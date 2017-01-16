@@ -23,7 +23,7 @@
 			"ignore": false, // could be true
 			"region": [ 10, 10, 100, 100] // UL, LR coords of region
 		}
-	}
+	},
 	"items": [
 		{
 			"url": "20160326-001.MP4",
@@ -132,7 +132,7 @@
 					"narrative": "deeper dive on a concept"
 				}
 			]
-		},
+		}
 		
 	]
 }
