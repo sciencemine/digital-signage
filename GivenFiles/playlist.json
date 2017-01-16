@@ -1,0 +1,138 @@
+{
+	"config": {
+		"menu": {
+			"when": "interactively", // Could be never, always
+			"where": "top", // could be bottom, middle
+			"dwell", 15, // number of seconds to dwell
+			"idle": 45 // seconds of idle before display for dwell
+		},
+		"topics": {
+			"when": "interactively", //could be never, always
+			"where": "left", // could be right
+		},
+		"attribution": {
+			"when": "always", //could be never, intermittantly
+			"where": "bottom-right", // could be lower-left, center
+			"dwell": 15 // seconds to dwell visible when intermitantly
+		},
+		"keyboard": {
+			"ignore": false, // could be true
+			"accept": [ "a", "b" , "c", "d"] // Keys to accept, others ignored
+		},
+		"mouse": {
+			"ignore": false, // could be true
+			"region": [ 10, 10, 100, 100] // UL, LR coords of region
+		}
+	}
+	"items": [
+		{
+			"url": "20160326-001.MP4",
+			"caption": "Silver Bow Creek - Spring 2016",
+			"attribution": "Fred Hartline, 20160326",
+			"transition": "css style to apply to container when displayed",
+			"summary": "This is summary text for the video",
+			"descriptions": [
+				{
+					"key": "unique-identifier-001",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - adult oriented"
+				},
+				{
+					"key": "unique-identifier-002",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - young adult oriented"
+				},
+				{
+					"key": "unique-identifier-003",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "deeper dive on a concept"
+				}
+			]
+		},
+		{
+			"url": "20160326-002.MP4",
+			"caption": "Silver Bow Creek - Spring 2016",
+			"attribution": "Fred Hartline, 20160326",
+			"transition": "css style to apply to container when displayed",
+			"summary": "This is summary text for the video",
+			"descriptions": [
+				{
+					"key": "unique-identifier-001",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - adult oriented"
+				},
+				{
+					"key": "unique-identifier-002",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - young adult oriented"
+				},
+				{
+					"key": "unique-identifier-003",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "deeper dive on a concept"
+				}
+			]
+		},
+		{
+			"url": "20160326-003.MP4",
+			"caption": "Silver Bow Creek - Spring 2016",
+			"attribution": "Fred Hartline, 20160326",
+			"transition": "css style to apply to container when displayed",
+			"summary": "This is summary text for the video",
+			"descriptions": [
+				{
+					"key": "unique-identifier-001",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - adult oriented"
+				},
+				{
+					"key": "unique-identifier-002",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - young adult oriented"
+				},
+				{
+					"key": "unique-identifier-003",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "deeper dive on a concept"
+				}
+			]
+		},
+		{
+			"url": "20160326-004.MP4",
+			"caption": "Silver Bow Creek - Spring 2016",
+			"attribution": "Fred Hartline, 20160326",
+			"transition": "css style to apply to container when displayed",
+			"summary": "This is summary text for the video",
+			"descriptions": [
+				{
+					"key": "unique-identifier-001",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - adult oriented"
+				},
+				{
+					"key": "unique-identifier-002",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "text associated with key - young adult oriented"
+				},
+				{
+					"key": "unique-identifier-003",
+					"label": "descriptive label for narrative - one or two words",
+					"style": "css style to apply while displayed",
+					"narrative": "deeper dive on a concept"
+				}
+			]
+		},
+		
+	]
+}
