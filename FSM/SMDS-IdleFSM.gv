@@ -1,0 +1,77 @@
+/*
+ * Science Mine Digital Signage
+ * Finite State Machine (FSM)
+ *
+ * Describes the States and Bahvior of the digital signage system
+ * when the system enters the {Idle Cluster}, {Children Cluster}, {Adult Cluster}
+ * and the interactions between these clustered states to form the entire FSM.
+ *
+ * Phillip J. Curtiss, Assistant Professor
+ * Department of Computer Science, Montana Tech
+ * pcurtiss@mtech.edu (406) 496-4807
+ * 
+ * Revision 0.1 Last Revised 2017-01-16
+ * File describes Graph Viz in DOT Language - see www.graphviz.org
+ */
+
+digraph "smdsFSM" {
+    rankdir = LR;
+    ratio=auto;
+
+    subgraph "idleFSM" {
+        S [shape = none, label=""];
+        I0 [shape = circle, color=DarkGreen];
+        Ii [shape = doublecircle, color=blue];
+        node [shape = circle, color=blue];
+
+            S -> I0 [label = "S", color=blue];
+            I0 -> I1 [label = "e1", color=blue];
+            I1 -> I2 [label = "e2", color=blue];
+            I1 -> Ii [label = "Ex", color=blue];
+            I2 -> I3 [label = "e3", color=blue];
+                I2 -> I1 [label = "e4", color=blue];
+                I2 -> I2 [label = "e5", color=blue];
+                I2 -> Ii [label = "Ex", color=blue];
+            I3 -> I2 [label = "e6", color=blue];
+            I3 -> Ii [label = "Ex", color=blue];
+    }
+
+    subgraph "childrenFSM" {
+        label = "Children FSM";
+        C0 [shape = circle, color = red];
+        Cf [shape = doublecircle, color = red];
+        node [shape = circle; color = red];
+
+            C0 -> C0 [label = "f0(Lvl%n)", color = red];
+            C0 -> C1 [label = "f1(Lvl+1)", color = red];
+            C1 -> C0 [label = "f2(Lvl-1)", color = red];
+                C1 -> C1 [label = "f3(PL%n)", color = red];
+                C1 -> C2 [label = "f4(PLst)", color = red];
+                C1 -> Cf [label = "fi", color = red];
+            C2 -> C1 [label = "f5(PLsp)", color = red];
+            C2 -> Cf [label = "fi", color = red];
+    }
+
+    subgraph "adultFSM" {
+        label = "Adult FSM";
+        A0 [shape = circle, color = Purple];
+        Af [shape = doublecircle, color = Purple];
+        node [shape = circle, color = Purple];
+
+            A0 -> A0 [label = "j0(Lvl%n)", color = Purple];
+            A0 -> A1 [label = "j1(Lvl+1)", color = Purple];
+            A1 -> A0 [label = "j2(Lvl-1)", color = Purple];
+                A1 -> A1 [label = "j3(PL%n)", color = Purple];
+                A1 -> A2 [label = "j4(PLst)", color = Purple];
+                A1 -> Af [label = "ji", color = Purple];
+            A2 -> A1 [label = "j5(PLsp)", color = Purple];
+            A2 -> Af [label = "ji", color = Purple];
+    }
+
+    Ii -> C0 [label = "Ci"];
+    Ii -> A0 [label = "Ai"];
+
+    {Cf,Af} -> I1 [label = "ITo"];
+
+    label = "Finite State Machine (FSM) for Science Mine Digital Signage\nI-Nodes Idle Cluster; C-Nodes Children Cluster; A-Nodes Adult Cluster";
+}

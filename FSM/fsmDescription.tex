@@ -1,0 +1,147 @@
+%%
+% Science Mine Digital Science Project
+% Finite State Machine Description
+%
+% Phillip J. Curtiss, Assistant Professor
+% Department of Computer Science
+% 
+% Montana Tech of the University of Montana
+% pcurtiss@mtech.edu, 406-496-4807
+%
+% Revision 0.1 Last Revised 2017-01-17
+%%
+\documentclass[10pt]{article}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage[margin=1in]{geometry}
+\usepackage{fancyhdr}
+\usepackage[svgnames]{xcolor}
+\usepackage{graphicx}
+\usepackage{lastpage}
+
+%%
+% Configure First Page Header and Footer
+\fancypagestyle{firststyle}{%
+	\fancyhf{}%
+	\lfoot{Department of Computer Science, Montana Tech of the University of Montana}%
+	\rfoot{Page~\thepage~of~\pageref{LastPage}}%
+	\renewcommand{\headrulewidth}{0pt}%
+	\renewcommand{\footrulewidth}{0.4pt}%
+}
+
+%%
+% Configure Running Header and Footer
+\lhead{\scshape{}Phillip J. Curtiss, PhD\\Science Mine Digital Signage FSM}
+\chead{}
+\rhead{Date: February 1, 2016}
+\lfoot{Department of Computer Science, Montana Tech of the University of Montana}
+\cfoot{}
+\rfoot{Page~\thepage~of~\pageref{LastPage}}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0.4pt}
+\setlength{\headheight}{23pt}
+
+%%
+% Draw a Rule for the Line
+\newcommand{\HRule}{\rule{\linewidth}{0.5mm}}
+
+\begin{document}
+\thispagestyle{firststyle}
+\pagestyle{fancy}
+
+\begin{titlepage}
+ \begin{center}
+ %%
+ % Header on the title page
+ 	\textsc{\LARGE Montana Tech}\\[1.5cm]
+	\textsc{\Large Science Mine}\\[0.5cm]
+	\textsc{\large Digital Signage Project}\\[0.5cm]
+	
+ %%
+ % Title Section
+	\HRule \\[0.4cm]
+	{\huge \bfseries Finite State Machine Description} \\[0.4cm]
+	\HRule \\[1.5cm]
+	
+ %%
+ % Author Section
+	\begin{minipage}{0.8\textwidth} 
+		\large
+		\emph{Author:} \hfill \emph{Principal Investigator:} \\
+		Phillip J. Curtiss \hfill Fred Hartline
+	\end{minipage} \\[2cm]
+	
+ %%
+ % Date Section
+	{\large \today} \\[2cm]
+	
+ %%
+ % Institutional Graphic
+	\includegraphics[width=1.5in]{MTechShieldLogo.png}
+ \end{center}
+\end{titlepage}
+
+\section{Introduction}
+
+The Science Mine Digital Signage project provides a self-guided signage system for museum exhibits whereby visitors may interact with a variety of input devices to allow for the exploration of the content within the signage system, in a similar way that a visitor to the exhibit is encouraged to learn by exploring through interacting with the exhibit. The variety of different input devices allows visitors of different ages and different knowledge levels to interact with a single signage platform that adapts to provide information that is relevant to what is of interest to the visitor. 
+
+To accomplish this task, the signage system is comprised of the following components: 
+
+\begin{description}
+	\item[Input Devices:] The current set of input devices consists of a bluetooth trackpad and a bluetooth array of buttons driven by an Arduino-based microcontroller. In the future, an additional touch screen is likely to be added. In general, however, any input device that is bluetooth HID compliant should be able to be integrated into the system without much effort. 
+	
+	\item[Compute Platform:] The compute platform selected is an extremely small form-factor full-function Linux-based computer made by Intel known as the Stick. In particular, we are using model STK2MV64CC which is quite a capable compute device in a small form-factor that can be connected to a high-definition projector and out of the way of visitors to the exhibit. 
+	
+	\item[Projector/Display:] The initial deployment will be a projector to provide a large enough display surface to show high-quality video content, and also provide high-quality thumbnails of next-level video content that may be selected by the visitor. In the future, additional touchscreen monitors might be used, or added, to provide a different presentation format and means of interaction.
+	
+	\item[Video Content:] The video content is high-quality custom produced content highlighting the use of the exhibit associated with the signage. The video content collection is organized in a graph structure that matches a given organizational structure (learning paths) through the video content collection. In this way, a single video may be included in different organizational unit structures represented within the graph - i.e. be part of multiple learning paths through the collection.
+	
+	\item[Signage Software:] Custom written software that consists of the following components: 
+	\begin{description}
+		\item[Single Page Web Application:] Based on the Ember application framework, the single page web application is resident in the client browser running on the Intel Compute Stick. The web application is responsible for implementing the Finite State Machine (FSM) described within this document by mapping different bluetooth HID input (from a variety of devices) to transitions within the FSM. The web application will also enter a default \emph{idle behavior\/} when the is no interaction from a visitor.
+		
+		\item[Exhibit Object Model (EOM):] The Exhibit Object Model (EOM) is a JSON formatted description of the signage content for a given specific exhibit. This EOM is used by the single web page application to \emph{drive\/} the signage. The EOM contains references to the entire video content collection and provides the organizational structure of this content. In addition, the meta-information for each video within the collection is stored within the EOM to implement textual overlays to provide descriptive text associated with the video, attribution for the video, and the like. 
+		
+		\item[HTML:] The web application is a simple web page written using HTML5. The base-page merely has placeholders for the main background video content, a menu of all the video content for the given level, a region that overlays the background video, and zero or more regions in which thumbnail video content will play, each one representing a topic at the current level that may be explored. 
+		
+		\item[CSS:] The cascading style sheet (CSS) is used to provide layout functionality and look and feel behaviors for the html content elements created by the web application.
+		
+		\item[JS:] JavaScript content is used to script and provide functional behavior of the web application.
+	\end{description}
+\end{description}
+
+All of these components remain the same an unchanged no matter for which exhibit they are providing signage, with the exception of the EOM. There is a one-to-one relationship between a given exhibit that has been paired with a digital signage system, and its corresponding EOM that fully describes the signage with be used with the exhibit.
+
+\begin{figure} \centering 
+	\caption{Science Mine Digital Signage Finite State Machine} \label{fig:FSM}
+	\includegraphics[width=\textwidth]{SMDS-fsm.png} 
+\end{figure}
+
+\section{Finite State Machine}
+
+The finite state machine (FSM) for the digital signage system consists of three (3) subgraphs, $I, C, A$, where $I$ describes the states and transitions associated with the system being in an idle state, $C$ describes the states and transitions associated with the system being in a mode of providing signage-content for children, and $A$ describes the states and transitions associated with the system being in a mode of providing signage-content for adults. All of these subgraphs are related into a single FSM in Figure~\ref{fig:FSM} on page~\pageref{fig:FSM}.
+
+More formally: 
+
+\begin{tabbing}
+	Let $C$ be the graph such that, $C = <C_{s}, C_{v}>$ \= $| C_{s} = \{C_{n}\ \textrm{for}\ n \in [0 .. 2]\} \cup \{C_{f}\}$ \kill 
+	
+	Let $I$ be the graph such that, $I = <I_{s}, I_{v}>$ \> $| I_{s} = \{I_{n}\ \textrm{for}\ n \in [0 .. 3]\} \cup \{I_{i}\}$ \\[0.5ex]
+																		\> $| I_{v} = \{e_{m}\ \textrm{for}\ m \in [1 .. 6]\} \cup \{E_{x}\}$ \\[1em]
+																		
+	Let $C$ be the graph such that, $C = <C_{s}, C_{v}>$ \> $| C_{s} = \{C_{n}\ \textrm{for}\ n \in [0 .. 2]\} \cup \{C_{f}\}$ \\[0.5em]
+																		\> $| C_{v} = \{f_{m}\ \textrm{for}\ m \in [0 .. 5]\} \cup \{f_{i}\}$ \\[1em]
+																		
+	Let $A$ by the graph such that, $A = <A_{s}, A_{v}>$ \> $| A_{s} = \{A_{n}\ \textrm{for}\ n \in [0 .. 2]\} \cup \{A_{f}\}$ \\[0.5ex]
+																		\> $| A_{V} = \{j_{m}\ \textrm{for}\ m \in [0 .. 5]\} \cup \{j_{i}\}$\\[1em]
+																		
+	Let $I_{0}$ be the start state \\[1em]
+	
+	Let $C_{0}, A_{0}$ be the respective start states for the subgraphs defined by $C$ and $A$ respectively.
+\end{tabbing}
+
+\subsection{System Startup Behavior $\delta(I_{0}, e_{1}) \mapsto I_{1}$}
+
+\subsection{Idle Mode Startup Behavior $\delta(I_{1}, e_{2}) \mapsto I_{2}$}
+
+\end{document}
