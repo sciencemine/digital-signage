@@ -142,6 +142,233 @@ More formally:
 
 \subsection{System Startup Behavior $\delta(I_{0}, e_{1}) \mapsto I_{1}$}
 
-\subsection{Idle Mode Startup Behavior $\delta(I_{1}, e_{2}) \mapsto I_{2}$}
+Startup behavior should perform the following operations: 
+
+\begin{itemize}
+	\item Ready any application frameworks
+	\item Ready any CSS
+	\item Ready any JavaScript
+	\item Initialize the Document Object Model (DOM)
+	\item Read the EOM and prepare associated data structures
+	\item Enter fullscreen mode (via scripting)
+	\item Register a callback for any keyboard (HID) event from any DOM element
+	\item Enter Idle Mode
+\end{itemize}
+
+\subsection{Idle Mode Startup Behavior}
+
+Idle mode behavior is dictated by whatever state and input is provided to that state. Below is a description of each combination of state from the Idle subgraph, and associated input/event:
+
+\paragraph{$\delta(I_{1}, e_{2}) \mapsto I_{2}$:} 
+
+Once in $I_{1}$ we know the application state has been initialized and all EOM and DOM objects are ready for transformation. In $I_{1}$ we perform the following: 
+
+\begin{itemize}
+	\item Select a Playlist $P_{k}$ from the Top Level (Category); Selection model should be \emph{shuffle} with a least-used-first algorithm.
+	\item Ready any DOM elements in preparation for playing an element from the selected playlist
+	\item For each video $v_{i} \in P_{L}$, place a video container $D_{i}$ over (on top of) the background container of the browser window and load $v_{i}$ in $D_{i}$ and begin playing the video.
+	\item Plaint the boarder of every $D_{i}$ either red or white depending on the corresponding property in the EOM for $v_{i}$ loaded in $D_{i}$ as to whether it is content for a \emph{child\/}, which should be red, or content for an \emph{adult\/}, which should be white.
+	\item Set the global mode of the \emph{selection mode\/} to be \emph{child}.
+	\item Set a timeout counter $T_{i}$ that will be used when in state $I_{2}$ to return to this state and select a different Top Level playlist
+\end{itemize}
+
+\paragraph{$\delta(I_{2}, e_{4}) \mapsto I_{1}$:}
+
+The timeout $T_{i}$ has been reached in state $I_{2}$ causing a return to $I_{1}$ where the operations are performed from the above section.
+
+\paragraph{$\delta(I_{2}, e_{5}) \mapsto I_{2}$:}
+
+Shuffle through the videos in the selected playlist and select a video to play $v_{i}$ in state $I_{3}$ using a least-used-first algorithm. If the timeout $T_{i}$ is reached or exceeded in this state, return to state $I_{1}$ for the selection of a different playlist shuffled. Decorate the boarder of $D_{i}$ in which the selected $v_{i}$ is contained to be a pulsating thin to thick version of its boarder color. 
+
+\paragraph{$\delta(I_{2}, e_{3}) \mapsto I_{3}$:}
+
+Once a video $v_{i}$ has been selected from the selected playlist, dwell for a programmable amount of time. When this time is reach, set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time, and simultaneously load $v_{i}$ into the background container of the browser window and begin planning the video. 
+
+\paragraph{$\delta(I_{3}, e_{6}) \mapsto I_{2}$:}
+
+Once the selected video $v_{i}$ has finished playing in the background container, modify opacity of all $D_{i}$ from zero to some programmable amount to make them visible again. Return to state $I_{2}$.
+
+\paragraph{$\delta(\{I_{1}, I_{2}, I_{3}\}, E_{x}) \mapsto I_{i}$:}
+
+Event $E_{x}$ is any event resulting in any detectable HID input by the application. Once detected, transition from the shown states to the final state for the idle subgraph $I_{i}$.
+
+Once in $I_{i}$, perform the following operations:
+
+\begin{itemize}
+	\item Set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time
+	\item Empty the video in the background container and replace with an image defined in EOM
+	\item Unregister callback for any keyboard (HID) event from any DOM element
+	\item Populate a carousel menu with all possible videos from EOM, with each $D_{i}$ decorated as to whether it is content for a \emph{child\/}, which should be red, or content for an \emph{adult\/}, which should be white
+	\item Hide the menu container
+	\item Register a callback for any mouse event that appears within a certain number of pixels away from the top boarder of the window as specified in the EOM - which will then show the menu. 
+	\item Set a global idle timeout $IT_{0}$ that will be used to return to idle subgraph is no interaction is detected within the timeout period
+	\item if the \emph{selection mode\/} has been set to child, transition to $\delta(I_{i}, C_{i}) \mapsto C_{0}$
+	\item if the \emph{selection mode\/} has been set to adult, transition to $\delta(I_{i}, A_{i}) \mapsto A_{0}$
+\end{itemize}
+
+\subsection{Exploring Signage Content for Children}
+
+The children content mode of the digital signage solution is designed to allow children visitors to explore the signage content using simplified user input devices. The following sections describe the states the system can be in and the associated behavior.
+
+\paragraph{$\delta(C_{0}, f_{0}) \mapsto C_{0}$:}
+
+Once in $C_{0}$ we know the application state has been initialized and all EOM and DOM objects are ready for transformation. In $C_{0}$ we perform the following operations:
+
+\begin{itemize}
+	\item Select a Playlist $P_{k}$ from the Top Level (Category);  Selection model should be \emph{shuffle} with a least-used-first algorithm.
+	\item Ready any DOM elements in preparation for playing an element from the selected playlist
+	\item For each video $v_{i} \in P_{L}$, place a video container $D_{i}$ over (on top of) the background container of the browser window and load $v_{i}$ in $D_{i}$ and begin playing the video.
+	\item Paint the boarder of every $D_{i}$ either red or white depending on the corresponding property in the EOM for $v_{i}$ loaded in $D_{i}$ as to whether it is content for a \emph{child\/}, which should be red, or content for an \emph{adult\/}, which should be white.
+	\item Register callback for keyboard (HID) input over the main window and process input as follows:
+	\begin{itemize}
+		\item $d(C_{0}, K_{b}) \mapsto C_{0}$: change the selected category forward associated with the current selection mode,
+		\item $d(C_{0}, K_{g}) \mapsto C_{0}$: change the selected category backward associated with the current selection mode,
+		\item $d(C_{0}, K_{r}) \mapsto C_{1}$: 
+		\begin{itemize}
+			\item if in child selection mode, 	selects the level (and the associated playlist $P_{l}$ and transitions to $C_{1}$
+			\item if in adult selection mode, switches to child selection mode, and change the selected category forward associated with the child selection mode
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\paragraph{$\delta(C_{1}, f_{2}) \mapsto C_{0}$:} 
+
+Perform the following options:
+
+\begin{itemize}
+	\item For all the $D_{i}$ change their opacity to zero in such as way as to implement a fade effect - the amount of fade specified in the EOM
+	\item Unregister callback for keyboard (HID) input over the main window 
+	\item Transition back to $C_{0}$
+\end{itemize}
+
+\paragraph{$\delta(C_{1}, f_{3}) \mapsto C_{1}$:}
+
+Once in $C_{1}$, play the video associated with the category select, and present the visitor with the next level of video elements once the category video is completed. Perform the following operations:
+
+\begin{itemize}
+	\item for each video $v_{i}$ in the playlist associated with the category selection, place a video container $D_{i}$ over (on top of) the background container of the browser window and load $v_{i}$ into $D_{i}$ and begin playing the video.
+	\item add an additional $D_{n+1}$ where $n$ is the number of videos $v_{i}$ in this level. In $D_{n+1}$, create a thumb nail that represents the previous level
+	\item Paint the boarder of every $D_{i}$ either red or white depending on the corresponding property in the EOM for $v_{i}$ loaded in $D_{i}$ as to whether it is content for a child or adult.
+	\item Register callback for keyboard (HID) input over the main window and process input as follows:
+	\begin{itemize}
+		\item $d(C_{0}, K_{b}) \mapsto C_{0}$: change the selected category forward associated with the current selection mode,
+		\item $d(C_{0}, K_{g}) \mapsto C_{0}$: change the selected category backward associated with the current selection mode,
+		\item $d(C_{0}, K_{r}) \mapsto C_{1}$: 
+		\begin{itemize}
+			\item if in child select mode, and $D_{n+1}$ is selected, $d(C_{1}, f{2}) \mapsto C_{0}$
+			\item if in child selection mode, 	selects the level (and the associated playlist $P_{l}$ and transitions to $C_{1}$
+			\item if in adult selection mode, switches to child selection mode, and change the selected category forward associated with the child selection mode
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\paragraph{$C_{1}, f_{4}) \mapsto C_{2}$:}
+
+Once a video $v_{i}$ has been selected from the selected playlist, dwell for a programmable amount of time. When this time is reach, set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time, and simultaneously load $v_{i}$ into the background container of the browser window and begin planning the video. 
+
+\paragraph{$\delta(C_{2}, f_{5}) \mapsto C_{1}$:}
+
+Once the selected video $v_{i}$ has finished playing in the background container, modify opacity of all $D_{i}$ from zero to some programmable amount to make them visible again. Return to state $I_{2}$.
+
+\paragraph{$\delta(\{C_{1}, C_{2}\}, f_{i}) \mapsto C_{f}$:} 
+
+An idle timeout has occurred and we return to idle mode by transitioning to state $I_{1}$
+
+\begin{itemize}
+	\item Set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time
+	\item Empty the video in the background container and replace with an image defined in EOM
+	\item Unregister callback for any keyboard (HID) event from any DOM element
+	\item Unpopulate a carousel menu with all possible videos from EOM
+	\item Hide the menu container
+	\item Unegister a callback for any mouse event 
+\end{itemize}
+
+\subsection{Exploring Signage Content for Adults}
+
+The adult content mode of the digital signage solution is designed to allow adult visitors to explore the signage content using more sophisticated user input devices, but will also accept input from the more simplified devices. The following sections describe the states the system can be in and the associated behavior.
+
+\paragraph{$\delta(A_{0}, j_{0}) \mapsto A_{0}$:}
+
+Once in $A_{0}$ we know the application state has been initialized and all EOM and DOM objects are ready for transformation. In $A_{0}$ we perform the following operations:
+
+\begin{itemize}
+	\item Select a Playlist $P_{k}$ from the Top Level (Category);  Selection model should be \emph{shuffle} with a least-used-first algorithm.
+	\item Ready any DOM elements in preparation for playing an element from the selected playlist
+	\item For each video $v_{i} \in P_{L}$, place a video container $D_{i}$ over (on top of) the background container of the browser window and load $v_{i}$ in $D_{i}$ and begin playing the video.
+	\item Paint the boarder of every $D_{i}$ either red or white depending on the corresponding property in the EOM for $v_{i}$ loaded in $D_{i}$ as to whether it is content for a \emph{child\/}, which should be red, or content for an \emph{adult\/}, which should be white.
+	\item Register callback for keyboard (HID) input over the main window and process input as follows:
+	\begin{itemize}
+		\item $d(A_{0}, K_{b}) \mapsto A_{0}$: change the selected category forward associated with the current selection mode,
+		\item $d(A_{0}, K_{g}) \mapsto A_{0}$: change the selected category backward associated with the current selection mode,
+		\item $d(A_{0}, K_{w}) \mapsto A_{1}$: 
+		\begin{itemize}
+			\item if in adult selection mode, selects the level (and the associated playlist $P_{l}$ and transitions to $A_{1}$
+			\item if in child selection mode, switches to child selection mode, and change the selected category forward associated with the child selection mode
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\paragraph{$\delta(A_{1}, j_{2}) \mapsto A_{0}$:} 
+
+Perform the following options:
+
+\begin{itemize}
+	\item For all the $D_{i}$ change their opacity to zero in such as way as to implement a fade effect - the amount of fade specified in the EOM
+	\item Unregister callback for keyboard (HID) input over the main window 
+	\item Transition back to $A_{0}$
+\end{itemize}
+
+\paragraph{$\delta(A_{1}, j_{3}) \mapsto A_{1}$:}
+
+Once in $A_{1}$, play the video associated with the category select, and present the visitor with the next level of video elements once the category video is completed. Perform the following operations:
+
+\begin{itemize}
+	\item for each video $v_{i}$ in the playlist associated with the category selection, place a video container $D_{i}$ over (on top of) the background container of the browser window and load $v_{i}$ into $D_{i}$ and begin playing the video.
+	\item add an additional $D_{n+1}$ where $n$ is the number of videos $v_{i}$ in this level. In $D_{n+1}$, create a thumb nail that represents the previous level
+	\item Paint the boarder of every $D_{i}$ either red or white depending on the corresponding property in the EOM for $v_{i}$ loaded in $D_{i}$ as to whether it is content for a child or adult.
+	\item Register callback for keyboard (HID) input over the main window and process input as follows:
+	\begin{itemize}
+		\item $d(A_{0}, K_{b}) \mapsto A_{0}$: change the selected category forward associated with the current selection mode,
+		\item $d(A_{0}, K_{g}) \mapsto A_{0}$: change the selected category backward associated with the current selection mode,
+		\item $d(A_{0}, K_{w}) \mapsto A_{1}$: 
+		\begin{itemize}
+			\item if in child select mode, and $D_{n+1}$ is selected, $d(A_{1}, j{2}) \mapsto A_{0}$
+			\item if in adult selection mode, selects the level (and the associated playlist $P_{l}$ and transitions to $A_{1}$
+			\item if in child selection mode, switches to child selection mode, and change the selected category forward associated with the child selection mode
+		\end{itemize}
+	\end{itemize}
+\end{itemize}
+
+\paragraph{$A_{1},jf_{4}) \mapsto A_{2}$:}
+
+Once a video $v_{i}$ has been selected from the selected playlist, dwell for a programmable amount of time. When this time is reach, set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time, and simultaneously load $v_{i}$ into the background container of the browser window and begin planning the video. 
+
+\paragraph{$\delta(A_{2}, j_{5}) \mapsto A_{1}$:}
+
+Once the selected video $v_{i}$ has finished playing in the background container, modify opacity of all $D_{i}$ from zero to some programmable amount to make them visible again. Return to state $I_{2}$.
+
+\paragraph{$\delta(\{A_{1}, A_{2}\}, j_{i}) \mapsto A_{f}$:} 
+
+An idle timeout has occurred and we return to idle mode by transitioning to state $I_{1}$
+
+\begin{itemize}
+	\item Set the opacity of all $D_{i}$ to zero in such a way to implement a programmable fade time
+	\item Empty the video in the background container and replace with an image defined in EOM
+	\item Unregister callback for any keyboard (HID) event from any DOM element
+	\item Unpopulate a carousel menu with all possible videos from EOM
+	\item Hide the menu container
+	\item Unegister a callback for any mouse event 
+\end{itemize}
+
+\section{Missing States for the FSM}
+
+\begin{enumerate}
+
+	\item subgraph for the menu interactions
+	\item switching between adult and child modes
+	\item subgraph for the Bluetooth button interactions
+	\item subgraph for the EOM administration utility
+
+\end{enumerate}
 
 \end{document}

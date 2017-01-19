@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.12)  17 JAN 2017 18:15
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.12.12)  18 JAN 2017 17:38
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -321,67 +321,52 @@ File: SMDS-fsm.png Graphic file (type png)
 <use SMDS-fsm.png>
 Package pdftex.def Info: SMDS-fsm.png used on input line 117.
 (pdftex.def)             Requested size: 469.75502pt x 158.54723pt.
-
-
-LaTeX Warning: Reference `fig:FSM' on page 1 undefined on input line 122.
-
-
-LaTeX Warning: Reference `fig:FSM' on page 1 undefined on input line 122.
-
-
-LaTeX Warning: Reference `LastPage' on page 1 undefined on input line 123.
-
-[1]
+ [1]
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <12> on input line 143.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 143.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 143.
+LaTeX Font Info:    Try loading font information for OMS+lmr on input line 148.
 
 
-Package lastpage Warning: Rerun to get the references right on input line 147.
-
-
+(/usr/local/texlive/2016/texmf-dist/tex/latex/lm/omslmr.fd
+File: omslmr.fd 2009/10/30 v1.6 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `OMS/lmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/lmsy/m/n' tried instead on input line 148.
+ [2 <./SMDS-fsm.png>] [3] [4] [5] [6] 
 AED: lastpage setting LastPage
-
-LaTeX Warning: Reference `LastPage' on page 2 undefined on input line 147.
-
-[2 <./SMDS-fsm.png>] (./fsmDescription.aux)
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
- ) 
+[7] (./fsmDescription.aux) ) 
 Here is how much of TeX's memory you used:
- 3119 strings out of 493013
- 43493 string characters out of 6133342
- 123489 words of memory out of 5000000
- 6601 multiletter control sequences out of 15000+600000
+ 3137 strings out of 493013
+ 43813 string characters out of 6133342
+ 124509 words of memory out of 5000000
+ 6616 multiletter control sequences out of 15000+600000
  69911 words of font info for 48 fonts, out of 8000000 for 9000
  1141 hyphenation exceptions out of 8191
- 40i,11n,43p,619b,238s stack positions out of 5000i,500n,10000p,200000b,80000s
-{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/
-texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/20
-16/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2016/texmf-d
-ist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/2016/texmf-dist/fonts/type
-1/public/lm/lmbx10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/l
-m/lmbx12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmcsc10.
-pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmmi10.pfb></usr/
-local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texl
-ive/2016/texmf-dist/fonts/type1/public/lm/lmmi7.pfb></usr/local/texlive/2016/te
-xmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2016/texmf-dist/fo
-nts/type1/public/lm/lmr12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
-ublic/lm/lmr7.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr
-8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmri10.pfb></us
-r/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmri12.pfb></usr/local/te
-xlive/2016/texmf-dist/fonts/type1/public/lm/lmsy10.pfb>
-Output written on fsmDescription.pdf (3 pages, 334172 bytes).
+ 40i,11n,43p,619b,328s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips
+/lm/lm-rm.enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-mathit.
+enc}{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/
+local/texlive/2016/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}</usr/local/texlive/
+2016/texmf-dist/fonts/type1/public/lm/lmbx10.pfb></usr/local/texlive/2016/texmf
+-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2016/texmf-dist/font
+s/type1/public/lm/lmcsc10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/p
+ublic/lm/lmmi10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/l
+mmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmmi7.pfb><
+/usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/
+texlive/2016/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/201
+6/texmf-dist/fonts/type1/public/lm/lmr7.pfb></usr/local/texlive/2016/texmf-dist
+/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1
+/public/lm/lmri10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm
+/lmri12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/lm/lmsy10.pf
+b>
+Output written on fsmDescription.pdf (8 pages, 360069 bytes).
 PDF statistics:
- 79 PDF objects out of 1000 (max. 8388607)
- 56 compressed objects within 1 object stream
+ 96 PDF objects out of 1000 (max. 8388607)
+ 68 compressed objects within 1 object stream
  0 named destinations out of 1000 (max. 500000)
  11 words of extra memory for PDF output out of 10000 (max. 10000000)
 
