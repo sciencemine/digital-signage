@@ -7,6 +7,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('media');
+  this.route('idle');
 });
 
 export default Router;

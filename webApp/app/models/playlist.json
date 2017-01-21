@@ -3,7 +3,7 @@
 		"menu": {
 			"when": "interactively", 
 			"where": "top", 
-			"dwell", 15, 
+			"dwell": 15, 
 			"idle": 45 
 		},
 		"topics": {
