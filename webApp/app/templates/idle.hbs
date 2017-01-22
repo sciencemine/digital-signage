@@ -19,15 +19,14 @@
    <![endif]-->
 
    <!-- Include Style Sheets -->
-   <link rel="stylesheet" type="text/css" href="ds.css">
-
-   <!-- Include JavaScript Files -->
-   <script type="text/javascript" src="ds.js"></script>
+   <link rel="stylesheet" type="text/css" href="styles/app.css">
   </head>
 
   <body>
-    <video id="bgvid" autoplay playsinline loop>
-      <source src="videos/20160326-001.MP4" type="video/mp4">
-    </video>
+    <div>
+      <video id="bgvid" autoplay playsinline loop>
+        <source src="videos/{{model.items.[0].url}}" type="video/mp4">
+      </video>
+    </div>
   </body>
 </html>
