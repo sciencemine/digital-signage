@@ -1,0 +1,185 @@
+<html>
+<!-- 
+    Pure JavaScript Example of a Form that will take its fields and create a simple JSON Object
+    from the form field contents and allow you to save the JSON file, and also allows a JSON
+    file to be read in from a file and populate a JSON object, which then populates the form
+    fields.
+
+    This is an example file and functionality for the Exhibit Object Model Editor/Maintainer that
+    is part of the Science Mine Digital Signage Project. The field contents (and structure) will
+    need to match that of the EOM JSON object, but those should be relatively easy modifications
+    of this files contents. 
+
+    Phillip J. Curtiss, Assistant Professor, pcurtiss@mtech.edu
+    Department of Computer Science, Montana Tech of the University of Montana
+
+    Versin 0.1 Last Revised 2017-01-22
+  -->
+
+<head>
+    <script>
+        var eom = {}; // Empty JavaScript Object that will hold our Exhibit Object Model
+
+        /*
+         *  Populate the EOM JavaScript object from form field data provided in the JSONfromEOM form
+         *  Form fields that contribute to the eom JavaScript object should have a class identifier 
+         *  of "eom" so they can be selected and become part of the eomFields collection. 
+         * 
+         *  Once selected, the eomFields collection is iterated and a new field in the eom JavaScript
+         *  object is created in key: value pairs for each form field in the eom class.
+         *
+         *  An alert window is provided to the user to indicate the activity is completed. 
+         */
+        function buildEOM() {
+            // Build a collection eomFields from the input elements in the JSONfromEOM form based
+            // on the class identifier of "eom" associated with the input element
+            var eomFields = document.forms['JSONfromEOM'].querySelectorAll(".eom");
+
+            // Iterate through the eomFields collection, and for each one, form a key: value pair 
+            // that is added to the eom JavaScript object
+            for (var idx = 0; idx < eomFields.length; idx++) {
+                eom[eomFields[idx].name] = eomFields[idx].value;
+            }
+
+            // Alert the user that we have built the eom JavaScript Object
+            window.alert("Built Exhibit Object Model from form data");
+        }
+
+        /*
+         *  Use the file API to browse and read in a file of a specified content-type to read in
+         *  a JSON object. Then parse this JSON object content and build our eom JavaScript object
+         *  from the contents of the JSON file. 
+         *  
+         *  Make sure to check that the file API is supported by the browser being used by the 
+         *  eom creator/maintainer and bail if not.
+         *
+         *  Once the eom JavaScript object has been built from the JSON file contents read in, 
+         *  iterate over the eom JavaScript object and populate the JSONfromEOM form fields 
+         *  to reflect the values of the fields contained in the eom JavaScript Object. 
+         *  NOTE: a javascript error will be writtent ot the conolse.log and processing will stop
+         *  if there is not an input element that corresponds with every field of the eom JavaScript
+         *  object - there must be a high-affinity between the form input elements on the JSONfromEOM
+         *  form and the eom JavaScript Object.
+         */
+        function loadFile() {
+            var input, // The input element that contains the filename holding the JSON data
+                file, // The filename obtained from the files collection of the input element - we only use 1st element
+                fr; // The filereader handle used to read the file 
+
+            // Check to make sure the browser supports the file API, and if not, bail
+            if (typeof window.FileReader !== 'function') {
+                window.alert("The file API isn't supported on this browser yet.");
+                return;
+            }
+
+            // Obtain the input element from the from EOMfromJSON that contains the filename
+            input = document.getElementById('fileinput');
+            if (!input) { // If there is not element, complain and bail
+                window.alert("Could not find the fileinput element.");
+                return;
+            } else if (!input.files) { // If the broser lacks support for selecting file, complain and bail    
+                window.alert("Browser does not support `files` property of file input.");
+                return;
+            } else if (!input.files[0]) { // If the user hasn't selected a file, then complain and bail
+                window.alert("Please select a file before clicking 'Load'");
+                return;
+            } else {
+                file = input.files[0]; // Set the filename from the files collection of the file input element
+                fr = new FileReader(); // Create a new filereader to read in the file contents
+                fr.onload = receivedText; // Set the callback of the filereader onload event to process the contents once read
+                fr.readAsText(file); // Read in the contents of the file
+            }
+
+            /*
+             *  Callback function associated with the onload event of the filereader 
+             *  Triggered once the entire file has been read by the file reader. 
+             *  The event data is what we processed contained in the argument to the callback function
+             *
+             *  We want to parse the lines of the JSON file we read, and then update the JSONfromEOM form fields
+             *  to reflect the values we read in so they may be modified and resaved, if desired, or just displayed.
+             *
+             *  We notify the user that we have finished processing the JSON file contents and built our eom
+             *  JavaScript object.
+             */
+            function receivedText(e) {
+                var lines = e.target.result; // Contains the result of readig the JSON file contents
+                var filename = document.getElementById('fileinput').files[0].name; // Reference to filename we read from
+
+                // Set the eom JavaScrpt object to the return value of parsing the JSON text file we read in
+                eom = JSON.parse(lines);
+
+                // Interate over the fields in the eom JavaScript object and update the associated form fileds in JSONfromEOM
+                for (var key in eom) {
+                    if (eom.hasOwnProperty(key)) {
+                        document.forms['JSONfromEOM'].elements[key].value = eom[key];
+                    }
+                }
+
+                // Alert the user we have created the eom JavaScript object from the JSON file
+                window.alert("Loaded Exhibit Object Model from " + filename);
+            }
+        }
+
+        /*
+         *  Given a JSON textual representation of the eom JavaScript object and a filename, 
+         *  contruct a new element in the DOM that represents a link to this content and then
+         *  programmatically trigger its click event to cause the content to be downloaded
+         */
+        function saveEOM(json, filename) {
+            // Aler the user that we are about to download the JSON textual form of the eom JavaScript object
+            window.alert("Exporting Exhibit Object Model in JSON form to file " + filename);
+            var a = document.createElement('a'); // Create a new anchor element in the DOM
+
+            // Set the attribute of the newly created anchor element to point to in-line data created from 
+            // encoding the JSON representation of the eom JavaScript object
+            a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(json));
+
+            // Set the download attribute to the filename provided in the argument
+            // When anchor is click'd, the contents of the anchor will be downloaded into the file
+            // with the filename provided
+            a.setAttribute('download', filename);
+
+            // Trigger the click event of the newly created anchor
+            a.click();
+        }
+    </script>
+</head>
+
+<body>
+    <h3>Science Mine Exbibit Object Model Maintainer</h3>
+    <h4>Version 0.1 Last Revised 2017-01-22</h4>
+
+    <!-- Create a DIV that shows instructions to the end-user. There is an ID and CLASS attribute for use with CSS -->
+    <div id="instructions" class="groupBpx">
+        <p>Use the form below to either retrieve and update an Exhibit Object Model JSON file, or create a new one.</p>
+
+        <p>If you wish to retrieve the contents of an EOM, browse to a JSON file, and then load the file contents. Once loaded, the EOM will populate the form fields below, whereby you may make any edits as required. Once you are finished editting the EOM,
+            you may select save and download the new EOM JSON file for use in the digital signage system.
+        </p>
+    </div>
+
+    <!-- The form used to create the eom JavaScript object from a JSON file -->
+    <form id="EOMfromJSON" name="loadJSON" enctype="multipart/form-data" method="post">
+        <fieldset>
+            <legend>Load EOM from JSON File</legend>
+            <label>Browse for EOM JSON File:</label>
+            <input type="file" id="fileinput">
+            <input type="button" id="btnload" value="Load EOM File" onclick="loadFile();">
+        </fieldset>
+    </form>
+
+    <!-- The form used to create/modify the eom JavaScript object based on form filed content -->
+    <!-- Note that those input elements that contain part of the eom JavaScript object must have the class="eom" -->
+    <form id="JSONfromEOM">
+        <fieldset>
+            <legend>Save EOM to JSON File</legend>
+            <input class="eom" type="text" name="fname" placeholder="First Name" required autofocus>
+            <input class="eom" type="text" name="lname" placeholder="Last Name" required>
+            <input class="eom" type="text" name="msg" placeholder="Short Message" required>
+            <input type="button" value='Build EOM' onclick="buildEOM();">
+            <input type="button" value="Save EOM" onclick="saveEOM(JSON.stringify(eom), 'EOM.json');">
+        </fieldset>
+    </form>
+</body>
+
+</html>
