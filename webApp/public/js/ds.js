@@ -42,7 +42,8 @@ pauseButton.addEventListener("click", function() {
 });
 
 menuButton.addEventListener("click", function() {
-	var me = document.getElementById('menu');
+
+  var me = document.getElementById('menu');
 
 	me.classList.toggle('slide');
 });
@@ -52,3 +53,5 @@ menuButton.addEventListener("click", function() {
 function vidFade() {
     vid.classList.add("stopfade");
 }
+
+init();
