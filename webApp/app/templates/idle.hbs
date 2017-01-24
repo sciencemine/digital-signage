@@ -17,16 +17,14 @@
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js">
     </script>
    <![endif]-->
-
+ 
    <!-- Include Style Sheets -->
    <link rel="stylesheet" type="text/css" href="styles/app.css">
   </head>
 
   <body>
     <div>
-      <video id="bgvid" autoplay playsinline loop>
-        <source src="videos/{{model.items.[0].url}}" type="video/mp4">
-      </video>
+      {{background-video url=model.items.[0].url}}
     </div>
   </body>
 </html>

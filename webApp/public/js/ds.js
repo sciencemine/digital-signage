@@ -34,7 +34,8 @@ pauseButton.addEventListener("click", function() {
 	if (vid.paused) {
 		vid.play();
 		pauseButton.innerHTML = "Pause";
-	} else {
+	}
+  else {
         vid.pause();
         pauseButton.innerHTML = "Paused";
 	}
@@ -45,12 +46,9 @@ menuButton.addEventListener("click", function() {
 
 	me.classList.toggle('slide');
 });
-
 }
 
 // Helper functions
 function vidFade() {
     vid.classList.add("stopfade");
 }
-
-
