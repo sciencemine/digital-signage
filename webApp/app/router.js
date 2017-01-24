@@ -9,7 +9,6 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('idle');
-  this.route('vid-picker');
 });
 
 export default Router;
