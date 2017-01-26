@@ -13,12 +13,3 @@ export default Ember.Route.extend({
     }
   }
 });
-
-
-// function randomVideo() {
-//     var arrayLength = model.items.length;
-//     var index = parseInt((Math.random() * arrayLength));
-//     var url = "videos/" + model.items[index].url + ".mp4";
-
-//     return url;
-// }

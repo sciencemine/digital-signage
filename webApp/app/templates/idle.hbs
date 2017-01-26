@@ -1,12 +1,25 @@
-<link rel="stylesheet" type="text/css" href="styles/app.css">
-<div>
-  <div id="vid">
-    {{background-video url=""}}
+ <!-- Include Style Sheets -->
+ <link rel="stylesheet" type="text/css" href="styles/app.css">
+
+ <!-- Include JavaScript Files -->
+ <script type="text/javascript" src="js/ds.js"></script>
+ <div id="fs">
+  {{background-video url=""}}
+  <div id="menu">
+    {{#each model.items as |item|}}
+      <img {{action "loadVideo" item.url}} height="90" width="160" src="videos/{{item.url}}.png">
+    {{/each}}
+  </div>
+  <div id="buttons">
+    <button id="vidpause">Pause</button>
+    <button id="menuSlide">Menu</button>
   </div>
   <div>
-    {{#each model.items as |item|}}
-      <img {{action "loadVideo" item.url}} height="90" width="160" src="videos/{{item.url}}.png"><br>
-    {{/each}}
+    <div>
+      {{#each model.items as |item|}}
+        <img {{action "loadVideo" item.url}} height="90" width="160" src="videos/{{item.url}}.png"><br>
+      {{/each}}
+    </div>
   </div>
 </div>
 
