@@ -20,33 +20,33 @@ function init() {
 	pauseButton = document.getElementById('vidpause');
 	menuButton = document.getElementById('menuSlide');
 
-// Register listener that cycles through videos upon video 
-// play ending 
-vid.addEventListener('ended', function() {
-    // only functional if "loop" is removed 
-     vid.pause();
-	// to capture IE10
-	vidFade();
-});
+  // Register listener that cycles through videos upon video 
+  // play ending 
+  vid.addEventListener('ended', function() {
+      // only functional if "loop" is removed 
+       vid.pause();
+  	// to capture IE10
+  	vidFade();
+  });
 
-pauseButton.addEventListener("click", function() {
-    vid.classList.toggle('stopfade');
-	if (vid.paused) {
-		vid.play();
-		pauseButton.innerHTML = "Pause";
-	}
-  else {
-        vid.pause();
-        pauseButton.innerHTML = "Paused";
-	}
-});
+  pauseButton.addEventListener("click", function() {
+      vid.classList.toggle('stopfade');
+  	if (vid.paused) {
+  		vid.play();
+  		pauseButton.innerHTML = "Pause";
+  	}
+    else {
+          vid.pause();
+          pauseButton.innerHTML = "Paused";
+  	}
+  });
 
-menuButton.addEventListener("click", function() {
+  menuButton.addEventListener("click", function() {
 
-  var me = document.getElementById('menu');
+    var me = document.getElementById('menu');
 
-	me.classList.toggle('slide');
-});
+  	me.classList.toggle('slide');
+  });
 }
 
 // Helper functions

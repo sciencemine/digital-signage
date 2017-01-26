@@ -1,11 +1,13 @@
-   <link rel="stylesheet" type="text/css" href="styles/app.css">
+<link rel="stylesheet" type="text/css" href="styles/app.css">
+<div>
+  <div id="vid">
+    {{background-video url=""}}
+  </div>
+  <div>
+    {{#each model.items as |item|}}
+      <img {{action "loadVideo" item.url}} height="90" width="160" src="videos/{{item.url}}.png"><br>
+    {{/each}}
+  </div>
+</div>
 
-
-
-    <div>
-      <video id="bgvid" autoplay playsinline loop>
-        <source src="videos/{{model.items.[0].url}}" type="video/mp4">
-      </video>
-    </div>
 {{outlet}}
-
