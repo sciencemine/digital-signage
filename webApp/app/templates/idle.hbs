@@ -13,9 +13,10 @@
   <div id="buttons">
     <button id="vidpause">Pause</button>
     <button id="menuSlide">Menu</button>
+    {{full-screen}}
   </div>
   <div>
-    <div>
+    <div id="video-select">
       {{#each model.items as |item|}}
         <img {{action "loadVideo" item.url}} height="90" width="160" src="videos/{{item.url}}.png"><br>
       {{/each}}
