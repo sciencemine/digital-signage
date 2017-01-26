@@ -18,7 +18,7 @@
 		},
 		"keyboard": {
 			"ignore": false, 
-			"accept": [ "a", "b" , "c", "d"] 
+			"accept": [ "w", "a" , "s", "d"] 
 		},
 		"mouse": {
 			"ignore": false, 
@@ -27,7 +27,7 @@
 	},
 	"items": [
 		{
-			"url": "Bee Movie.MP4",
+			"url": "Bee_Movie",
 			"caption": "The entire bee movie but everytime they say bee it gets faster.",
 			"attribution": "Jerry Seinfield",
 			"transition": "baba",
@@ -35,7 +35,7 @@
 			"descriptions": []
 		},
 		{
-			"url": "20160326-001.MP4",
+			"url": "20160326-001",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
@@ -62,7 +62,7 @@
 			]
 		},
 		{
-			"url": "20160326-002.MP4",
+			"url": "20160326-002",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
@@ -89,7 +89,7 @@
 			]
 		},
 		{
-			"url": "20160326-003.MP4",
+			"url": "20160326-003",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
@@ -116,7 +116,7 @@
 			]
 		},
 		{
-			"url": "20160326-004.MP4",
+			"url": "20160326-004",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
@@ -142,6 +142,5 @@
 				}
 			]
 		}
-		
 	]
 }
