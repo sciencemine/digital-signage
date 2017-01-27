@@ -1,5 +1,5 @@
 <div>
-  {{bkg-vid path=model.modelInfo.mediaPath fName=""}}
+  {{bkg-vid data-related="" path=model.modelInfo.mediaPath fName=""}}
 
   <div id="carousel">
     <!-- Populates CAROUSEL with video icons -->
@@ -19,8 +19,10 @@
     <!-- Generates RELATED video icons -->
     <!-- MAKE INTO COMPONENT -->
 
-    {{#each-in model.items as |key value|}}
-      <img {{action "loadVideo" key}} height="90" width="160" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png"><br>
+    {{#each-in model.items as |parentKey value|}}
+      <div id={{parentKey}} class="thumbnail" data-related={{value.relatedContent}}>
+        <img {{action "loadVideo" parentKey}} height="90" width="90" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png"><br>
+      </div>
     {{/each-in}}
   </div>
 </div>

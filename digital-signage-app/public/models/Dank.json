@@ -1,5 +1,6 @@
 {
 	"modelInfo": {
+		"currentVidId": "",
 		"mediaPath": "Memes",
 		"prettyTitle": "Memes *Aesthetic*"
 	},
@@ -36,7 +37,7 @@
 			"attribution": "Shaggy",
 			"transition": "baba",
 			"summary": "Important video from Scooby Doo",
-			"relatedContent": ["Bees"],
+			"relatedContent": ["Bees", "Red"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -46,6 +47,16 @@
 			"attribution": "Jerry Seinfield",
 			"transition": "baba",
 			"summary": "A staple in the current meme economy",
+			"relatedContent": ["Red"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"Red": {
+			"fName": "Red",
+			"caption": "Illuminati confirmed",
+			"attribution": "",
+			"transition": "baba",
+			"summary": "Exposure of the illuminati",
 			"relatedContent": ["Caveman"],
 			"contentType": 0,
 			"descriptions": []

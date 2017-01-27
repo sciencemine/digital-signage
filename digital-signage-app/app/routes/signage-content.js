@@ -1,33 +1,48 @@
 import Ember from 'ember';
 
-var currentVidKey;
-
 export default Ember.Route.extend({
 
   modelFile: null,
 
   beforeModel(params) {
     var qp = params.queryParams;
+    var path;
+
     if (qp.modelfile) {
       this.modelFile = qp.modelfile;
     }
   },
   model() {
-    var mf = this.modelFile;
+    var path = "models/" + (this.modelFile ? this.modelFile : "Dank") + ".json";
+    var data = Ember.$.getJSON(path);
 
-    return Ember.$.getJSON("models/" + (mf ? mf : "Dank") + ".json");
+    return data;
   },
   actions: {
-    loadVideo(key) {
+    loadVideo(inputKey) {
       var m = this.modelFor(this.routeName);
       var pauseButton = document.getElementById('playback-toggle');
       var vid = document.getElementById('bkg-vid');
-      var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[key].fName + ".mp4";
+      var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[inputKey].fName + ".mp4";
+      var thumbnails = document.getElementsByClassName('thumbnail');
 
       vid.setAttribute("src", setFName);
       vid.currentTime = 0;
 
-      currentVidKey = key;
+      for (var ndx = 0; ndx < thumbnails.length; ndx++) {
+        thumbnails[ndx].style.visibility = "hidden";
+        thumbnails[ndx].style.height = "0px";
+        thumbnails[ndx].style.weight = "0px";
+        var relatedContent = thumbnails[ndx].dataset.related.split(",");
+
+        if (relatedContent.includes(inputKey)) {
+          thumbnails[ndx].style.visibility = "visible";
+        thumbnails[ndx].style.height = "90px";
+        thumbnails[ndx].style.weight = "160px";
+        }//if
+      }//for
+
+      m.modelInfo.currentVidId = inputKey;
      
       play(vid, pauseButton);
 
