@@ -1,0 +1,28 @@
+<div>
+  {{bkg-vid path=model.modelInfo.mediaPath fName=""}}
+
+  <div id="carousel">
+    <!-- Populates CAROUSEL with video icons -->
+    <!-- MAKE INTO COMPONENT -->
+
+    {{#each-in model.items as |key value|}}
+      <img {{action "loadVideo" key}} height="90" width="160" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png">
+    {{/each-in}}
+  </div>
+
+  <div id="buttons">
+    <button id="playback-toggle" {{action "togglePlayback"}}>Pause</button>
+    <button id="carousel-toggle" {{action "toggleCarousel"}}>Menu</button>
+  </div>
+
+  <div id="vid-select">
+    <!-- Generates RELATED video icons -->
+    <!-- MAKE INTO COMPONENT -->
+
+    {{#each-in model.items as |key value|}}
+      <img {{action "loadVideo" key}} height="90" width="160" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png"><br>
+    {{/each-in}}
+  </div>
+</div>
+
+{{outlet}}
