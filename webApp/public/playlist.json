@@ -27,19 +27,36 @@
 	},
 	"items": [
 		{
+			"id": "",
+			"url": "Where's_the_Caveman",
+			"caption": "",
+			"attribution": "Shaggy",
+			"transition": "baba",
+			"summary": "Important video from Scooby Doo",
+			"relatedContent": [],
+			"contentType": 0,
+			"descriptions": []
+		},
+		{
+			"id": "",
 			"url": "Bee_Movie",
 			"caption": "The entire bee movie but everytime they say bee it gets faster.",
 			"attribution": "Jerry Seinfield",
 			"transition": "baba",
 			"summary": "A staple in the current meme economy",
+			"relatedContent": [],
+			"contentType": 0,
 			"descriptions": []
 		},
 		{
+			"id": "",
 			"url": "20160326-001",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
 			"summary": "This is summary text for the video",
+			"relatedContent": [],
+			"contentType": 0,
 			"descriptions": [
 				{
 					"key": "unique-identifier-001",
@@ -62,11 +79,14 @@
 			]
 		},
 		{
+			"id": "",
 			"url": "20160326-002",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
 			"summary": "This is summary text for the video",
+			"relatedContent": [],
+			"contentType": 0,
 			"descriptions": [
 				{
 					"key": "unique-identifier-001",
@@ -89,11 +109,14 @@
 			]
 		},
 		{
+			"id": "",
 			"url": "20160326-003",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
 			"summary": "This is summary text for the video",
+			"relatedContent": [],
+			"contentType": 0,
 			"descriptions": [
 				{
 					"key": "unique-identifier-001",
@@ -116,11 +139,14 @@
 			]
 		},
 		{
+			"id": "",
 			"url": "20160326-004",
 			"caption": "Silver Bow Creek - Spring 2016",
 			"attribution": "Fred Hartline, 20160326",
 			"transition": "css style to apply to container when displayed",
 			"summary": "This is summary text for the video",
+			"relatedContent": [],
+			"contentType": 0,
 			"descriptions": [
 				{
 					"key": "unique-identifier-001",
