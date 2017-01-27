@@ -1,8 +1,19 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+
+  playlistName: "",
+
+  beforeModel(params) {
+    var qp = params.queryParams;
+    if (qp.playlistname) {
+      this.playlistName = qp.playlistname;
+    }
+  },
+
   model() {
-    return Ember.$.getJSON("playlist.json");
+    console.log("playlistName: " + this.playlistName);
+    return Ember.$.getJSON(this.playlistName + ".json");
   },
   actions: {
     loadVideo(url) {
