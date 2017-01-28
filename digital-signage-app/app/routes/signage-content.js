@@ -4,7 +4,7 @@ var signage_content_state = {
   // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
   displayedThumbnails: [],
   selectedThumbnailIndex: 0
-}
+};
 
 export default Ember.Route.extend({
 
