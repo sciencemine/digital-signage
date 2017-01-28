@@ -1,0 +1,71 @@
+/*
+ * Science Mine Digital Signage Project
+ * CSS for DS Project
+ * Phillip J. Curtiss, PhD
+ * Science Mine Board Member
+ * (C) 2016 Science Mine, Inc.
+ * All Rights Reserved
+ */
+ 
+ body {
+   background: #000;
+ }
+/*
+ * Force Video to be on the background 
+ * z-index ensures behind other elements on the page
+ */
+video#bkg-vid { 
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    -ms-transform: translateX(-50%) translateY(-50%);
+    -moz-transform: translateX(-50%) translateY(-50%);
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+}
+
+video {
+  display: block;
+}
+
+video#bkg-vid {
+    transition: 1s opacity;
+}
+
+.darken-video { 
+  opacity: .5; 
+}
+
+div#carousel {
+  border-radius: 25px;
+  background-color: #225;
+  opacity: 0.5;
+  height: 100px;
+  padding: 0px;
+  overflow-y: hidden;
+  max-height: 0px; /* approximate max height */
+
+  transition-property: all;
+  transition-duration: 1.2s;
+  transition-timing-function: cubic-bezier(0, 1, 0.5, 1);
+}
+
+div#carousel.carousel-visible {
+  padding: 25px;
+  max-height: 150px;
+}
+
+#buttons {
+    top:  0 px;
+    left: 0 px;
+    width: 100%;
+}
+
+:-webkit-full-screen{
+    background-color : transparent;
+}

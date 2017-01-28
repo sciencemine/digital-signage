@@ -1,0 +1,65 @@
+{
+	"modelInfo": {
+		"currentVidId": "",
+		"mediaPath": "Memes",
+		"prettyTitle": "Memes *Aesthetic*"
+	},
+	"config": {
+		"menu": {
+			"when": "interactively", 
+			"where": "top", 
+			"dwell": 15, 
+			"idle": 45 ,
+			"num": 0
+		},
+		"topics": {
+			"when": "interactively", 
+			"where": "left" 
+		},
+		"attribution": {
+			"when": "always", 
+			"where": "bottom-right", 
+			"dwell": 15 
+		},
+		"keyboard": {
+			"ignore": false, 
+			"accept": [ "w", "a" , "s", "d"] 
+		},
+		"mouse": {
+			"ignore": false, 
+			"region": [ 10, 10, 100, 100] 
+		}
+	},
+	"items": {
+		"Caveman": {
+			"fName": "Where's_the_Caveman",
+			"caption": "",
+			"attribution": "Shaggy",
+			"transition": "baba",
+			"summary": "Important video from Scooby Doo",
+			"relatedContent": ["Bees", "Red"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"Bees": {
+			"fName": "Bee_Movie",
+			"caption": "The entire bee movie but everytime they say bee it gets faster.",
+			"attribution": "Jerry Seinfield",
+			"transition": "baba",
+			"summary": "A staple in the current meme economy",
+			"relatedContent": ["Red"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"Red": {
+			"fName": "Red",
+			"caption": "Illuminati confirmed",
+			"attribution": "",
+			"transition": "baba",
+			"summary": "Exposure of the illuminati",
+			"relatedContent": ["Caveman"],
+			"contentType": 0,
+			"descriptions": []
+		}
+	}
+}
