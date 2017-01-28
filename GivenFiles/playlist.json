@@ -3,12 +3,13 @@
 		"menu": {
 			"when": "interactively", // Could be never, always
 			"where": "top", // could be bottom, middle
-			"dwell", 15, // number of seconds to dwell
-			"idle": 45 // seconds of idle before display for dwell
+			"dwell": 15, // number of seconds to dwell
+			"idle": 45, // seconds of idle before display for dwell
+			"num": 0
 		},
 		"topics": {
 			"when": "interactively", //could be never, always
-			"where": "left", // could be right
+			"where": "left" // could be right
 		},
 		"attribution": {
 			"when": "always", //could be never, intermittantly
