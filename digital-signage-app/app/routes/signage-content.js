@@ -1,5 +1,11 @@
 import Ember from 'ember';
 
+var signage_content_state = {
+  // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
+  displayedThumbnails: [],
+  selectedThumbnailIndex: 0
+}
+
 export default Ember.Route.extend({
 
   modelFile: null,
@@ -15,9 +21,12 @@ export default Ember.Route.extend({
     var path = "models/" + (this.modelFile ? this.modelFile : "Dank") + ".json";
     var data = Ember.$.getJSON(path);
 
-    data.currentVidId = "Bees";
-
     return data;
+  },
+  afterModel(model, transition) {
+    // Add the state to the model for easy access within handlebars
+    model["state"] = signage_content_state;
+    return model;
   },
   actions: {
     loadVideo(inputKey) {
@@ -43,8 +52,6 @@ export default Ember.Route.extend({
         }//if
       }//for
 
-      m.modelInfo.currentVidId = inputKey;
-     
       play(vid, pauseButton);
 
       vid.addEventListener('ended', function() {
