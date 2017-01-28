@@ -6,7 +6,6 @@ export default Ember.Route.extend({
 
   beforeModel(params) {
     var qp = params.queryParams;
-    var path;
 
     if (qp.modelfile) {
       this.modelFile = qp.modelfile;
@@ -15,6 +14,8 @@ export default Ember.Route.extend({
   model() {
     var path = "models/" + (this.modelFile ? this.modelFile : "Dank") + ".json";
     var data = Ember.$.getJSON(path);
+
+    data.currentVidId = "Bees";
 
     return data;
   },
@@ -37,8 +38,8 @@ export default Ember.Route.extend({
 
         if (relatedContent.includes(inputKey)) {
           thumbnails[ndx].style.visibility = "visible";
-        thumbnails[ndx].style.height = "90px";
-        thumbnails[ndx].style.weight = "160px";
+          thumbnails[ndx].style.height = "90px";
+          thumbnails[ndx].style.weight = "160px";
         }//if
       }//for
 
