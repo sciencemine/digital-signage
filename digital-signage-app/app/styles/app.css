@@ -60,6 +60,10 @@ div#carousel.carousel-visible {
   overflow: auto;
 }
 
+.menuThumbnail{
+    padding: 0px 5px 0px 5px;
+}
+
 #buttons {
     top:  0 px;
     left: 0 px;
