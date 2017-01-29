@@ -30,13 +30,63 @@
 		}
 	},
 	"items": {
+		"5Gum": {
+			"fName": "5Gum",
+			"caption": "",
+			"attribution": "",
+			"transition": "baba",
+			"summary": "How it feels to chew 5 gum",
+			"relatedContent": ["ThorNLoki"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"PPAP": {
+			"fName": "PPAP",
+			"caption": "",
+			"attribution": "",
+			"transition": "baba",
+			"summary": "Pen Pineapple Apple Pen",
+			"relatedContent": ["ThorNLoki", "5Gum"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"TSwift": {
+			"fName": "Taylor Swift",
+			"caption": "",
+			"attribution": "Taylor Swift",
+			"transition": "baba",
+			"summary": "Taylor Swift Loses 1 v 1 at Grammy's",
+			"relatedContent": ["Caveman", "ShaggyDance"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"ShaggyDance" : {
+			"fName": "Shaggy Moves",
+			"caption": "",
+			"attribution": "Shaggy",
+			"transition": "baba",
+			"summary": "Shaggy lays some dance moves on the gang",
+			"relatedContent": ["Caveman"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"ThorNLoki": {
+			"fName": "Thor N Loki",
+			"caption": "",
+			"attribution": "Asgard Gods",
+			"transition": "baba",
+			"summary": "Thor composes a compelling song for his brother's birthday",
+			"relatedContent": ["5Gum"],
+			"contentType": 0,
+			"descriptions": []
+		},
 		"Caveman": {
 			"fName": "Where's_the_Caveman",
 			"caption": "",
 			"attribution": "Shaggy",
 			"transition": "baba",
 			"summary": "Important video from Scooby Doo",
-			"relatedContent": ["Bees", "Red"],
+			"relatedContent": ["ShaggyDance"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -46,7 +96,7 @@
 			"attribution": "Jerry Seinfield",
 			"transition": "baba",
 			"summary": "A staple in the current meme economy",
-			"relatedContent": ["Red"],
+			"relatedContent": ["TSwift", "PPAP", "Red"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -56,7 +106,7 @@
 			"attribution": "",
 			"transition": "baba",
 			"summary": "Exposure of the illuminati",
-			"relatedContent": ["Caveman"],
+			"relatedContent": [""],
 			"contentType": 0,
 			"descriptions": []
 		}
