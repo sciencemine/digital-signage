@@ -6,7 +6,8 @@
     <!-- MAKE INTO COMPONENT -->
 
     {{#each-in model.items as |key value|}}
-      <img {{action "loadVideo" key}} height="90" width="160" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png">
+      <img {{action "loadVideo" key}} height="90" width="160"
+      src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png" class="menuThumbnail">
     {{/each-in}}
   </div>
 
