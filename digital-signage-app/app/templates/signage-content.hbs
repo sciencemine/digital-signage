@@ -20,11 +20,13 @@
     <!-- Generates RELATED video icons -->
     <!-- MAKE INTO COMPONENT -->
 
+    <div class="divTable">
     {{#each-in model.items as |parentKey value|}}
-      <div id={{parentKey}} class="thumbnail" data-related={{value.relatedContent}}>
+      <div id={{parentKey}} class="thumbnail divTableCell" data-related={{value.relatedContent}}>
         <img {{action "loadVideo" parentKey}} height="90" width="90" src="media/{{model.modelInfo.mediaPath}}/{{value.fName}}.png"><br>
       </div>
     {{/each-in}}
+  </div>
   </div>
 </div>
 
