@@ -41,6 +41,12 @@ video#bkg-vid {
   opacity: .5; 
 }
 
+.highlight-video{
+  border-style: solid;
+  border-width: 4px;
+  border-color: white;
+}
+
 div#carousel {
   border-radius: 25px;
   background-color: rgba(34, 34, 85, 0.5);

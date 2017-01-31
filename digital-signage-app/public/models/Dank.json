@@ -46,7 +46,7 @@
 			"attribution": "",
 			"transition": "baba",
 			"summary": "Pen Pineapple Apple Pen",
-			"relatedContent": ["ThorNLoki", "5Gum"],
+			"relatedContent": ["5Gum","ThorNLoki"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -56,7 +56,7 @@
 			"attribution": "Taylor Swift",
 			"transition": "baba",
 			"summary": "Taylor Swift Loses 1 v 1 at Grammy's",
-			"relatedContent": ["Caveman", "ShaggyDance"],
+			"relatedContent": ["ShaggyDance","Caveman"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -96,7 +96,7 @@
 			"attribution": "Jerry Seinfield",
 			"transition": "baba",
 			"summary": "A staple in the current meme economy",
-			"relatedContent": ["TSwift", "PPAP", "Red"],
+			"relatedContent": ["PPAP","TSwift","Red"],
 			"contentType": 0,
 			"descriptions": []
 		},

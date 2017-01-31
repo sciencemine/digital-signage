@@ -2,8 +2,8 @@ import Ember from 'ember';
 
 var signage_content_state = {
   // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
-  displayedThumbnails: [],
-  selectedThumbnailIndex: -1,
+  numRelatedVids: 0,
+  selectedThumbnailIndex: 0,
   currentVidId: null
 };
 
@@ -31,6 +31,7 @@ export default Ember.Route.extend({
   },
   actions: {
     loadVideo(inputKey) {
+      
       var m = this.modelFor(this.routeName);
       var pauseButton = document.getElementById('playback-toggle');
       var vid = document.getElementById('bkg-vid');
@@ -47,12 +48,18 @@ export default Ember.Route.extend({
         thumbnails[ndx].style.weight = "0px";
       }//for
 
+      m.state.numRelatedVids = 0;
       for (var ndx = 0; ndx < relatedContent.length; ndx++) {
         var thumbnail = document.getElementById(relatedContent[ndx]);
         thumbnail.style.visibility = "visible";
         thumbnail.style.height = "90px";
         thumbnail.style.weight = "160px";
+        thumbnail.classList.remove("highlight-video");
+        m.state.numRelatedVids++;
       }//for
+
+      var selectThumb = document.getElementById(relatedContent[m.state.selectedThumbnailIndex]);
+      selectThumb.classList.add("highlight-video");
 
       m.state.currentVidId = inputKey;
 
@@ -77,7 +84,8 @@ export default Ember.Route.extend({
       var menu = document.getElementById('carousel');
 
       menu.classList.toggle('carousel-visible');
-    }
+    },
+    
   }
 });
 
@@ -92,3 +100,49 @@ function pause(vid, pauseButton) {
   pauseButton.innerHTML = "Paused";
   vid.classList.add("darken-video");
 }
+
+document.onkeydown = function(event){
+  
+     
+      var currentSelect = signage_content_state.selectedThumbnailIndex;
+      var num = signage_content_state.numRelatedVids;
+      var keyPress = event.which || event.keyCode;
+      
+      var vid = document.getElementById('bkg-vid');
+      var pauseButton = document.getElementById('playback-toggle');
+      
+       var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
+
+      
+      var selectThumb = document.getElementById(relatedContent[currentSelect]);
+      selectThumb.classList.remove("highlight-video");
+
+      console.log(num);
+      switch(keyPress){
+        case 68:
+          currentSelect += 1;
+          
+          if(currentSelect >= num){
+              currentSelect = 0;
+          }//if - the selection index is out of bounds
+          
+          console.log('currentSelect= d');
+          break;
+        case 65:
+           currentSelect -= 1;
+           
+          if(currentSelect < 0){
+              currentSelect = num - 1;
+          }//if - the selection index is out of bounds
+          
+          console.log('currentSelect = a');
+          break;
+        case 87:
+          loadVideo();
+          break;
+      }
+      selectThumb = document.getElementById(relatedContent[currentSelect]);
+      selectThumb.classList.add("highlight-video");
+      console.log(currentSelect);
+      signage_content_state.selectedThumbnailIndex = currentSelect;
+ }
