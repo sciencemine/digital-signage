@@ -6,15 +6,15 @@
  * (C) 2016 Science Mine, Inc.
  * All Rights Reserved
  */
- 
+
  body {
    background: #000;
  }
 /*
- * Force Video to be on the background 
+ * Force Video to be on the background
  * z-index ensures behind other elements on the page
  */
-video#bkg-vid { 
+video#bkg-vid {
     position: fixed;
     top: 50%;
     left: 50%;
@@ -37,8 +37,20 @@ video#bkg-vid {
     transition: 1s opacity;
 }
 
-.darken-video { 
-  opacity: .5; 
+.darken-video {
+  opacity: .5;
+}
+
+.highlight-video-child{
+  border-style: solid;
+  border-width: 4px;
+  border-color: white;
+}
+
+.highlight-video-adult{
+  border-style: solid;
+  border-width: 4px;
+  border-color: red;
 }
 
 div#carousel {
@@ -72,4 +84,30 @@ div#carousel.carousel-visible {
 
 -webkit-full-screen{
     background-color : transparent;
+}
+
+div.divTable{
+  display: table;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+
+div.divTableRow {
+  display: table-row;
+}
+
+div.divTableCell{
+  display: table-cell;
+  padding: 8px;
+}
+
+div#vid-select{
+  position: absolute;
+  height: 100%;
+  width: 100%;
 }
