@@ -24,7 +24,7 @@ export default Ember.Route.extend({
 
     return data;
   },
-  afterModel(model, transition) {
+  afterModel(model) {
     // Add the state to the model for easy access within handlebars
     model["state"] = signage_content_state;
     return model;
