@@ -44,7 +44,16 @@ export default Ember.Route.extend({
       for (var ndx = 0; ndx < thumbnails.length; ndx++) {
         thumbnails[ndx].style.visibility = "hidden";
         thumbnails[ndx].style.height = "0px";
-        thumbnails[ndx].style.weight = "0px";
+        thumbnails[ndx].style.maxWidth = "0px";
+        thumbnails[ndx].style.padding = "0px";
+        var relatedContent = thumbnails[ndx].dataset.related.split(",");
+
+        if (relatedContent.includes(inputKey)) {
+          thumbnails[ndx].style.visibility = "visible";
+          thumbnails[ndx].style.height = "90px";
+          thumbnails[ndx].style.maxWidth = "160px";
+          thumbnails[ndx].style.padding = "8px";
+        }//if
       }//for
 
       for (var ndx = 0; ndx < relatedContent.length; ndx++) {
@@ -55,6 +64,7 @@ export default Ember.Route.extend({
       }//for
 
       m.state.currentVidId = inputKey;
+
 
       play(vid, pauseButton);
 
