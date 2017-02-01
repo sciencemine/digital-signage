@@ -1,5 +1,12 @@
 import Ember from 'ember';
 
+var signage_content_state = {
+  // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
+  displayedThumbnails: [],
+  selectedThumbnailIndex: -1,
+  currentVidId: null
+};
+
 export default Ember.Route.extend({
 
   modelFile: null,
@@ -15,9 +22,12 @@ export default Ember.Route.extend({
     var path = "models/" + (this.modelFile ? this.modelFile : "Dank") + ".json";
     var data = Ember.$.getJSON(path);
 
-    data.currentVidId = "Bees";
-
     return data;
+  },
+  afterModel(model, transition) {
+    // Add the state to the model for easy access within handlebars
+    model["state"] = signage_content_state;
+    return model;
   },
   actions: {
     loadVideo(inputKey) {
@@ -26,6 +36,7 @@ export default Ember.Route.extend({
       var vid = document.getElementById('bkg-vid');
       var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[inputKey].fName + ".mp4";
       var thumbnails = document.getElementsByClassName('thumbnail');
+      var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
 
       vid.setAttribute("src", setFName);
       vid.currentTime = 0;
@@ -45,7 +56,15 @@ export default Ember.Route.extend({
         }//if
       }//for
 
-      m.modelInfo.currentVidId = inputKey;
+      for (var ndx = 0; ndx < relatedContent.length; ndx++) {
+        var thumbnail = document.getElementById(relatedContent[ndx]);
+        thumbnail.style.visibility = "visible";
+        thumbnail.style.height = "90px";
+        thumbnail.style.weight = "160px";
+      }//for
+
+      m.state.currentVidId = inputKey;
+
 
       play(vid, pauseButton);
 
