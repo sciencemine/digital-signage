@@ -47,7 +47,8 @@ export default Ember.Route.extend({
         thumbnails[ndx].style.height = "0px";
         thumbnails[ndx].style.maxWidth = "0px";
         thumbnails[ndx].style.padding = "0px";
-  //      var relatedContent = thumbnails[ndx].dataset.related.split(",");
+
+        relatedContent = thumbnails[ndx].dataset.related.split(",");
 
         if (relatedContent.includes(inputKey)) {
           thumbnails[ndx].style.visibility = "visible";
@@ -118,14 +119,22 @@ document.onkeydown = function(event){
       var num = signage_content_state.numRelatedVids;
       var keyPress = event.which || event.keyCode;
       
-      var vid = document.getElementById('bkg-vid');
-      var pauseButton = document.getElementById('playback-toggle');
+      //var vid = document.getElementById('bkg-vid');
+     // var pauseButton = document.getElementById('playback-toggle');
       
        var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
 
       
       var selectThumb = document.getElementById(relatedContent[currentSelect]);
-      selectThumb.classList.remove("highlight-video");
+
+      if(document.getElementById(contentType) == 0){
+
+         selectThumb.classList.remove("highlight-video-child");
+      }
+      else{
+         selectThumb.classList.remove("highlight-video-adult");
+
+      }
 
       console.log(num);
       switch(keyPress){
@@ -148,11 +157,21 @@ document.onkeydown = function(event){
           console.log('currentSelect = a');
           break;
         case 87:
+
           loadVideo(currentSelect);
+
           break;
       }
       selectThumb = document.getElementById(relatedContent[currentSelect]);
-      selectThumb.classList.add("highlight-video");
+      if(document.getElementById(contentType) == 0){
+          selectThumb.classList.add("highlight-video-child");
+      }
+      else{
+          selectThumb.classList.add("highlight-video-adult");
+
+      }
+      
       console.log(currentSelect);
       signage_content_state.selectedThumbnailIndex = currentSelect;
  };
+
