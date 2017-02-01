@@ -47,7 +47,7 @@ export default Ember.Route.extend({
         thumbnails[ndx].style.height = "0px";
         thumbnails[ndx].style.maxWidth = "0px";
         thumbnails[ndx].style.padding = "0px";
-        var relatedContent = thumbnails[ndx].dataset.related.split(",");
+  //      var relatedContent = thumbnails[ndx].dataset.related.split(",");
 
         if (relatedContent.includes(inputKey)) {
           thumbnails[ndx].style.visibility = "visible";
@@ -58,11 +58,11 @@ export default Ember.Route.extend({
       }//for
 
       m.state.numRelatedVids = 0;
-      for (var ndx = 0; ndx < relatedContent.length; ndx++) {
+      for (ndx = 0; ndx < relatedContent.length; ndx++) {
         var thumbnail = document.getElementById(relatedContent[ndx]);
         thumbnail.style.visibility = "visible";
         thumbnail.style.height = "90px";
-        thumbnail.style.weight = "160px";
+        thumbnail.style.maxWidth = "160px";
         thumbnail.classList.remove("highlight-video");
         m.state.numRelatedVids++;
       }//for
@@ -148,11 +148,11 @@ document.onkeydown = function(event){
           console.log('currentSelect = a');
           break;
         case 87:
-          loadVideo();
+          loadVideo(currentSelect);
           break;
       }
       selectThumb = document.getElementById(relatedContent[currentSelect]);
       selectThumb.classList.add("highlight-video");
       console.log(currentSelect);
       signage_content_state.selectedThumbnailIndex = currentSelect;
- }
+ };
