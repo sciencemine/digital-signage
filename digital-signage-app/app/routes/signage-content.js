@@ -7,7 +7,11 @@ let signage_content_state = {
   currentVidId: null,
   thumbnailContentType: [],
   timeout: 0,
-  thumbnailFName: []
+  vidKey: []
+
+};
+
+let global_model = {
 
 };
 
@@ -31,73 +35,13 @@ export default Ember.Route.extend({
     // Add the state to the model for easy access within handlebars
     model["state"] = signage_content_state;
     signage_content_state.timeout = model.config.menu.dwell;
+    global_model = model;
    
     return model;
   },
   actions: {
     loadVideo(inputKey) {
-      var m = this.modelFor(this.routeName);
-      var pauseButton = document.getElementById('playback-toggle');
-      var vid = document.getElementById('bkg-vid');
-      var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[inputKey].fName + ".mp4";
-      var thumbnails = document.getElementsByClassName('thumbnail');
-      var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
-      var menu = document.getElementById('carousel');
-      var thumbnail;
-      var contentType = [];
-      var fName = [];
-
-      vid.setAttribute("src", setFName);
-      vid.currentTime = 0;
-
-      for (var ndx = 0; ndx < thumbnails.length; ndx++) {
-        if (m.items[thumbnails[ndx].id] === 0) {
-          thumbnails[ndx].classList.remove("highlight-child-video");
-        }//if
-        else {
-          thumbnails[ndx].classList.remove("highlight-adult-video");
-        }//if
-
-        thumbnails[ndx].style.visibility = "hidden";
-        thumbnails[ndx].style.height = "0px";
-        thumbnails[ndx].style.maxWidth = "0px";
-        thumbnails[ndx].style.padding = "0px";
-      }//for
-
-      signage_content_state.numRelatedVids = 0;
-
-      for (ndx = 0; ndx < relatedContent.length; ndx++) {
-        thumbnail = document.getElementById(relatedContent[ndx]);
-        thumbnail.style.visibility = "visible";
-        thumbnail.style.height = "90px";
-        thumbnail.style.maxWidth = "160px";
-        signage_content_state.numRelatedVids++;
-        contentType.push(m.items[relatedContent[ndx]].contentType);
-        fName.push(m.items[relatedContent[ndx]].thumbnailFName);
-      }//for
-
-      if (signage_content_state.numRelatedVids !== 0) {
-        thumbnail = document.getElementById(relatedContent[0]);
-        if (m.items[relatedContent[0]].contentType === 0) {
-          thumbnail.classList.add("highlight-video-child");
-        }//if
-        else {
-          thumbnail.classList.add("highlight-video-adult");
-        }//else
-      }//ifd
-
-      play(vid, pauseButton);
-      menu.classList.remove('carousel-visible');
-      signage_content_state.currentVidId = inputKey;
-      signage_content_state.selectedThumbnailIndex = 0;
-      signage_content_state.thumbnailContentType = contentType;
-      signage_content_state.thumbnailFName = fName;
-
-      m.state = signage_content_state;
-
-      vid.addEventListener('ended', function() {
-        pause(vid, pauseButton);
-      });
+      displayVideo(inputKey);
     },
     togglePlayback() {
       var vid = document.getElementById('bkg-vid');
@@ -117,14 +61,81 @@ export default Ember.Route.extend({
   }
 });
 
+function toggleBox(id) {
+  document.getElementById(id).classList.remove("highlight-video-adult");
+  document.getElementById(id).classList.remove("highlight-video-child");
+
+}
+
 function play(vid, pauseButton) {
   vid.play();
   pauseButton.innerHTML = "Pause";
   vid.classList.remove("darken-video");
   var divTable = document.getElementsByClassName("divTable")[0];
 
+  divTable.style.display = "table";
   setTimeout( function(){divTable.style.display = "none";}, signage_content_state.timeout * 1000);
 
+}
+
+function displayVideo(inputKey) {
+  var m = global_model;
+  var pauseButton = document.getElementById('playback-toggle');
+  var vid = document.getElementById('bkg-vid');
+  var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[inputKey].fName + ".mp4";
+  var thumbnails = document.getElementsByClassName('thumbnail');
+  var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
+  var menu = document.getElementById('carousel');
+  var thumbnail;
+  var contentType = [];
+  var vidKey = [];
+
+  vid.setAttribute("src", setFName);
+  vid.currentTime = 0;
+
+  for (var ndx = 0; ndx < thumbnails.length; ndx++) {
+    toggleBox(thumbnails[ndx].id);
+
+    thumbnails[ndx].style.visibility = "hidden";
+    thumbnails[ndx].style.height = "0px";
+    thumbnails[ndx].style.maxWidth = "0px";
+    thumbnails[ndx].style.padding = "0px";
+  }//for
+
+  signage_content_state.numRelatedVids = 0;
+
+  for (ndx = 0; ndx < relatedContent.length; ndx++) {
+    thumbnail = document.getElementById(relatedContent[ndx]);
+    thumbnail.style.visibility = "visible";
+    thumbnail.style.height = "90px";
+    thumbnail.style.maxWidth = "160px";
+    signage_content_state.numRelatedVids++;
+    contentType.push(m.items[relatedContent[ndx]].contentType);
+    vidKey.push(relatedContent[ndx]);
+  }//for
+
+  if (signage_content_state.numRelatedVids !== 0) {
+    thumbnail = document.getElementById(relatedContent[0]);
+    if (m.items[relatedContent[0]].contentType === 0) {
+      thumbnail.classList.add("highlight-video-child");
+    }//if
+    else {
+      thumbnail.classList.add("highlight-video-adult");
+    }//else
+  }//if
+
+  play(vid, pauseButton);
+  menu.classList.remove('carousel-visible');
+  signage_content_state.currentVidId = inputKey;
+  signage_content_state.selectedThumbnailIndex = 0;
+  signage_content_state.thumbnailContentType = contentType;
+  signage_content_state.vidKey = vidKey;
+
+  m.state = signage_content_state;
+
+  vid.addEventListener('ended', function() {
+    pause(vid, pauseButton);
+  });
 }
 
 function pause(vid, pauseButton) {
@@ -139,7 +150,7 @@ document.onkeydown = function(event) {
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
   var contentType = signage_content_state.thumbnailContentType;
-  var fName = signage_content_state.thumbnailFName;
+  var vidKey = signage_content_state.vidKey;
   var keyPress = event.which || event.keyCode;
   var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
@@ -172,7 +183,7 @@ document.onkeydown = function(event) {
     }
     case 87: {
 
-      loadVideo(fName[currentSelect]);
+      displayVideo(vidKey[currentSelect]);
 
       break;
     }
