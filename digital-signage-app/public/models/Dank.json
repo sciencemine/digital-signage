@@ -22,8 +22,8 @@
 		},
 		"keyboard": {
 			"ignore": false, 
-			"select": "w",
-			"cancel": "s",
+			"adult": "w",
+			"child": "s",
 			"left": "a", 
 			"right": "d"
 		},

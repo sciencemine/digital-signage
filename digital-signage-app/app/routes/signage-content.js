@@ -108,7 +108,7 @@ function displayVideo(inputKey) {
 
     thumbnail = document.getElementById(relatedContent[ndx]);
     thumbnail.style.visibility = "visible";
-    thumbnail.style.height = "90px";
+    //thumbnail.style.height = "90px";
     thumbnail.style.maxWidth = "160px";
     signage_content_state.numRelatedVids++;
     contentType.push(m.items[relatedContent[ndx]].contentType);
