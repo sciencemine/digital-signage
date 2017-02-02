@@ -123,16 +123,17 @@ function displayVideo(inputKey) {
 
   play(vid, pauseButton);
   menu.classList.remove('carousel-visible');
-  signage_content_state.startingVidId = inputKey;
   signage_content_state.selectedThumbnailIndex = 0;
   signage_content_state.thumbnailContentType = contentType;
   signage_content_state.vidKey = vidKey;
-
-  m.state = signage_content_state;
-
+  
   vid.addEventListener('ended', function() {
     pause(vid, pauseButton);
-  });
+    clearTimeout(timer);
+    timer = setTimeout( function() {
+      displayVideo(signage_content_state.startingVidId);
+    }, signage_content_state.timeout * 5 * 1000);
+    });
 }//displayVideo
 
 function toggleBox(id) {
