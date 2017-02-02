@@ -24,8 +24,8 @@
 			"ignore": false,
 			"adult": "w",
 			"child": "s",
-			"left": "d",
-			"right": "a"
+			"left": "a",
+			"right": "d"
 		},
 		"mouse": {
 			"ignore": false,
