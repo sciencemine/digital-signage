@@ -6,7 +6,9 @@ let signage_content_state = {
   selectedThumbnailIndex: 0,
   currentVidId: null,
   thumbnailContentType: [],
-  timeout: 0
+  timeout: 0,
+  thumbnailFName: []
+
 };
 
 export default Ember.Route.extend({
@@ -43,12 +45,13 @@ export default Ember.Route.extend({
       var menu = document.getElementById('carousel');
       var thumbnail;
       var contentType = [];
+      var fName = [];
 
       vid.setAttribute("src", setFName);
       vid.currentTime = 0;
 
       for (var ndx = 0; ndx < thumbnails.length; ndx++) {
-        if (m.items[thumbnails[ndx].dataset.id] === 0) {
+        if (m.items[thumbnails[ndx].id] === 0) {
           thumbnails[ndx].classList.remove("highlight-child-video");
         }//if
         else {
@@ -70,6 +73,7 @@ export default Ember.Route.extend({
         thumbnail.style.maxWidth = "160px";
         signage_content_state.numRelatedVids++;
         contentType.push(m.items[relatedContent[ndx]].contentType);
+        fName.push(m.items[relatedContent[ndx]].thumbnailFName);
       }//for
 
       if (signage_content_state.numRelatedVids !== 0) {
@@ -87,6 +91,7 @@ export default Ember.Route.extend({
       signage_content_state.currentVidId = inputKey;
       signage_content_state.selectedThumbnailIndex = 0;
       signage_content_state.thumbnailContentType = contentType;
+      signage_content_state.thumbnailFName = fName;
 
       m.state = signage_content_state;
 
@@ -134,6 +139,7 @@ document.onkeydown = function(event) {
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
   var contentType = signage_content_state.thumbnailContentType;
+  var fName = signage_content_state.thumbnailFName;
   var keyPress = event.which || event.keyCode;
   var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
@@ -166,7 +172,7 @@ document.onkeydown = function(event) {
     }
     case 87: {
 
-      loadVideo(currentSelect);
+      loadVideo(fName[currentSelect]);
 
       break;
     }
