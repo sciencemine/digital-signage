@@ -7,7 +7,7 @@
 		"menu": {
 			"when": "interactively", 
 			"where": "top", 
-			"dwell": 15, 
+			"dwell": 3, 
 			"idle": 45 ,
 			"num": 0
 		},

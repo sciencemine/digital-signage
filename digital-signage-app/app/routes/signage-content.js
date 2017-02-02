@@ -5,7 +5,8 @@ let signage_content_state = {
   numRelatedVids: 0,
   selectedThumbnailIndex: 0,
   currentVidId: null,
-  thumbnailContentType: []
+  thumbnailContentType: [],
+  timeout: 0
 };
 
 export default Ember.Route.extend({
@@ -27,6 +28,8 @@ export default Ember.Route.extend({
   afterModel(model) {
     // Add the state to the model for easy access within handlebars
     model["state"] = signage_content_state;
+    signage_content_state.timeout = model.config.menu.dwell;
+   
     return model;
   },
   actions: {
@@ -113,12 +116,18 @@ function play(vid, pauseButton) {
   vid.play();
   pauseButton.innerHTML = "Pause";
   vid.classList.remove("darken-video");
+  var divTable = document.getElementsByClassName("divTable")[0];
+
+  setTimeout( function(){divTable.style.display = "none";}, signage_content_state.timeout * 1000);
+
 }
 
 function pause(vid, pauseButton) {
   vid.pause();
   pauseButton.innerHTML = "Paused";
   vid.classList.add("darken-video");
+  var divTable = document.getElementsByClassName("divTable")[0];
+  divTable.style.display = "table";
 }
 
 document.onkeydown = function(event) {
