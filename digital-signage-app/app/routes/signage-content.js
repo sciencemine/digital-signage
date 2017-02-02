@@ -46,8 +46,6 @@ export default Ember.Route.extend({
     return model;
   },
   init() {
-    //displayVideo(signage_content_state.startingVidFName = model.items[key].fName)
-
     clearTimeout(timer);
     timer = setTimeout( function() {
       displayVideo(signage_content_state.startingVidId);
@@ -156,6 +154,9 @@ function pause(vid, pauseButton) {
   vid.classList.add("darken-video");
   var divTable = document.getElementsByClassName("divTable")[0];
   divTable.style.display = "table";
+  timer = setTimeout( function() {
+    play(vid, pauseButton);
+  }, signage_content_state.timeout * 5 * 1000);
 }//pause
 
 function resetTimer() {
@@ -171,33 +172,35 @@ function resetTimer() {
 
   }, signage_content_state.timeout * 1000);
 
-}
+}//resetTimer
 
 document.onclick = function() {
   resetTimer();
 };
 
 document.onkeydown = function(event) {
+  var keyPress = event.key;
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
   var contentType = signage_content_state.thumbnailContentType;
   var vidKey = signage_content_state.vidKey;
-  var keyPress = event.key;
   var relatedContent = document.getElementById(signage_content_state.startingVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
 
   resetTimer();
 
-  if(contentType[currentSelect] === 0) {
-     selectThumb.classList.remove("highlight-video-child");
+  if (keyPress === global_model.config.keyboard.right || keyPress === global_model.config.keyboard.left) {
+    if(contentType[currentSelect] === 0) {
+       selectThumb.classList.remove("highlight-video-child");
+    }//if
+    else {
+       selectThumb.classList.remove("highlight-video-adult");
+    }//else
   }//if
-  else {
-     selectThumb.classList.remove("highlight-video-adult");
-  }//else
 
   switch(keyPress) {
     case global_model.config.keyboard.right: {
-      currentSelect += 1;
+      currentSelect = currentSelect + 1;
       
       if(currentSelect >= num) {
           currentSelect = 0;
@@ -206,7 +209,7 @@ document.onkeydown = function(event) {
       break;
     }
     case global_model.config.keyboard.left: {
-       currentSelect -= 1;
+       currentSelect = currentSelect - 1;
        
       if(currentSelect < 0) {
           currentSelect = num - 1;
