@@ -8,7 +8,7 @@
 			"when": "interactively", 
 			"where": "top", 
 			"dwell": 3, 
-			"idle": 45 ,
+			"idle": 3.5,
 			"num": 0
 		},
 		"topics": {
@@ -69,8 +69,8 @@
 			"attribution": "Taylor Swift",
 			"transition": "baba",
 			"summary": "Taylor Swift Loses 1 v 1 at Grammy's",
-			"relatedContent": ["ShaggyDance","Caveman"],
-			"contentType": 0,
+			"relatedContent": ["ShaggyDance","Caveman", "Red"],
+			"contentType": 2,
 			"descriptions": []
 		},
 		"ShaggyDance" : {
@@ -80,7 +80,7 @@
 			"transition": "baba",
 			"summary": "Shaggy lays some dance moves on the gang",
 			"relatedContent": ["Caveman"],
-			"contentType": 1,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"ThorNLoki": {
@@ -100,7 +100,7 @@
 			"transition": "baba",
 			"summary": "Important video from Scooby Doo",
 			"relatedContent": ["ShaggyDance"],
-			"contentType": 1,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"Red": {

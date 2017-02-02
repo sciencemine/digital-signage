@@ -8,6 +8,7 @@ let signage_content_state = {
   currentVidId: null,
   thumbnailContentType: [],
   timeout: 0,
+  modelViewState: null,
   vidKey: []
 };
 
@@ -15,7 +16,7 @@ let global_model = {
 
 };
 
-var timer;
+let timer;
 
 export default Ember.Route.extend({
   modelFile: null,
@@ -41,6 +42,8 @@ export default Ember.Route.extend({
       signage_content_state.startingVidId = key;
       break;
     }
+
+    signage_content_state.modelViewState = model.items[signage_content_state.startingVidId].contentType;
 
     model["state"] = signage_content_state;
    
@@ -94,7 +97,6 @@ function displayVideo(inputKey) {
     removeBorder(thumbnails[ndx].id);
 
     thumbnails[ndx].style.visibility = "hidden";
-    thumbnails[ndx].style.height = "0px";
     thumbnails[ndx].style.maxWidth = "0px";
     thumbnails[ndx].style.padding = "0px";
   }//for
@@ -108,7 +110,6 @@ function displayVideo(inputKey) {
 
     thumbnail = document.getElementById(relatedContent[ndx]);
     thumbnail.style.visibility = "visible";
-    //thumbnail.style.height = "90px";
     thumbnail.style.maxWidth = "160px";
     signage_content_state.numRelatedVids++;
     contentType.push(m.items[relatedContent[ndx]].contentType);
@@ -116,13 +117,7 @@ function displayVideo(inputKey) {
   }//for
 
   if (signage_content_state.numRelatedVids !== 0) {
-    thumbnail = document.getElementById(relatedContent[0]);
-    if (m.items[relatedContent[0]].contentType === 0) {
-      thumbnail.classList.add("highlight-video-child");
-    }//if
-    else {
-      thumbnail.classList.add("highlight-video-adult");
-    }//else
+    addBorder(relatedContent[0]);
   }//if
 
   play(vid, pauseButton);
@@ -130,7 +125,7 @@ function displayVideo(inputKey) {
   signage_content_state.thumbnailContentType = contentType;
   signage_content_state.currentVidId = inputKey;
   signage_content_state.vidKey = vidKey;
-  
+
   vid.addEventListener('ended', function() {
     clearTimeout(timer);
       
@@ -147,14 +142,29 @@ function displayVideo(inputKey) {
       else {
         displayVideo(signage_content_state.startingVidId);
       }//else
-    }, 1000);
+    }, m.config.menu.idle * 1000);
   });
 }//displayVideo
 
 function removeBorder(id) {
   document.getElementById(id).classList.remove("highlight-video-adult");
   document.getElementById(id).classList.remove("highlight-video-child");
+  document.getElementById(id).classList.remove("highlight-video-both");
 }//removeBorder
+
+function addBorder(id) {
+  var selectThumb = document.getElementById(id);
+  var contentType = global_model.items[id].contentType;
+    if (contentType === 0) {
+        selectThumb.classList.add("highlight-video-child");
+    }//if
+    else if(contentType === 1) {
+        selectThumb.classList.add("highlight-video-adult");
+    }//else
+    else {
+        selectThumb.classList.add("highlight-video-both");
+    }//else
+}
 
 function hideCarousel() {
   var menu = document.getElementById('carousel');
@@ -209,15 +219,13 @@ document.onkeydown = function(event) {
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
 
   resetTimer();
-
-  if (keyPress === global_model.config.keyboard.right || keyPress === global_model.config.keyboard.left) {
-    if(contentType[currentSelect] === 0) {
-       selectThumb.classList.remove("highlight-video-child");
+  for (var ndx = 0; ndx < relatedContent.length; ndx++) {
+    if (relatedContent[0] === "") {
+      break;
     }//if
-    else {
-       selectThumb.classList.remove("highlight-video-adult");
-    }//else
-  }//if
+
+    removeBorder(relatedContent[ndx]);
+  }//for
 
   switch(keyPress) {
     case global_model.config.keyboard.right: {
@@ -238,25 +246,36 @@ document.onkeydown = function(event) {
 
       break;
     }
-    case global_model.config.keyboard.select: {
-
-      displayVideo(vidKey[currentSelect]);
+    case global_model.config.keyboard.child: {
+      if (signage_content_state.modelViewState === 0) {
+        displayVideo(vidKey[currentSelect]);
+      }//if
+      else {
+        signage_content_state.modelViewState = 0;
+        addBorder(relatedContent[currentSelect]);
+      }//else
 
       break;
     }
-    case global_model.config.keyboard.select: {
+    case global_model.config.keyboard.adult: {
+      if (signage_content_state.modelViewState === 0) {
+        displayVideo(vidKey[currentSelect]);
+      }//if
+      else {
+        signage_content_state.modelViewState = 0;
+        addBorder(relatedContent[currentSelect]);
+      }//else
+
       break;
     }
   }//switch
 
+  relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   selectThumb = document.getElementById(relatedContent[currentSelect]);
 
-  if(contentType[currentSelect] === 0) {
-      selectThumb.classList.add("highlight-video-child");
+  if (keyPress !== global_model.config.keyboard.child && keyPress !== global_model.config.keyboard.adult) {
+    addBorder(relatedContent[currentSelect]);
   }//if
-  else {
-      selectThumb.classList.add("highlight-video-adult");
-  }//else
   
   signage_content_state.selectedThumbnailIndex = currentSelect;
  };//keydown
