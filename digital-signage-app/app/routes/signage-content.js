@@ -4,16 +4,17 @@ let signage_content_state = {
   // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
   numRelatedVids: 0,
   selectedThumbnailIndex: 0,
-  currentVidId: null,
+  startingVidId: null,
   thumbnailContentType: [],
   timeout: 0,
   vidKey: []
-
 };
 
 let global_model = {
 
 };
+
+var timer;
 
 export default Ember.Route.extend({
   modelFile: null,
@@ -26,18 +27,32 @@ export default Ember.Route.extend({
     }
   },
   model() {
-    var path = "models/" + (this.modelFile ? this.modelFile : "Dank") + ".json";
+    var path = "models/" + (this.modelFile ? this.modelFile : "Demo") + ".json";
     var data = Ember.$.getJSON(path);
 
     return data;
   },
   afterModel(model) {
     // Add the state to the model for easy access within handlebars
-    model["state"] = signage_content_state;
     signage_content_state.timeout = model.config.menu.dwell;
     global_model = model;
+    for (var key in model.items) {
+      signage_content_state.startingVidId = key;
+      break;
+    }
+
+    model["state"] = signage_content_state;
    
     return model;
+  },
+  init() {
+    //displayVideo(signage_content_state.startingVidFName = model.items[key].fName)
+
+    clearTimeout(timer);
+    timer = setTimeout( function() {
+      displayVideo(signage_content_state.startingVidId);
+
+    }, 100);
   },
   actions: {
     loadVideo(inputKey) {
@@ -61,28 +76,11 @@ export default Ember.Route.extend({
   }
 });
 
-function toggleBox(id) {
-  document.getElementById(id).classList.remove("highlight-video-adult");
-  document.getElementById(id).classList.remove("highlight-video-child");
-
-}
-
-function play(vid, pauseButton) {
-  vid.play();
-  pauseButton.innerHTML = "Pause";
-  vid.classList.remove("darken-video");
-  var divTable = document.getElementsByClassName("divTable")[0];
-
-  divTable.style.display = "table";
-  setTimeout( function(){divTable.style.display = "none";}, signage_content_state.timeout * 1000);
-
-}
-
 function displayVideo(inputKey) {
   var m = global_model;
   var pauseButton = document.getElementById('playback-toggle');
   var vid = document.getElementById('bkg-vid');
-  var setFName = "media/" + m.modelInfo.mediaPath + "/" + m.items[inputKey].fName + ".mp4";
+  var setFName = m.modelInfo.mediaPath + m.items[inputKey].fName + ".mp4";
   var thumbnails = document.getElementsByClassName('thumbnail');
   var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
   var menu = document.getElementById('carousel');
@@ -91,6 +89,7 @@ function displayVideo(inputKey) {
   var vidKey = [];
 
   vid.setAttribute("src", setFName);
+  vid.setAttribute("data-related", relatedContent);
   vid.currentTime = 0;
 
   for (var ndx = 0; ndx < thumbnails.length; ndx++) {
@@ -126,7 +125,7 @@ function displayVideo(inputKey) {
 
   play(vid, pauseButton);
   menu.classList.remove('carousel-visible');
-  signage_content_state.currentVidId = inputKey;
+  signage_content_state.startingVidId = inputKey;
   signage_content_state.selectedThumbnailIndex = 0;
   signage_content_state.thumbnailContentType = contentType;
   signage_content_state.vidKey = vidKey;
@@ -136,24 +135,58 @@ function displayVideo(inputKey) {
   vid.addEventListener('ended', function() {
     pause(vid, pauseButton);
   });
-}
+}//displayVideo
+
+function toggleBox(id) {
+  document.getElementById(id).classList.remove("highlight-video-adult");
+  document.getElementById(id).classList.remove("highlight-video-child");
+}//toggleBox
+
+function play(vid, pauseButton) {
+  vid.play();
+  pauseButton.innerHTML = "Pause";
+  vid.classList.remove("darken-video");
+  resetTimer();
+}//play
 
 function pause(vid, pauseButton) {
+  clearTimeout(timer);
   vid.pause();
   pauseButton.innerHTML = "Paused";
   vid.classList.add("darken-video");
   var divTable = document.getElementsByClassName("divTable")[0];
   divTable.style.display = "table";
+}//pause
+
+function resetTimer() {
+  if (document.getElementById("playback-toggle").innerHTML === "Paused") {
+    return;
+  }//if
+  var divTable = document.getElementsByClassName("divTable")[0];
+  clearTimeout(timer);
+
+  divTable.style.display = "table";
+  timer = setTimeout( function() {
+    divTable.style.display = "none";
+
+  }, signage_content_state.timeout * 1000);
+
 }
+
+document.onclick = function() {
+  resetTimer();
+};
 
 document.onkeydown = function(event) {
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
   var contentType = signage_content_state.thumbnailContentType;
   var vidKey = signage_content_state.vidKey;
-  var keyPress = event.which || event.keyCode;
-  var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
+  var keyPress = event.key;
+  var relatedContent = document.getElementById(signage_content_state.startingVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
+
+  resetTimer();
 
   if(contentType[currentSelect] === 0) {
      selectThumb.classList.remove("highlight-video-child");
@@ -163,7 +196,7 @@ document.onkeydown = function(event) {
   }//else
 
   switch(keyPress) {
-    case 68: {
+    case global_model.config.keyboard.right: {
       currentSelect += 1;
       
       if(currentSelect >= num) {
@@ -172,7 +205,7 @@ document.onkeydown = function(event) {
 
       break;
     }
-    case 65: {
+    case global_model.config.keyboard.left: {
        currentSelect -= 1;
        
       if(currentSelect < 0) {
@@ -181,10 +214,13 @@ document.onkeydown = function(event) {
 
       break;
     }
-    case 87: {
+    case global_model.config.keyboard.select: {
 
       displayVideo(vidKey[currentSelect]);
 
+      break;
+    }
+    case global_model.config.keyboard.select: {
       break;
     }
   }//switch
@@ -199,4 +235,4 @@ document.onkeydown = function(event) {
   }//else
   
   signage_content_state.selectedThumbnailIndex = currentSelect;
- };
+ };//keydown
