@@ -33,6 +33,16 @@
 		}
 	},
 	"items": {
+		"Bees": {
+			"fName": "Bee_Movie",
+			"caption": "The entire bee movie but everytime they say bee it gets faster.",
+			"attribution": "Jerry Seinfield",
+			"transition": "baba",
+			"summary": "A staple in the current meme economy",
+			"relatedContent": ["PPAP","TSwift","Red"],
+			"contentType": 1,
+			"descriptions": []
+		},
 		"5Gum": {
 			"fName": "5Gum",
 			"caption": "",
@@ -93,23 +103,13 @@
 			"contentType": 1,
 			"descriptions": []
 		},
-		"Bees": {
-			"fName": "Bee_Movie",
-			"caption": "The entire bee movie but everytime they say bee it gets faster.",
-			"attribution": "Jerry Seinfield",
-			"transition": "baba",
-			"summary": "A staple in the current meme economy",
-			"relatedContent": ["PPAP","TSwift","Red"],
-			"contentType": 1,
-			"descriptions": []
-		},
 		"Red": {
 			"fName": "Red",
 			"caption": "Illuminati confirmed",
 			"attribution": "",
 			"transition": "baba",
 			"summary": "Exposure of the illuminati",
-			"relatedContent": [""],
+			"relatedContent": [],
 			"contentType": 0,
 			"descriptions": []
 		}
