@@ -8,7 +8,7 @@
 			"when": "interactively", 
 			"where": "top", 
 			"dwell": 3, 
-			"idle": 45 ,
+			"idle": 3.5,
 			"num": 0
 		},
 		"topics": {
@@ -69,7 +69,7 @@
 			"attribution": "Taylor Swift",
 			"transition": "baba",
 			"summary": "Taylor Swift Loses 1 v 1 at Grammy's",
-			"relatedContent": ["ShaggyDance","Caveman"],
+			"relatedContent": ["ShaggyDance","Caveman", "Red"],
 			"contentType": 0,
 			"descriptions": []
 		},

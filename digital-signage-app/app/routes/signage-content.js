@@ -147,7 +147,7 @@ function displayVideo(inputKey) {
       else {
         displayVideo(signage_content_state.startingVidId);
       }//else
-    }, 1000);
+    }, m.config.menu.idle * 1000);
   });
 }//displayVideo
 
@@ -207,6 +207,8 @@ document.onkeydown = function(event) {
   var vidKey = signage_content_state.vidKey;
   var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
+  console.log(selectThumb);
+  console.log(relatedContent);
 
   resetTimer();
 
