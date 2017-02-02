@@ -1,11 +1,11 @@
 import Ember from 'ember';
 
-var signage_content_state = {
+let signage_content_state = {
   // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
   numRelatedVids: 0,
   selectedThumbnailIndex: 0,
   currentVidId: null,
-  visibleThumbnails: []
+  thumbnailContentType: []
 };
 
 export default Ember.Route.extend({
@@ -38,7 +38,8 @@ export default Ember.Route.extend({
       var thumbnails = document.getElementsByClassName('thumbnail');
       var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
       var menu = document.getElementById('carousel');
-      var thumbnailsToAdd = [];
+      var thumbnail;
+      var contentType = [];
 
       vid.setAttribute("src", setFName);
       vid.currentTime = 0;
@@ -60,28 +61,31 @@ export default Ember.Route.extend({
       signage_content_state.numRelatedVids = 0;
 
       for (ndx = 0; ndx < relatedContent.length; ndx++) {
-        var thumbnail = document.getElementById(relatedContent[ndx]);
+        thumbnail = document.getElementById(relatedContent[ndx]);
         thumbnail.style.visibility = "visible";
         thumbnail.style.height = "90px";
         thumbnail.style.maxWidth = "160px";
         signage_content_state.numRelatedVids++;
-        thumbnailsToAdd.push(thumbnail);
+        contentType.push(m.items[relatedContent[ndx]].contentType);
       }//for
 
       if (signage_content_state.numRelatedVids !== 0) {
-        if (m.items[thumbnailsToAdd[0].dataset.id] === 0) {
-          thumbnailsToAdd[0].classList.add("highlight-child-video");
-        }
+        thumbnail = document.getElementById(relatedContent[0]);
+        if (m.items[relatedContent[0]].contentType === 0) {
+          thumbnail.classList.add("highlight-video-child");
+        }//if
         else {
-          thumbnailsToAdd[0].classList.add("highlight-adult-video");
-        }
-      }
-
-      m.state.currentVidId = inputKey;
-
+          thumbnail.classList.add("highlight-video-adult");
+        }//else
+      }//ifd
 
       play(vid, pauseButton);
       menu.classList.remove('carousel-visible');
+      signage_content_state.currentVidId = inputKey;
+      signage_content_state.selectedThumbnailIndex = 0;
+      signage_content_state.thumbnailContentType = contentType;
+
+      m.state = signage_content_state;
 
       vid.addEventListener('ended', function() {
         pause(vid, pauseButton);
@@ -118,50 +122,42 @@ function pause(vid, pauseButton) {
 }
 
 document.onkeydown = function(event) {
-  console.log(this); return;
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
+  var contentType = signage_content_state.thumbnailContentType;
   var keyPress = event.which || event.keyCode;
   var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
-      
-  //var vid = document.getElementById('bkg-vid');
-  // var pauseButton = document.getElementById('playback-toggle');
 
-  if(document.getElementById(relatedContent[currentSelect]) === 0){
+  if(contentType[currentSelect] === 0) {
      selectThumb.classList.remove("highlight-video-child");
   }//if
   else {
      selectThumb.classList.remove("highlight-video-adult");
-
   }//else
 
-  console.log(num);
-
-  switch(keyPress){
+  switch(keyPress) {
     case 68: {
       currentSelect += 1;
       
-      if(currentSelect >= num){
+      if(currentSelect >= num) {
           currentSelect = 0;
       }//if - the selection index is out of bounds
-      
-      console.log('currentSelect= d');
+
       break;
     }
     case 65: {
        currentSelect -= 1;
        
-      if(currentSelect < 0){
+      if(currentSelect < 0) {
           currentSelect = num - 1;
-      }//if - the selection index is out of bounds
-      
-      console.log('currentSelect = a');
+      }//if - the selection index is out of bounds      
+
       break;
     }
-    case 87:{
+    case 87: {
 
-      //loadVideo(currentSelect);
+      loadVideo(currentSelect);
 
       break;
     }
@@ -169,15 +165,12 @@ document.onkeydown = function(event) {
 
   selectThumb = document.getElementById(relatedContent[currentSelect]);
 
-  if(document.getElementById(relatedContent[currentSelect]) === 0){
+  if(contentType[currentSelect] === 0) {
       selectThumb.classList.add("highlight-video-child");
   }//if
-  else{
+  else {
       selectThumb.classList.add("highlight-video-adult");
-
   }//else
   
-  console.log(currentSelect);
   signage_content_state.selectedThumbnailIndex = currentSelect;
  };
-

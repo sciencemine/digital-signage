@@ -22,7 +22,10 @@
 		},
 		"keyboard": {
 			"ignore": false, 
-			"accept": [ "w", "a" , "s", "d"] 
+			"select": "w",
+			"cancel": "s",
+			"left": "a", 
+			"right": "d"
 		},
 		"mouse": {
 			"ignore": false, 
