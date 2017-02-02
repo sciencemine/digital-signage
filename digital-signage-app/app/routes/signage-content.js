@@ -5,6 +5,7 @@ let signage_content_state = {
   numRelatedVids: 0,
   selectedThumbnailIndex: 0,
   startingVidId: null,
+  currentVidId: null,
   thumbnailContentType: [],
   timeout: 0,
   vidKey: []
@@ -46,12 +47,9 @@ export default Ember.Route.extend({
     return model;
   },
   init() {
-    //displayVideo(signage_content_state.startingVidFName = model.items[key].fName)
-
     clearTimeout(timer);
     timer = setTimeout( function() {
       displayVideo(signage_content_state.startingVidId);
-
     }, 100);
   },
   actions: {
@@ -83,7 +81,6 @@ function displayVideo(inputKey) {
   var setFName = m.modelInfo.mediaPath + m.items[inputKey].fName + ".mp4";
   var thumbnails = document.getElementsByClassName('thumbnail');
   var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
-  var menu = document.getElementById('carousel');
   var thumbnail;
   var contentType = [];
   var vidKey = [];
@@ -91,9 +88,10 @@ function displayVideo(inputKey) {
   vid.setAttribute("src", setFName);
   vid.setAttribute("data-related", relatedContent);
   vid.currentTime = 0;
+  hideCarousel();
 
   for (var ndx = 0; ndx < thumbnails.length; ndx++) {
-    toggleBox(thumbnails[ndx].id);
+    removeBorder(thumbnails[ndx].id);
 
     thumbnails[ndx].style.visibility = "hidden";
     thumbnails[ndx].style.height = "0px";
@@ -104,6 +102,10 @@ function displayVideo(inputKey) {
   signage_content_state.numRelatedVids = 0;
 
   for (ndx = 0; ndx < relatedContent.length; ndx++) {
+    if (relatedContent[0] === "") {
+      break;
+    }//if
+
     thumbnail = document.getElementById(relatedContent[ndx]);
     thumbnail.style.visibility = "visible";
     thumbnail.style.height = "90px";
@@ -124,23 +126,40 @@ function displayVideo(inputKey) {
   }//if
 
   play(vid, pauseButton);
-  menu.classList.remove('carousel-visible');
-  signage_content_state.startingVidId = inputKey;
   signage_content_state.selectedThumbnailIndex = 0;
   signage_content_state.thumbnailContentType = contentType;
+  signage_content_state.currentVidId = inputKey;
   signage_content_state.vidKey = vidKey;
-
-  m.state = signage_content_state;
-
+  
   vid.addEventListener('ended', function() {
-    pause(vid, pauseButton);
+    clearTimeout(timer);
+      
+    vid.classList.add("darken-video");
+    var divTable = document.getElementsByClassName("divTable")[0];
+    divTable.style.display = "table";
+    pauseButton.innerHTML = "Restart";
+
+    timer = setTimeout( function() {
+
+      if (m.items[inputKey].relatedContent.length > 0) {
+        displayVideo(m.items[inputKey].relatedContent[0]);
+      }//if
+      else {
+        displayVideo(signage_content_state.startingVidId);
+      }//else
+    }, 1000);
   });
 }//displayVideo
 
-function toggleBox(id) {
+function removeBorder(id) {
   document.getElementById(id).classList.remove("highlight-video-adult");
   document.getElementById(id).classList.remove("highlight-video-child");
-}//toggleBox
+}//removeBorder
+
+function hideCarousel() {
+  var menu = document.getElementById('carousel');
+  menu.classList.remove('carousel-visible');
+}//hideCarousel
 
 function play(vid, pauseButton) {
   vid.play();
@@ -156,6 +175,9 @@ function pause(vid, pauseButton) {
   vid.classList.add("darken-video");
   var divTable = document.getElementsByClassName("divTable")[0];
   divTable.style.display = "table";
+  timer = setTimeout( function() {
+    play(vid, pauseButton);
+  }, signage_content_state.timeout * 5 * 1000);
 }//pause
 
 function resetTimer() {
@@ -171,33 +193,35 @@ function resetTimer() {
 
   }, signage_content_state.timeout * 1000);
 
-}
+}//resetTimer
 
 document.onclick = function() {
   resetTimer();
-};
+};//onclick
 
 document.onkeydown = function(event) {
+  var keyPress = event.key;
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
   var contentType = signage_content_state.thumbnailContentType;
   var vidKey = signage_content_state.vidKey;
-  var keyPress = event.key;
-  var relatedContent = document.getElementById(signage_content_state.startingVidId).dataset.related.split(",");
+  var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
   var selectThumb = document.getElementById(relatedContent[currentSelect]);
 
   resetTimer();
 
-  if(contentType[currentSelect] === 0) {
-     selectThumb.classList.remove("highlight-video-child");
+  if (keyPress === global_model.config.keyboard.right || keyPress === global_model.config.keyboard.left) {
+    if(contentType[currentSelect] === 0) {
+       selectThumb.classList.remove("highlight-video-child");
+    }//if
+    else {
+       selectThumb.classList.remove("highlight-video-adult");
+    }//else
   }//if
-  else {
-     selectThumb.classList.remove("highlight-video-adult");
-  }//else
 
   switch(keyPress) {
     case global_model.config.keyboard.right: {
-      currentSelect += 1;
+      currentSelect = currentSelect + 1;
       
       if(currentSelect >= num) {
           currentSelect = 0;
@@ -206,7 +230,7 @@ document.onkeydown = function(event) {
       break;
     }
     case global_model.config.keyboard.left: {
-       currentSelect -= 1;
+       currentSelect = currentSelect - 1;
        
       if(currentSelect < 0) {
           currentSelect = num - 1;

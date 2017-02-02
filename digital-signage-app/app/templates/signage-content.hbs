@@ -25,7 +25,7 @@
     <div class="divTable">
     {{#each-in model.items as |parentKey value|}}
       <div id={{parentKey}} class="thumbnail divTableCell" data-related={{value.relatedContent}}>
-        <img {{action "loadVideo" parentKey}} height="90" width="90" src="{{model.modelInfo.mediaPath}}{{value.fName}}.png"><br>
+        <img {{action "loadVideo" parentKey}} height="90" width="160" src="{{model.modelInfo.mediaPath}}{{value.fName}}.png"><br>
       </div>
     {{/each-in}}
   </div>
