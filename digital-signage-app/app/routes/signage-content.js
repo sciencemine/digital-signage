@@ -9,7 +9,6 @@ var signage_content_state = {
 };
 
 export default Ember.Route.extend({
-
   modelFile: null,
 
   beforeModel(params) {
