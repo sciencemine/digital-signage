@@ -22,8 +22,8 @@
 		},
 		"keyboard": {
 			"ignore": false,
-			"select": "w",
-			"cancel": "s",
+			"adult": "w",
+			"child": "s",
 			"left": "d",
 			"right": "a"
 		},
@@ -40,7 +40,7 @@
 			"transition": "",
 			"summary": "",
 			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
-			"contentType": 0,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"SM-HSt-Beavr-s1": {
@@ -120,7 +120,7 @@
 			"transition": "",
 			"summary": "",
 			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
-			"contentType": 0,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"SM-HSt-H20-1": {
