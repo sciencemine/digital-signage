@@ -1,6 +1,6 @@
 {
 	"modelInfo": {
-		"mediaPath": "smds",
+		"mediaPath": "http://10.10.2.159/smds/",
 		"prettyTitle": "Demo"
 	},
 	"config": {
