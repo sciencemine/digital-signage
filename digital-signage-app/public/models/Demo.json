@@ -24,8 +24,8 @@
 			"ignore": false,
 			"select": "w",
 			"cancel": "s",
-			"left": "a",
-			"right": "d"
+			"left": "d",
+			"right": "a"
 		},
 		"mouse": {
 			"ignore": false,
@@ -49,7 +49,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -59,7 +59,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -89,7 +89,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 1,
 			"descriptions": []
 		},
@@ -119,7 +119,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 0,
 			"descriptions": []
 		},
@@ -129,7 +129,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 1,
 			"descriptions": []
 		},
@@ -149,7 +149,7 @@
 			"attribution": "",
 			"transition": "",
 			"summary": "",
-			"relatedContent": [""],
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
 			"contentType": 0,
 			"descriptions": []
 		}
