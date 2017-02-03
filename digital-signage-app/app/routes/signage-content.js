@@ -8,8 +8,8 @@ let signage_content_state = {
   currentVidId: null,
   thumbnailContentType: [],
   timeout: 0,
-  modelViewState: null,
-  vidKey: []
+  modelViewState: 0,
+  vidKeys: []
 };
 
 let global_model = {
@@ -83,14 +83,12 @@ function displayVideo(inputKey) {
   var vid = document.getElementById('bkg-vid');
   var setFName = m.modelInfo.mediaPath + m.items[inputKey].fName + ".mp4";
   var thumbnails = document.getElementsByClassName('thumbnail');
-  var relatedContent = document.getElementById(inputKey).dataset.related.split(",");
-  var thumbnail;
   var contentType = [];
-  var vidKey = [];
+  var vidKeys = [];
 
   vid.setAttribute("src", setFName);
-  vid.setAttribute("data-related", relatedContent);
   vid.currentTime = 0;
+  signage_content_state.numRelatedVids = 0;
   hideCarousel();
 
   for (var ndx = 0; ndx < thumbnails.length; ndx++) {
@@ -99,32 +97,25 @@ function displayVideo(inputKey) {
     thumbnails[ndx].style.visibility = "hidden";
     thumbnails[ndx].style.maxWidth = "0px";
     thumbnails[ndx].style.padding = "0px";
-  }//for
 
-  signage_content_state.numRelatedVids = 0;
-
-  for (ndx = 0; ndx < relatedContent.length; ndx++) {
-    if (relatedContent[0] === "") {
-      break;
-    }//if
-
-    thumbnail = document.getElementById(relatedContent[ndx]);
-    thumbnail.style.visibility = "visible";
-    thumbnail.style.maxWidth = "160px";
-    signage_content_state.numRelatedVids++;
-    contentType.push(m.items[relatedContent[ndx]].contentType);
-    vidKey.push(relatedContent[ndx]);
+    if (m.items[inputKey].relatedContent.includes(thumbnails[ndx].id)) {
+      thumbnails[ndx].style.visibility = "visible";
+      thumbnails[ndx].style.maxWidth = "160px";
+      signage_content_state.numRelatedVids++;
+      contentType.push(m.items[thumbnails[ndx].id].contentType);
+      vidKeys.push(thumbnails[ndx].id);
+    }
   }//for
 
   if (signage_content_state.numRelatedVids !== 0) {
-    addBorder(relatedContent[0]);
+    addBorder(vidKeys[0]);
   }//if
 
   play(vid, pauseButton);
   signage_content_state.selectedThumbnailIndex = 0;
   signage_content_state.thumbnailContentType = contentType;
   signage_content_state.currentVidId = inputKey;
-  signage_content_state.vidKey = vidKey;
+  signage_content_state.vidKeys = vidKeys;
 
   vid.addEventListener('ended', function() {
     clearTimeout(timer);
@@ -213,18 +204,16 @@ document.onkeydown = function(event) {
   var keyPress = event.key;
   var currentSelect = signage_content_state.selectedThumbnailIndex;
   var num = signage_content_state.numRelatedVids;
-  var contentType = signage_content_state.thumbnailContentType;
-  var vidKey = signage_content_state.vidKey;
-  var relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
-  var selectThumb = document.getElementById(relatedContent[currentSelect]);
+  var vidKeys = signage_content_state.vidKeys;
+  var selectThumb = document.getElementById(vidKeys[currentSelect]);
 
   resetTimer();
-  for (var ndx = 0; ndx < relatedContent.length; ndx++) {
-    if (relatedContent[0] === "") {
+  for (var ndx = 0; ndx < vidKeys.length; ndx++) {
+    if (vidKeys[0] === "") {
       break;
     }//if
 
-    removeBorder(relatedContent[ndx]);
+    removeBorder(vidKeys[ndx]);
   }//for
 
   switch(keyPress) {
@@ -248,33 +237,34 @@ document.onkeydown = function(event) {
     }
     case global_model.config.keyboard.child: {
       if (signage_content_state.modelViewState === 0) {
-        displayVideo(vidKey[currentSelect]);
+        displayVideo(vidKeys[currentSelect]);
+        currentSelect = 0;
       }//if
       else {
         signage_content_state.modelViewState = 0;
-        addBorder(relatedContent[currentSelect]);
+        addBorder(vidKeys[currentSelect]);
       }//else
 
       break;
     }
     case global_model.config.keyboard.adult: {
       if (signage_content_state.modelViewState === 0) {
-        displayVideo(vidKey[currentSelect]);
+        displayVideo(vidKeys[currentSelect]);
+        currentSelect = 0;
       }//if
       else {
         signage_content_state.modelViewState = 0;
-        addBorder(relatedContent[currentSelect]);
+        addBorder(vidKeys[currentSelect]);
       }//else
 
       break;
     }
   }//switch
 
-  relatedContent = document.getElementById(signage_content_state.currentVidId).dataset.related.split(",");
-  selectThumb = document.getElementById(relatedContent[currentSelect]);
+  selectThumb = document.getElementById(vidKeys[currentSelect]);
 
   if (keyPress !== global_model.config.keyboard.child && keyPress !== global_model.config.keyboard.adult) {
-    addBorder(relatedContent[currentSelect]);
+    addBorder(vidKeys[currentSelect]);
   }//if
   
   signage_content_state.selectedThumbnailIndex = currentSelect;
