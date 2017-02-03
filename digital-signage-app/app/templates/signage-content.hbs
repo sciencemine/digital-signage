@@ -1,5 +1,5 @@
 <div id="mainDiv">
-  {{bkg-vid data-related="" path=model.modelInfo.mediaPath fName=""}}
+  {{bkg-vid path=model.modelInfo.mediaPath fName=""}}
 
   {{model.state.startingVidFName}}
 
@@ -24,7 +24,7 @@
 
     <div class="divTable">
     {{#each-in model.items as |parentKey value|}}
-      <div id={{parentKey}} class="thumbnail divTableCell" data-related={{value.relatedContent}}>
+      <div id={{parentKey}} class="thumbnail divTableCell">
         <img {{action "loadVideo" parentKey}} height="90" width="160" src="{{model.modelInfo.mediaPath}}{{value.fName}}.png"><br>
       </div>
     {{/each-in}}
