@@ -30,6 +30,9 @@
 		"mouse": {
 			"ignore": false,
 			"region": [ 10, 10, 100, 100]
+		},
+		"default": {
+			"id": ""
 		}
 	},
 	"items": {

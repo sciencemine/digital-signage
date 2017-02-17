@@ -4,7 +4,6 @@ let signage_content_state = {
   // Access state in .hbs like so: {{model.state.selectedThumbnailIndex}}
   numRelatedVids: 0,
   selectedThumbnailIndex: 0,
-  startingVidId: null,
   currentVidId: null,
   thumbnailContentType: [],
   timeout: 0,
@@ -38,12 +37,6 @@ export default Ember.Route.extend({
     // Add the state to the model for easy access within handlebars
     signage_content_state.timeout = model.config.menu.dwell;
     global_model = model;
-    for (var key in model.items) {
-      signage_content_state.startingVidId = key;
-      break;
-    }
-
-    signage_content_state.modelViewState = model.items[signage_content_state.startingVidId].contentType;
 
     model["state"] = signage_content_state;
    
@@ -52,7 +45,7 @@ export default Ember.Route.extend({
   init() {
     clearTimeout(timer);
     timer = setTimeout( function() {
-      displayVideo(signage_content_state.startingVidId);
+      displayVideo(global_model.config.default.id);
     }, 100);
   },
   actions: {
@@ -126,13 +119,7 @@ function displayVideo(inputKey) {
     pauseButton.innerHTML = "Restart";
 
     timer = setTimeout( function() {
-
-      if (m.items[inputKey].relatedContent.length > 0) {
-        displayVideo(m.items[inputKey].relatedContent[0]);
-      }//if
-      else {
-        displayVideo(signage_content_state.startingVidId);
-      }//else
+        displayVideo(global_model.config.default.id);
     }, m.config.menu.idle * 1000);
   });
 }//displayVideo
@@ -176,9 +163,10 @@ function pause(vid, pauseButton) {
   vid.classList.add("darken-video");
   var divTable = document.getElementsByClassName("divTable")[0];
   divTable.style.display = "table";
+  console.log(vid); 
   timer = setTimeout( function() {
     play(vid, pauseButton);
-  }, signage_content_state.timeout * 5 * 1000);
+  }, global_model.config.menu.idle * 1000);
 }//pause
 
 function resetTimer() {

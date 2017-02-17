@@ -13,7 +13,7 @@ npm-debug.log*
 testem.log
 
 # dependecies
-/node_modules
-/bower_components
-/public/media/Memes
+/node_modules/*
+/bower_components/*
+/public/media/Memes/*
 
