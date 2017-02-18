@@ -9,7 +9,6 @@ Public Actions:
   getMuted(bool)
     Return false if the video player is playing sound,
     otherwise false
-
   
   setPlaying(bool)
     If param1 is true, the video will play
