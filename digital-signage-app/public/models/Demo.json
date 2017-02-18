@@ -8,7 +8,7 @@
 			"when": "interactively",
 			"where": "top",
 			"dwell": 3,
-			"idle": 45 ,
+			"idle": 15 ,
 			"num": 0
 		},
 		"topics": {
@@ -32,10 +32,20 @@
 			"region": [ 10, 10, 100, 100]
 		},
 		"default": {
-			"id": ""
+			"id": "Background"
 		}
 	},
 	"items": {
+		"Background": {
+			"fName": "Background",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s", "SM-HSt-H20-1", "SM-HSt-ripar-2", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 0,
+			"descriptions": []
+		},
 		"SM-HSt-5C-1s": {
 			"fName": "SM-HSt-5C-1s",
 			"caption": "",
