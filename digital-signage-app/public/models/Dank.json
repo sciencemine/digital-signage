@@ -1,14 +1,14 @@
 {
 	"modelInfo": {
-		"mediaPath": "Memes",
+		"mediaPath": "media/Memes/",
 		"prettyTitle": "Memes *Aesthetic*"
 	},
 	"config": {
 		"menu": {
 			"when": "interactively", 
 			"where": "top", 
-			"dwell": 15, 
-			"idle": 45 ,
+			"dwell": 3, 
+			"idle": 3.5,
 			"num": 0
 		},
 		"topics": {
@@ -22,17 +22,30 @@
 		},
 		"keyboard": {
 			"ignore": false, 
-			"select": "w",
-			"cancel": "s",
+			"adult": "w",
+			"child": "s",
 			"left": "a", 
 			"right": "d"
 		},
 		"mouse": {
 			"ignore": false, 
 			"region": [ 10, 10, 100, 100] 
+		},
+		"default": {
+			"id": "Bees"
 		}
 	},
 	"items": {
+		"Bees": {
+			"fName": "Bee_Movie",
+			"caption": "The entire bee movie but everytime they say bee it gets faster.",
+			"attribution": "Jerry Seinfield",
+			"transition": "baba",
+			"summary": "A staple in the current meme economy",
+			"relatedContent": ["PPAP","TSwift","Red"],
+			"contentType": 1,
+			"descriptions": []
+		},
 		"5Gum": {
 			"fName": "5Gum",
 			"caption": "",
@@ -59,8 +72,8 @@
 			"attribution": "Taylor Swift",
 			"transition": "baba",
 			"summary": "Taylor Swift Loses 1 v 1 at Grammy's",
-			"relatedContent": ["ShaggyDance","Caveman"],
-			"contentType": 0,
+			"relatedContent": ["ShaggyDance","Caveman", "Red"],
+			"contentType": 2,
 			"descriptions": []
 		},
 		"ShaggyDance" : {
@@ -70,7 +83,7 @@
 			"transition": "baba",
 			"summary": "Shaggy lays some dance moves on the gang",
 			"relatedContent": ["Caveman"],
-			"contentType": 1,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"ThorNLoki": {
@@ -90,17 +103,7 @@
 			"transition": "baba",
 			"summary": "Important video from Scooby Doo",
 			"relatedContent": ["ShaggyDance"],
-			"contentType": 1,
-			"descriptions": []
-		},
-		"Bees": {
-			"fName": "Bee_Movie",
-			"caption": "The entire bee movie but everytime they say bee it gets faster.",
-			"attribution": "Jerry Seinfield",
-			"transition": "baba",
-			"summary": "A staple in the current meme economy",
-			"relatedContent": ["PPAP","TSwift","Red"],
-			"contentType": 1,
+			"contentType": 2,
 			"descriptions": []
 		},
 		"Red": {
@@ -109,7 +112,7 @@
 			"attribution": "",
 			"transition": "baba",
 			"summary": "Exposure of the illuminati",
-			"relatedContent": [""],
+			"relatedContent": [],
 			"contentType": 0,
 			"descriptions": []
 		}

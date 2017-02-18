@@ -1,0 +1,160 @@
+{
+	"modelInfo": {
+		"mediaPath": "http://10.10.2.159/smds/",
+		"prettyTitle": "Demo"
+	},
+	"config": {
+		"menu": {
+			"when": "interactively",
+			"where": "top",
+			"dwell": 3,
+			"idle": 45 ,
+			"num": 0
+		},
+		"topics": {
+			"when": "interactively",
+			"where": "left"
+		},
+		"attribution": {
+			"when": "always",
+			"where": "bottom-right",
+			"dwell": 15
+		},
+		"keyboard": {
+			"ignore": false,
+			"adult": "w",
+			"child": "s",
+			"left": "a",
+			"right": "d"
+		},
+		"mouse": {
+			"ignore": false,
+			"region": [ 10, 10, 100, 100]
+		},
+		"default": {
+			"id": ""
+		}
+	},
+	"items": {
+		"SM-HSt-5C-1s": {
+			"fName": "SM-HSt-5C-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-H20-1", "SM-HSt-ripar-2", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 2,
+			"descriptions": []
+		},
+		"SM-HSt-Beavr-s1": {
+			"fName": "SM-HSt-Beavr-s1",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"SM-HSt-BioIn-1s": {
+			"fName": "SM-HSt-BioIn-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"SM-HSt-Cmplx-1s" : {
+			"fName": "SM-HSt-Cmplx-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 1,
+			"descriptions": []
+		},
+		"SM-HSt-Conec-1s": {
+			"fName": "SM-HSt-Conec-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"SM-HSt-CpxI-1": {
+			"fName": "SM-HSt-CpxI-1",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 1,
+			"descriptions": []
+		},
+		"SM-HSt-Crit2-1s": {
+			"fName": "SM-HSt-Crit2-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 1,
+			"descriptions": []
+		},
+		"SM-HSt-Critr-1s": {
+			"fName": "SM-HSt-Critr-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 0,
+			"descriptions": []
+		},
+		"SM-HSt-Critr-2": {
+			"fName": "SM-HSt-Critr-2",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 2,
+			"descriptions": []
+		},
+		"SM-HSt-H20-1": {
+			"fName": "SM-HSt-H20-1",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 1,
+			"descriptions": []
+		},
+		"SM-HSt-Ripar-1s": {
+			"fName": "SM-HSt-Ripar-1s",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-ripar-2", "SM-HSt-H20-1", "SM-HSt-Critr-2", "SM-HSt-CpxI-1", "SM-HSt-Beavr-s1"],
+			"contentType": 1,
+			"descriptions": []
+		},
+		"SM-HSt-ripar-2": {
+			"fName": "SM-HSt-ripar-2",
+			"caption": "",
+			"attribution": "",
+			"transition": "",
+			"summary": "",
+			"relatedContent": ["SM-HSt-5C-1s", "SM-HSt-BioIn-1s", "SM-HSt-Cmplx-1s", "SM-HSt-Conec-1s", "SM-HSt-Crit2-1s"],
+			"contentType": 0,
+			"descriptions": []
+		}
+	}
+}

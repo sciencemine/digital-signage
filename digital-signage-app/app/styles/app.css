@@ -9,7 +9,17 @@
 
  body {
    background: #000;
+   max-width: 100%;
+   max-height: 100%;
  }
+
+#bodyDiv{
+    max-width: 100%;
+    max-height: 100%;
+    min-width: 100%;
+    min-height: 100%;
+ }
+
 /*
  * Force Video to be on the background
  * z-index ensures behind other elements on the page
@@ -44,13 +54,19 @@ video#bkg-vid {
 .highlight-video-child{
   border-style: solid;
   border-width: 4px;
-  border-color: white;
+  border-color: red;
 }
 
 .highlight-video-adult{
   border-style: solid;
   border-width: 4px;
-  border-color: red;
+  border-color: white;
+}
+
+.highlight-video-both{
+  border-style: solid;
+  border-width: 4px;
+  border-color: red white white red;
 }
 
 div#carousel {
@@ -108,6 +124,9 @@ div.divTableCell{
 
 div#vid-select{
   position: absolute;
+  top: 0px;
+  left: 0px;
+  z-index: -1;
   height: 100%;
   width: 100%;
 }
