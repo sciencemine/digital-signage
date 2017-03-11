@@ -2,7 +2,7 @@
 @import 'main.css';
 
 /* Component CSS Files */
-@import 'after-video.css';
+@import 'after-video-list.css';
 @import 'stack-list.css';
 @import 'video-list.css';
 @import 'video-player.css';
