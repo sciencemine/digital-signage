@@ -42,5 +42,5 @@ install:
     - npm install
     - bower install
 script:
-    - ember test --server
+    - ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test --reporter dot
     
