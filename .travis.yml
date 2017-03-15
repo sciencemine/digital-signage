@@ -4,8 +4,10 @@ addons:
   apt:
     sources:
       - google-chrome
+      - ubuntu-toolchain-r-test
     packages:
       - google-chrome-stable
+      - g++-4.8
 language: node_js
 node_js:
   - "6"
@@ -14,6 +16,7 @@ env:
     - EMBER_VERSION=release
     - EMBER_VERSION=beta
     - EMBER_VERSION=canary
+    - CXX=g++-4.8
 matrix:
   fast_finish: true
   allow_failures:
@@ -29,7 +32,7 @@ before_install:
     - sh -e /etc/init.d/xvfb start
     - cd digital-signage-app-v2
     - "npm config set spin false"
-    - "npm install -g npm@^2"
+    - "npm install -g npm@latest"
 install:
     - mkdir travis-phantomjs
     - wget https://s3.amazonaws.com/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2 -O $PWD/travis-phantomjs/phantomjs-2.0.0-ubuntu-12.04.tar.bz2
