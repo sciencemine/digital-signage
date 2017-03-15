@@ -39,6 +39,5 @@ install:
     - npm install
     - bower install
 script:
-    - cd digital-signage-app-v2
     - ember test --server
     
