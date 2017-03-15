@@ -4,10 +4,8 @@ addons:
   apt:
     sources:
       - google-chrome
-      - ubuntu-toolchain-r-test
     packages:
       - google-chrome-stable
-      - g++-4.8
 language: node_js
 node_js:
   - "6"
@@ -16,7 +14,6 @@ env:
     - EMBER_VERSION=release
     - EMBER_VERSION=beta
     - EMBER_VERSION=canary
-    - CXX=g++-4.8
 matrix:
   fast_finish: true
   allow_failures:
@@ -42,5 +39,5 @@ install:
     - npm install
     - bower install
 script:
-    - ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test --reporter dot
+    - ember test --reporter dot
     
