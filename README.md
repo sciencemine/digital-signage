@@ -1,4 +1,4 @@
-#Digital Signage for the Science Mine
+# Digital Signage for the Science Mine
 
 [![Build
 Status](https://travis-ci.org/trevorlbrooks/digital-signage.svg?branch=master)](https://travis-ci.org/trevorlbrooks/digital-signage)
