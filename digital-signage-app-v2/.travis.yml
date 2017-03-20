@@ -18,9 +18,9 @@ cache:
 matrix:
   fast_finish: true
   allow_failures:
-    - env: EMBER_VERSION=release
-    - env: EMBER_VERSION=beta
-    - env: EMBER_VERSION=canary
+    - env: EMBER_VERSION=ember-release
+    - env: EMBER_VERSION=ember-beta
+    - env: EMBER_VERSION=ember-canary
 
 before_install:
     # setting the path for phantom.js 2.0.0
