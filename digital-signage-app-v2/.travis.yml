@@ -6,9 +6,9 @@ node_js:
   - "6"
 env:
     - EMBER_VERSION=default
-    - EMBER_VERSION=release
-    - EMBER_VERSION=beta
-    - EMBER_VERSION=canary
+    - EMBER_VERSION=ember-release
+    - EMBER_VERSION=ember-beta
+    - EMBER_VERSION=ember-canary
     
 cache:
   directories:
