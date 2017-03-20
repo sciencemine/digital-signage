@@ -1,0 +1,29 @@
+
+./testMatrixMult 1000 > results.txt
+rts = {
+  scenarios: [
+    {
+      name: 'default',
+      dependencies: {}
+    },
+    {
+      name: "release",
+      dependencies: {
+        "ember": "release"
+      }
+    },
+    {
+      name: "beta",
+      dependencies: {
+        "ember": "beta"
+      }
+    },
+    {
+      name: "canary",
+      dependencies: {
+        "ember": "canary"
+      }
+    }
+  ],
+  bowerOptions: ['--quiet'],
+}
