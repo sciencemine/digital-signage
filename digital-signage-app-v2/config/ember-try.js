@@ -1,6 +1,4 @@
-
-./testMatrixMult 1000 > results.txt
-rts = {
+module.exports = {
   scenarios: [
     {
       name: 'default',
