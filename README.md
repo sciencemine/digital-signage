@@ -1,4 +1,7 @@
-#Digital Signage for the Science Mine
+# Digital Signage for the Science Mine
+
+[![Build
+Status](https://travis-ci.org/trevorlbrooks/digital-signage.svg?branch=master)](https://travis-ci.org/trevorlbrooks/digital-signage)
 
 This is a web application using the Emberjs framework to display videos for exhibits. 
 

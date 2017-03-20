@@ -12,7 +12,7 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{video-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim(), 'This is a video list\nIs Active:');
 
   // Template block usage:
   this.render(hbs`
@@ -21,5 +21,5 @@ test('it renders', function(assert) {
     {{/video-list}}
   `);
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim(), 'This is a video list\nIs Active: \n      template block text');
 });

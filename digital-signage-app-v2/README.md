@@ -1,5 +1,8 @@
 # digital-signage-app-v2
 
+[![Build
+Status](https://travis-ci.org/trevorlbrooks/digital-signage.svg?branch=master)](https://travis-ci.org/trevorlbrooks/digital-signage)
+
 This README outlines the details of collaborating on this Ember application.
 A short introduction of this app could easily go here.
 
