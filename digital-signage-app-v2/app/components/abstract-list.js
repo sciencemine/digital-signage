@@ -14,31 +14,38 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  isActive: null,
   classNames: [],
-  currentlySelected: null,
 
   init() {
     this._super(...arguments);
-    this.set('isActive', this.get('startActive'));
-  }, 
+  },
+  keyPress(event) {
+    console.log(String.fromCharCode(event.keyCode));
+  },
   actions: {
-    selectedCallback(sender) {
-      this.set('currentlySelected', sender);
-      this.get('onSelectedCallback')(this, this.get('currentlySelected'));
+    selectedCallback(sender, selected) {
+      this.get('onSelectedCallback')(this, selected);
     },
     overflowCallback(sender) {
-      this.get('onOverflowCallback')(this, this.get('currentlySelected'));
-      this.set('currentlySelected', null);
+      this.get('onOverflowCallback')(this);
     },
     underflowCallback(sender) {
-      this.get('onUnderflowCallback')(this, this.get('currentlySelected'));
-      this.set('currentlySelected', null);
+      this.get('onUnderflowCallback')(this);
     },
-    cancelCallback(sender) {
-      this.set('isActive', false);
-      this.set('currentlySelected', null);
-      this.get('onCancelledCallback')(this, this.get('currentlySelected'));
+    cancelCallback(sender, selected) {
+      this.get('onCancelledCallback')(this, selected);
+    },
+    goPrevious() {
+      console.log('goPrevious() needs to be imlemented in subcomponent');
+    },
+    goNext() {
+      console.log('goNext() needs to be imlemented in subcomponent');
+    },
+    select() {
+      console.log('select() needs to be imlemented in subcomponent');
+    },
+    cancel() {
+      console.log('cancel() needs to be imlemented in subcomponent');
     }
   }
 });
