@@ -21,6 +21,29 @@ export default Ember.Component.extend({
   },
   keyPress(event) {
     console.log(String.fromCharCode(event.keyCode));
+    
+    //This needs to be pulled from the model later
+    switch (String.fromCharCode(event.keyCode).toLowerCase()) {
+      case "w":
+        this.send('select');
+        break;
+      case "a":
+        this.send('goPrevious');
+        break;
+      case "s":
+        this.send('cancel');
+        break;
+      case "d":
+        this.send('goNext');
+        break;
+  },
+  isFocused: Ember.Observer('focus', function() {
+    if (focus) {
+      this.$().focus();
+    }//if
+    else {
+      this.$().blur();
+    }//else
   },
   actions: {
     selectedCallback(sender, selected) {
