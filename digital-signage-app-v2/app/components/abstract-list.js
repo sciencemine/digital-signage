@@ -1,7 +1,7 @@
 /**
  * 
- * @pre has been passed a parameter called `startActive` to determine if the
- *   list should start as the active list.
+ * @pre has been passed a parameter called `focus` to determine if the
+ *   list should have focus
  * @pre has been passed a parameter called `class` to set the class
  * @pre has been passed an action called `onSelectedCallback`
  * @pre has been passed an action called `onOverflowCallback`
@@ -18,6 +18,8 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
+    this.addObserver('focus', this, this.get('updateFocus'));
+    this.set('classNames[0]', this.get('class'));
   },
   keyPress(event) {
     console.log(String.fromCharCode(event.keyCode));
@@ -36,14 +38,7 @@ export default Ember.Component.extend({
       case "d":
         this.send('goNext');
         break;
-  },
-  isFocused: Ember.Observer('focus', function() {
-    if (focus) {
-      this.$().focus();
-    }//if
-    else {
-      this.$().blur();
-    }//else
+    }
   },
   actions: {
     selectedCallback(sender, selected) {
@@ -69,6 +64,14 @@ export default Ember.Component.extend({
     },
     cancel() {
       console.log('cancel() needs to be imlemented in subcomponent');
+    },
+    updateFocus() {
+      if ('focus') {
+        this.$().focus();
+      }//if
+      else {
+        this.$().blur();
+      }//else
     }
   }
 });

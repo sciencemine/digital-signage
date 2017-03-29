@@ -1,0 +1,20 @@
+.videoList {
+
+}
+
+.videoList--flex {
+  display: flex;
+
+  flex-flow: row wrap;
+
+  justify-content: space-around;
+}
+
+.item {
+
+}
+
+.item--flex {
+  align-self: auto;
+  flex-basis: 5%;
+}
