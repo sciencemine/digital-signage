@@ -5,10 +5,14 @@ export default Ember.Route.extend({
     return {
       videos: [
       {
-        url: "",
+        url: "/media/kenny_vid.mp4",
+        title: ""
+      },
+      {
+        url: "/media/sintel_trailer.mp4",
         title: ""
       }
       ]
-    }
+    };
   }
 });

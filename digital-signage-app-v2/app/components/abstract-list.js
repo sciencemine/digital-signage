@@ -18,8 +18,9 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-    this.addObserver('focus', this, this.get('updateFocus'));
+    this.addObserver('focus', this, 'updateFocusMethod');
     this.set('classNames[0]', this.get('class'));
+    this.send('updateFocusAction');
   },
   keyPress(event) {
     console.log(String.fromCharCode(event.keyCode));
@@ -39,6 +40,9 @@ export default Ember.Component.extend({
         this.send('goNext');
         break;
     }
+  },
+  updateFocusMethod() {
+    this.send('updateFocusAction');
   },
   actions: {
     selectedCallback(sender, selected) {
@@ -65,13 +69,8 @@ export default Ember.Component.extend({
     cancel() {
       console.log('cancel() needs to be imlemented in subcomponent');
     },
-    updateFocus() {
-      if ('focus') {
-        this.$().focus();
-      }//if
-      else {
-        this.$().blur();
-      }//else
+    updateFocusAction() {
+      this.set('focus', this.get('focus'));
     }
   }
 });

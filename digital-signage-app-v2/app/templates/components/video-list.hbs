@@ -1,12 +1,13 @@
 <h3>This is a video list</h3>
 Is Active: {{isActive}}
 
-<ul class={{flexContainerClass}}>
+<div class={{flexContainerClass}}>
   {{#each-in data.videos as |key value|}}
-    <li class={{flexItemClass}}>
+    <div class={{flexItemClass}}>
+      {{key}}: {{value.url}}<br>
       {{video-player url=value.url}}
-    </li>
+    </div>
   {{/each-in}}
-</ul>
+</div>
 
 {{yield}}
