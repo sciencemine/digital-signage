@@ -33,7 +33,10 @@ You will need the following things properly installed on your computer.
 Make use of the many generators for code, try `ember help generate` for more details
 
 ### Running Tests
+Make sure that Phantom JS is installed with:
+* npm install phantomjs-prebuilt
 
+Run tests locally with:
 * `ember test`
 * `ember test --server`
 
