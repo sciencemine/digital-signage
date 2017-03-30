@@ -33,9 +33,14 @@ You will need the following things properly installed on your computer.
 Make use of the many generators for code, try `ember help generate` for more details
 
 ### Running Tests
+You need Phantom JS to run the integration tests. Use:
+* npm install -g phantomjs-prebuilt
+to install it.
 
+Use:
 * `ember test`
 * `ember test --server`
+to run integration tests.
 
 ### Building
 
