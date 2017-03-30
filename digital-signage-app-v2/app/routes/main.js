@@ -5,11 +5,19 @@ export default Ember.Route.extend({
     return {
       videos: [
       {
-        url: "/media/kenny_vid.mp4",
+        url: "/media/kenny_band_1.mp4",
         title: ""
       },
       {
-        url: "/media/sintel_trailer.mp4",
+        url: "/media/kenny_band_2.mp4",
+        title: ""
+      },
+      {
+        url: "/media/kenny_flap.mp4",
+        title: ""
+      },
+      {
+        url: "/media/kenny_sticks.mp4",
         title: ""
       }
       ]

@@ -2,7 +2,7 @@
 
 }
 
-.videoList--flex {
+.video-list--flex {
   display: flex;
 
   flex-flow: row wrap;
@@ -10,11 +10,13 @@
   justify-content: space-around;
 }
 
-.item {
+.video-list-item {
 
 }
 
-.item--flex {
+.video-list-item--flex {
   align-self: auto;
   flex-basis: 5%;
+  width: 160px;
+  height: 90px;
 }

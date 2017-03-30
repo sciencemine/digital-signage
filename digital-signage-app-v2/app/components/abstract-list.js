@@ -1,60 +1,83 @@
 /**
+ * COMPONENT: abstract-list
+ *
+ * DESCRIPTION:
+ *  This is the highest level list to be inherited by all othe lists.
+ *  use `import AbstractList from './abstract-list'` in your lists to import this
+ *  library. Then use `export default AbstractList.extend({ /* code here /* });
+ *  to extend this object in your other lists.
+ *
+ * PARAMETERS:
+ *  focus
+ *    Determines if the list should be initialized with focus or not
  * 
- * @pre has been passed a parameter called `focus` to determine if the
- *   list should have focus
- * @pre has been passed a parameter called `class` to set the class
- * @pre has been passed an action called `onSelectedCallback`
- * @pre has been passed an action called `onOverflowCallback`
- * @pre has been passed an action called `onUnderflowCallback`
- * @pre has been passed an action called `onCancelledCallback`
- * 
+ *  class
+ *    Applies a css class to the component's wrapper div
+ *
+ * CALLBACKS
+ *  onSelectedCallback
+ *    Callback for when an item has been selected
+ *
+ *  onCancelledCallback
+ *    Callback for when an item has been selected
+ *
+ *  onOverflowCallback
+ *    Callback for when an item has been selected
+ *
+ *  onUnderflowCallback
+ *    Callback for when an item has been selected
+ *
  * @author Michael Fryer
  * @date 3/11/2017
  */
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  classNames: [],
-
   init() {
     this._super(...arguments);
-    this.addObserver('focus', this, 'updateFocusMethod');
-    this.set('classNames[0]', this.get('class'));
-    this.send('updateFocusAction');
   },
-  keyPress(event) {
-    console.log(String.fromCharCode(event.keyCode));
-    
-    //This needs to be pulled from the model later
+
+  //Sends an action after the html has been rendered. Necessary to allow access
+  //to the component's wrapper div
+  didRender() {
+    this.send('updateFocus');
+  },
+
+  //checks input on key down to see if it is valid
+  //This needs to be pulled from the model later, not be hard coded
+  keyDown(event) {
     switch (String.fromCharCode(event.keyCode).toLowerCase()) {
-      case "w":
+      case 'w':
         this.send('select');
         break;
-      case "a":
+      case 'a':
         this.send('goPrevious');
         break;
-      case "s":
+      case 's':
         this.send('cancel');
         break;
-      case "d":
+      case 'd':
         this.send('goNext');
         break;
     }
   },
-  updateFocusMethod() {
-    this.send('updateFocusAction');
-  },
+
+  //adds an observer for the parameter that was passed. fires when it is changed
+  //up a level. allows for change of fovus to the lists
+  changeFocusObserver: Ember.observer('focus', function() {
+    this.send('updateFocus');
+  }),
   actions: {
-    selectedCallback(sender, selected) {
+    selectedCallback(selected) {
       this.get('onSelectedCallback')(this, selected);
     },
-    overflowCallback(sender) {
+    overflowCallback() {
       this.get('onOverflowCallback')(this);
     },
-    underflowCallback(sender) {
+    underflowCallback() {
       this.get('onUnderflowCallback')(this);
     },
-    cancelCallback(sender, selected) {
+    cancelCallback(selected) {
       this.get('onCancelledCallback')(this, selected);
     },
     goPrevious() {
@@ -69,8 +92,16 @@ export default Ember.Component.extend({
     cancel() {
       console.log('cancel() needs to be imlemented in subcomponent');
     },
-    updateFocusAction() {
-      this.set('focus', this.get('focus'));
+
+    //sets the focus to the list if focus is true otherwise blurs it
+    updateFocus() {
+      if (this.get('focus')) {
+        this.$().attr('tabindex', 0);
+        this.$().focus();
+      }//if
+      else {
+        this.$().blur();
+      }//else
     }
   }
 });
