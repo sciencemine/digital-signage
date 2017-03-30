@@ -1,0 +1,8 @@
+.video-player__video {
+    height:100%;
+    width: auto;
+}
+
+.video-player__component {
+    height: 200px;
+}
