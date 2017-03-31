@@ -1,3 +1,8 @@
-<h3>This is a video list</h3>
-Is Active: {{isActive}}
+{{#each-in data.videos as |key value|}}
+  <div class={{flexItemClass}}>
+    {{key}}: {{value.url}}<br>
+    {{video-player class='video-player__component' looping=true url=value.url }}
+  </div>
+{{/each-in}}
+
 {{yield}}
