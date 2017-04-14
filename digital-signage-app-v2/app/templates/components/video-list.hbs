@@ -1,8 +1,7 @@
-{{#each-in data.videos as |key value|}}
-  <div class={{flexItemClass}}>
-    {{key}}: {{value.url}}<br>
-    {{video-player class='video-player__component' looping=true url=value.url }}
-  </div>
-{{/each-in}}
+{{#each-in data as |key value|}}
 
-{{yield}}
+  <div class="{{flexItemClass}} {{if (video-selected key selectedVidPos) "video-list-item--highlight"}}">
+    {{video-player class='video-player__screen-overlay' playing=false looping=true url=value.fileName onSelectedCallback=(action 'videoSelected')}}
+  </div>
+
+{{/each-in}}

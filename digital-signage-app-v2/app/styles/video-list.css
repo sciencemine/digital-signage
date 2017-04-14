@@ -1,9 +1,30 @@
-.videoList {
+.video-list {
 
 }
 
+.video-list:focus {
+  outline: 0;
+}
+
+.video-list--container {
+  position: absolute;
+
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  z-index: 10;
+}
+
 .video-list--flex {
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  align-items: center;
   display: flex;
+
+  margin: auto;
 
   flex-flow: row wrap;
 
@@ -11,12 +32,15 @@
 }
 
 .video-list-item {
-
+  
 }
 
 .video-list-item--flex {
   align-self: auto;
   flex-basis: 5%;
-  width: 160px;
-  height: 90px;
+}
+
+.video-list-item--highlight {
+  border-radius: 5px;
+  border: 4px solid #ff4d4d;
 }

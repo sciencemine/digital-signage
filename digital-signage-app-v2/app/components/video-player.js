@@ -37,6 +37,10 @@ export default Ember.Component.extend({
 	playing: true,
 	muted: true,
 
+	click() {
+		this.get('onSelectedCallback')(this);
+	},
+
 	loopingObserver: Ember.observer('looping', function() {
 		var videoElement = this.$().find("video").get(0);
 		if (videoElement) {

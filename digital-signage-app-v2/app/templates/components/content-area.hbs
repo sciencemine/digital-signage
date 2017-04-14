@@ -1,0 +1,11 @@
+{{#if displayVideo}}
+  {{video-player class='video-player__fullscreen' playing=videoPlaying muted=false url=video.fileName onSelectedCallback=(action 'togglePlayback')}}
+{{/if}}
+
+{{#if displayVideoSelect}}
+  <div class="video-list--container">
+    {{video-list keyboard=data.config.keyboard data=data.videos focus=displayVideoSelect class='video-list video-list--flex' flexItemClass='video-list-item--flex' onSelectedCallback=(action 'showVideo')}}
+  </div>
+{{/if}}
+
+{{yield}}
