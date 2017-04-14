@@ -13,13 +13,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{video-player}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#video-player}}
-      
-    {{/video-player}}
-  `);
-
-  assert.equal(this.$().text().trim(), '');
 });

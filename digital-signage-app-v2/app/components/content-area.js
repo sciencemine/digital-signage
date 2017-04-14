@@ -1,9 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  displayVideoSelect: false,
+  displayVideoSelect: true,
   displayVideo: false,
-  focus: true,
+  focus: false,
   video: null,
   videoPlaying: false,
 
@@ -16,7 +16,7 @@ export default Ember.Component.extend({
   //checks input on key down to see if it is valid
   //This needs to be pulled from the model later, not be hard coded
   keyDown(event) {
-    if (this.get('focus')) {
+    if (this.get('focus') && !this.get('displayVideoSelect')) {
       switch (String.fromCharCode(event.keyCode).toLowerCase()) {
         case this.get('data.config.keyboard.select'):
           this.send('select');
@@ -25,7 +25,7 @@ export default Ember.Component.extend({
           //this.send('goPrevious');
           break;
         case this.get('data.config.keyboard.cancel'):
-          //this.send('cancel');
+          this.send('cancel');
           break;
         case this.get('data.config.keyboard.next'):
           //this.send('goNext');
@@ -44,17 +44,23 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    select() {
-      if (!this.get('displayVideoSelect')) {
+    select(sender, selected) {
+      if (!this.get('displayVideo')) {
         this.send('updateFocus', false);
         this.send('showVideoSelect');
       }
     },
-    showVideo(sender, selected) {
+    cancel() {
+      if (this.get('videoPlaying')) {
+        this.send('togglePlayback');
+      }
+    },
+    updateVideo(sender, selected) {
       this.send('hideVideoSelect');
       this.set('video', selected);
       this.set('videoPlaying', true);
       this.set('displayVideo', true);
+      this.send('updateFocus', true);
     },
     togglePlayback() {
       this.set('videoPlaying', !this.get('videoPlaying'));

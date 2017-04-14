@@ -1,39 +1,35 @@
 .video-player__video {
-    height:100%;
-    width: auto;
-}
-
-.video-player__screen-overlay {
-    height: 200px;
+    height: auto;
+    width: 100%;
 }
 
 .video-player__background--container {
-  position: fixed;
+  position: absolute;
+
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+
   overflow: hidden;
   z-index: -100;
   align-content: center;
   background-color: black;
 }
 
-.video-player__background {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  width: auto;
-  height: 100%;
-  opacity: 0.6;
-}
-
 .video-player__fullscreen {
-  position: fixed;
+  position: absolute;
+
   top: 0px;
   right: 0px;
   bottom: 0px;
   left: 0px;
+
   overflow: hidden;
   z-index: 3;
 }
+
+.video-player__darken {
+  opacity: 0.5;
+}
+

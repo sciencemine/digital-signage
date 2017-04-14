@@ -24,3 +24,13 @@ test('0 -1', function(assert) {
   let result = videoSelected([0, -1]);
   assert.ok(!result);
 });
+
+test('false false', function(assert) {
+  let result = videoSelected([false, false]);
+  assert.ok(!result);
+});
+
+test('0 true', function(assert) {
+  let result = videoSelected([0, true]);
+  assert.ok(!result);
+});

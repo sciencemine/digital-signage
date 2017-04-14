@@ -17,10 +17,16 @@
   z-index: 10;
 }
 
+.video-list--flex:focus {
+  outline: 0;
+}
+
 .video-list--flex {
   height: 100%;
-  padding: 0;
-  margin: 0;
+
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
+
   align-items: center;
   display: flex;
 
@@ -37,7 +43,14 @@
 
 .video-list-item--flex {
   align-self: auto;
-  flex-basis: 5%;
+}
+
+.video-list-item--flex__large {
+  flex-basis: 20%;
+}
+
+.video-list-item--flex__small {
+  flex-basis: 10%;
 }
 
 .video-list-item--highlight {

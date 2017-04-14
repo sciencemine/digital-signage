@@ -97,6 +97,7 @@ export default Ember.Component.extend({
         this.$().focus();
       }//if
       else {
+        this.$().attr('tabindex', -1);
         this.$().blur();
       }//else
     }

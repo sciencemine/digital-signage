@@ -30,7 +30,7 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	classNames: ["video-player"],
+	classNames: ["video-player__video"],
 
 	url: null,
 	looping: false,
