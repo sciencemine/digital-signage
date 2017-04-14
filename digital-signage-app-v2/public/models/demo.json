@@ -1,0 +1,48 @@
+{
+    "config" : {
+        "prettyName": "Demo",
+        "mediaPath": "/path/to/media",
+        "ui": {
+            "dwell": 3,
+            "idle": 15,
+            "menuLocale": "top"
+        },
+        "keyboard": {
+            "select": "w",
+            "cancel": "s",
+            "previous": "a",
+            "forward": "d"
+        }
+    },
+    "tags": {
+        "big": "this is big",
+        "thing": "this is a thing"
+    },
+    "videos": {
+        "vid1": {
+            "name": "thing 1",
+            "desc": "Introduction to the thing",
+            "fileName": "thing_1.mp4",
+            "tags": ["thing"],
+            "attribuion": "Bob",
+            "caption": "This is an introduction to what the thing is about!"
+        },
+        "vid2": {
+            "name": "thing 2",
+            "desc": "Large thing",
+            "fileName": "thing_2.mp4",
+            "tags": ["thing", "big"],
+            "attribution": "Bob",
+            "caption": "More about the thing, just bigger."
+        }
+    },
+    "relations": [
+        {
+            "initialVideo": "vid1",
+            "finalVideo": "vid2",
+            "difficulty": 3,
+            "tags": ["thing"]
+        }
+    ]
+}
+
