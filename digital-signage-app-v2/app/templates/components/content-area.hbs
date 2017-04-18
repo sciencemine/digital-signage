@@ -1,16 +1,16 @@
 <div class="video-player__background--container">
-  {{video-player class='video-player__darken' playing=(if videoPlaying false true) looping=true url=data.videos.[2].fileName}}
+  {{video-player class='video-player__darken' playing=(if videoPlaying false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.fileIdentifier)}}
 </div>
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
-    {{video-player playing=videoPlaying muted=true url=video.fileName onSelectedCallback=(action 'togglePlayback')}}
+    {{video-player playing=videoPlaying muted=true url=video onClickCallback=(action 'videoClicked' bubbles=false)}}
   </div>
 {{/if}}
 
 {{#if displayVideoSelect}}
   <div class="video-list--container">
-    {{video-list keyboard=data.config.keyboard data=data.videos focus=displayVideoSelect class='video-list--flex' onSelectedCallback=(action 'updateVideo')}}
+    {{video-list keyboard=data.config.keyboard data=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect class='video-list--flex' onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoSelected')}}
   </div>
 {{/if}}
 

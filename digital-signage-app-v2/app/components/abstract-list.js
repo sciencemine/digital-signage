@@ -47,16 +47,16 @@ export default Ember.Component.extend({
   keyDown(event) {
       switch (String.fromCharCode(event.keyCode).toLowerCase()) {
         case this.get('keyboard.select'):
-          this.send('select');
+          this.send('select', event);
           break;
         case this.get('keyboard.previous'):
-          this.send('goPrevious');
+          this.send('goPrevious', event);
           break;
         case this.get('keyboard.cancel'):
-          this.send('cancel');
+          this.send('cancel', event);
           break;
         case this.get('keyboard.next'):
-          this.send('goNext');
+          this.send('goNext', event);
           break;
       }
   },

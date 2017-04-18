@@ -12,11 +12,10 @@ export default Ember.Component.extend({
   didRender() {
     this.send('updateFocus', this.get('focus'));
   },
-
   //checks input on key down to see if it is valid
   //This needs to be pulled from the model later, not be hard coded
   keyDown(event) {
-    if (this.get('focus') && !this.get('displayVideoSelect')) {
+    if (this.get('focus')) {
       switch (String.fromCharCode(event.keyCode).toLowerCase()) {
         case this.get('data.config.keyboard.select'):
           this.send('select');
@@ -44,35 +43,32 @@ export default Ember.Component.extend({
   }),
 
   actions: {
-    select(sender, selected) {
-      if (!this.get('displayVideo')) {
-        this.send('updateFocus', false);
-        this.send('showVideoSelect');
-      }
+    select() {
+      this.set('videoPlaying', false);
+      this.send('updateFocus', false);
+      this.send('showVideoSelect');
     },
     cancel() {
-      if (this.get('videoPlaying')) {
-        this.send('togglePlayback');
-      }
+      this.set('videoPlaying', !this.get('videoPlaying'));
     },
-    updateVideo(sender, selected) {
-      this.send('hideVideoSelect');
-      this.set('video', selected);
-      this.set('videoPlaying', true);
+    videoSelected(sender, selected) {
+      this.set('video', this.get('data.config.modelIdentifier') + '/' + selected.fileIdentifier);
       this.set('displayVideo', true);
+      this.set('videoPlaying', true);
+      this.send('hideVideoSelect');
       this.send('updateFocus', true);
     },
-    togglePlayback() {
-      this.set('videoPlaying', !this.get('videoPlaying'));
-
-      if (this.get('videoPlaying')) {
-        this.send('showVideoSelect');
+    videoClicked(selected) {
+      if (selected.get('url') === this.get('video')) {
+        this.set('videoPlaying', !this.get('videoPlaying'));
       }
       else {
+        this.set('video', selected.get('url'));
+        this.set('displayVideo', true);
+        this.set('videoPlaying', true);
         this.send('hideVideoSelect');
+        this.send('updateFocus', true);
       }
-
-      this.send('updateFocus', this.get('videoPlaying'));
     },
     showVideoSelect() {
       this.set('displayVideoSelect', true);

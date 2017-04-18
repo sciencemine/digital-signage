@@ -7,8 +7,9 @@ export default AbstractList.extend({
     this._super(...arguments);
   },
   actions: {
-    select() {
+    select(event) {
       this.send('selectedCallback', this.get('data')[this.get('selectedVidPos')]);
+      event.stopPropagation();
     },
     goNext() {
       let curVidPos = this.get('selectedVidPos');

@@ -30,15 +30,14 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	classNames: ["video-player__video"],
-
 	url: null,
 	looping: false,
 	playing: true,
 	muted: true,
 
-	click() {
-		this.get('onSelectedCallback')(this);
+	click(event) {
+		this.get('onClickCallback')(this);
+		event.stopPropagation();
 	},
 
 	loopingObserver: Ember.observer('looping', function() {
