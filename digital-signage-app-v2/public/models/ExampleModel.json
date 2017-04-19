@@ -84,7 +84,7 @@
             "description": "Looks like someone needs a haircut.",
             "x": 0.5,
             "y": 0.2,
-            "videos": [ 0, 1, 2, 3 ]
+            "videos": [ "0", "1", "2", "3" ]
         }
     },
     "relation": {
