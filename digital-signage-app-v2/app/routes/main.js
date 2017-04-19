@@ -1,26 +1,19 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  modelFile: null,
+
+  beforeModel(params) {
+    var qp = params.queryParams;
+
+    if (qp.modelfile) {
+      this.modelFile = qp.modelfile;
+    }
+  },
   model() {
-    return {
-      videos: [
-      {
-        url: "/media/kenny_band_1.mp4",
-        title: ""
-      },
-      {
-        url: "/media/kenny_band_2.mp4",
-        title: ""
-      },
-      {
-        url: "/media/kenny_flap.mp4",
-        title: ""
-      },
-      {
-        url: "/media/kenny_sticks.mp4",
-        title: ""
-      }
-      ]
-    };
+    var path = "models/" + (this.modelFile ? this.modelFile : "ExampleModel") + ".json";
+    var data = Ember.$.getJSON(path);
+
+    return data;
   }
 });

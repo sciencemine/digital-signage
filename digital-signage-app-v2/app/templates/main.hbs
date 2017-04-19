@@ -1,3 +1,4 @@
-<h1>This is the main page!</h1>
-{{video-list data=model focus=true class='video-list--flex' flexItemClass='video-list-item--flex'}}
-{{outlet}}
+{{#content-area class="content-area" focus=false data=model}}
+  {{outlet}}
+{{/content-area}}
+

@@ -1,8 +1,35 @@
 .video-player__video {
-    height:100%;
-    width: auto;
+    height: auto;
+    width: 100%;
 }
 
-.video-player__component {
-    height: 200px;
+.video-player__background--container {
+  position: absolute;
+
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  overflow: hidden;
+  z-index: -100;
+  align-content: center;
+  background-color: black;
 }
+
+.video-player__fullscreen {
+  position: absolute;
+
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  overflow: hidden;
+  z-index: 3;
+}
+
+.video-player__darken {
+  opacity: 0.5;
+}
+

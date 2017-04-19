@@ -1,7 +1,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('video-player', 'Integration | Component | video player', {
+moduleForComponent('content-area', 'Integration | Component | content area', {
   integration: true
 });
 
@@ -10,7 +10,7 @@ test('it renders', function(assert) {
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
-  this.render(hbs`{{video-player}}`);
+  this.render(hbs`{{content-area}}`);
 
   assert.equal(this.$().text().trim(), '');
 });

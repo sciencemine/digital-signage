@@ -1,8 +1,7 @@
-{{#each-in data.videos as |key value|}}
-  <div class={{flexItemClass}}>
-    {{key}}: {{value.url}}<br>
-    {{video-player class='video-player__component' looping=true url=value.url }}
-  </div>
-{{/each-in}}
+{{#each-in data as |key value|}}
 
-{{yield}}
+  <div class="video-list-item--flex {{if (video-selected key selectedVidPos) "video-list-item--highlight video-list-item--flex__large" "video-list-item--flex__small"}}">
+    {{video-player muted=(if (video-selected key selectedVidPos) false true) playing=true looping=true url=(make-local-url modelIdentifier value.fileIdentifier) onClickCallback=(action onClickCallback) onSelectedCallback=(action 'videoSelected')}}
+  </div>
+
+{{/each-in}}
