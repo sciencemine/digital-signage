@@ -7,10 +7,10 @@
             "menuLocale": "top"
         },
         "keyboard": {
-            "select": "d",
+            "select": "w",
             "previous": "a",
             "cancel": "s",
-            "next": "h"
+            "next": "d"
         }
     },
     "videos": {

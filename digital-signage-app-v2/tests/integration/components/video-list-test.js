@@ -45,7 +45,11 @@ test('it renders', function(assert) {
 
   this.set('testData', data);
 
-  this.render(hbs`{{video-list data=testData}}`);
+  this.set('baba', (actual) => {
+    assert.ok(actual);
+  });
+
+  this.render(hbs`{{video-list data=testData selectedCallback=(action baba) onClickCallback=(action baba)}}`);
 
   assert.equal(this.$().text().trim(), '');
 });
