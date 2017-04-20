@@ -2,9 +2,11 @@ import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
   selectedVidPos: 0,
+  keys: [],
 
   init() {
     this._super(...arguments);
+    this.set('keys', Object.keys(this.get('data')));
   },
   actions: {
     select(event) {
@@ -12,24 +14,18 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goNext() {
-      let curVidPos = this.get('selectedVidPos');
+      let vidArrayLength = this.get('keys').length;
+      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
 
-      if (curVidPos === this.get('data').length - 1) {
-        this.set('selectedVidPos', 0);
-      }
-      else {
-        this.set('selectedVidPos', curVidPos + 1);
-      }
+      this.set('selectedVidPos', (curVidPos + 1) % vidArrayLength);
+      event.stopPropagation();
     },
     goPrevious() {
-      let curVidPos = this.get('selectedVidPos');
+      let vidArrayLength = this.get('keys').length;
+      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
 
-      if (curVidPos === 0) {
-        this.set('selectedVidPos', this.get('data').length - 1);
-      }
-      else {
-        this.set('selectedVidPos', curVidPos - 1);
-      }
+      this.set('selectedVidPos', (curVidPos - 1) % vidArrayLength);
+      event.stopPropagation();
     },
     videoSelected(sender) {
       this.send('selectedCallback', sender);

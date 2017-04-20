@@ -7,10 +7,10 @@
             "menuLocale": "top"
         },
         "keyboard": {
-            "select": "d",
+            "select": "w",
             "previous": "a",
             "cancel": "s",
-            "next": "h"
+            "next": "d"
         }
     },
     "videos": {
@@ -84,7 +84,7 @@
             "description": "Looks like someone needs a haircut.",
             "x": 0.5,
             "y": 0.2,
-            "videos": [ 0, 1, 2, 3 ]
+            "videos": [ "0", "1", "2", "3" ]
         }
     },
     "relation": {

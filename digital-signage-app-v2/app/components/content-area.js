@@ -1,46 +1,23 @@
 import Ember from 'ember';
+import KeyboardControls from '../mixins/keyboard-controls';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend(KeyboardControls, {
   displayVideoSelect: true,
   displayVideo: false,
   focus: false,
   video: null,
   videoPlaying: false,
+  keyboard: null,
 
-  //Sends an action after the html has been rendered. Necessary to allow access
-  //to the component's wrapper div
-  didRender() {
-    this.send('updateFocus', this.get('focus'));
+  init() {
+    this._super(...arguments);
+    this.set('keyboard', this.get('data.config.keyboard'));
   },
-  //checks input on key down to see if it is valid
-  //This needs to be pulled from the model later, not be hard coded
-  keyDown(event) {
-    if (this.get('focus')) {
-      switch (String.fromCharCode(event.keyCode).toLowerCase()) {
-        case this.get('data.config.keyboard.select'):
-          this.send('select');
-          break;
-        case this.get('data.config.keyboard.previous'):
-          //this.send('goPrevious');
-          break;
-        case this.get('data.config.keyboard.cancel'):
-          this.send('cancel');
-          break;
-        case this.get('data.config.keyboard.next'):
-          //this.send('goNext');
-          break;
-      }
-    }
-  },
+  
   click() {
     this.send('updateFocus', false);
     this.send('showVideoSelect');
   },
-  //adds an observer for the parameter that was passed. fires when it is changed
-  //up a level. allows for change of fovus to the lists
-  changeFocusObserver: Ember.observer('focus', function() {
-    this.send('updateFocus', this.get('focus'));
-  }),
 
   actions: {
     select() {
