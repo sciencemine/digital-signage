@@ -31,21 +31,21 @@ export default Ember.Mixin.create({
     this.send('updateFocus', this.get('focus'));
   }),
   actions: {
-    select() {
-      console.log('select() needs to be imlemented in subcomponent');
+    select(event) {
+      console.log('select() needs to be implemented in subcomponent', event);
     },
-    goPrevious() {
-      console.log('goPrevious() needs to be imlemented in subcomponent');
+    goPrevious(event) {
+      console.log('goPrevious() needs to be implemented in subcomponent', event);
     },
-    cancel() {
-      console.log('cancel() needs to be imlemented in subcomponent');
+    cancel(event) {
+      console.log('cancel() needs to be implemented in subcomponent', event);
     },
-    goNext() {
-      console.log('goNext() needs to be imlemented in subcomponent');
+    goNext(event) {
+      console.log('goNext() needs to be implemented in subcomponent', event);
     },
     //sets the focus to the list if focus is true otherwise blurs it
-    updateFocus(param) {
-      console.log('Update focus needs to be implemented.');
+    updateFocus() {
+      console.log('UpdateFocus() needs to be implemented.');
     }
   }
 });
