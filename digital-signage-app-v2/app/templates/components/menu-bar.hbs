@@ -1,0 +1,50 @@
+<div>
+{{filterType}}<br>
+
+  <div class="btn-group">
+    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-sm btn-info">All</button>
+    <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+
+    <ul class="dropdown-menu">
+    {{#each-in attributes as |key value|}}
+      <li>
+        <span {{action 'setMenuVideos' key}}>
+          {{value.name}}
+        </span>
+      </li>
+      <li role="separator" class="divider"></li>
+    {{/each-in}}
+    </ul>
+  </div>
+
+  <div class="btn-group" role="toolbar" aria-label="...">
+    <button {{action 'setMenuVideos' 'All'}} type="button" class="btn btn-default" aria-label="...">
+      All
+    </button>
+    {{#each-in attributes as |key value|}}
+      <button {{action 'setMenuVideos' key}} type="button" class="btn btn-default" aria-label="...">
+        {{value.name}}
+      </button>
+    {{/each-in}}
+  </div>
+
+  <div class="btn-group-vertical" role="toolbar" aria-label="...">
+    <button {{action 'setMenuVideos' 'All'}} type="button" class="btn btn-default" aria-label="...">
+      All
+    </button>
+    {{#each-in attributes as |key value|}}
+      <button {{action 'setMenuVideos' key}} type="button" class="btn btn-default" aria-label="...">
+        {{value.name}}
+      </button>
+    {{/each-in}}
+  </div>
+</div>
+
+<div class="video-list--container">
+  {{video-list data=displayVideos modelIdentifier=config.modelIdentifier focus=false class='video-list--flex' onClickCallback=(action 'baba') onSelectedCallback=(action 'baba')}}
+</div>
+
+{{yield}}
