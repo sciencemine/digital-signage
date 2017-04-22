@@ -4,7 +4,7 @@
         "ui": {
             "dwell": 3,
             "idle": 15,
-            "menuLocale": "top"
+            "menuLocale": "bottom"
         },
         "keyboard": {
             "select": "w",
