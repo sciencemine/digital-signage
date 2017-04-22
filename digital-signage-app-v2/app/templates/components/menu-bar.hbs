@@ -1,5 +1,4 @@
-<div>
-{{filterType}}<br>
+<!--div>
 
   <div class="btn-group">
     <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-sm btn-info">All</button>
@@ -21,7 +20,7 @@
   </div>
 
   <div class="btn-group" role="toolbar" aria-label="...">
-    <button {{action 'setMenuVideos' 'All'}} type="button" class="btn btn-default" aria-label="...">
+    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-default" aria-label="...">
       All
     </button>
     {{#each-in attributes as |key value|}}
@@ -32,7 +31,7 @@
   </div>
 
   <div class="btn-group-vertical" role="toolbar" aria-label="...">
-    <button {{action 'setMenuVideos' 'All'}} type="button" class="btn btn-default" aria-label="...">
+    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-default" aria-label="...">
       All
     </button>
     {{#each-in attributes as |key value|}}
@@ -41,10 +40,33 @@
       </button>
     {{/each-in}}
   </div>
-</div>
+</div-->
 
-<div class="video-list--container">
-  {{video-list data=displayVideos modelIdentifier=config.modelIdentifier focus=false class='video-list--flex' onClickCallback=(action 'baba') onSelectedCallback=(action 'baba')}}
-</div>
+{{#menu-list class=menuListStyle data=displayVideos modelIdentifier=config.modelIdentifier focus=false onClickCallback=(action 'baba') onSelectedCallback=(action 'baba')}}
+<div>
+  <span class="filter-label">
+    {{filterType}}
+  </span>
+  <br>
+  <div class="btn-group {{if useDropUp "dropup"}} menu-bar--dropdown">
+    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-sm btn-info">All</button>
+    <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="caret"></span>
+      <span class="sr-only">Toggle Dropdown</span>
+    </button>
+
+    <ul class="dropdown-menu">
+    <li class="dropdown-header menu-bar--list--element--border">Filter Videos</li>
+    {{#each-in attributes as |key value|}}
+      <li class="menu-bar--list--element menu-bar--list--element--border">
+        <span {{action 'setMenuVideos' key}}>
+          {{value.name}}
+        </span>
+      </li>
+    {{/each-in}}
+    </ul>
+  </div>
+  </div>
+{{/menu-list}}
 
 {{yield}}

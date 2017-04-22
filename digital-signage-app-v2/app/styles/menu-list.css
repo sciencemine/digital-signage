@@ -1,0 +1,72 @@
+.menu-list {
+  position: absolute;
+
+  z-index: 100;
+}
+
+.menu-list:focus {
+  outline: 0;
+}
+
+.menu-list--flex--horizontal {
+  flex-wrap: wrap;
+  flex-direction: row;
+
+  align-items: center;
+
+  height: 10%;
+}
+
+.menu-list--flex--verticle {
+  flex-wrap: wrap;
+  flex-direction: column;
+
+  width: 10%;
+}
+
+.menu-list--flex {
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
+
+  display: flex;
+
+  margin: auto;
+
+  justify-content: flex-start;
+}
+
+.menu-list--flex:focus {
+  outline: 0;
+}
+
+.menu-list__top {
+  top: 0px;
+  right: 0px;
+  left: 0px;
+}
+
+.menu-list__right {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+}
+
+.menu-list__bottom {
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.menu-list__left {
+  bottom: 0px;
+  left: 0px;
+  top: 0px;
+}
+
+.menu-list-item--flex__small {
+  flex-basis: 10%;
+}
+
+.menu-list-item--flex__xs {
+  flex-basis: 7%;
+}

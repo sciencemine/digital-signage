@@ -1,4 +1,4 @@
-<!--div class="video-player__background--container">
+<div class="video-player__background--container">
   {{video-player class='video-player__darken' playing=(if videoPlaying false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.fileIdentifier)}}
 </div>
 
@@ -12,7 +12,7 @@
   <div class="video-list--container">
     {{video-list keyboard=data.config.keyboard data=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect class='video-list--flex' onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoSelected')}}
   </div>
-{{/if}}-->
+{{/if}}
 
 {{menu-bar config=data.config videos=data.videos attributes=data.attribute}}
 
