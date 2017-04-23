@@ -47,11 +47,14 @@
 .video-list__menu {
   position: absolute;
 
+  background-color: #2d343f;
+  border-radius: 10px;
+
   z-index: 100;
 }
 
 .video-list--flex__menu {
-  padding: 0px;
+  padding: 5px;
   margin: 0px 5px 0px 5px;
 
   display: flex;

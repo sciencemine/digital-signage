@@ -1,28 +1,4 @@
-<!--div>
-
-  <div class="btn-group" role="toolbar" aria-label="...">
-    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-default" aria-label="...">
-      All
-    </button>
-    {{#each-in attributes as |key value|}}
-      <button {{action 'setMenuVideos' key}} type="button" class="btn btn-default" aria-label="...">
-        {{value.name}}
-      </button>
-    {{/each-in}}
-  </div>
-
-  <div class="btn-group-vertical" role="toolbar" aria-label="...">
-    <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-default" aria-label="...">
-      All
-    </button>
-    {{#each-in attributes as |key value|}}
-      <button {{action 'setMenuVideos' key}} type="button" class="btn btn-default" aria-label="...">
-        {{value.name}}
-      </button>
-    {{/each-in}}
-  </div>
-</div-->
-<div class={{menuBarStyle}}>
+<div class="{{menuBarStyle}}">
   {{#if renderMenu}}
     {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemLarge="video-list-item--flex__small__menu" listItemSmall="video-list-item--flex__small__menu" listItemHighlight="" data=displayVideos modelIdentifier=config.modelIdentifier focus='false' onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoClicked')}}
     <div>
