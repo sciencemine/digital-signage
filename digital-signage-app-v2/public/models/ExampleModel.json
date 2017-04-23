@@ -1,10 +1,12 @@
 {
     "config": {
         "modelIdentifier": "kenny",
+        "description" : "Kenny: Starting life in another world",
+        "backgroudVideos": ["3", "2"],
         "ui": {
-            "dwell": 3,
             "idle": 15,
-            "menuLocale": "bottom"
+            "menuDwell": 3,
+            "menuLocale": "top"
         },
         "keyboard": {
             "select": "w",

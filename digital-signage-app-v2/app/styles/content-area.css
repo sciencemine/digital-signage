@@ -5,3 +5,7 @@
   bottom: 0px;
   left: 0px;
 }
+
+.content-area:focus {
+  outline: 0;
+}

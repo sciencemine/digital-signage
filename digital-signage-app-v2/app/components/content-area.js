@@ -27,6 +27,8 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     cancel() {
       this.set('videoPlaying', !this.get('videoPlaying'));
+      this.set('displayVideoSelect', !this.get('videoPlaying'));
+      this.send('updateFocus', this.get('videoPlaying'));
     },
     videoSelected(sender, selected) {
       this.set('video', this.get('data.config.modelIdentifier') + '/' + selected.fileIdentifier);
@@ -36,11 +38,16 @@ export default Ember.Component.extend(KeyboardControls, {
       this.send('updateFocus', true);
     },
     videoClicked(selected) {
-      if (selected.get('url') === this.get('video')) {
+      var url = selected.get('url');
+
+      if (url === this.get('video')) {
         this.set('videoPlaying', !this.get('videoPlaying'));
+        this.send('updateFocus', this.get('videoPlaying'));
+      this.set('displayVideoSelect', !this.get('videoPlaying'));
       }
       else {
-        this.set('video', selected.get('url'));
+        //strips off media fragments fix by sending vid object data from model
+        this.set('video', url.substring(0, url.indexOf('#t=')));
         this.set('displayVideo', true);
         this.set('videoPlaying', true);
         this.send('hideVideoSelect');

@@ -23,3 +23,41 @@
   font-weight: bold;
   font-size: 15px;
 }
+
+.menu-bar {
+  position: absolute;
+
+  z-index: 100;
+}
+
+.menu-bar__top {
+  top: 0px;
+  right: 0px;
+  left: 0px;
+
+  height: 20%;
+}
+
+.menu-bar__right {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+
+  width: 20%;
+}
+
+.menu-bar__bottom {
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+
+  height: 20%;
+}
+
+.menu-bar__left {
+  bottom: 0px;
+  left: 0px;
+  top: 0px;
+
+  width: 20%;
+}

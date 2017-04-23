@@ -1,9 +1,0 @@
-{{yield}}
-
-{{#each-in data as |key value|}}
-
-  <div class="menu-list-item--flex menu-list-item--flex__xs">
-    {{video-player playing=true looping=true url=(make-local-url modelIdentifier value.fileIdentifier) onClickCallback=(action onClickCallback) onSelectedCallback=(action 'videoSelected')}}
-  </div>
-
-{{/each-in}}
