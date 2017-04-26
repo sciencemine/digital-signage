@@ -1,3 +1,4 @@
+/* Video Select CSS */
 .video-list {
   position: absolute;
 
@@ -56,7 +57,7 @@
   border: 4px solid blue;
 }
 
-/* Menu List CSS */
+/* Menu CSS */
 .video-list__menu {
   position: absolute;
 
@@ -133,3 +134,5 @@
   border-radius: 5px;
   border: 4px solid red;
 }
+
+/* Video History CSS */

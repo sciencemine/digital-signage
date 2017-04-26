@@ -10,11 +10,11 @@ export default AbstractList.extend({
 
   init() {
     this._super(...arguments);
-    this.set('keys', Object.keys(this.get('data')));
+    this.set('keys', Object.keys(this.get('videos')));
   },
   actions: {
     select(event) {
-      this.send('selectedCallback', this.get('data')[this.get('selectedVidPos')]);
+      this.send('selectedCallback', this.get('videos')[this.get('selectedVidPos')]);
       event.stopPropagation();
     },
     goPrevious() {
@@ -37,6 +37,22 @@ export default AbstractList.extend({
     },
     videoSelected(sender) {
       this.send('selectedCallback', sender);
+    },
+    videoHovered(sender) {
+      var senderUrl = sender.url;
+      var isFragment = senderUrl.indexOf('#t=');
+
+      if (isFragment !== -1) {
+        senderUrl = senderUrl.substring(0, isFragment);
+      }
+
+      for (var key in this.get('videos')) {
+        if (this.get(`videos[${key}].fileIdentifier`) === senderUrl) {
+          this.set('selectedVidPos', key);
+
+          break;
+        }
+      }
     }
   }
 });
