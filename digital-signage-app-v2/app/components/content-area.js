@@ -8,6 +8,7 @@ export default Ember.Component.extend(KeyboardControls, {
   video: null,
   videoPlaying: false,
   keyboard: null,
+  videoHistory: [],
 
   init() {
     this._super(...arguments);
@@ -27,6 +28,8 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     cancel() {
       this.set('videoPlaying', !this.get('videoPlaying'));
+      this.set('displayVideoSelect', !this.get('videoPlaying'));
+      this.send('updateFocus', this.get('videoPlaying'));
     },
     videoSelected(sender, selected) {
       this.set('video', this.get('data.config.modelIdentifier') + '/' + selected.fileIdentifier);
@@ -35,12 +38,18 @@ export default Ember.Component.extend(KeyboardControls, {
       this.send('hideVideoSelect');
       this.send('updateFocus', true);
     },
+    //sets the focus to the list if focus is true otherwise blurs it
     videoClicked(selected) {
-      if (selected.get('url') === this.get('video')) {
+      var url = selected.get('url');
+
+      if (url === this.get('video')) {
         this.set('videoPlaying', !this.get('videoPlaying'));
+        this.send('updateFocus', this.get('videoPlaying'));
+        this.set('displayVideoSelect', !this.get('videoPlaying'));
       }
       else {
-        this.set('video', selected.get('url'));
+        //strips off media fragments fix by sending vid object data from model
+        this.set('video', url.substring(0, url.indexOf('#t=')));
         this.set('displayVideo', true);
         this.set('videoPlaying', true);
         this.send('hideVideoSelect');
@@ -65,6 +74,13 @@ export default Ember.Component.extend(KeyboardControls, {
       }//else
       
       this.set('focus', param);
+    },
+    //sender is a video object? url? video player object?
+    //assuming video object
+    videoEnded(sender) {
+      let oldVideoHistory = this.get('videoHistory');
+      oldVideoHistory.push(sender);
+      this.set('videoHistory', oldVideoHistory);
     }
   }
 });

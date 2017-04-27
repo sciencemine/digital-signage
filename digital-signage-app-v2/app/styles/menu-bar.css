@@ -1,0 +1,63 @@
+.menu-bar--list--element {
+  white-space: wrap;
+  padding: 3px 20px;
+}
+
+.menu-bar--list--element:hover {
+  cursor: pointer;
+  background: #42adf4;
+}
+
+.menu-bar--dropdown {
+  padding: 4px;
+}
+
+.menu-bar--list--element--border {
+  border-width: 0px 0px 1px 0px;
+  border-style: solid;
+  border-color: black;
+}
+
+.filter-label {
+  padding: 4px;
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.menu-bar {
+  position: absolute;
+
+  z-index: 100;
+}
+
+.menu-bar__top {
+  top: 4px;
+  right: 4px;
+  left: 4px;
+
+  height: 20%;
+}
+
+.menu-bar__right {
+  top: 4px;
+  right: 4px;
+  bottom: 4px;
+
+  width: 20%;
+}
+
+.menu-bar__bottom {
+  right: 4px;
+  bottom: 4px;
+  left: 4px;
+
+  height: 20%;
+}
+
+.menu-bar__left {
+  bottom: 4px;
+  left: 4px;
+  top: 4px;
+
+  width: 20%;
+}

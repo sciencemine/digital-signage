@@ -1,6 +1,10 @@
 <div class="video-player__background--container">
-  {{video-player class='video-player__darken' playing=(if videoPlaying false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.fileIdentifier)}}
+  {{video-player class='video-player__darken' playing=(if displayVideo false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.fileIdentifier 0 0)}}
 </div>
+
+{{#if displayVideoSelect}}
+    {{video-list selectedVidPos=0 class="video-list video-list--flex" listItemClass="video-list-item--flex" listItemLarge="video-list-item--flex__large" listItemSmall="video-list-item--flex__small" listItemHighlight="video-list-item--highlight" keyboard=data.config.keyboard videos=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoSelected') onCancelledCallback=(action 'cancel')}}
+{{/if}}
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
@@ -8,10 +12,6 @@
   </div>
 {{/if}}
 
-{{#if displayVideoSelect}}
-  <div class="video-list--container">
-    {{video-list keyboard=data.config.keyboard data=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect class='video-list--flex' onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoSelected')}}
-  </div>
-{{/if}}
+{{menu-bar config=data.config videos=data.videos attributes=data.attribute onClickCallback=(action 'videoClicked')}}
 
 {{yield}}
