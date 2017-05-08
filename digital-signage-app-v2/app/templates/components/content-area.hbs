@@ -1,5 +1,5 @@
 <div class="video-player__background--container">
-  {{video-player class='video-player__darken' playing=(if displayVideo false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.fileIdentifier 0 0)}}
+  {{video-player class='video-player__darken' playing=(if displayVideo false true) looping=true url=(make-local-url data.config.modelIdentifier data.videos.2.full.fileIdentifier)}}
 </div>
 
 {{#if displayVideoSelect}}
