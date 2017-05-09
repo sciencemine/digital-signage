@@ -4,9 +4,8 @@ export default AbstractList.extend({
   selectedVidPos: 0,
   keys: [],
   listItemClass: '',
-  listItemLarge: '',
   listItemSmall: '',
-  listItemHighlight: '',
+  listItemSelected: '',
 
   init() {
     this._super(...arguments);

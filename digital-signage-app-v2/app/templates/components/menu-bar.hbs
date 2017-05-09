@@ -1,6 +1,6 @@
 <div class="{{menuBarStyle}}">
   {{#if renderMenu}}
-    {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemSmall="video-list-item--flex__small__menu" listItemLarge="video-list-item--flex__small__menu" listItemHighlight="video-list-item--highlight__menu" videos=displayVideos modelIdentifier=config.modelIdentifier focus='false' onSelectedCallback=(action 'videoClicked')}}
+    {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemSmall="video-list-item--flex__small__menu" listItemSelected="video-list-item--selected__menu" videos=displayVideos modelIdentifier=config.modelIdentifier focus='false' onSelectedCallback=(action 'videoClicked')}}
     <div>
       <span class="filter-label">
         {{filterType}}
