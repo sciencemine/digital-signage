@@ -18,10 +18,7 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goPrevious() {
-      let vidArrayLength = this.get('keys').length;
-      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
-
-      this.set('selectedVidPos', (curVidPos - 1) % vidArrayLength);
+      this.send('incrementSelected', -1);
       event.stopPropagation();
     },
     cancel(event) {
@@ -29,30 +26,17 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goNext() {
-      let vidArrayLength = this.get('keys').length;
-      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
-
-      this.set('selectedVidPos', (curVidPos + 1) % vidArrayLength);
+      this.send('incrementSelected', 1);
       event.stopPropagation();
     },
     videoSelected(sender) {
       this.send('selectedCallback', sender);
     },
-    videoHovered(sender) {
-      var senderUrl = sender.url;
-      var isFragment = senderUrl.indexOf('#t=');
+    incrementSelected(param) {
+      let vidArrayLength = this.get('keys').length;
+      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
 
-      if (isFragment !== -1) {
-        senderUrl = senderUrl.substring(0, isFragment);
-      }
-
-      for (var key in this.get('videos')) {
-        if (this.get(`videos[${key}].fileIdentifier`) === senderUrl) {
-          this.set('selectedVidPos', key);
-
-          break;
-        }
-      }
+      this.set('selectedVidPos', (curVidPos + (1 * param)) % vidArrayLength);
     }
   }
 });
