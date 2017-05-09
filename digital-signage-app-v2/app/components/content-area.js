@@ -9,10 +9,16 @@ export default Ember.Component.extend(KeyboardControls, {
   videoPlaying: false,
   keyboard: null,
   videoHistory: [],
+  backgroundVideoPos: 0,
+  backgroundVideoUrl: null,
+  backgroundVideoKeys: null,
 
   init() {
+    let backgroundId = this.get('data.config.backgroudVideos')[0];
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
+    this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
+    this.set('backgroundVideoKeys', this.get('data.config.backgroudVideos'));
   },
   
   click() {
@@ -27,33 +33,26 @@ export default Ember.Component.extend(KeyboardControls, {
       this.send('showVideoSelect');
     },
     cancel() {
-      this.set('videoPlaying', !this.get('videoPlaying'));
-      this.set('displayVideoSelect', !this.get('videoPlaying'));
-      this.send('updateFocus', this.get('videoPlaying'));
+      this.send('pauseVideo');
     },
-    videoSelected(sender, selected) {
-      this.set('video', this.get('data.config.modelIdentifier') + '/' + selected.full.fileIdentifier);
-      this.set('displayVideo', true);
-      this.set('videoPlaying', true);
-      this.send('hideVideoSelect');
-      this.send('updateFocus', true);
+    goNext() {
+      this.send('pauseVideo');
     },
-    //sets the focus to the list if focus is true otherwise blurs it
-    videoClicked(selected) {
-      var url = selected.get('url');
-
-      if (url === this.get('video')) {
-        this.set('videoPlaying', !this.get('videoPlaying'));
-        this.send('updateFocus', this.get('videoPlaying'));
-        this.set('displayVideoSelect', !this.get('videoPlaying'));
-      }
-      else {
+    goPrevious() {
+      this.send('pauseVideo');
+    },
+    videoSelected(videoData) {
+      if (videoData) {
+        var url = videoData.full.fileIdentifier;
         //strips off media fragments fix by sending vid object data from model
-        this.set('video', url);
+        this.set('video', this.get('data.config.modelIdentifier') + '/' + url);
         this.set('displayVideo', true);
         this.set('videoPlaying', true);
         this.send('hideVideoSelect');
         this.send('updateFocus', true);
+      }
+      else {
+        this.send('pauseVideo');
       }
     },
     showVideoSelect() {
@@ -81,6 +80,26 @@ export default Ember.Component.extend(KeyboardControls, {
       let oldVideoHistory = this.get('videoHistory');
       oldVideoHistory.push(sender);
       this.set('videoHistory', oldVideoHistory);
+      this.send('updateFocus', false);
+      this.set('displayVideoSelect', true);
+      this.set('displayVideo', false);
+    },
+    cycleBackground() {
+      let backArrayLength = this.get('backgroundVideoKeys').length;
+      let curVidPos = this.get('backgroundVideoPos') + backArrayLength;
+
+      this.set('backgroundVideoPos', (curVidPos + 1) % backArrayLength);
+
+      let backgroundId = this.get('data.config.backgroudVideos')[this.get('backgroundVideoPos')];
+      this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
+    },
+    doNothing() {
+
+    },
+    pauseVideo() {
+      this.set('videoPlaying', !this.get('videoPlaying'));
+      this.set('displayVideoSelect', !this.get('videoPlaying'));
+      this.send('updateFocus', this.get('videoPlaying'));
     }
   }
 });

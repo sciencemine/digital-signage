@@ -35,21 +35,8 @@
   flex-basis: 10%;
 }
 
-.video-list-item--flex__small:hover {
-  flex-basis: 20%;
-
-  border-radius: 5px;
-  border: 4px solid red;
-}
-
 .video-list-item--flex__large {
   flex-basis: 20%;
-}
-
-.video-list-item--flex__large:hover {
-  border-radius: 5px;
-  border-left: 4px solid red;
-  border-bottom: 4px solid red;
 }
 
 .video-list-item--highlight {
@@ -128,11 +115,9 @@
   flex-basis: 5%;
 }
 
-.video-list-item--flex__small__menu:hover {
-  flex-basis: 7%;
-
+.video-list-item--highlight__menu {
   border-radius: 5px;
-  border: 4px solid red;
+  border: 4px solid blue;
 }
 
 /* Video History CSS */

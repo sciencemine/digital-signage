@@ -71,9 +71,9 @@ export default Ember.Component.extend({
         this.set('filterType', this.get('attributes.' + newAttributeID + '.name'));
       }
     },
-    videoClicked(sender) {
+    videoClicked(videoData) {
       this.set('renderMenu', false);
-      this.get('onClickCallback')(sender);
+      this.get('onClickCallback') (videoData);
     }
   }
 });

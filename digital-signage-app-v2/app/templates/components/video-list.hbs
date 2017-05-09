@@ -3,7 +3,7 @@
 {{#each-in videos as |key value|}}
 
   <div class="{{listItemClass}} {{if (video-selected key selectedVidPos) (selected-style listItemLarge listItemHighlight) listItemSmall}}">
-    {{video-player muted=(if (video-selected key selectedVidPos) false true) playing=true looping=true url=(make-local-url modelIdentifier value.teaser.fileIdentifier) onClickCallback=(action onClickCallback) onSelectedCallback=(action 'videoSelected')}}
+    {{video-player muted=(if (video-selected key selectedVidPos) false true) looping=true url=(make-local-url modelIdentifier value.teaser.fileIdentifier) onClickCallback=(action 'videoSelected') onHoverCallback=(action 'videoHovered') videoPos=key}}
   </div>
 
 {{/each-in}}
