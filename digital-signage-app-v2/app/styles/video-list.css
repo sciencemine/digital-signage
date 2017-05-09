@@ -42,6 +42,10 @@
   border: 4px solid blue;
 }
 
+.video-list-item--selected:hover {
+  cursor: pointer;
+}
+
 /* Menu CSS */
 .video-list__menu {
   position: absolute;
@@ -118,6 +122,10 @@
 
   border-radius: 5px;
   border: 4px solid blue;
+}
+
+.video-list-item--selected__menu:hover {
+  cursor: pointer;
 }
 
 /* Video History CSS */
