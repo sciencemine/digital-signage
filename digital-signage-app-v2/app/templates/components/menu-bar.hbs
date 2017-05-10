@@ -1,6 +1,6 @@
 <div class="{{menuBarStyle}}">
   {{#if renderMenu}}
-    {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemSmall="video-list-item--flex__small__menu" videos=displayVideos modelIdentifier=config.modelIdentifier focus='false' onClickCallback=(action 'videoClicked') onSelectedCallback=(action 'videoClicked')}}
+    {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemSmall="video-list-item--flex__small__menu" listItemSelected="video-list-item--selected__menu" videos=displayVideos modelIdentifier=config.modelIdentifier focus='false' onSelectedCallback=(action 'videoClicked')}}
     <div>
       <span class="filter-label">
         {{filterType}}
@@ -18,7 +18,7 @@
         {{#each-in attributes as |key value|}}
           <li class="menu-bar--list--element menu-bar--list--element--border">
             <span {{action 'setMenuVideos' key}}>
-              {{value.name}}
+              {{value.prettyName}}
             </span>
           </li>
         {{/each-in}}

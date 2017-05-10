@@ -68,12 +68,12 @@ export default Ember.Component.extend({
         }
 
         this.set('displayVideos', tempVideos);
-        this.set('filterType', this.get('attributes.' + newAttributeID + '.name'));
+        this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
       }
     },
-    videoClicked(sender) {
+    videoClicked(videoData) {
       this.set('renderMenu', false);
-      this.get('onClickCallback')(sender);
+      this.get('onClickCallback') (videoData);
     }
   }
 });

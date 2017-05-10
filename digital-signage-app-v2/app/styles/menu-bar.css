@@ -5,7 +5,7 @@
 
 .menu-bar--list--element:hover {
   cursor: pointer;
-  background: #42adf4;
+  background: #c0c1c4;
 }
 
 .menu-bar--dropdown {
@@ -22,6 +22,7 @@
   padding: 4px;
   font-weight: bold;
   font-size: 15px;
+  color: white;
 }
 
 .menu-bar {
