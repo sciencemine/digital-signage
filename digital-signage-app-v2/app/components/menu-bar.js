@@ -68,7 +68,7 @@ export default Ember.Component.extend({
         }
 
         this.set('displayVideos', tempVideos);
-        this.set('filterType', this.get('attributes.' + newAttributeID + '.name'));
+        this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
       }
     },
     videoClicked(videoData) {

@@ -18,7 +18,7 @@
         {{#each-in attributes as |key value|}}
           <li class="menu-bar--list--element menu-bar--list--element--border">
             <span {{action 'setMenuVideos' key}}>
-              {{value.name}}
+              {{value.prettyName}}
             </span>
           </li>
         {{/each-in}}
