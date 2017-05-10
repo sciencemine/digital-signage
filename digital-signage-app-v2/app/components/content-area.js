@@ -86,7 +86,7 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     cycleBackground() {
       let backArrayLength = this.get('backgroundVideoKeys').length;
-      let curVidPos = this.get('backgroundVideoPos') + backArrayLength;
+      let curVidPos = this.get('backgroundVideoPos');
 
       this.set('backgroundVideoPos', (curVidPos + 1) % backArrayLength);
 
