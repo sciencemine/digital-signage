@@ -1,6 +1,8 @@
 {
   "config": {
+    "prettyName": "Healthy Streams",
     "modelIdentifier": "http://10.10.2.159/smds",
+    "fileIdentifier": "HealthyStreams",
     "description": "Demo model for Science Mine",
     "backgroundVideos": ["0", "1"],
     "ui": {

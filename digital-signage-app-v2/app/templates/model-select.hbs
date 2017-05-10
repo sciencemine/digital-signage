@@ -1,1 +1,19 @@
+<div class="model-select--panel panel panel-default">
+  <div class="panel-heading">
+    <h3 class="panel-title">Model Selection</h3>
+  </div>
+
+  <div class="list-group">
+    {{#each-in model as |key value|}}
+      {{#link-to "main" (query-params modelfile=value.config.fileIdentifier)}}
+        <button class="list-group-item">
+          {{model-select-element name=value.config.prettyName description=value.config.description videos=value.videos backgroundVideos=value.config.backgroundVideos}}
+        </button>
+      {{/link-to}}
+    {{/each-in}}
+      <button class="list-group-item">
+          <h4 class="list-group-item-heading">Add Exhibit</h4>
+      </button>
+  </div>
+</div>
 {{outlet}}
