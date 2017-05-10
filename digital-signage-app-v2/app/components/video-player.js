@@ -36,20 +36,14 @@ export default Ember.Component.extend({
 	muted: true,
 
 	click(event) {
-		this.get('onClickCallback')(this);
+		this.get('onClickCallback') (this.get('videoPos'));
 		event.stopPropagation();
 	},
-
-	loopingObserver: Ember.observer('looping', function() {
-		var videoElement = this.$().find("video").get(0);
-		if (videoElement) {
-			if (videoElement.ended && this.get("playing")) {
-				videoElement.play();
-			}
-		}
-  	}),
+	mouseEnter() {
+		this.get('onHoverCallback') (this.get('videoPos'));
+	},
 	playingObserver: Ember.observer('playing', function() {
-    	var p = this.get("playing");
+    var p = this.get("playing");
 		var videoElement = this.$().find("video").get(0);
 		if (videoElement) {
 			if (p) {
@@ -62,7 +56,7 @@ export default Ember.Component.extend({
 		else {
 			console.log("No video element found!");
 		}
-  	}),
+  }),
 	urlObserver: Ember.observer('url', function() {
 		var videoElement = this.$().find("video").get(0);
 		if (videoElement) {
@@ -71,5 +65,15 @@ export default Ember.Component.extend({
 		else {
 			console.log("No video element found");
 		}
-  	})
+  }),
+  actions: {
+  	ended() {
+  		if (this.get('looping')) {
+  			this.$().find("video").get(0).play();
+  		}
+  		else {
+  			this.get('onEndedCallback') (this.get('videoPos'));
+  		}
+  	}
+  }
 });

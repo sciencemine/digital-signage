@@ -1,0 +1,239 @@
+{
+  "config": {
+    "modelIdentifier": "http://10.10.2.159/smds",
+    "description": "Demo model for Science Mine",
+    "backgroundVideos": ["0", "1"],
+    "ui": {
+      "idle": 15,
+      "menuDwell": 3,
+      "menuLocale": "top"
+    },
+    "keyboard": {
+      "select": "w",
+      "previous": "a",
+      "cancel": "s",
+      "next": "d"
+    }
+  },
+  "videos": {
+    "0":{
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-5C-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-5C-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "1": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "2": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "3": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "4": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Conec-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Conec-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "5": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-CpxI-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-CpxI-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "6": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "7": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Critr-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Critr-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "8": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Critr-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Critr-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "9": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-H20-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-H20-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "10": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    },
+    "11": {
+      "prettyName": "",
+      "description": "",
+      "attributes": [],
+      "full": {
+        "fileIdentifier": "SM-HSt-ripar-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-ripar-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      }
+    }
+  },
+  "attribute": {
+    "0": {
+      "prettyName": "Raparian Habitats",
+      "description": "Raparian Habitats",
+      "x": 0,
+      "y": 0,
+      "videos": ["10", "11", "1", "5"]
+    },
+    "1": {
+      "prettyName": "Critters",
+      "description": "Critters",
+      "x": 0,
+      "y": 0,
+      "videos": ["7", "8", "6", "2"]
+    },
+    "2": {
+      "prettyName": "The 5Cs",
+      "description": "Cold, Clear, Clean, Complex, and Connected",
+      "x": 0,
+      "y": 0,
+      "videos": ["3", "4", "5", "9"]
+    },
+    "3": {
+      "prettyName": "Plants",
+      "description": "",
+      "x": 0,
+      "y": 0,
+      "videos": ["10", "11"]
+    },
+    "4": {
+      "prettyName": "Beavers",
+      "description": "",
+      "x": 0,
+      "y": 0,
+      "videos": ["1"]
+    }
+  },
+  "relation": {
+  }
+}
