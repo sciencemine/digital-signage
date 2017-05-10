@@ -1,12 +1,11 @@
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
-  selectedVidPos: -1,
+  selectedVidPos: 0,
   keys: [],
   listItemClass: '',
-  listItemLarge: '',
   listItemSmall: '',
-  listItemHighlight: '',
+  listItemSelected: '',
 
   init() {
     this._super(...arguments);
@@ -14,11 +13,11 @@ export default AbstractList.extend({
   },
   actions: {
     select(event) {
-      this.send('selectedCallback', this.get('videos')[this.get('selectedVidPos')]);
+      this.get('onSelectedCallback') (this.get('videos')[this.get('selectedVidPos')]);
       event.stopPropagation();
     },
     goPrevious() {
-      this.send('incrementSelected', -1);
+      this.send('alterSelected', -1);
       event.stopPropagation();
     },
     cancel(event) {
@@ -26,17 +25,21 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goNext() {
-      this.send('incrementSelected', 1);
+      this.send('alterSelected', 1);
       event.stopPropagation();
     },
-    videoSelected(sender) {
-      this.send('selectedCallback', sender);
+    videoSelected(videoPos) {
+      this.get('onSelectedCallback') (this.get('videos')[videoPos]);
     },
-    incrementSelected(param) {
+    alterSelected(param) {
       let vidArrayLength = this.get('keys').length;
-      let curVidPos = this.get('selectedVidPos') + vidArrayLength;
+      //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
+      let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
 
       this.set('selectedVidPos', (curVidPos + (1 * param)) % vidArrayLength);
+    },
+    videoHovered(videoPos) {
+      this.set('selectedVidPos', videoPos);
     }
   }
 });
