@@ -1,6 +1,8 @@
 {
     "config": {
+        "prettyName": "", 
         "modelIdentifier": "",
+        "fileIdentifier": "ModelSkeleton",
         "description" : "",
         "backgroundVideos": [ ], array of background videos by key to video object
         "ui": {

@@ -9,9 +9,12 @@ export default Ember.Route.extend({
     if (qp.modelfile) {
       this.modelFile = qp.modelfile;
     }
+    else {
+      this.replaceWith('modelSelect');
+    }
   },
   model() {
-    var path = "models/" + (this.modelFile ? this.modelFile : "HealthyStreams") + ".json";
+    var path = "models/" + this.modelFile + ".json";
     var data = Ember.$.getJSON(path);
 
     return data;

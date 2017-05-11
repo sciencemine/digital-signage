@@ -1,0 +1,11 @@
+.model-select--panel {
+  position: absolute;
+
+  top: 5px;
+  right: 20%;
+  left: 20%;
+}
+
+.model-select--element {
+  color: black;
+}
