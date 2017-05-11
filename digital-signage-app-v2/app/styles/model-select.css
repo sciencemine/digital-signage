@@ -7,7 +7,5 @@
 }
 
 .model-select--element {
-  border-bottom: 1px solid black;
-
-  text-decoration: none;
+  color: black;
 }

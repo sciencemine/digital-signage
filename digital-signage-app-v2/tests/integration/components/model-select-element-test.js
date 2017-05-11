@@ -12,14 +12,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{model-select-element}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#model-select-element}}
-      template block text
-    {{/model-select-element}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Edit');
 });
