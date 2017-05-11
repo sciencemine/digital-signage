@@ -11,7 +11,7 @@ test('it renders', function(assert) {
     "config": {
         "modelIdentifier": "kenny",
         "description" : "Kenny: Starting life in another world",
-        "backgroudVideos": ["3", "2"],
+        "backgroundVideos": ["3", "2"],
         "ui": {
             "idle": 15,
             "menuDwell": 3,
