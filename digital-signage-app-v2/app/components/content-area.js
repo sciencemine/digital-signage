@@ -41,7 +41,7 @@ export default Ember.Component.extend(KeyboardControls, {
     goPrevious() {
       this.send('pauseVideo');
     },
-    videoSelected(videoData) {
+    videoSelected(sender, videoData) {
       if (videoData) {
         var url = videoData.full.fileIdentifier;
         //strips off media fragments fix by sending vid object data from model

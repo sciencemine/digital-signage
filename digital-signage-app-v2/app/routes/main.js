@@ -15,8 +15,7 @@ export default Ember.Route.extend({
   },
   model() {
     var path = "models/" + this.modelFile + ".json";
-    var data = Ember.$.getJSON(path);
 
-    return data;
+    return Ember.$.getJSON(path);
   }
 });

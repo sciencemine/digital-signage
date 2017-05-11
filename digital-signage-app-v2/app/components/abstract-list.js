@@ -7,28 +7,21 @@
  *  library. Then use `export default AbstractList.extend({ /* code here /* });
  *  to extend this object in your other lists.
  *
- * PARAMETERS:
- *  focus
- *    Determines if the list should be initialized with focus or not
- * 
- *  class
- *    Applies a css class to the component's wrapper div
- *
  * CALLBACKS
  *  onSelectedCallback
  *    Callback for when an item has been selected
  *
  *  onCancelledCallback
- *    Callback for when an item has been selected
+ *    Callback for when the cancel action is invoked
  *
  *  onOverflowCallback
- *    Callback for when an item has been selected
+ *    Callback for when the list is incremented past the last element
  *
  *  onUnderflowCallback
- *    Callback for when an item has been selected
+ *    Callback for when the list is decremented past the first element
  *
  * @author Michael Fryer
- * @date 3/11/2017
+ * @date 5/11/2017
  */
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
