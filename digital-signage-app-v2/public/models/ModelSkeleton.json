@@ -2,7 +2,7 @@
     "config": {
         "modelIdentifier": "",
         "description" : "",
-        "backgroudVideos": [ ], array of background videos by key to video object
+        "backgroundVideos": [ ], array of background videos by key to video object
         "ui": {
             "idle": 0, seconds system is idle before returning home
             "menuDwell": 0, seconds menu should remain after mouse leaves

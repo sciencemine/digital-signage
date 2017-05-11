@@ -14,7 +14,7 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoKeys: null,
 
   init() {
-    let backgroundId = this.get('data.config.backgroudVideos')[0];
+    let backgroundId = this.get('data.config.backgroundVideos')[0];
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
     this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
