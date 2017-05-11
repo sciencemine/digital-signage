@@ -8,7 +8,7 @@
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
-    {{video-player playing=videoPlaying muted=true url=video onClickCallback=(action 'videoSelected' bubbles=false) onHoverCallback=(action 'doNothing') onEndedCallback=(action 'videoEnded') videoPos=backgroundVideoPos}}
+    {{video-player playing=videoPlaying muted=false url=video onClickCallback=(action 'videoSelected' bubbles=false) onHoverCallback=(action 'doNothing') onEndedCallback=(action 'videoEnded') videoPos=backgroundVideoPos}}
   </div>
 {{/if}}
 
