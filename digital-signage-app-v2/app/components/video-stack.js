@@ -43,7 +43,7 @@ export default Ember.Component.extend(
                 this.set('selectedVidPos', (curArrayPos + 1) % arrayLength);
            },
             hover() {
-                this.get('onHoverCallback') (this.get('selectedStackIndex'));
+                this.get('onHoverCallback') (this.get('videos'),this.get('selectedStackIndex'));
             }
         }
     });
