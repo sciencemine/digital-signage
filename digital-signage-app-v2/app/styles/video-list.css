@@ -126,6 +126,10 @@
   border-radius: 5px;
 }
 
+.video-list-item--highlight__menu {
+  border: 4px solid blue;
+}
+
 .video-list-item--selected__menu:hover {
   cursor: pointer;
 }

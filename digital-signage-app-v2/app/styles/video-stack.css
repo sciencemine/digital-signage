@@ -1,0 +1,9 @@
+.vid-shadows--2 {
+    box-shadow: 7px 7px 0px #a9a9a9;
+}
+.vid-shadows--3 {
+    box-shadow: 7px 7px 0px #a9a9a9, 14px 14px 0px #c0c0c0;
+}
+.vid-shadows--4 {    
+    box-shadow: 7px 7px 0px #a9a9a9, 14px 14px 0px #c0c0c0, 21px 21px 0px #d3d3d3;
+}
