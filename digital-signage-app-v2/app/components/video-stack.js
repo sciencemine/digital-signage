@@ -7,6 +7,7 @@ export default Ember.Component.extend(
         selectedStackIndex: 0,
         stackStyle: ' ',
         playerSize: '',
+        isMuted: true,
         init() {
             this._super(...arguments);
             this.set('keys', Object.keys(this.get('videos')));
