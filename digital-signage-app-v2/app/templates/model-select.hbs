@@ -2,21 +2,6 @@
   <div class="model-select--title page-header">
     <h1>Exhibit Selection <small>Select an exhibit below</small></h1>
   </div>
-
-<<<<<<< Updated upstream
-  <div class="list-group">
-    {{#each-in model as |key value|}}
-        <button class="list-group-item">
-          {{#link-to "main" (query-params modelfile=value.config.fileIdentifier)}}
-            {{model-select-element name=value.config.prettyName description=value.config.description videos=value.videos backgroundVideos=value.config.backgroundVideos}}
-          {{/link-to}}
-        </button>
-    {{/each-in}}
-  </div>
-
-  <div class="panel-footer">
-      <h4 class="panel-title">Add Exhibit</h4>
-=======
   <div class="model-select--panel panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">Select an exhibit</h3>
@@ -36,6 +21,5 @@
     <div class="panel-footer">
         <h4 class="panel-title">Add Exhibit</h4>
     </div>
->>>>>>> Stashed changes
   </div>
 </div>
