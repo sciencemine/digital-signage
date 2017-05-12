@@ -1,10 +1,8 @@
 {{log videos}}
 {{videoCount}}
-{{video-player url=(make-local-url modelIdentifier rootVideo.teaser.fileIdentifier) onClickCallback=(action 'stackClicked') onHover=(action 'onHover')}}
-{{log rootVideo}}
-{{#each-in videos as |key value|}}
-    {{value.prettyName}}
-{{/each-in}}
+{{video-player url=(make-local-url modelIdentifier curVideo.teaser.fileIdentifier) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'hover') onEndedCallback=(action 'getNextVid')}}
+{{log curVideo}}
+
 
 
 {{yield}}
