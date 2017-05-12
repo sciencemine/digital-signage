@@ -20,11 +20,13 @@ Parameters:
 	default: true
 
 Callbacks:
-  onCompletedCallback(sender)
+  onEndedCallback(sender)
 	This is an action that will be passed in as a parameter.
 	Call this action using this.get('onCompletedCallback')()
 	when the video has played to completion and and looping is
 	disabled.
+  onClickCallback
+  onHoverCallback
 */
 
 import Ember from 'ember';
@@ -34,6 +36,7 @@ export default Ember.Component.extend({
 	looping: false,
 	playing: true,
 	muted: true,
+  highlightedStyle: '',
 
 	click(event) {
 		this.get('onClickCallback') (this.get('videoPos'));
