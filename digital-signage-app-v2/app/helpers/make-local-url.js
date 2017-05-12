@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 /**
  * HELPER: make-local-url
  *
@@ -13,7 +11,6 @@
  * @author Michael Fryer
  * @date 5/11/2017
  */
->>>>>>> Stashed changes
 import Ember from 'ember';
 
 export function makeLocalUrl([arg1, arg2]) {

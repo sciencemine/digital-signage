@@ -4,11 +4,7 @@
         "modelIdentifier": "",
         "fileIdentifier": "ModelSkeleton",
         "description" : "",
-<<<<<<< Updated upstream
-        "backgroudVideos": [ ], array of background videos by key to video object
-=======
         "backgroundVideos": [ ],
->>>>>>> Stashed changes
         "ui": {
             "idle": 0,
             "menuDwell": 0,

@@ -1,3 +1,25 @@
+/**
+ * COMPONENT: video-list
+ *
+ * DESCRIPTION:
+ *  Video list. Can cycle items on list and callsback if there is over/under flow
+ *
+ * CALLBACKS
+ *  onSelectedCallback
+ *    Callback for when an item has been selected
+ *
+ *  onCancelledCallback
+ *    Callback for when the cancel action is invoked
+ *
+ *  onOverflowCallback
+ *    Callback for when the list is incremented past the last element
+ *
+ *  onUnderflowCallback
+ *    Callback for when the list is decremented past the first element
+ *
+ * @author Michael Fryer
+ * @date 5/11/2017
+ */
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
@@ -13,10 +35,10 @@ export default AbstractList.extend({
   },
   actions: {
     select(event) {
-      this.get('onSelectedCallback') (this.get('videos')[this.get('selectedVidPos')]);
+      this.get('selectedCallback') (this.get('videos')[this.get('selectedVidPos')]);
       event.stopPropagation();
     },
-    goPrevious() {
+    goPrevious(event) {
       this.send('alterSelected', -1);
       event.stopPropagation();
     },
@@ -24,12 +46,12 @@ export default AbstractList.extend({
       this.send('cancelCallback');
       event.stopPropagation();
     },
-    goNext() {
+    goNext(event) {
       this.send('alterSelected', 1);
       event.stopPropagation();
     },
     videoSelected(videoPos) {
-      this.get('onSelectedCallback') (this.get('videos')[videoPos]);
+      this.get('selectedCallback') (this.get('videos')[videoPos]);
     },
     alterSelected(param) {
       let vidArrayLength = this.get('keys').length;

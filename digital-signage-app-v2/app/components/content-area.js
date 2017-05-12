@@ -14,11 +14,11 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoKeys: null,
 
   init() {
-    let backgroundId = this.get('data.config.backgroudVideos')[0];
+    let backgroundId = this.get('data.config.backgroundVideos')[0];
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
     this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
-    this.set('backgroundVideoKeys', this.get('data.config.backgroudVideos'));
+    this.set('backgroundVideoKeys', this.get('data.config.backgroundVideos'));
   },
   
   click() {
@@ -41,7 +41,7 @@ export default Ember.Component.extend(KeyboardControls, {
     goPrevious() {
       this.send('pauseVideo');
     },
-    videoSelected(videoData) {
+    videoSelected(sender, videoData) {
       if (videoData) {
         var url = videoData.full.fileIdentifier;
         //strips off media fragments fix by sending vid object data from model
@@ -90,7 +90,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
       this.set('backgroundVideoPos', (curVidPos + 1) % backArrayLength);
 
-      let backgroundId = this.get('data.config.backgroudVideos')[this.get('backgroundVideoPos')];
+      let backgroundId = this.get('data.config.backgroundVideos')[this.get('backgroundVideoPos')];
       this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     },
     doNothing() {
