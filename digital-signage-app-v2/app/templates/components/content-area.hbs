@@ -3,7 +3,7 @@
 </div>
 
 {{#if displayVideoSelect}}
-    {{video-list selectedVidPos=0 class="video-list video-list--flex" listItemClass="video-list-item--flex" listItemSmall="video-list-item--flex__small" listItemSelected="video-list-item--selected" keyboard=data.config.keyboard videos=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect onSelectedCallback=(action 'videoSelected') onCancelledCallback=(action 'cancel')}}
+    {{video-list selectedVidPos=0 class="video-list video-list--flex" listItemClass="video-list-item--flex" listItemSmall="video-list-item--flex__small" listItemSelected="video-list-item--selected" listItemHighlight="video-list-item--highlight" keyboard=data.config.keyboard videos=data.videos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect onSelectedCallback=(action 'videoSelected') onCancelledCallback=(action 'cancel')}}
 {{/if}}
 
 {{#if displayVideo}}

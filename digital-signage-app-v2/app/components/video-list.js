@@ -28,6 +28,7 @@ export default AbstractList.extend({
   listItemClass: '',
   listItemSmall: '',
   listItemSelected: '',
+  listItemHighlight: '',
 
   init() {
     this._super(...arguments);
