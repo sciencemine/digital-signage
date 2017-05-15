@@ -2,7 +2,6 @@
     "config": {
         "prettyName": "Kenny",
         "modelIdentifier": "kenny",
-        "fileIdentifier": "ExampleModel",
         "description" : "Kenny: Starting life in another world",
         "backgroundVideos": ["3", "2"],
         "ui": {

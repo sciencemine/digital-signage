@@ -5,7 +5,8 @@
  *  Determines if the video is selected. true if arg1 === arg2 false otherwise
  *
  * PARAMETERS
- *  arg1, arg2
+ *  arg1 - array index
+ *  arg2 - array index
  *
  * @author Michael Fryer
  * @date 5/11/2017

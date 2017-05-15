@@ -5,8 +5,8 @@
  *  combines two parameters to make a local url address
  *
  * PARAMETERS
- *  arg1{string} usually modelIdentifier
- *  arg2{string} usually fileIdentifier
+ *  arg1 - usually modelIdentifier
+ *  arg2 - usually fileIdentifier
  *
  * @author Michael Fryer
  * @date 5/11/2017

@@ -1,8 +1,8 @@
 {{yield}}
 
 {{#each-in videos as |key value|}}
-{{log key selectedVidPos}}
-  <div class="{{listItemClass}} {{if (video-selected key selectedVidPos)listItemSelected listItemSmall}}">
+
+  <div class="{{listItemClass}} {{if (video-selected key selectedVidPos) listItemSelected listItemSmall}}">
     {{video-player highlightedStyle=(if (video-selected key selectedVidPos) listItemHighlight) muted=(if (video-selected key selectedVidPos) false true) looping=true url=(make-local-url modelIdentifier value.teaser.fileIdentifier) onClickCallback=(action 'videoSelected') onHoverCallback=(action 'videoHovered') videoPos=key}}
   </div>
 

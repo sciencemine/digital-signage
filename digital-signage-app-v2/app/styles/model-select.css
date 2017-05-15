@@ -1,11 +1,29 @@
+.model-select {
+  background-color: #fefefe;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.model-select--title {
+  position: static;
+  text-align: center;
+}
+
 .model-select--panel {
   position: absolute;
 
-  top: 5px;
   right: 20%;
   left: 20%;
 }
 
 .model-select--element {
-  color: black;
+  text-decoration: none;
+}
+
+.model-select--element:focus {
+  outline: 0;
 }

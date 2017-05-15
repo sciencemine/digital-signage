@@ -134,4 +134,8 @@
   cursor: pointer;
 }
 
+.video-list-item--highlighted__menu {
+  border: 4px solid blue;
+}
+
 /* Video History CSS */

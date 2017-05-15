@@ -2,15 +2,14 @@
     "config": {
         "prettyName": "", 
         "modelIdentifier": "",
-        "fileIdentifier": "ModelSkeleton",
         "description" : "",
-        "backgroundVideos": [ ], array of background videos by key to video object
+        "backgroundVideos": [ ],
         "ui": {
-            "idle": 0, seconds system is idle before returning home
-            "menuDwell": 0, seconds menu should remain after mouse leaves
-            "menuLocale": "" top right bottom left
+            "idle": 0,
+            "menuDwell": 0,
+            "menuLocale": ""
         },
-        "keyboard": { keys for keyboard actions
+        "keyboard": {
             "select": "",
             "previous": "",
             "cancel": "",
@@ -19,15 +18,15 @@
     },
     "videos": {
         "0": {
-            "prettyName": "", title
-            "description": "", description of video
-            "attributes": [ ], array of attributes by key to attribute object
+            "prettyName": "",
+            "description": "",
+            "attributes": [ ],
             "full": {
-                "fileIdentifier": "", the name of the video file
-                "isUrl": false, true or false. false for local, true for links to other sites
-                "attribution": "" attribution for the video
+                "fileIdentifier": "",
+                "isUrl": false, 
+                "attribution": ""
             },
-            "teaser": { same as above
+            "teaser": {
                 "fileIdentifier": "",
                 "isUrl": false,
                 "attribution": ""
@@ -38,17 +37,17 @@
         "0": {
             "prettyName": "",
             "description": "",
-            "x": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from left
-            "y": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from top
-            "videos": [ ] videos associated with this attribute
+            "x": 0,
+            "y": 0,
+            "videos": [ ]
         }
     },
     "relation": {
         "0": {
-            "videoId": "0", start video
-            "relatedId": "0", end video
-            "difficulty": 0, how hard end video is relative from the start video
-            "attributeId": "0" attribute by key to attribute object (why they are related)
+            "videoId": "0",
+            "relatedId": "0",
+            "difficulty": 0,
+            "attributeId": "0"
         }
     }
 }
