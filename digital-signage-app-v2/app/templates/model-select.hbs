@@ -9,14 +9,12 @@
 
     <div class="list-group">
       {{#each-in model as |key value|}}
-          <button class="list-group-item model-select--element">
-            {{#link-to "main" (query-params modelfile=value.fileName)}}
-              {{model-select-element name=value.config.prettyName description=value.config.description videos=value.videos backgroundVideos=value.config.backgroundVideos}}
-            {{/link-to}}
-            <button type="button" class="btn btn-warning">Edit</button>
-          </button>
-          
-          {{video-stack }}
+          {{#link-to "main" (query-params modelfile=value.fileName)}}
+            <button class="list-group-item model-select--element">
+              {{model-select-element name=value.config.prettyName description=value.config.description modelIdentifier=value.config.modelIdentifier videos=value.backgroundVideos}}
+              <button type="button" class="btn btn-warning model-select--btn__edit">Edit</button>
+            </button>
+          {{/link-to}}
       {{/each-in}}
     </div>
 

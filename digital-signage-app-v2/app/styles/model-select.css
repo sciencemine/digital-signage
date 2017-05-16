@@ -27,3 +27,9 @@
 .model-select--element:focus {
   outline: 0;
 }
+
+.model-select--btn__edit {
+  position: absolute;
+
+  bottom: 25px;
+}
