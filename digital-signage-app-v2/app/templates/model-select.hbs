@@ -11,12 +11,10 @@
       {{#each-in model as |key value|}}
           <button class="list-group-item model-select--element">
             {{#link-to "main" (query-params modelfile=value.fileName)}}
-              {{model-select-element name=value.config.prettyName description=value.config.description videos=value.videos backgroundVideos=value.config.backgroundVideos}}
+              {{model-select-element name=value.config.prettyName description=value.config.description modelIdentifier=value.config.modelIdentifier videos=value.backgroundVideos}}
             {{/link-to}}
-            <button type="button" class="btn btn-warning">Edit</button>
+            <button onclick={{action 'click'}} bubbles="false" type="button" class="btn btn-warning model-select--btn__edit">Edit</button>
           </button>
-          
-          {{video-stack }}
       {{/each-in}}
     </div>
 
