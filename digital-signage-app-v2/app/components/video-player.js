@@ -43,29 +43,37 @@ export default Ember.Component.extend({
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
 	},
+  willClearRender() {
+    this.set('playingObserver', null);
+    this.set('urlObserver', null);
+  },
 	playingObserver: Ember.observer('playing', function() {
-    var p = this.get("playing");
-		var videoElement = this.$().find("video").get(0);
-		if (videoElement) {
-			if (p) {
-				videoElement.play();
-			}
-			else {
-				videoElement.pause();
-			}
-		}
-		else {
-			console.log("No video element found!");
-		}
+    if (this) {
+      var p = this.get("playing");
+      var videoElement = this.$().find("video").get(0);
+      if (videoElement) {
+        if (p) {
+          videoElement.play();
+        }
+        else {
+          videoElement.pause();
+        }
+      }
+      else {
+        console.log("No video element found!");
+      }
+    }
   }),
 	urlObserver: Ember.observer('url', function() {
-		var videoElement = this.$().find("video").get(0);
-		if (videoElement) {
-			videoElement.load();
-		}
-		else {
-			console.log("No video element found");
-		}
+    if (this) {
+      var videoElement = this.$().find("video").get(0);
+      if (videoElement) {
+        videoElement.load();
+      }
+      else {
+        console.log("No video element found");
+      }
+    }
   }),
   actions: {
   	ended() {

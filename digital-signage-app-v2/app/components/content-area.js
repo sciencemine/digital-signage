@@ -2,7 +2,8 @@ import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
-  displayVideoSelect: true,
+  displayVideoSelect: false,
+  displayVideoSelectTimeout: null,
   displayVideo: false,
   focus: false,
   video: null,
@@ -19,6 +20,7 @@ export default Ember.Component.extend(KeyboardControls, {
     this.set('keyboard', this.get('data.config.keyboard'));
     this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     this.set('backgroundVideoKeys', this.get('data.config.backgroundVideos'));
+    this.send('showVideoSelect');
   },
   
   click() {
@@ -31,15 +33,23 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('videoPlaying', false);
       this.send('updateFocus', false);
       this.send('showVideoSelect');
+
+      this.send('resetTimeout');
     },
     cancel() {
       this.send('pauseVideo');
+
+      this.send('resetTimeout');
     },
     goNext() {
       this.send('pauseVideo');
+
+      this.send('resetTimeout');
     },
     goPrevious() {
       this.send('pauseVideo');
+
+      this.send('resetTimeout');
     },
     videoSelected(videoData) {
       if (videoData) {
@@ -57,9 +67,13 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     showVideoSelect() {
       this.set('displayVideoSelect', true);
+
+      this.send('resetTimeout');
     },
     hideVideoSelect() {
       this.set('displayVideoSelect', false);
+
+      clearTimeout(this.get('displayVideoSelectTimeout'));
     },
     //sets the focus to the list if focus is true otherwise blurs it
     updateFocus(param) {
@@ -81,7 +95,7 @@ export default Ember.Component.extend(KeyboardControls, {
       oldVideoHistory.push(sender);
       this.set('videoHistory', oldVideoHistory);
       this.send('updateFocus', false);
-      this.set('displayVideoSelect', true);
+      this.send('showVideoSelect');
       this.set('displayVideo', false);
     },
     cycleBackground() {
@@ -100,6 +114,18 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('videoPlaying', !this.get('videoPlaying'));
       this.set('displayVideoSelect', !this.get('videoPlaying'));
       this.send('updateFocus', this.get('videoPlaying'));
+    },
+    resetTimeout() {
+      let component = this;
+
+      clearTimeout(this.get('displayVideoSelectTimeout'));
+
+      let timeout = setTimeout(function() {
+                      component.send('hideVideoSelect');
+                      component.send('updateFocus', true);
+                    }, this.get('data.config.ui.idle') * 1000);
+
+      this.set('displayVideoSelectTimeout', timeout);
     }
   }
 });

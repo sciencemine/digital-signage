@@ -2,9 +2,9 @@
     "config": {
         "modelIdentifier": "kenny",
         "description" : "Kenny: Starting life in another world",
-        "backgroundVideos": ["3", "2"],
+        "backgroundVideos": ["0", "2"],
         "ui": {
-            "idle": 15,
+            "idle": 5,
             "menuDwell": 3,
             "menuLocale": "top"
         },

@@ -15,18 +15,30 @@ export default AbstractList.extend({
   actions: {
     select(event) {
       this.get('onSelectedCallback') (this.get('videos')[this.get('selectedVidPos')]);
+
+      this.send('input');
+
       event.stopPropagation();
     },
     goPrevious() {
       this.send('alterSelected', -1);
+
+      this.send('input');
+
       event.stopPropagation();
     },
     cancel(event) {
       this.send('cancelCallback');
+
+      this.send('input');
+
       event.stopPropagation();
     },
     goNext() {
       this.send('alterSelected', 1);
+
+      this.send('input');
+
       event.stopPropagation();
     },
     videoSelected(videoPos) {
@@ -37,10 +49,15 @@ export default AbstractList.extend({
       //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
       let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
 
-      this.set('selectedVidPos', (curVidPos + (1 * param)) % vidArrayLength);
+      this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);
+
+      this.send('input');
+    },
+    input() {
+      this.get('onInputCallback') ();
     }
   }
 });
