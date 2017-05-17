@@ -7,6 +7,8 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('modelSelect');
+  this.route('modelEdit');
 });
 
 export default Router;
