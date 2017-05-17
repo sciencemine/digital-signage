@@ -11,25 +11,44 @@ export default Ember.Route.extend({
     }
   },
   model() {
+    /**
+     *  blobDaba for promisises returend is array as cannont `Promise.all` on a hash
+     *  uniqueVids for unique vids blobData and uniqueVids are 1-1 as a promise
+     *   is returned and it is not waiting to be resolved first
+     */
     let path = "models/" + (this.modelFile ? this.modelFile : "HealthyStreams") + ".json";
     let blobData = [];
-
+    let uniqueVids = {
+      vids: []
+    };
 
     return Ember.$.getJSON(path).then(res => {
-      for (let video in res.videos) {
-        let fileIdentifier = res.videos[video].teaser.fileIdentifier;
-        let modelIdentifier = res.config.modelIdentifier;
+      let modelIdentifier = res.config.modelIdentifier;
 
-        blobData.push(preloadData(modelIdentifier, fileIdentifier));
+      //gets all unique videos and makes blobs of them
+      for (let video in res.videos) {
+        if (!(res.videos[video].teaser.fileIdentifier in uniqueVids) && !res.videos[video].teaser.isUrl) {
+          uniqueVids.vids.push(res.videos[video].teaser.fileIdentifier);
+          uniqueVids[res.videos[video].teaser.fileIdentifier] = null;
+          blobData.push(preloadData(modelIdentifier, res.videos[video].teaser.fileIdentifier));
+        }
       }
 
+      //after promises on blobs has been resolved
       return Ember.RSVP.Promise.all(blobData).then(data => {
-        //this is guaranteed in order by loop above
-        for (var j = 0;  j < Object.keys(res.videos).length; j++) {
-          res.videos[Object.keys(res.videos)[j]].teaser.fileIdentifier = URL.createObjectURL(data[j]);
-          res.videos[Object.keys(res.videos)[j]].teaser.isUrl = true;
+
+        //make url of the blob and hash the uniqueVid to the url
+        for (var i = 0;  i < uniqueVids.vids.length; i++) {
+          uniqueVids[uniqueVids.vids[i]] = URL.createObjectURL(data[i]);
         }
 
+        //update fileIdentifier in model to be the blob for all videos
+        for (let video in res.videos) {
+          if (!res.videos[video].teaser.isUrl) {
+            res.videos[video].teaser.fileIdentifier = uniqueVids[res.videos[video].teaser.fileIdentifier];
+            res.videos[video].teaser.isUrl = true;
+          }
+        }
         return res;
       });
     });
