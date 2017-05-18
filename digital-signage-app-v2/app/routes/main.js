@@ -17,12 +17,12 @@ export default Ember.Route.extend({
      *   is returned and it is not waiting to be resolved first
      */
     let path = "models/" + (this.modelFile ? this.modelFile : "HealthyStreams") + ".json";
-    let blobData = [];
     let uniqueVids = {
-      vids: []
+      vids: [],
+      blobData: []
     };
 
-    return Ember.$.getJSON(path).then(res => {
+    return Ember.$.getJSON(path).then((res) => {
       let modelIdentifier = res.config.modelIdentifier;
 
       //gets all unique videos and makes blobs of them
@@ -30,12 +30,12 @@ export default Ember.Route.extend({
         if (!(res.videos[video].teaser.fileIdentifier in uniqueVids) && !res.videos[video].teaser.isUrl) {
           uniqueVids.vids.push(res.videos[video].teaser.fileIdentifier);
           uniqueVids[res.videos[video].teaser.fileIdentifier] = null;
-          blobData.push(preloadData(modelIdentifier, res.videos[video].teaser.fileIdentifier));
+          uniqueVids.blobData.push(preloadData(modelIdentifier, res.videos[video].teaser.fileIdentifier));
         }
       }
 
       //after promises on blobs has been resolved
-      return Ember.RSVP.Promise.all(blobData).then(data => {
+      return Ember.RSVP.Promise.all(uniqueVids.blobData).then((data) => {
 
         //make url of the blob and hash the uniqueVid to the url
         for (var i = 0;  i < uniqueVids.vids.length; i++) {
