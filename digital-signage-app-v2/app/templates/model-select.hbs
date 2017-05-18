@@ -12,14 +12,14 @@
           {{#link-to "main" (query-params modelfile=value.fileName)}}
             <button class="list-group-item model-select--element">
               {{model-select-element name=value.config.prettyName description=value.config.description modelIdentifier=value.config.modelIdentifier videos=value.backgroundVideos}}
-              <button onclick={{action 'click'}} bubbles="false" type="button" class="btn btn-warning model-select--btn__edit">Edit</button>
+              <!-- button onclick={{action 'click'}} bubbles="false" type="button" class="btn btn-warning model-select--btn__edit">Edit</button -->
             </button>
           {{/link-to}}
       {{/each-in}}
     </div>
 
     <div class="panel-footer">
-        <h4 class="panel-title">Add Exhibit</h4>
+        <!--h4 class="panel-title">Add Exhibit</h4-->
     </div>
   </div>
 </div>
