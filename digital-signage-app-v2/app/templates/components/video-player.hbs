@@ -1,1 +1,1 @@
-<video onended={{action 'ended'}} class="video-player__video {{highlightedStyle}}" autoplay={{playing}} src={{url}} muted={{muted}} />
+<video oncanplaythrough={{action 'play'}} onended={{action 'ended'}} src={{url}} class="video-player__video {{highlightedStyle}} {{if playing '' 'video-player__darken'}}" preload="" muted={{muted}} />

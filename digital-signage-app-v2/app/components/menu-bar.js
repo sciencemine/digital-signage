@@ -47,7 +47,7 @@ export default Ember.Component.extend({
   mouseLeave() {
     var component = this;
 
-    setTimeout( function() {
+    setTimeout(() => {
       component.set('renderMenu', false);
     }, this.get('config.ui.menuDwell') * 1000);
   },
@@ -74,6 +74,9 @@ export default Ember.Component.extend({
     videoClicked(videoData) {
       this.set('renderMenu', false);
       this.get('onClickCallback') (videoData);
+    },
+    doNothing() {
+      
     }
   }
 });
