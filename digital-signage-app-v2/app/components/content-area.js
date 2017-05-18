@@ -9,7 +9,6 @@ export default Ember.Component.extend(KeyboardControls, {
   video: null,
   videoPlaying: false,
   keyboard: null,
-  videoHistory: [],
   backgroundVideoPos: 0,
   backgroundVideoUrl: null,
   backgroundVideoKeys: null,
@@ -90,10 +89,7 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     //sender is a video object? url? video player object?
     //assuming video object
-    videoEnded(sender) {
-      let oldVideoHistory = this.get('videoHistory');
-      oldVideoHistory.push(sender);
-      this.set('videoHistory', oldVideoHistory);
+    videoEnded() {
       this.send('updateFocus', false);
       this.send('showVideoSelect');
       this.set('displayVideo', false);
@@ -120,7 +116,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
       clearTimeout(this.get('displayVideoSelectTimeout'));
 
-      let timeout = setTimeout(function() {
+      let timeout = setTimeout(() => {
                       component.send('hideVideoSelect');
                       component.send('updateFocus', true);
                     }, this.get('data.config.ui.idle') * 1000);

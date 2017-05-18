@@ -1,3 +1,1 @@
-<video oncanplaythrough={{action 'play'}} onended={{action 'ended'}} class="video-player__video {{highlightedStyle}} {{if playing '' 'video-player__darken'}}" preload="" muted={{muted}}>
-  <source src="{{url}}" type="video/mp4">
-</video>
+<video oncanplaythrough={{action 'play'}} onended={{action 'ended'}} src={{url}} class="video-player__video {{highlightedStyle}} {{if playing '' 'video-player__darken'}}" preload="" muted={{muted}} />
