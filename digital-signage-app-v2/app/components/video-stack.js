@@ -36,7 +36,7 @@ export default Ember.Component.extend(
         }),
         actions: {
             stackClicked() {
-                this.get('onClickCallback') (this.get('videos'), this.get('selectedVidPos'));
+                this.get('onClickCallback') (this.get('videos'), this.get('keys')[this.get('selectedVidPos')]);
             },
             getNextVid() {
                 let arrayLength = this.get('keys').length;

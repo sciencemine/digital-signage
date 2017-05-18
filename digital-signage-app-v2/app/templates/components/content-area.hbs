@@ -1,4 +1,4 @@
-<div class="video-player__background--container">
+<!--div class="video-player__background--container">
   {{video-player class='video-player__darken' playing=(if displayVideo false true) url=(make-local-url data.config.modelIdentifier backgroundVideoUrl) onEndedCallback=(action 'cycleBackground')}}
 </div>
 
@@ -13,5 +13,13 @@
 {{/if}}
 
 {{menu-bar config=data.config videos=data.videos attributes=data.attribute onClickCallback=(action 'videoSelected')}}
+
+{{video-stack videos=data.videos modelIdentifier=data.config.modelIdentifier playerSize='video-stack--container' onClickCallback=(action 'doNothing') onHoverCallback=(action 'doNothing')}}
+-->
+<div class="video-list video-list--flex">
+  {{stack-list videos=data.data.videos modelIdentifier=data.config.modelIdentifier stackStyle="" 
+  keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
+  cancelCallback=(action 'cancel') onHoverCallback=(action 'doNothing')}}
+</div>
 
 {{yield}}

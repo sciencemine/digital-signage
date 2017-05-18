@@ -1,1 +1,18 @@
 {{yield}}
+{{#if isFlex}}
+    <div class="video-list video-list--flex">
+    {{#each-in data as |key value|}}
+        <div>
+        {{video-stack videos=data.data.videos stackStyle="" keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
+        cancelCallback=(action 'cancel') onHoverCallback=(action 'hover')}}
+        </div>
+    {{/each-in}}
+    </div>
+{{else}}
+    {{#each-in data as |key value|}}
+    <div style={{make-stack-style x=value.x y=value.y}}>
+        {{video-stack videos=data.data.videos stackStyle="" keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
+        cancelCallback=(action 'cancel') onHoverCallback=(action 'hover')}}
+    </div>
+    {{/each-in}}
+{{/if}}
