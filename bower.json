@@ -1,0 +1,21 @@
+{
+  "name": "digital-signage",
+  "description": "Popover implementation",
+  "main": "index.js",
+  "authors": [
+    "alex reid"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "popover"
+  ],
+  "homepage": "https://github.com/sciencemine/digital-signage",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

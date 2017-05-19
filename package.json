@@ -1,0 +1,26 @@
+{
+  "name": "digital-signage",
+  "version": "1.0.0",
+  "description": "Popover implementation",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "ember-bootstrap": "^1.0.0-alpha.12"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sciencemine/digital-signage.git"
+  },
+  "keywords": [
+    "popover"
+  ],
+  "author": "alex reid",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sciencemine/digital-signage/issues"
+  },
+  "homepage": "https://github.com/sciencemine/digital-signage#readme"
+}
