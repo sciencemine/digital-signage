@@ -1,29 +1,29 @@
 <div class="{{menuBarStyle}}">
   {{#if renderMenu}}
     {{#video-list class=menuListStyle listItemClass="video-list-item--flex__menu" listItemSmall="video-list-item--flex__small__menu" listItemSelected="video-list-item--selected__menu" listItemHighlight="video-list-item--highlight__menu" videos=displayVideos modelIdentifier=config.modelIdentifier focus='false' onSelectedCallback=(action 'videoClicked') onInputCallback=(action 'doNothing')}}
-    <div>
-      <span class="filter-label">
-        {{filterType}}
-      </span>
-      <br>
-      <div class="btn-group {{if useDropUp "dropup"}} menu-bar--dropdown">
-        <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-sm btn-info">All</button>
-        <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span class="caret"></span>
-          <span class="sr-only">Toggle Dropdown</span>
-        </button>
+      <div>
+        <span class="filter-label">
+          {{filterType}}
+        </span>
+        <br>
+        <div class="btn-group {{if useDropUp "dropup"}} menu-bar--dropdown">
+          <button {{action 'setMenuVideos' -1}} type="button" class="btn btn-sm btn-info">All</button>
+          <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <span class="caret"></span>
+            <span class="sr-only">Toggle Dropdown</span>
+          </button>
 
-        <ul class="dropdown-menu">
-        <li class="dropdown-header menu-bar--list--element--border">Filter Videos</li>
-        {{#each-in attributes as |key value|}}
-          <li class="menu-bar--list--element menu-bar--list--element--border">
-            <span {{action 'setMenuVideos' key}}>
-              {{value.prettyName}}
-            </span>
-          </li>
-        {{/each-in}}
-        </ul>
-      </div>
+          <ul class="dropdown-menu">
+            <li class="dropdown-header menu-bar--list--element--border">Filter Videos</li>
+            {{#each-in attributes as |key value|}}
+              <li data-container="body" data-toggle="popover" data-placement="right" data-title={{value.prettyName}} data-content={{value.description}} class="menu-bar--list--element menu-bar--list--element--border">
+                <span {{action 'setMenuVideos' key}}>
+                  {{value.prettyName}}
+                </span>
+              </li>
+            {{/each-in}}
+          </ul>
+        </div>
       </div>
     {{/video-list}}
   {{/if}}

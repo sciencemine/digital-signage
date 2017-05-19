@@ -7,10 +7,20 @@ export default AbstractList.extend({
   listItemSmall: '',
   listItemSelected: '',
   listItemHighlight: '',
+  displayPopovers: false,
 
   init() {
     this._super(...arguments);
     this.set('keys', Object.keys(this.get('videos')));
+  },
+  didRender() {
+    if (this.get('displayPopovers')) {
+      let component = this;
+      
+      component.$(function () {
+        component.$('[data-toggle="popover"]').popover({"trigger": "hover"});
+      });
+    }
   },
   actions: {
     select(event) {
