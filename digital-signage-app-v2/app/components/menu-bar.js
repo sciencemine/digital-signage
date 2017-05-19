@@ -50,8 +50,9 @@ export default Ember.Component.extend({
       component.$('[data-toggle="popover"]').popover({"trigger": "hover"}).on('shown.bs.popover', function () {
 		  
          let timeout = setTimeout(function () {
-		 component.$('[data-toggle="popover"]').popover('hide');},
-		 component.get('config.ui.popoverDwell') * 1000);
+		 component.$('[data-toggle="popover"]').popover('hide');
+		 component.send('hidePopovers');
+		 }, component.get('config.ui.popoverDwell') * 1000);
 		 console.log(timeout);
 
     clearTimeout(component.get('popoverTimeout'));
@@ -99,9 +100,15 @@ export default Ember.Component.extend({
     videoClicked(videoData) {
       this.set('renderMenu', false);
       this.get('onClickCallback') (videoData);
+	  this.send('hidePopovers');
     },
     doNothing() {
       
-    }
+    },
+	
+	hidePopovers() {
+		this.$('[data-toggle="popover"]').popover('hide');
+
+	}
   }
 });
