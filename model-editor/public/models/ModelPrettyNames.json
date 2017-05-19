@@ -1,23 +1,23 @@
 {
     "config": {
-        "prettyName": "",
-        "modelIdentifier": "",
-        "description" : "",
-        "backgroundVideos": [ ],
+        "prettyName": "Title", 
+        "modelIdentifier": "Filename",
+        "description" : "Description",
+        "backgroundVideos": "Background Videos",
         "ui": {
-            "idle": 0,
-            "menuDwell": 0,
-            "menuLocale": ""
+            "idle": "Idle Time",
+            "menuDwell": "Menu Dwell",
+            "menuLocale": "Menu Location"
         },
         "keyboard": {
-            "select": "",
-            "previous": "",
-            "cancel": "",
+            "select": "Select Button",
+            "previous": "Previous Button",
+            "cancel": "Cancel Button",
             "next": ""
         }
     },
     "videos": {
-        "0": {
+        "video": {
             "prettyName": "",
             "description": "",
             "attributes": [ ],
@@ -34,7 +34,7 @@
         }
     },
     "attribute": {
-        "0": {
+        "attribute": {
             "prettyName": "",
             "description": "",
             "x": 0,
@@ -43,11 +43,11 @@
         }
     },
     "relation": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "0",
+        "relation": {
+            "videoId": "",
+            "relatedId": "",
             "difficulty": 0,
-            "attributeId": "0"
+            "attributeId": ""
         }
     }
 }

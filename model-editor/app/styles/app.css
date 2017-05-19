@@ -1,1 +1,6 @@
+/* Route css */
 @import 'model-select.css';
+@import 'model-edit.css';
+
+/* Component css */
+@import 'generic-form.css';

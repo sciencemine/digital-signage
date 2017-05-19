@@ -1,0 +1,254 @@
+{
+    "config": {
+        "displayName": "Configuration",
+        "inputType": "",
+        "help": "",
+        "data": {
+            "prettyName": {
+                "displayName": "Exhibit Title",
+                "inputType": "text",
+                "help": "",
+                "data": ""
+            },
+            "modelIdentifier": {
+                "displayName": "Filename",
+                "inputType": "text",
+                "help": "",
+                "data": ""
+            },
+            "description": {
+                "displayName": "Description",
+                "inputType": "text",
+                "help": "",
+                "data": ""
+            },
+            "backgroundVideos": {
+                "displayName": "Background Videos",
+                "inputType": "",
+                "help": "",
+                "data": [ ]
+            },
+            "ui": {
+                "displayName": "User Interface",
+                "inputType": "",
+                "help": "",
+                "data": {
+                    "idle": {
+                        "displayName": "Interface Timeout",
+                        "inputType": "number",
+                        "help": "",
+                        "data": 5
+                    },
+                    "menuDwell": {
+                        "displayName": "Menu Timeout",
+                        "inputType": "number",
+                        "help": "",
+                        "data": 3
+                    },
+                    "menuLocale": {
+                        "displayName": "Menu Location",
+                        "inputType": "dropdown",
+                        "help": "",
+                        "data": ["top", "right", "bottom", "left"]
+                    }
+                }
+            },
+            "keyboard": {
+                "displayName": "Button Input",
+                "inputType": "",
+                "help": "",
+                "data": {
+                    "select": {
+                        "displayName": "Select",
+                        "inputType": "",
+                        "help": "",
+                        "data": "w"
+                    },
+                    "previous": {
+                        "displayName": "Previous",
+                        "inputType": "",
+                        "help": "",
+                        "data": "a"
+                    },
+                    "cancel": {
+                        "displayName": "Cancel",
+                        "inputType": "",
+                        "help": "",
+                        "data": "s"
+                    },
+                    "next": {
+                        "displayName": "Next",
+                        "inputType": "",
+                        "help": "",
+                        "data": "d"
+                    }
+                }
+            }
+        }
+    },
+    "videos": {
+        "displayName": "Videos",
+        "inputType": "",
+        "help": "",
+        "data": {
+            "video": {
+                "displayName": "Video",
+                "inputType": "",
+                "help": "",
+                "data": {
+                    "prettyName": {
+                        "displayName": "Title",
+                        "inputType": "text",
+                        "help": "",
+                        "data": ""
+                    },
+                    "description": {
+                        "displayName": "Description",
+                        "inputType": "text",
+                        "help": "",
+                        "data": ""
+                    },
+                    "attributes": {
+                        "displayName": "Attributes",
+                        "inputType": "",
+                        "help": "",
+                        "data": [ ]
+                    },
+                    "full": {
+                        "displayName": "Full Video",
+                        "inputType": "",
+                        "help": "",
+                        "data": {
+                            "fileIdentifier": {
+                                "displayName": "Filename",
+                                "inputType": "text",
+                                "help": "",
+                                "data": ""
+                            },
+                            "isUrl": {
+                                "displayName": "Url",
+                                "inputType": "checkbox",
+                                "help": "",
+                                "data": false
+                            },
+                            "attribution": {
+                                "displayName": "Video Attribution",
+                                "inputType": "text",
+                                "help": "",
+                                "data": ""
+                            }
+                        }
+                    },
+                    "teaser": {
+                        "displayName": "Teaser Video",
+                        "inputType": "",
+                        "help": "",
+                        "data": {
+                            "fileIdentifier": {
+                                "displayName": "Filename",
+                                "inputType": "text",
+                                "help": "",
+                                "data": ""
+                            },
+                            "isUrl": {
+                                "displayName": "Url",
+                                "inputType": "checkbox",
+                                "help": "",
+                                "data": false
+                            },
+                            "attribution": {
+                                "displayName": "Video Attribution",
+                                "inputType": "text",
+                                "help": "",
+                                "data": ""
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "attributes": {
+        "displayName": "Attributes",
+        "inputType": "",
+        "help": "",
+        "data": {
+            "attribute": {
+                "displayName": "Attribute",
+                "inputType": "",
+                "help": "",
+                "data": {
+                    "prettyName": {
+                        "displayName": "Attribute Name",
+                        "inputType": "text",
+                        "help": "",
+                        "data": ""
+                    },
+                    "description": {
+                        "displayName": "Attribute Description",
+                        "inputType": "text",
+                        "help": "",
+                        "data": ""
+                    },
+                    "x": {
+                        "displayName": "X Position",
+                        "inputType": "number",
+                        "help": "",
+                        "data": 0
+                    },
+                    "y":  {
+                        "displayName": "Y Position",
+                        "inputType": "number",
+                        "help": "",
+                        "data": 0,
+                        "params": "min=0 max=1 step=0.01"
+                    },
+                    "videos":  {
+                        "displayName": "Videos",
+                        "inputType": "",
+                        "help": "",
+                        "data": [ ]
+                    }
+                }
+            }
+        }
+    },
+    "relations": {
+        "displayName": "Relations",
+        "inputType": "",
+        "help": "",
+        "data": {
+            "relation": {
+                "displayName": "Relation",
+                "inputType": "",
+                "help": "",
+                "data": {
+                    "videoId": {
+                        "displayName": "Beginning Video",
+                        "inputType": "",
+                        "help": "",
+                        "data": ""
+                    },
+                    "relatedId": {
+                        "displayName": "Ending Video",
+                        "inputType": "",
+                        "help": "",
+                        "data": ""
+                    },
+                    "difficulty": {
+                        "displayName": "Ending Video",
+                        "inputType": "",
+                        "help": "",
+                        "data": ""
+                    },
+                    "attributeId": {
+                        "displayName": "Attribute",
+                        "inputType": "",
+                        "help": "",
+                        "data": ""
+                    }
+                }
+            }
+        }
+    }
+}
