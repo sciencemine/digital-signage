@@ -1,3 +1,32 @@
+/**
+ * COMPONENT: video-list
+ *
+ * DESCRIPTION:
+ *  Video list. Can cycle items on list and callsback if there is over/under flow
+ *
+ * PARAMETERS
+ *  videos - array of videos
+ * 
+ *  selectedVidPos - initial selected video in list
+ * 
+ *  listItemClass - class of list item
+ * 
+ *  listItemSmall - class of a list item when it is small
+ * 
+ *  listItemSelected - class of a list item when it is selected
+ * 
+ *  keyboard - keyboard object from model
+ * 
+ *  modelIdentifier - model identifier from confic
+ * 
+ *  focus - if the list should be focused
+ * 
+ *  loop - determines if the list loops to the start. default true. if false,
+ *   over/under flow callbacks are required
+ *
+ * @author Michael Fryer
+ * @date 5/11/2017
+ */
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
@@ -7,6 +36,7 @@ export default AbstractList.extend({
   listItemSmall: '',
   listItemSelected: '',
   listItemHighlight: '',
+  loop: true,
 
   init() {
     this._super(...arguments);
@@ -14,13 +44,17 @@ export default AbstractList.extend({
   },
   actions: {
     select(event) {
-      this.get('onSelectedCallback') (this.get('videos')[this.get('selectedVidPos')]);
+      this.send('selectedCallback', this.get('videos')[this.get('selectedVidPos')]);
 
       this.send('input');
 
       event.stopPropagation();
     },
-    goPrevious() {
+    goPrevious(event) {
+      if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
+        this.send('underflowCallback');
+      }
+
       this.send('alterSelected', -1);
 
       this.send('input');
@@ -34,7 +68,11 @@ export default AbstractList.extend({
 
       event.stopPropagation();
     },
-    goNext() {
+    goNext(event) {
+      if (parseInt(this.get('selectedVidPos')) + 1 === this.get('keys').length && !this.get('loop')) {
+        this.send('overflowCallback');
+      }
+
       this.send('alterSelected', 1);
 
       this.send('input');
@@ -42,7 +80,7 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     videoSelected(videoPos) {
-      this.get('onSelectedCallback') (this.get('videos')[videoPos]);
+      this.send('selectedCallback', this.get('videos')[videoPos]);
     },
     alterSelected(param) {
       let vidArrayLength = this.get('keys').length;
