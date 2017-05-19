@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   useDropUp: false,
   renderMenu: false,
   menuTimeout: null,
+  popoverTimeout: null,
 
   init() {
     this._super(...arguments);
@@ -43,9 +44,19 @@ export default Ember.Component.extend({
 
   didRender() {
     let component = this;
+	 //var popover = $(this);
 
     component.$(function () {
-      component.$('[data-toggle="popover"]').popover({"trigger": "hover"});
+      component.$('[data-toggle="popover"]').popover({"trigger": "hover"}).on('shown.bs.popover', function () {
+		  
+         let timeout = setTimeout(function () {
+		 component.$('[data-toggle="popover"]').popover('hide');},
+		 component.get('config.ui.popoverDwell') * 1000);
+		 console.log(timeout);
+
+    clearTimeout(component.get('popoverTimeout'));
+    component.set('popoverTimeout', timeout);
+	  });
     });
   },
 

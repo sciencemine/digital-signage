@@ -6,6 +6,7 @@
         "ui": {
             "idle": 0, seconds system is idle before returning home
             "menuDwell": 0, seconds menu should remain after mouse leaves
+			"popoverDwell": 0,
             "menuLocale": "" top right bottom left
         },
         "keyboard": { keys for keyboard actions

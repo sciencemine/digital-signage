@@ -18,7 +18,7 @@ export default AbstractList.extend({
       let component = this;
       
       component.$(function () {
-        component.$('[data-toggle="popover"]').popover({"trigger": "hover"});
+        component.$('[data-toggle="popover" data-placement="auto right"]').popover({"trigger": "hover"});
       });
     }
   },

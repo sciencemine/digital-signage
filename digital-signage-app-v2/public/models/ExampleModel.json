@@ -6,6 +6,7 @@
         "ui": {
             "idle": 5,
             "menuDwell": 3,
+			"popoverDwell": 3,
             "menuLocale": "top"
         },
         "keyboard": {
