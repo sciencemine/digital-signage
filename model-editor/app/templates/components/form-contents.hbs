@@ -7,6 +7,7 @@
     {{#form-contents data=value offset=offset}}
       <div class="form-group">
         <label class="{{nextFormOffset}} col-sm-3 control-label">{{value.displayName}}</label>
+        <span class="help-block">{{value.help}}</span>
       </div>
     {{/form-contents}}
   {{else}}
@@ -14,6 +15,7 @@
       <label for={{key}} class="{{formOffset}} col-sm-3 control-label">{{value.displayName}}</label>
       <div class="col-sm-5">
         {{form-contents-input key=key data=value class=(if (not-checkbox value.inputType) "form-control")}}
+        <span class="help-block">{{value.help}}</span>
       </div>
     </div>
   {{/if}}

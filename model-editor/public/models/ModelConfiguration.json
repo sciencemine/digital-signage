@@ -5,6 +5,7 @@
         "help": "",
         "error": "",
         "validation": { },
+        "help": "Configure the exhibit characteristics",
         "data": {
             "prettyName": {
                 "displayName": "Exhibit Title",
@@ -14,16 +15,7 @@
                 "validation": {
                     "required": "required"
                 },
-                "data": ""
-            },
-            "modelIdentifier": {
-                "displayName": "Filename",
-                "inputType": "text",
-                "help": "",
-                "error": "",
-                "validation": {
-                    "required": "required"
-                },
+                "help": "Title of the exhibit",
                 "data": ""
             },
             "description": {
@@ -34,6 +26,18 @@
                 "validation": {
                     "required": "required"
                 },
+                "help": "Description of the exhibit",
+                "data": ""
+            },
+            "modelIdentifier": {
+                "displayName": "Filename",
+                "inputType": "text",
+                "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
+                "help": "Filename for this exhibit",
                 "data": ""
             },
             "backgroundVideos": {
@@ -44,6 +48,8 @@
                 "validation": {
                     "required": "required"
                 },
+                "inputType": "Background videos associated with the exhibit",
+                "help": "Background videos to be displayed on the exhibit",
                 "data": [ ]
             },
             "ui": {
@@ -52,6 +58,7 @@
                 "help": "",
                 "error": "",
                 "validation": { },
+                "help": "Controls the interface for the exhibit",
                 "data": {
                     "idle": {
                         "displayName": "Interface Timeout",
@@ -63,7 +70,9 @@
                             "min": 0,
                             "max": 120
                         },
-                        "data": 5
+                        "data": 5,
+                        "help": "How long, in seconds, before the interface should hide",
+                        "data": 10
                     },
                     "menuDwell": {
                         "displayName": "Menu Timeout",
@@ -75,6 +84,7 @@
                             "min": 0,
                             "max": 30
                         },
+                        "help": "How long, in seconds, after mouse stops hovering the menu before it should hide",
                         "data": 3
                     },
                     "menuLocale": {
@@ -86,7 +96,10 @@
                             "required": "required",
                             "pattern": "/^(top|right|bottom|left)$/gi"
                         },
-                        "data": ""
+                        "data": "",
+                        "inputType": "dropdown",
+                        "help": "Position of the menu on the screen",
+                        "data": ["top", "right", "bottom", "left"]
                     }
                 }
             },
@@ -96,6 +109,7 @@
                 "help": "",
                 "error": "",
                 "validation": { },
+                "help": "Button input characters",
                 "data": {
                     "select": {
                         "displayName": "Select",
@@ -107,6 +121,7 @@
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
+                        "help": "For selection",
                         "data": "w"
                     },
                     "previous": {
@@ -119,6 +134,7 @@
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
+                        "help": "For going forward in a list",
                         "data": "a"
                     },
                     "cancel": {
@@ -131,6 +147,7 @@
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
+                        "help": "For canceling",
                         "data": "s"
                     },
                     "next": {
@@ -143,6 +160,7 @@
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
+                        "help": "For going backwards in a list",
                         "data": "d"
                     }
                 }
@@ -155,6 +173,7 @@
         "help": "",
         "error": "",
         "validation": { },
+        "help": "Videos that the exhibit has access to",
         "data": {
             "video": {
                 "displayName": "Video",
@@ -162,6 +181,7 @@
                 "help": "",
                 "error": "",
                 "validation": { },
+                "help": "A video in the exhibit",
                 "data": {
                     "prettyName": {
                         "displayName": "Title",
@@ -171,6 +191,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Title of the video",
                         "data": ""
                     },
                     "description": {
@@ -181,6 +202,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Description for the video",
                         "data": ""
                     },
                     "attributes": {
@@ -191,6 +213,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Attributes that the video has",
                         "data": [ ]
                     },
                     "full": {
@@ -199,6 +222,7 @@
                         "help": "",
                         "error": "",
                         "validation": { },
+                        "help": "The full video",
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
@@ -209,6 +233,7 @@
                                     "required": "required",
                                     "pattern": "/^\\w.*\\.(mp4|ogg|webm)$/gi"
                                 },
+                                "help": "Filename of the full video",
                                 "data": ""
                             },
                             "isUrl": {
@@ -217,6 +242,7 @@
                                 "help": "",
                                 "error": "",
                                 "validation": { },
+                                "help": "If it is a url or not, e.g. http://...",
                                 "data": false
                             },
                             "attribution": {
@@ -227,6 +253,7 @@
                                 "validation": {
                                     "required": "required"
                                 },
+                                "help": "Attribution for the video",
                                 "data": ""
                             }
                         }
@@ -247,6 +274,7 @@
                                     "required": "required",
                                     "pattern": "/^\\w.*(\\.mp4|\\.ogg|\\.webm)$/gi"
                                 },
+                                "help": "Filename of the teaser video",
                                 "data": ""
                             },
                             "isUrl": {
@@ -255,6 +283,7 @@
                                 "help": "",
                                 "error": "",
                                 "validation": { },
+                                "help": "If it is a url or not, e.g. http://...",
                                 "data": false
                             },
                             "attribution": {
@@ -265,6 +294,7 @@
                                 "validation": {
                                     "required": "required"
                                 },
+                                "help": "Attribution for the video",
                                 "data": ""
                             }
                         }
@@ -281,6 +311,7 @@
         "validation": {
             "required": "required"
         },
+        "help": "Attributes that are related to the exhibit",
         "data": {
             "attribute": {
                 "displayName": "Attribute",
@@ -290,6 +321,7 @@
                 "validation": {
                     "required": "required"
                 },
+                "help": "An attribute of the exhibit",
                 "data": {
                     "prettyName": {
                         "displayName": "Attribute Name",
@@ -299,6 +331,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "The name of the attribute",
                         "data": ""
                     },
                     "description": {
@@ -309,6 +342,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "The description of the attribute",
                         "data": ""
                     },
                     "x": {
@@ -321,6 +355,7 @@
                             "min": 0,
                             "max": 100
                         },
+                        "help": "Position from the left where the attribute is shown on home screen",
                         "data": 0
                     },
                     "y":  {
@@ -333,6 +368,7 @@
                             "min": 0,
                             "max": 100
                         },
+                        "help": "Position from the top where the attribute is shown on home screen",
                         "data": 0
                     },
                     "videos":  {
@@ -343,6 +379,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Videos that have this attribute",
                         "data": [ ]
                     }
                 }
@@ -355,6 +392,7 @@
         "help": "",
         "error": "",
         "validation": { },
+        "help": "Relations that are in the exhibit",
         "data": {
             "relation": {
                 "displayName": "Relation",
@@ -362,6 +400,7 @@
                 "help": "",
                 "error": "",
                 "validation": { },
+                "help": "A relation in the exhibit",
                 "data": {
                     "videoId": {
                         "displayName": "Beginning Video",
@@ -371,6 +410,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Video the relation is coming from",
                         "data": ""
                     },
                     "relatedId": {
@@ -393,7 +433,15 @@
                             "min": -100,
                             "max": 100
                         },
-                        "data": 0
+                        "data": 0,
+                        "help": "Video the relation is going to",
+                        "data": ""
+                    },
+                    "difficulty": {
+                        "displayName": "Difficulty",
+                        "inputType": "",
+                        "help": "Difficulty of going from the beginning video to the ending",
+                        "data": ""
                     },
                     "attributeId": {
                         "displayName": "Attribute",
@@ -403,6 +451,7 @@
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Attribute of this relation",
                         "data": ""
                     }
                 }
