@@ -13,7 +13,7 @@
     <div class="form-group">
       <label for={{key}} class="{{formOffset}} col-sm-3 control-label">{{value.displayName}}</label>
       <div class="col-sm-5">
-        <input type={{value.inputType}} id="{{key}}" class={{if (not-checkbox value.inputType) "form-control"}} placeholder={{value.data}} required="required">
+        {{form-contents-input key=key data=value class=(if (not-checkbox value.inputType) "form-control")}}
       </div>
     </div>
   {{/if}}
