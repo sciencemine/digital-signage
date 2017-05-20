@@ -1,0 +1,26 @@
+<div class="model-select">
+  <div class="model-select--title page-header">
+    <h1>Exhibit Selection <small>Select an exhibit to edit below</small></h1>
+  </div>
+  <div class="model-select--panel panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Select an exhibit</h3>
+    </div>
+
+    <ul class="list-group">
+      {{#each-in model as |key value|}}
+          {{#link-to "modelEdit" (query-params modelfile=value.fileName)}}
+            <li class="list-group-item model-select--element">
+              {{model-select-element name=value.config.prettyName description=value.config.description}}
+            </li>
+          {{/link-to}}
+      {{/each-in}}
+    </ul>
+
+    <div class="panel-footer">
+      {{#link-to "modelEdit" (query-params modelfile="ModelSkeleton")}}
+        <h4 class="panel-title">Add Exhibit</h4>
+      {{/link-to}}
+    </div>
+  </div>
+</div>
