@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   filterType: "All",
   useDropUp: false,
   renderMenu: false,
+  menuTimeout: null,
 
   init() {
     this._super(...arguments);
@@ -42,14 +43,19 @@ export default Ember.Component.extend({
 
   mouseEnter() {
     this.set('renderMenu', true);
+
+    clearTimeout(this.get('menuTimeout'));
   },
 
   mouseLeave() {
     var component = this;
-
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       component.set('renderMenu', false);
     }, this.get('config.ui.menuDwell') * 1000);
+
+    clearTimeout(this.get('menuTimeout'));
+
+    this.set('menuTimeout', timeout);
   },
 
   actions: {
