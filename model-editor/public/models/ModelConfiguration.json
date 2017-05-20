@@ -3,53 +3,90 @@
         "displayName": "Configuration",
         "inputType": "",
         "help": "",
+        "error": "",
+        "validation": { },
         "data": {
             "prettyName": {
                 "displayName": "Exhibit Title",
                 "inputType": "text",
                 "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
                 "data": ""
             },
             "modelIdentifier": {
                 "displayName": "Filename",
                 "inputType": "text",
                 "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
                 "data": ""
             },
             "description": {
                 "displayName": "Description",
                 "inputType": "text",
                 "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
                 "data": ""
             },
             "backgroundVideos": {
                 "displayName": "Background Videos",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
                 "data": [ ]
             },
             "ui": {
                 "displayName": "User Interface",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": { },
                 "data": {
                     "idle": {
                         "displayName": "Interface Timeout",
                         "inputType": "number",
                         "help": "",
+                        "error": "Please pick numbers in the range of 0 - 120.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 120
+                        },
                         "data": 5
                     },
                     "menuDwell": {
                         "displayName": "Menu Timeout",
                         "inputType": "number",
                         "help": "",
+                        "error": "Please pick numbers in the range of 0 - 30.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 30
+                        },
                         "data": 3
                     },
                     "menuLocale": {
                         "displayName": "Menu Location",
-                        "inputType": "dropdown",
+                        "inputType": "text",
                         "help": "",
-                        "data": ["top", "right", "bottom", "left"]
+                        "error": "Please use on of the following: top, right, bottom, left.",
+                        "validation": {
+                            "required": "required",
+                            "pattern": "/^(top|right|bottom|left)$/gi"
+                        },
+                        "data": ""
                     }
                 }
             },
@@ -57,29 +94,55 @@
                 "displayName": "Button Input",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": { },
                 "data": {
                     "select": {
                         "displayName": "Select",
                         "inputType": "",
                         "help": "",
+                        "error": "Please use a-z, A-Z, or 0-9.",
+                        "validation": {
+                            "required": "required",
+                            "maxlength": 1,
+                            "pattern": "/\\w/gi"
+                        },
                         "data": "w"
                     },
                     "previous": {
                         "displayName": "Previous",
                         "inputType": "",
                         "help": "",
+                        "error": "Please use a-z, A-Z, or 0-9.",
+                        "validation": {
+                            "required": "required",
+                            "maxlength": 1,
+                            "pattern": "/\\w/gi"
+                        },
                         "data": "a"
                     },
                     "cancel": {
                         "displayName": "Cancel",
                         "inputType": "",
                         "help": "",
+                        "error": "Please use a-z, A-Z, or 0-9.",
+                        "validation": {
+                            "required": "required",
+                            "maxlength": 1,
+                            "pattern": "/\\w/gi"
+                        },
                         "data": "s"
                     },
                     "next": {
                         "displayName": "Next",
                         "inputType": "",
                         "help": "",
+                        "error": "Please use a-z, A-Z, or 0-9.",
+                        "validation": {
+                            "required": "required",
+                            "maxlength": 1,
+                            "pattern": "/\\w/gi"
+                        },
                         "data": "d"
                     }
                 }
@@ -90,51 +153,80 @@
         "displayName": "Videos",
         "inputType": "",
         "help": "",
+        "error": "",
+        "validation": { },
         "data": {
             "video": {
                 "displayName": "Video",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": { },
                 "data": {
                     "prettyName": {
                         "displayName": "Title",
                         "inputType": "text",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "description": {
                         "displayName": "Description",
                         "inputType": "text",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "attributes": {
                         "displayName": "Attributes",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": [ ]
                     },
                     "full": {
                         "displayName": "Full Video",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": { },
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "help": "",
+                                "help": "Use files that are .mp4, .ogg, or .webm.",
+                                "error": "Use files that are .mp4, .ogg, or .webm.",
+                                "validation": {
+                                    "required": "required",
+                                    "pattern": "/^\\w.*\\.(mp4|ogg|webm)$/gi"
+                                },
                                 "data": ""
                             },
                             "isUrl": {
                                 "displayName": "Url",
                                 "inputType": "checkbox",
                                 "help": "",
+                                "error": "",
+                                "validation": { },
                                 "data": false
                             },
                             "attribution": {
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
                                 "help": "",
+                                "error": "",
+                                "validation": {
+                                    "required": "required"
+                                },
                                 "data": ""
                             }
                         }
@@ -143,23 +235,36 @@
                         "displayName": "Teaser Video",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": { },
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "help": "",
+                                "help": "Use files that are .mp4, .ogg, or .webm.",
+                                "error": "Use files that are .mp4, .ogg, or .webm.",
+                                "validation": {
+                                    "required": "required",
+                                    "pattern": "/^\\w.*(\\.mp4|\\.ogg|\\.webm)$/gi"
+                                },
                                 "data": ""
                             },
                             "isUrl": {
                                 "displayName": "Url",
                                 "inputType": "checkbox",
                                 "help": "",
+                                "error": "",
+                                "validation": { },
                                 "data": false
                             },
                             "attribution": {
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
                                 "help": "",
+                                "error": "",
+                                "validation": {
+                                    "required": "required"
+                                },
                                 "data": ""
                             }
                         }
@@ -172,41 +277,72 @@
         "displayName": "Attributes",
         "inputType": "",
         "help": "",
+        "error": "",
+        "validation": {
+            "required": "required"
+        },
         "data": {
             "attribute": {
                 "displayName": "Attribute",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
                 "data": {
                     "prettyName": {
                         "displayName": "Attribute Name",
                         "inputType": "text",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "description": {
                         "displayName": "Attribute Description",
                         "inputType": "text",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "x": {
                         "displayName": "X Position",
                         "inputType": "number",
                         "help": "",
+                        "error": "Please pick numbers in the range of 0 - 100.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 100
+                        },
                         "data": 0
                     },
                     "y":  {
                         "displayName": "Y Position",
                         "inputType": "number",
                         "help": "",
-                        "data": 0,
-                        "params": "min=0 max=1 step=0.01"
+                        "error": "Please pick numbers in the range of 0 - 100.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 100
+                        },
+                        "data": 0
                     },
                     "videos":  {
                         "displayName": "Videos",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": [ ]
                     }
                 }
@@ -217,34 +353,56 @@
         "displayName": "Relations",
         "inputType": "",
         "help": "",
+        "error": "",
+        "validation": { },
         "data": {
             "relation": {
                 "displayName": "Relation",
                 "inputType": "",
                 "help": "",
+                "error": "",
+                "validation": { },
                 "data": {
                     "videoId": {
                         "displayName": "Beginning Video",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "relatedId": {
                         "displayName": "Ending Video",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     },
                     "difficulty": {
                         "displayName": "Ending Video",
-                        "inputType": "",
+                        "inputType": "number",
                         "help": "",
-                        "data": ""
+                        "error": "Please pick numbers in the range of -100 - 100.",
+                        "validation": {
+                            "required": "required",
+                            "min": -100,
+                            "max": 100
+                        },
+                        "data": 0
                     },
                     "attributeId": {
                         "displayName": "Attribute",
                         "inputType": "",
                         "help": "",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
                         "data": ""
                     }
                 }
