@@ -1,8 +1,23 @@
-<div class="model-edit--title page-header">
-  <h1>{{model.modelData.config.prettyName}} <small>{{model.modelData.config.description}}</small></h1>
+<div class="model-edit--title">
+  <h3>{{model.modelData.config.prettyName}} <small>{{model.modelData.config.description}}</small></h3>
 </div>
 
-{{generic-form class="generic-form--center generic-form--dark generic-form--rounded" data=model.modelConfig.videos.data.video}}
+<div class="panel panel-default model-edit--properties-section">
+  <div class="panel-heading">
+    <h4 class="panel-title">Properties</h4>
+  </div>
+
+  <div class="panel-body">
+    List of properties the video has.
+  </div>
+
+  <div class="model-edit--properties-section__footer panel-footer"></div>
+</div>
+
+<div class="model-edit--configuration-section">
+  {{generic-form class="generic-form__bottom" data=model.modelConfig.config}}
+</div>
+
+{{attribute-panel class="model-edit--attribute-section" data=model.modelData.attributes}}
 
 {{outlet}}
-t

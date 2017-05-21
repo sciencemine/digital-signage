@@ -33,7 +33,7 @@
             }
         }
     },
-    "attribute": {
+    "attributes": {
         "0": {
             "prettyName": "",
             "description": "",
@@ -42,7 +42,7 @@
             "videos": [ ] videos associated with this attribute
         }
     },
-    "relation": {
+    "relations": {
         "0": {
             "videoId": "0", start video
             "relatedId": "0", end video

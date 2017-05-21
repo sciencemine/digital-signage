@@ -2,21 +2,18 @@
 
 {{#each-in data.data as |key value|}}
   {{#if (is-array value.data)}}
-
-  {{else if (is-object value.data)}}
-    {{#form-contents data=value offset=offset}}
-      <div class="form-group">
-        <label class="{{nextFormOffset}} col-sm-3 control-label">{{value.displayName}}</label>
-        <span class="help-block">{{value.help}}</span>
-      </div>
-    {{/form-contents}}
-  {{else}}
     <div class="form-group">
-      <label for={{key}} class="{{formOffset}} col-sm-3 control-label">{{value.displayName}}</label>
-      <div class="col-sm-5">
-        {{form-contents-input key=key data=value class=(if (not-checkbox value.inputType) "form-control")}}
-        <span class="help-block">{{value.help}}</span>
-      </div>
+      <label for={{key}} class="sr-only">{{value.displayName}}</label>
+      {{form-contents-select key=key data=value.data class="form-control input-sm"}}
+      <span class="help-block">{{value.help}}</span>
+    </div>
+  {{else if (is-object value.data)}}
+    {{form-contents tagName='' data=value}}
+  {{else if value.inputType}}
+    <div class="form-group">
+      <label for={{key}} class="sr-only">{{value.displayName}}</label>
+      {{form-contents-input key=key data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
+      <span class="help-block">{{value.help}}</span>
     </div>
   {{/if}}
 {{/each-in}}
