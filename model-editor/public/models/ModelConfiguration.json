@@ -225,6 +225,7 @@
                         "inputType": "text",
                         "error": "",
                         "validation": { },
+                        "help": "The teaser video",
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
@@ -259,19 +260,19 @@
                     },
                     "attributes": {
                         "displayName": "Attributes",
-                        "inputType": "text",
+                        "inputType": "list",
                         "error": "",
                         "validation": { },
                         "help": "Attributes that the video has",
-                        "data": [ ]
+                        "data": { }
                     },
                     "relations": {
                         "displayName": "Relations",
-                        "inputType": "text",
+                        "inputType": "list",
                         "error": "",
                         "validation": { },
                         "help": "Relations the video is a part of",
-                        "data": [ ]
+                        "data": { }
                     }
                 }
             }

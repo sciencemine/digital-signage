@@ -18,7 +18,7 @@
     </div>
   {{else if (is-object value.data)}}
     {{form-contents noLabel=noLabel inputId=(create-id inputId key) tagName='' data=value}}
-  {{else if value.inputType}}
+  {{else if (is-valid-input-type value.inputType)}}
     <div class="form-group">
       <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
       {{form-contents-input key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
