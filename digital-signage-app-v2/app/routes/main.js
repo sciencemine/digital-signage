@@ -9,6 +9,9 @@ export default Ember.Route.extend({
     if (qp.modelfile) {
       this.modelFile = qp.modelfile;
     }
+    else {
+      this.replaceWith('modelSelect');
+    }
   },
   model() {
     /**
@@ -17,6 +20,7 @@ export default Ember.Route.extend({
      *   is returned and it is not waiting to be resolved first
      */
     let path = "models/" + (this.modelFile ? this.modelFile : "HealthyStreams") + ".json";
+    let route = this;
     let uniqueVids = {
       vids: [],
       blobData: []
@@ -51,6 +55,8 @@ export default Ember.Route.extend({
         }
         return res;
       });
+    }).fail(() => {
+      route.transitionTo('modelSelect');
     });
   }
 });

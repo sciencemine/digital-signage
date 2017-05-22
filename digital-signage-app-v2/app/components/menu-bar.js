@@ -10,6 +10,7 @@ export default Ember.Component.extend({
   menuTimeout: null,
   popoverTimeout: null,
 
+
   init() {
     this._super(...arguments);
     this.set('displayVideos', this.get('videos'));
