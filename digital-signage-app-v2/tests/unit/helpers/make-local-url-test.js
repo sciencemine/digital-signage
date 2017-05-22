@@ -1,4 +1,3 @@
-
 import { makeLocalUrl } from 'digital-signage-app-v2/helpers/make-local-url';
 import { module, test } from 'qunit';
 
