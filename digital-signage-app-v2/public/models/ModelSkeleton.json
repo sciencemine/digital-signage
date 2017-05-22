@@ -8,7 +8,8 @@
             "idle": 0,
             "menuDwell": 0,
 			"popoverDwell": 0,
-            "menuLocale": ""
+            "menuLocale": "",
+			"showTime": 1000
         },
         "keyboard": {
             "select": "",
