@@ -46,31 +46,23 @@ export default Ember.Component.extend({
     let component = this;
 	
 	if (this.$('[data-toggle="popover"]').length !== 0){
-		
 		component.$('[data-toggle="popover"]').popover({
-			
 			trigger: 'hover focus',
 			placement: 'auto',
 			delay: {
-				show: 'config.ui.showTime',
+				show: component.get('config.ui.showTime'),
 				hide: '100'
 			}
-		});
-			}).on('shown.bs.popover', function () {
-		  
-         let timeout = setTimeout(function () {
-		 component.$('[data-toggle="popover"]').popover('hide');
-		 component.send('hidePopovers');
-		 }, component.get('config.ui.popoverDwell') * 1000);
-		 console.log(timeout);
-
-    clearTimeout(component.get('popoverTimeout'));
-    component.set('popoverTimeout', timeout);
-	  });
+		}).on('shown.bs.popover', function () {  
+			let timeout = setTimeout(function () {
+				component.$('[data-toggle="popover"]').popover('hide');
+				component.send('hidePopovers');
+			}, component.get('config.ui.popoverDwell'));
+				
+			clearTimeout(component.get('popoverTimeout'));
+			component.set('popoverTimeout', timeout);
+		});	
 	}
-		
-	
-     
   },
 
   mouseEnter() {
