@@ -49,7 +49,6 @@ export default Ember.Component.extend({
     if (this.$('[data-toggle="popover"]').length !== 0){
       component.$('[data-toggle="popover"]').popover({
         trigger: 'hover focus',
-        placement: 'auto',
         delay: {
           show: component.get('config.ui.showTime'),
           hide: '100'

@@ -38,6 +38,7 @@ export default AbstractList.extend({
   listItemHighlight: '',
   displayPopovers: false,
   loop: true,
+  popoverShowtime: 250,
 
   init() {
     this._super(...arguments);
@@ -47,9 +48,15 @@ export default AbstractList.extend({
     if (this.get('displayPopovers')) {
       let component = this;
       
-      component.$(function () {
-        component.$('[data-toggle="popover" data-placement="auto right"]').popover({"trigger": "hover"});
-      });
+      if (this.$('[data-toggle="popover"]').length !== 0){
+        component.$('[data-toggle="popover"]').popover({
+          trigger: 'hover focus',
+          delay: {
+            show: component.get('popoverShowtime'),
+            hide: '100'
+          }
+        });	
+      }
     }
   },
   actions: {
