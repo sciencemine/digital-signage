@@ -36,11 +36,28 @@ export default AbstractList.extend({
   listItemSmall: '',
   listItemSelected: '',
   listItemHighlight: '',
+  displayPopovers: false,
   loop: true,
+  popoverShowtime: 250,
 
   init() {
     this._super(...arguments);
     this.set('keys', Object.keys(this.get('videos')));
+  },
+  didRender() {
+    if (this.get('displayPopovers')) {
+      let component = this;
+      
+      if (this.$('[data-toggle="popover"]').length !== 0){
+        component.$('[data-toggle="popover"]').popover({
+          trigger: 'hover focus',
+          delay: {
+            show: component.get('popoverShowtime'),
+            hide: '100'
+          }
+        });	
+      }
+    }
   },
   actions: {
     select(event) {
