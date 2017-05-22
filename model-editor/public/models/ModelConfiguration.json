@@ -261,10 +261,16 @@
                         "displayName": "Attributes",
                         "inputType": "text",
                         "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
+                        "validation": { },
                         "help": "Attributes that the video has",
+                        "data": [ ]
+                    },
+                    "relations": {
+                        "displayName": "Relations",
+                        "inputType": "text",
+                        "error": "",
+                        "validation": { },
+                        "help": "Relations the video is a part of",
                         "data": [ ]
                     }
                 }

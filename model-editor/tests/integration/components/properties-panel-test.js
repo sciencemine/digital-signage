@@ -6,20 +6,7 @@ moduleForComponent('properties-panel', 'Integration | Component | properties pan
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{properties-panel}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#properties-panel}}
-      template block text
-    {{/properties-panel}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Properties Scroll me List of properties the video has. Submit Submit at bottom of scroll');
 });

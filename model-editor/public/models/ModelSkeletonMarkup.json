@@ -20,6 +20,7 @@
         "0": {
             "prettyName": "", title
             "description": "", description of video
+            "relations": [ ], array of attributes by key to relation object
             "attributes": [ ], array of attributes by key to attribute object
             "full": {
                 "fileIdentifier": "", the name of the video file

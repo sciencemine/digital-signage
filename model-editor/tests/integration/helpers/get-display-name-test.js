@@ -1,6 +1,7 @@
 
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
+import Ember from 'ember';
 
 moduleForComponent('get-display-name', 'helper:get-display-name', {
   integration: true
@@ -8,10 +9,16 @@ moduleForComponent('get-display-name', 'helper:get-display-name', {
 
 // Replace this with your real tests.
 test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+  let data = Ember.Object.create({
+    baba: {
+      displayName: "bobo"
+    }
+  });
 
-  this.render(hbs`{{get-display-name inputValue}}`);
+  this.set('obj', data);
 
-  assert.equal(this.$().text().trim(), '1234');
+  this.render(hbs`{{get-display-name obj "baba"}}`);
+
+  assert.equal(this.$().text().trim(), 'bobo');
 });
 

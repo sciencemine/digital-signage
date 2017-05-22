@@ -20,6 +20,7 @@
     "0":{
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-5C-1s.mp4",
@@ -35,6 +36,7 @@
     "1": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
@@ -50,6 +52,7 @@
     "2": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
@@ -65,6 +68,7 @@
     "3": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
@@ -80,6 +84,7 @@
     "4": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Conec-1s.mp4",
@@ -95,6 +100,7 @@
     "5": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-CpxI-1.mp4",
@@ -110,6 +116,7 @@
     "6": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
@@ -125,6 +132,7 @@
     "7": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Critr-1s.mp4",
@@ -140,6 +148,7 @@
     "8": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Critr-2.mp4",
@@ -155,6 +164,7 @@
     "9": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-H20-1.mp4",
@@ -170,6 +180,7 @@
     "10": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
@@ -185,6 +196,7 @@
     "11": {
       "prettyName": "",
       "description": "",
+      "relations": [],
       "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-ripar-2.mp4",
