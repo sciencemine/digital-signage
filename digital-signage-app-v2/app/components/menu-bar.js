@@ -44,10 +44,19 @@ export default Ember.Component.extend({
 
   didRender() {
     let component = this;
-	 //var popover = $(this);
-
-    component.$(function () {
-      component.$('[data-toggle="popover"]').popover({"trigger": "hover"}).on('shown.bs.popover', function () {
+	
+	if (this.$('[data-toggle="popover"]').length !== 0){
+		
+		component.$('[data-toggle="popover"]').popover({
+			
+			trigger: 'hover focus',
+			placement: 'auto',
+			delay: {
+				show: 'config.ui.showTime',
+				hide: '100'
+			}
+		});
+			}).on('shown.bs.popover', function () {
 		  
          let timeout = setTimeout(function () {
 		 component.$('[data-toggle="popover"]').popover('hide');
@@ -58,7 +67,10 @@ export default Ember.Component.extend({
     clearTimeout(component.get('popoverTimeout'));
     component.set('popoverTimeout', timeout);
 	  });
-    });
+	}
+		
+	
+     
   },
 
   mouseEnter() {

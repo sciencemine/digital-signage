@@ -16,10 +16,12 @@ test('it renders', function(assert) {
 
   // Template block usage:
   this.render(hbs`
-    {{#menu-bar}}
+    {{#menu-bar renderMenu=true}}
       template block text
     {{/menu-bar}}
   `);
+  
+  
 
   assert.equal(this.$().text().trim(), 'template block text');
 });

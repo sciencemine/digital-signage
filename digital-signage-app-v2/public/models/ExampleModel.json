@@ -8,6 +8,7 @@
             "menuDwell": 3,
 			"popoverDwell": 3,
             "menuLocale": "top"
+			"showTime": 1
         },
         "keyboard": {
             "select": "w",
