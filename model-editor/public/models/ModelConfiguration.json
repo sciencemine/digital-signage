@@ -182,19 +182,9 @@
                         "help": "Description for the video",
                         "data": ""
                     },
-                    "attributes": {
-                        "displayName": "Attributes",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "help": "Attributes that the video has",
-                        "data": [ ]
-                    },
                     "full": {
                         "displayName": "Full Video",
-                        "inputType": "",
+                        "inputType": "text",
                         "error": "",
                         "validation": { },
                         "help": "The full video",
@@ -232,7 +222,7 @@
                     },
                     "teaser": {
                         "displayName": "Teaser Video",
-                        "inputType": "",
+                        "inputType": "text",
                         "error": "",
                         "validation": { },
                         "data": {
@@ -266,6 +256,16 @@
                                 "data": ""
                             }
                         }
+                    },
+                    "attributes": {
+                        "displayName": "Attributes",
+                        "inputType": "text",
+                        "error": "",
+                        "validation": {
+                            "required": "required"
+                        },
+                        "help": "Attributes that the video has",
+                        "data": [ ]
                     }
                 }
             }

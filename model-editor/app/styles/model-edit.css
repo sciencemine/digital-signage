@@ -11,18 +11,12 @@
 .model-edit--properties-section {
   position: fixed;
 
+  top: 0px;
   right: 0px;
+  bottom: 0px;
   left: 90%;
 
   height: 100%;
-}
-
-.model-edit--properties-section__footer {
-  position: fixed;
-
-  bottom: 0px;
-
-  width: 10%;
 }
 
 .model-edit--configuration-section {

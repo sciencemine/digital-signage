@@ -20,6 +20,10 @@
   overflow-y: scroll;
 }
 
+.attribute-panel--scrollable::-webkit-scrollbar {
+  display: none;
+}
+
 .attribute-panel__footer {
   position: fixed;
 

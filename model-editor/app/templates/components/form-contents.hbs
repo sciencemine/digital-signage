@@ -1,18 +1,27 @@
 {{yield}}
 
+{{#if inputId}}
+  {{#if data.inputType}}
+    <div class="form-group">
+      <label id={{inputId}}>{{data.displayName}}</label>
+      <span class="help-block">{{data.help}}</span>
+    </div>
+  {{/if}}
+{{/if}}
+
 {{#each-in data.data as |key value|}}
   {{#if (is-array value.data)}}
     <div class="form-group">
-      <label for={{key}} class="sr-only">{{value.displayName}}</label>
-      {{form-contents-select key=key data=value.data class="form-control input-sm"}}
+      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      {{form-contents-select key=(create-id inputId key) data=value.data class="form-control input-sm"}}
       <span class="help-block">{{value.help}}</span>
     </div>
   {{else if (is-object value.data)}}
-    {{form-contents tagName='' data=value}}
+    {{form-contents noLabel=noLabel inputId=(create-id inputId key) tagName='' data=value}}
   {{else if value.inputType}}
     <div class="form-group">
-      <label for={{key}} class="sr-only">{{value.displayName}}</label>
-      {{form-contents-input key=key data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
+      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      {{form-contents-input key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
       <span class="help-block">{{value.help}}</span>
     </div>
   {{/if}}
