@@ -20,11 +20,13 @@ Parameters:
 	default: true
 
 Callbacks:
-  onCompletedCallback(sender)
+  onEndedCallback(sender)
 	This is an action that will be passed in as a parameter.
 	Call this action using this.get('onCompletedCallback')()
 	when the video has played to completion and and looping is
 	disabled.
+  onClickCallback
+  onHoverCallback
 */
 
 import Ember from 'ember';
@@ -43,29 +45,37 @@ export default Ember.Component.extend({
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
 	},
+  willClearRender() {
+    this.set('playingObserver', null);
+    this.set('urlObserver', null);
+  },
 	playingObserver: Ember.observer('playing', function() {
-    var p = this.get("playing");
-		var videoElement = this.$().find("video").get(0);
-		if (videoElement) {
-			if (p) {
-				videoElement.play();
-			}
-			else {
-				videoElement.pause();
-			}
-		}
-		else {
-			console.log("No video element found!");
-		}
+    if (this) {
+      var p = this.get("playing");
+      var videoElement = this.$().find("video").get(0);
+      if (videoElement) {
+        if (p) {
+          videoElement.play();
+        }
+        else {
+          videoElement.pause();
+        }
+      }
+      else {
+        console.log("No video element found!");
+      }
+    }
   }),
 	urlObserver: Ember.observer('url', function() {
-		var videoElement = this.$().find("video").get(0);
-		if (videoElement) {
-			videoElement.load();
-		}
-		else {
-			console.log("No video element found");
-		}
+    if (this) {
+      var videoElement = this.$().find("video").get(0);
+      if (videoElement) {
+        videoElement.load();
+      }
+      else {
+        console.log("No video element found");
+      }
+    }
   }),
   actions: {
   	ended() {
@@ -75,6 +85,11 @@ export default Ember.Component.extend({
   		else {
   			this.get('onEndedCallback') (this.get('videoPos'));
   		}
-  	}
+  	},
+    play() {
+      if (this.get('playing')) {
+        this.$().find("video").get(0).play();
+      }
+    }
   }
 });

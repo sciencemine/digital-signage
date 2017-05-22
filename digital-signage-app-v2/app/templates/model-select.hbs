@@ -1,1 +1,25 @@
-{{outlet}}
+<div class="model-select">
+  <div class="model-select--title page-header">
+    <h1>Exhibit Selection <small>Select an exhibit below</small></h1>
+  </div>
+  <div class="model-select--panel panel panel-default">
+    <div class="panel-heading">
+      <h3 class="panel-title">Select an exhibit</h3>
+    </div>
+
+    <div class="list-group">
+      {{#each-in model as |key value|}}
+          {{#link-to "main" (query-params modelfile=value.fileName)}}
+            <button class="list-group-item model-select--element">
+              {{model-select-element name=value.config.prettyName description=value.config.description modelIdentifier=value.config.modelIdentifier videos=value.backgroundVideos}}
+              <!-- button onclick={{action 'click'}} bubbles="false" type="button" class="btn btn-warning model-select--btn__edit">Edit</button -->
+            </button>
+          {{/link-to}}
+      {{/each-in}}
+    </div>
+
+    <div class="panel-footer">
+        <!--h4 class="panel-title">Add Exhibit</h4-->
+    </div>
+  </div>
+</div>
