@@ -1,0 +1,33 @@
+.properties-panel--header {
+  position: fixed;
+
+  top: 0px;
+  bottom: 95%;
+
+  width: 10%;
+
+  z-index: 100;
+}
+
+.properties-panel--scrollable {
+  position: relative;
+
+  top: 5%;
+  bottom: 5%;
+
+  height: 90%;
+
+  overflow-y: scroll;
+}
+
+.properties-panel--scrollable::-webkit-scrollbar {
+  display: none;
+}
+
+.properties-panel__footer {
+  position: fixed;
+
+  top: 95%;
+  bottom: 0px;
+
+  width: 10%;
