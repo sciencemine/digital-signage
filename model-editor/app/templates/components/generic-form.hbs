@@ -1,11 +1,6 @@
-<h3 class="generic-form__title--center">Adding {{data.displayName}}</h3>
+<h3>{{data.displayName}}<small> {{data.help}}</small></h3>
 
-<form class="form-horizontal">
-  {{form-contents data=data}}
-  <br><br>
-  <div class="form-group">
-    <div class="col-sm-10">
-      <button type="submit" class="btn btn-success">Add {{data.displayName}}</button>
-    </div>
-  </div>
+<form class="form-inline">
+  {{form-contents noLabel=noLabel data=data}}
+  <button type="submit" class="btn btn-success btn-xs">Submit {{title}}</button>
 </form>

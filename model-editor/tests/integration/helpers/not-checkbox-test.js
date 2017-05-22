@@ -12,6 +12,6 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{not-checkbox inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'true');
 });
 

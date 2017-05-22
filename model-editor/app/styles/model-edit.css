@@ -1,4 +1,43 @@
 .model-edit--title {
-  position: static;
   text-align: center;
+
+  top: 0px;
+  right: 0px;
+  left: 0px;
+
+  border-bottom: 1px solid grey;
+}
+
+.model-edit--properties-section {
+  position: fixed;
+
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 90%;
+
+  height: 100%;
+}
+
+.model-edit--configuration-section {
+  position: fixed;
+
+  right: 10%;
+  bottom: 0px;
+  left: 10%;
+
+  padding: 10px;
+
+  border-top: 2px solid black;
+}
+
+.model-edit--attribute-section {
+  position: fixed;
+
+  top: 0px;
+  right: 90%;
+  bottom: 0px;
+  left: 0px;
+
+  height: 100%;
 }

@@ -1,0 +1,27 @@
+<div id="attribute-panel" data-spy="scroll" data-target=".attribute-navbar" class="panel panel-primary attribute-panel--scrollable">
+  <div class="attribute-panel--header panel-heading">
+    <h4 class="panel-title">Attributes <small>Scroll me</small></h4>
+  </div>
+
+  <div class="panel-body">
+    <p>List of attributes in the exhibit. Drag an attribute onto a video to add it or select "Add Attribute" at the bottom to create a new attribute.</p>
+  </div>
+
+  <nav class="attribute-navbar navbar">
+    <div class="collapse navbar-collapse" id="attributeNav">
+      <ul class="nav navbar-nav">
+        {{#each-in data as |key value|}}
+          <li data-toggle="tooltip" title={{value.prettyName}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
+        {{/each-in}}
+      </ul>
+    </div>
+  </nav>
+
+  <ul class="list-group attribute-list">
+    {{#each-in data as |key value|}}
+      {{attribute-list-item id=key tagName="li" class="list-group-item container-fluid" data=value}}
+    {{/each-in}}
+  </ul>
+
+  <div class="attribute-panel__footer panel-footer"><span class="glyphicon glyphicon-plus"></span> Add Attribute</div>
+</div>
