@@ -20,7 +20,6 @@
         "0": {
             "prettyName": "", title
             "description": "", description of video
-            "attributes": [ ], array of attributes by key to attribute object
             "full": {
                 "fileIdentifier": "", the name of the video file
                 "isUrl": false, true or false. false for local, true for links to other sites
@@ -30,10 +29,12 @@
                 "fileIdentifier": "",
                 "isUrl": false,
                 "attribution": ""
-            }
+            },
+            "relations": [ ], array of attributes by key to relation object
+            "attributes": [ ] array of attributes by key to attribute object
         }
     },
-    "attribute": {
+    "attributes": {
         "0": {
             "prettyName": "",
             "description": "",
@@ -42,7 +43,7 @@
             "videos": [ ] videos associated with this attribute
         }
     },
-    "relation": {
+    "relations": {
         "0": {
             "videoId": "0", start video
             "relatedId": "0", end video

@@ -20,7 +20,6 @@
     "0":{
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-5C-1s.mp4",
         "isUrl": false,
@@ -30,12 +29,13 @@
         "fileIdentifier": "SM-HSt-5C-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "1": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
         "isUrl": false,
@@ -45,12 +45,13 @@
         "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "2": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
         "isUrl": false,
@@ -60,12 +61,13 @@
         "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "3": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
         "isUrl": false,
@@ -75,12 +77,13 @@
         "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "4": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Conec-1s.mp4",
         "isUrl": false,
@@ -90,12 +93,13 @@
         "fileIdentifier": "SM-HSt-Conec-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "5": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-CpxI-1.mp4",
         "isUrl": false,
@@ -105,12 +109,13 @@
         "fileIdentifier": "SM-HSt-CpxI-1.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "6": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
         "isUrl": false,
@@ -120,12 +125,13 @@
         "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "7": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Critr-1s.mp4",
         "isUrl": false,
@@ -135,12 +141,13 @@
         "fileIdentifier": "SM-HSt-Critr-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "8": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Critr-2.mp4",
         "isUrl": false,
@@ -150,12 +157,13 @@
         "fileIdentifier": "SM-HSt-Critr-2.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "9": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-H20-1.mp4",
         "isUrl": false,
@@ -165,12 +173,13 @@
         "fileIdentifier": "SM-HSt-H20-1.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "10": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
         "isUrl": false,
@@ -180,12 +189,13 @@
         "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     },
     "11": {
       "prettyName": "",
       "description": "",
-      "attributes": [],
       "full": {
         "fileIdentifier": "SM-HSt-ripar-2.mp4",
         "isUrl": false,
@@ -195,10 +205,12 @@
         "fileIdentifier": "SM-HSt-ripar-2.mp4",
         "isUrl": false,
         "attribution": ""
-      }
+      },
+      "relations": [],
+      "attributes": []
     }
   },
-  "attribute": {
+  "attributes": {
     "0": {
       "prettyName": "Raparian Habitats",
       "description": "Raparian Habitats",
@@ -235,6 +247,6 @@
       "videos": ["1"]
     }
   },
-  "relation": {
+  "relations": {
   }
 }

@@ -2,148 +2,147 @@
     "config": {
         "displayName": "Configuration",
         "inputType": "",
-        "help": "",
         "error": "",
         "validation": { },
+        "help": "Configure the exhibit characteristics",
         "data": {
             "prettyName": {
                 "displayName": "Exhibit Title",
                 "inputType": "text",
-                "help": "",
                 "error": "",
                 "validation": {
                     "required": "required"
                 },
-                "data": ""
-            },
-            "modelIdentifier": {
-                "displayName": "Filename",
-                "inputType": "text",
-                "help": "",
-                "error": "",
-                "validation": {
-                    "required": "required"
-                },
+                "help": "Title of the exhibit",
                 "data": ""
             },
             "description": {
                 "displayName": "Description",
                 "inputType": "text",
-                "help": "",
                 "error": "",
                 "validation": {
                     "required": "required"
                 },
+                "help": "Description of the exhibit",
+                "data": ""
+            },
+            "modelIdentifier": {
+                "displayName": "Filename",
+                "inputType": "text",
+                "error": "",
+                "validation": {
+                    "required": "required"
+                },
+                "help": "Filename for this exhibit",
                 "data": ""
             },
             "backgroundVideos": {
                 "displayName": "Background Videos",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": {
                     "required": "required"
                 },
+                "help": "Background videos to be displayed on the exhibit",
                 "data": [ ]
             },
             "ui": {
                 "displayName": "User Interface",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": { },
+                "help": "Controls the exhibit interface",
                 "data": {
                     "idle": {
-                        "displayName": "Interface Timeout",
+                        "displayName": "Idle",
                         "inputType": "number",
-                        "help": "",
                         "error": "Please pick numbers in the range of 0 - 120.",
                         "validation": {
                             "required": "required",
                             "min": 0,
                             "max": 120
                         },
-                        "data": 5
+                        "data": "",
+                        "help": "Idle timeout"
                     },
                     "menuDwell": {
-                        "displayName": "Menu Timeout",
+                        "displayName": "Menu",
                         "inputType": "number",
-                        "help": "",
                         "error": "Please pick numbers in the range of 0 - 30.",
                         "validation": {
                             "required": "required",
                             "min": 0,
                             "max": 30
                         },
-                        "data": 3
+                        "help": "Menu Timeout",
+                        "data": ""
                     },
                     "menuLocale": {
                         "displayName": "Menu Location",
-                        "inputType": "text",
-                        "help": "",
+                        "inputType": "dropdown",
                         "error": "Please use on of the following: top, right, bottom, left.",
                         "validation": {
-                            "required": "required",
-                            "pattern": "/^(top|right|bottom|left)$/gi"
+                            "required": "required"
                         },
-                        "data": ""
+                        "help": "Menu Position",
+                        "data": ["top", "right", "bottom", "left"]
                     }
                 }
             },
             "keyboard": {
                 "displayName": "Button Input",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": { },
+                "help": "Button Inputs",
                 "data": {
                     "select": {
                         "displayName": "Select",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "Please use a-z, A-Z, or 0-9.",
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
-                        "data": "w"
+                        "help": "Selection",
+                        "data": ""
                     },
                     "previous": {
                         "displayName": "Previous",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "Please use a-z, A-Z, or 0-9.",
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
-                        "data": "a"
+                        "help": "Forward in a List",
+                        "data": ""
                     },
                     "cancel": {
                         "displayName": "Cancel",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "Please use a-z, A-Z, or 0-9.",
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
-                        "data": "s"
+                        "help": "Cancelation",
+                        "data": ""
                     },
                     "next": {
                         "displayName": "Next",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "Please use a-z, A-Z, or 0-9.",
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi"
                         },
-                        "data": "d"
+                        "help": "Backward in a List",
+                        "data": ""
                     }
                 }
             }
@@ -152,122 +151,128 @@
     "videos": {
         "displayName": "Videos",
         "inputType": "",
-        "help": "",
         "error": "",
         "validation": { },
+        "help": "Videos that the exhibit has access to",
         "data": {
             "video": {
                 "displayName": "Video",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": { },
+                "help": "A video in the exhibit",
                 "data": {
                     "prettyName": {
                         "displayName": "Title",
                         "inputType": "text",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Title of the video",
                         "data": ""
                     },
                     "description": {
                         "displayName": "Description",
                         "inputType": "text",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Description for the video",
                         "data": ""
-                    },
-                    "attributes": {
-                        "displayName": "Attributes",
-                        "inputType": "",
-                        "help": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "data": [ ]
                     },
                     "full": {
                         "displayName": "Full Video",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "",
                         "validation": { },
+                        "help": "The full video",
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "help": "Use files that are .mp4, .ogg, or .webm.",
                                 "error": "Use files that are .mp4, .ogg, or .webm.",
                                 "validation": {
                                     "required": "required",
                                     "pattern": "/^\\w.*\\.(mp4|ogg|webm)$/gi"
                                 },
+                                "help": "Filename of the full video",
                                 "data": ""
                             },
                             "isUrl": {
                                 "displayName": "Url",
                                 "inputType": "checkbox",
-                                "help": "",
                                 "error": "",
                                 "validation": { },
-                                "data": false
+                                "help": "If it is a url or not, e.g. http://...",
+                                "data": ""
                             },
                             "attribution": {
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
-                                "help": "",
                                 "error": "",
                                 "validation": {
                                     "required": "required"
                                 },
+                                "help": "Attribution for the video",
                                 "data": ""
                             }
                         }
                     },
                     "teaser": {
                         "displayName": "Teaser Video",
-                        "inputType": "",
-                        "help": "",
+                        "inputType": "text",
                         "error": "",
                         "validation": { },
+                        "help": "The teaser video",
                         "data": {
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "help": "Use files that are .mp4, .ogg, or .webm.",
                                 "error": "Use files that are .mp4, .ogg, or .webm.",
                                 "validation": {
                                     "required": "required",
                                     "pattern": "/^\\w.*(\\.mp4|\\.ogg|\\.webm)$/gi"
                                 },
+                                "help": "Filename of the teaser video",
                                 "data": ""
                             },
                             "isUrl": {
                                 "displayName": "Url",
                                 "inputType": "checkbox",
-                                "help": "",
                                 "error": "",
                                 "validation": { },
-                                "data": false
+                                "help": "If it is a url or not, e.g. http://...",
+                                "data": ""
                             },
                             "attribution": {
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
-                                "help": "",
                                 "error": "",
                                 "validation": {
                                     "required": "required"
                                 },
+                                "help": "Attribution for the video",
                                 "data": ""
                             }
                         }
+                    },
+                    "attributes": {
+                        "displayName": "Attributes",
+                        "inputType": "list",
+                        "error": "",
+                        "validation": { },
+                        "help": "Attributes that the video has",
+                        "data": { }
+                    },
+                    "relations": {
+                        "displayName": "Relations",
+                        "inputType": "list",
+                        "error": "",
+                        "validation": { },
+                        "help": "Relations the video is a part of",
+                        "data": { }
                     }
                 }
             }
@@ -276,73 +281,73 @@
     "attributes": {
         "displayName": "Attributes",
         "inputType": "",
-        "help": "",
         "error": "",
         "validation": {
             "required": "required"
         },
+        "help": "Attributes that are related to the exhibit",
         "data": {
             "attribute": {
                 "displayName": "Attribute",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": {
                     "required": "required"
                 },
+                "help": "An attribute of the exhibit",
                 "data": {
                     "prettyName": {
                         "displayName": "Attribute Name",
                         "inputType": "text",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "The name of the attribute",
                         "data": ""
                     },
                     "description": {
                         "displayName": "Attribute Description",
                         "inputType": "text",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "The description of the attribute",
                         "data": ""
                     },
                     "x": {
                         "displayName": "X Position",
                         "inputType": "number",
-                        "help": "",
                         "error": "Please pick numbers in the range of 0 - 100.",
                         "validation": {
                             "required": "required",
                             "min": 0,
                             "max": 100
                         },
-                        "data": 0
+                        "help": "Position from the left where the attribute is shown on home screen",
+                        "data": ""
                     },
                     "y":  {
                         "displayName": "Y Position",
                         "inputType": "number",
-                        "help": "",
                         "error": "Please pick numbers in the range of 0 - 100.",
                         "validation": {
                             "required": "required",
                             "min": 0,
                             "max": 100
                         },
-                        "data": 0
+                        "help": "Position from the top where the attribute is shown on home screen",
+                        "data": ""
                     },
                     "videos":  {
                         "displayName": "Videos",
                         "inputType": "",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Videos that have this attribute",
                         "data": [ ]
                     }
                 }
@@ -352,31 +357,30 @@
     "relations": {
         "displayName": "Relations",
         "inputType": "",
-        "help": "",
         "error": "",
         "validation": { },
+        "help": "Relations that are in the exhibit",
         "data": {
             "relation": {
                 "displayName": "Relation",
                 "inputType": "",
-                "help": "",
                 "error": "",
                 "validation": { },
+                "help": "A relation in the exhibit",
                 "data": {
                     "videoId": {
                         "displayName": "Beginning Video",
                         "inputType": "",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Video the relation is coming from",
                         "data": ""
                     },
                     "relatedId": {
                         "displayName": "Ending Video",
                         "inputType": "",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
@@ -386,23 +390,24 @@
                     "difficulty": {
                         "displayName": "Ending Video",
                         "inputType": "number",
-                        "help": "",
                         "error": "Please pick numbers in the range of -100 - 100.",
                         "validation": {
                             "required": "required",
                             "min": -100,
                             "max": 100
                         },
-                        "data": 0
+                        "data": 0,
+                        "help": "Video the relation is going to",
+                        "data": ""
                     },
                     "attributeId": {
                         "displayName": "Attribute",
                         "inputType": "",
-                        "help": "",
                         "error": "",
                         "validation": {
                             "required": "required"
                         },
+                        "help": "Attribute of this relation",
                         "data": ""
                     }
                 }

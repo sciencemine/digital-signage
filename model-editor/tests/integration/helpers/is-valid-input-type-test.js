@@ -2,7 +2,7 @@
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
-moduleForComponent('not-checkbox', 'helper:not-checkbox', {
+moduleForComponent('is-valid-input-type', 'helper:is-valid-input-type', {
   integration: true
 });
 
@@ -10,8 +10,8 @@ moduleForComponent('not-checkbox', 'helper:not-checkbox', {
 test('it renders', function(assert) {
   this.set('inputValue', '1234');
 
-  this.render(hbs`{{not-checkbox inputValue}}`);
+  this.render(hbs`{{is-valid-input-type inputValue}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'true');
+  assert.equal(this.$().text().trim(), '1234');
 });
 

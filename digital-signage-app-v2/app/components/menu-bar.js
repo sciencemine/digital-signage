@@ -7,6 +7,9 @@ export default Ember.Component.extend({
   filterType: "All",
   useDropUp: false,
   renderMenu: false,
+  menuTimeout: null,
+  popoverTimeout: null,
+
 
   init() {
     this._super(...arguments);
@@ -40,16 +43,41 @@ export default Ember.Component.extend({
     }
   },
 
+  didRender() {
+    let component = this;
+	
+    if (this.$('[data-toggle="popover"]').length !== 0){
+      component.$('[data-toggle="popover"]').popover({
+        trigger: 'hover focus',
+        delay: {
+          show: component.get('config.ui.showTime'),
+          hide: '100'
+        }
+      }).on('shown.bs.popover', function () {  
+        let timeout = setTimeout(function () {
+          component.$('[data-toggle="popover"]').popover('hide');
+          component.send('hidePopovers');
+        }, component.get('config.ui.popoverDwell'));
+          
+        clearTimeout(component.get('popoverTimeout'));
+        component.set('popoverTimeout', timeout);
+      });	
+    }
+  },
+
   mouseEnter() {
     this.set('renderMenu', true);
+    clearTimeout(this.get('menuTimeout'));
   },
 
   mouseLeave() {
     var component = this;
-
-    setTimeout(() => {
+    let timeout = setTimeout(() => {
       component.set('renderMenu', false);
     }, this.get('config.ui.menuDwell') * 1000);
+
+    clearTimeout(this.get('menuTimeout'));
+    this.set('menuTimeout', timeout);
   },
 
   actions: {
@@ -60,7 +88,6 @@ export default Ember.Component.extend({
       }
       else {
         let tempVideos = {};
-
         let attributes = this.get('attributes.' + newAttributeID + '.videos');
 
         for (var videoID = 0; videoID < attributes.length; videoID++) {
@@ -71,12 +98,17 @@ export default Ember.Component.extend({
         this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
       }
     },
+    
     videoClicked(videoData) {
       this.set('renderMenu', false);
       this.get('onClickCallback') (videoData);
+	  this.send('hidePopovers');
     },
-    doNothing() {
-      
+    
+    doNothing() {},
+	
+    hidePopovers() {
+      this.$('[data-toggle="popover"]').popover('hide');
     }
   }
 });

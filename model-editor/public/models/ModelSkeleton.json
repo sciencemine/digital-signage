@@ -20,7 +20,6 @@
         "0": {
             "prettyName": "",
             "description": "",
-            "attributes": [ ],
             "full": {
                 "fileIdentifier": "",
                 "isUrl": false, 
@@ -30,10 +29,12 @@
                 "fileIdentifier": "",
                 "isUrl": false,
                 "attribution": ""
-            }
+            },
+            "relations": [ ],
+            "attributes": [ ]
         }
     },
-    "attribute": {
+    "attributes": {
         "0": {
             "prettyName": "",
             "description": "",
@@ -42,7 +43,7 @@
             "videos": [ ]
         }
     },
-    "relation": {
+    "relations": {
         "0": {
             "videoId": "0",
             "relatedId": "0",

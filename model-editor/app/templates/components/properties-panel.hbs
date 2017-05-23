@@ -1,0 +1,27 @@
+<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-primary properties-panel--scrollable">
+  <div class="properties-panel--header panel-heading">
+    <h4 class="panel-title">Properties <small>Scroll me</small></h4>
+  </div>
+    
+  <div class="panel-body">
+    <p>List of properties the video has.</p>
+  </div>
+
+  <nav class="properties-navbar navbar">
+    <div class="collapse navbar-collapse" id="propertiesNav">
+      <ul class="nav navbar-nav">
+        {{#each-in data.modelData.videos.[0] as |key value|}}
+          <li data-toggle="propertiesTooltip" title={{get-display-name data.modelConfig.videos.data.video.data key}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
+        {{/each-in}}
+      </ul>
+    </div>
+  </nav>
+
+  <div class="panel-body">
+    {{generic-form noLabel=false data=data.modelConfig.videos.data.video}}
+  </div>
+
+  <div class="properties-panel__footer panel-footer">
+    <p>Submit at bottom of scroll</p>
+  </div>
+</div>
