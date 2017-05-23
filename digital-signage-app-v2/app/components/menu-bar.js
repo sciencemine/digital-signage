@@ -9,7 +9,7 @@ export default Ember.Component.extend({
   renderMenu: false,
   menuTimeout: null,
   popoverTimeout: null,
-
+  popoverShowDelay: 250,
 
   init() {
     this._super(...arguments);
@@ -50,7 +50,7 @@ export default Ember.Component.extend({
       component.$('[data-toggle="popover"]').popover({
         trigger: 'hover focus',
         delay: {
-          show: component.get('config.ui.showTime'),
+          show: component.get('popoverShowDelay'),
           hide: '100'
         }
       }).on('shown.bs.popover', function () {  

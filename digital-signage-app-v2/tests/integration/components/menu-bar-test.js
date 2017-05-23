@@ -9,10 +9,10 @@ moduleForComponent('menu-bar', 'Integration | Component | menu bar', {
 test('it renders', function(assert) {
 	
   let data = Ember.Object.create({
-        "ui": {
+    "ui": {
 			"popoverDwell": 3000,
-			"showTime": 1000
-        }   
+			"popoverShowDelay": 1000
+    }   
   });	
 
   // Set any properties with this.set('myProperty', 'value');
@@ -23,15 +23,4 @@ test('it renders', function(assert) {
   this.render(hbs`{{menu-bar config=testData}}`);
 
   assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#menu-bar config=testData}}
-      template block text
-    {{/menu-bar}}
-  `);
-  
-  
-
-  assert.equal(this.$().text().trim(), 'template block text');
 });

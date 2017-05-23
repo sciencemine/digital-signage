@@ -13,7 +13,7 @@
   </div>
 {{/if}}
 
-{{menu-bar config=data.config videos=selectionVideos attributes=data.attributes onClickCallback=(action 'videoSelected')}}
+{{menu-bar popoverShowDelay=data.config.ui.popoverShowDelay config=data.config videos=selectionVideos attributes=data.attributes onClickCallback=(action 'videoSelected')}}
 
 {{video-stack videos=data.videos modelIdentifier=data.config.modelIdentifier playerSize='video-stack--container' onClickCallback=(action 'doNothing') onHoverCallback=(action 'doNothing')}}
 
