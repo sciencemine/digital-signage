@@ -87,14 +87,13 @@ export default Ember.Component.extend({
         this.set('filterType', "All");
       }
       else {
-        let tempVideos = [];
         let attributes = this.get('attributes.' + newAttributeID + '.videos');
+        this.set('displayVideos', []);
 
         for (var videoID = 0; videoID < attributes.length; videoID++) {
-          tempVideos.push(this.get('videos')[attributes[videoID]]);
+          this.get('displayVideos').pushObject(this.get('videos')[attributes[videoID]]);
         }
 
-        this.set('displayVideos', tempVideos);
         this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
       }
     },
