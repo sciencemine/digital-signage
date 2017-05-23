@@ -35,7 +35,7 @@
             }
         }
     },
-    "attribute": {
+    "attributes": {
         "0": {
             "prettyName": "",
             "description": "",
@@ -44,7 +44,7 @@
             "videos": [ ]
         }
     },
-    "relation": {
+    "relations": {
         "0": {
             "videoId": "0",
             "relatedId": "0",
