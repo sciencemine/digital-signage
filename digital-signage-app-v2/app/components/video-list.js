@@ -31,18 +31,16 @@ import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
   selectedVidPos: 0,
-  keys: [],
   listItemClass: '',
   listItemSmall: '',
   listItemSelected: '',
   listItemHighlight: '',
   displayPopovers: false,
   loop: true,
-  popoverShowtime: 250,
+  popoverShowDelay: 250,
 
   init() {
     this._super(...arguments);
-    this.set('keys', Object.keys(this.get('videos')));
   },
   didRender() {
     if (this.get('displayPopovers')) {
@@ -52,12 +50,14 @@ export default AbstractList.extend({
         component.$('[data-toggle="popover"]').popover({
           trigger: 'hover focus',
           delay: {
-            show: component.get('popoverShowtime'),
+            show: component.get('popoverShowDelay'),
             hide: '100'
           }
         });	
       }
     }
+
+    this.send('updateFocus', true);
   },
   actions: {
     select(event) {
@@ -86,7 +86,7 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goNext(event) {
-      if (parseInt(this.get('selectedVidPos')) + 1 === this.get('keys').length && !this.get('loop')) {
+      if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
         this.send('overflowCallback');
       }
 
@@ -100,7 +100,7 @@ export default AbstractList.extend({
       this.send('selectedCallback', this.get('videos')[videoPos]);
     },
     alterSelected(param) {
-      let vidArrayLength = this.get('keys').length;
+      let vidArrayLength = this.get('videos').length;
       //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
       let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
 
