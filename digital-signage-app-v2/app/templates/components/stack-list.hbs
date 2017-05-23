@@ -2,7 +2,7 @@
 {{#if isFlex}}
     <div class="video-list video-list--flex">
     {{#each-in data as |key value|}}
-        <div>
+        <div class={{playersize}}>
         {{video-stack videos=data.data.videos stackStyle="" keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
         cancelCallback=(action 'cancel') onHoverCallback=(action 'hover')}}
         </div>

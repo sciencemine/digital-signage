@@ -6,6 +6,7 @@ export default AbstractList.extend({
     isMuted: true,
     isFlex: true,
     loop: true,
+    playerSize: '',
     
     init(){
         this._super(...arguments);

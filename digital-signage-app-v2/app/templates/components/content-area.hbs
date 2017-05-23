@@ -1,4 +1,4 @@
-
+<!--
 <div class="video-player__background--container">
   {{video-player muted=displayVideoSelect class=(if displayVideo 'video-player__hidden' 'video-player__darken') playing=(if displayVideo false true) url=(make-local-url data.config.modelIdentifier backgroundVideoUrl) onEndedCallback=(action 'cycleBackground')}}
 </div>
@@ -16,7 +16,7 @@
 {{menu-bar popoverShowDelay=data.config.ui.popoverShowDelay config=data.config videos=selectionVideos attributes=data.attributes onClickCallback=(action 'videoSelected')}}
 
 {{video-stack videos=data.videos modelIdentifier=data.config.modelIdentifier playerSize='video-stack--container' onClickCallback=(action 'doNothing') onHoverCallback=(action 'doNothing')}}
-
+-->
 <div class="video-list video-list--flex">
   {{stack-list videos=data.data.videos modelIdentifier=data.config.modelIdentifier stackStyle="" 
   keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
