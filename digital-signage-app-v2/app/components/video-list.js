@@ -37,7 +37,7 @@ export default AbstractList.extend({
   listItemHighlight: '',
   displayPopovers: false,
   loop: true,
-  popoverShowtime: 250,
+  popoverShowDelay: 250,
 
   init() {
     this._super(...arguments);
@@ -50,7 +50,7 @@ export default AbstractList.extend({
         component.$('[data-toggle="popover"]').popover({
           trigger: 'hover focus',
           delay: {
-            show: component.get('popoverShowtime'),
+            show: component.get('popoverShowDelay'),
             hide: '100'
           }
         });	
