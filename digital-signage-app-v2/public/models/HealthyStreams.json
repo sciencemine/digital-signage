@@ -200,7 +200,7 @@
       }
     }
   },
-  "attribute": {
+  "attributes": {
     "0": {
       "prettyName": "Raparian Habitats",
       "description": "Raparian Habitats",
@@ -237,6 +237,6 @@
       "videos": ["1"]
     }
   },
-  "relation": {
+  "relations": {
   }
 }
