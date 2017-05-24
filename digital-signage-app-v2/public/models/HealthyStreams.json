@@ -9,7 +9,7 @@
       "menuDwell": 3,
       "popoverDwell": 3000,
       "menuLocale": "top",
-      "showTime": 1000
+      "popoverShowDelay": 1000
     },
     "keyboard": {
       "select": "w",
@@ -200,7 +200,7 @@
       }
     }
   },
-  "attribute": {
+  "attributes": {
     "0": {
       "prettyName": "Raparian Habitats",
       "description": "Raparian Habitats",
@@ -237,6 +237,6 @@
       "videos": ["1"]
     }
   },
-  "relation": {
+  "relations": {
   }
 }
