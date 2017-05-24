@@ -37,6 +37,7 @@ export default AbstractList.extend({
   listItemHighlight: '',
   displayPopovers: false,
   loop: true,
+  muted: false,
   popoverShowDelay: 250,
 
   init() {
