@@ -10,11 +10,10 @@ export default AbstractList.extend({
     
     init(){
         this._super(...arguments);
-        this.set('attributeKeys', Object.keys(this.get('videos')));
     },
     actions:{
         select(event){
-            this.get('onSelectedCallback') (this.get('videos')[this.get('selectedStackIndex')]);
+            this.get('onSelectedCallback') (this.get('data')[this.get('selectedStackIndex')]);
             event.stopPropagation();    
         },
         cancel(event){
