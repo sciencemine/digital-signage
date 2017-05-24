@@ -15,7 +15,7 @@
       <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
       <span class="help-block">{{value.help}}</span>
     </div>
-    {{form-contents-list tagName="ul" class="list-group" data=value.data}}
+    {{form-contents-list tagName="ul" class="list-group" data=(get-data data key)}}
   {{else if (is-array value.data)}}
     <div class="form-group">
       <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>

@@ -4,6 +4,17 @@
   </div>
   <div class="media-body">
     <h4 class="media-heading">{{data.prettyName}}</h4>
-    {{data.description}}
+
+    {{#if data.description}}
+      {{data.description}}
+    {{else}}
+      <i>No description available</i>
+    {{/if}}
+    <br>
+
+    <div class="btn-group" role="group" aria-label="...">
+      <button type="button" class="btn btn-warning btn-xs">Edit</button>
+      <button type="button" class="btn btn-danger btn-xs">Remove</button>
+    </div>
   </div>
 </div>

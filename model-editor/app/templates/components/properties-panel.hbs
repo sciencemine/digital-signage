@@ -3,25 +3,31 @@
     <h4 class="panel-title">Properties <small>Scroll me</small></h4>
   </div>
 
-  <div class="panel-body">
-    <p>List of properties the video has.</p>
-  </div>
-
-  <nav class="properties-navbar navbar">
-    <div class="collapse navbar-collapse" id="propertiesNav">
-      <ul class="nav navbar-nav">
-        {{#each-in data as |key value|}}
-          <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
-        {{/each-in}}
-      </ul>
+  {{#if data}}
+    <div class="panel-body">
+      <p>List of properties the video has.</p>
     </div>
-  </nav>
 
-  <div class="panel-body">
-    {{generic-form class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
-  </div>
+    <nav class="properties-navbar navbar">
+      <div class="collapse navbar-collapse" id="propertiesNav">
+        <ul class="nav navbar-nav">
+          {{#each-in data as |key value|}}
+            <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
+          {{/each-in}}
+        </ul>
+      </div>
+    </nav>
 
-  <div class="properties-panel__footer panel-footer">
-    Submit at bottom of scroll
-  </div>
+    <div class="panel-body">
+      {{generic-form class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+    </div>
+
+    <div class="properties-panel__footer panel-footer">
+      Submit at bottom of scroll
+    </div>
+  {{else}}
+    <div class="properties-panel__footer panel-footer">
+      <button type="button" class="btn btn-primary center-block">Add Video</button>
+    </div>
+  {{/if}}
 </div>

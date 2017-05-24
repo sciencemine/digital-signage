@@ -17,36 +17,7 @@
         }
     },
     "videos": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "full": {
-                "fileIdentifier": "",
-                "isUrl": false, 
-                "attribution": ""
-            },
-            "teaser": {
-                "fileIdentifier": "",
-                "isUrl": false,
-                "attribution": ""
-            },
-            "attributes": [ ],
-            "relations": [
-                {
-                    "relatedId": "",
-                    "difficulty": 0,
-                    "attributeId": ""
-                }
-            ]
-        }
     },
     "attributes": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "x": 0,
-            "y": 0,
-            "videos": [ ]
-        }
     }
 }
