@@ -1,8 +1,8 @@
 /* Route css */
 @import 'model-select.css';
-@import 'model-edit.css';
 
 /* Component css */
 @import 'generic-form.css';
 @import 'attribute-panel.css';
 @import 'properties-panel.css';
+@import 'content-area.css';

@@ -1,4 +1,4 @@
-.model-edit--title {
+.content-area--title {
   text-align: center;
 
   top: 0px;
@@ -8,18 +8,19 @@
   border-bottom: 1px solid grey;
 }
 
-.model-edit--properties-section {
+.content-area--properties-section {
   position: fixed;
 
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 90%;
+  
+  width: 10%;
 
   height: 100%;
 }
 
-.model-edit--configuration-section {
+.content-area--configuration-section {
   position: fixed;
 
   right: 10%;
@@ -31,13 +32,18 @@
   border-top: 2px solid black;
 }
 
-.model-edit--attribute-section {
+.content-area--attribute-section {
   position: fixed;
 
   top: 0px;
-  right: 90%;
   bottom: 0px;
   left: 0px;
 
+  width: 10%;
+
   height: 100%;
+}
+
+.content-area--modal__body {
+  margin: 0% 5%;
 }

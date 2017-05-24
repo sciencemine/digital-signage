@@ -1,0 +1,30 @@
+<div class="content-area--title">
+  <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
+</div>
+
+{{properties-panel class="content-area--properties-section" data=selectedVideo config=data.modelConfig}}
+
+<div class="content-area--configuration-section">
+  {{generic-form isInline=true class="generic-form__bottom" data=newModel.config config=data.modelConfig.config}}
+</div>
+
+{{attribute-panel updateModalCallback=(action 'updateModalInfo') class="content-area--attribute-section" data=newModel.attributes}}
+
+<div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalFormOverlay">{{modalTitle}}</h4>
+      </div>
+
+      <div class="modal-body content-area--modal__body">
+        {{generic-form showTitle=false noLabel=false data=modalData config=modalConfig}}
+      </div>
+
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
