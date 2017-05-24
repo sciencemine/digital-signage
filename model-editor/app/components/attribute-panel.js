@@ -13,8 +13,8 @@ export default Ember.Component.extend({
       });
     }
 
-    if (this.$('#attribute-list').length !== 0) {
-      this.$('#attribute-list').scrollspy({
+    if (this.$('.attribute-list').length !== 0) {
+      this.$('.attribute-list').scrollspy({
         target: '#attributeNav'
       });
     }

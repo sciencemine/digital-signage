@@ -1,13 +1,3 @@
-<div class="model-edit--title">
-  <h3>{{model.modelData.config.prettyName}} <small>{{model.modelData.config.description}}</small></h3>
-</div>
-
-{{properties-panel class="model-edit--properties-section" data=model}}
-
-<div class="model-edit--configuration-section">
-  {{generic-form class="generic-form__bottom" data=model.modelConfig.config}}
-</div>
-
-{{attribute-panel class="model-edit--attribute-section" data=model.modelData.attributes}}
+{{content-area data=model}}
 
 {{outlet}}

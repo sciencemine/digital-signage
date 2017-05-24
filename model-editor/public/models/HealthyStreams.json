@@ -30,8 +30,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "1": {
       "prettyName": "",
@@ -46,8 +46,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "2": {
       "prettyName": "",
@@ -62,8 +62,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "3": {
       "prettyName": "",
@@ -78,8 +78,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "4": {
       "prettyName": "",
@@ -94,8 +94,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "5": {
       "prettyName": "",
@@ -110,8 +110,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "6": {
       "prettyName": "",
@@ -126,8 +126,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "7": {
       "prettyName": "",
@@ -142,8 +142,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "8": {
       "prettyName": "",
@@ -158,8 +158,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "9": {
       "prettyName": "",
@@ -174,8 +174,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "10": {
       "prettyName": "",
@@ -190,8 +190,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     },
     "11": {
       "prettyName": "",
@@ -206,8 +206,8 @@
         "isUrl": false,
         "attribution": ""
       },
-      "relations": [],
-      "attributes": []
+      "attributes": [],
+      "relations": []
     }
   },
   "attributes": {
@@ -246,7 +246,5 @@
       "y": 0,
       "videos": ["1"]
     }
-  },
-  "relations": {
   }
 }

@@ -1,6 +1,6 @@
-<h3>{{data.displayName}}<small> {{data.help}}</small></h3>
+<h3>{{config.displayName}}<small> {{config.help}}</small></h3>
 
-<form class="form-inline">
-  {{form-contents noLabel=noLabel data=data}}
+<form class={{if isInline "form-inline" "form-horizontal"}}>
+  {{form-contents noLabel=noLabel data=data config=config}}
   <button type="submit" class="btn btn-success btn-xs">Submit {{title}}</button>
 </form>

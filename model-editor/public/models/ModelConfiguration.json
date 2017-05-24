@@ -77,6 +77,32 @@
                         "help": "Menu Timeout",
                         "data": ""
                     },
+                    "popoverDwell": {
+                        "displayName": "Popover hover time",
+                        "inputType": "number",
+                        "error": "Please select a time in the range of 0 - 30.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 30,
+                            "step": 0.1
+                        },
+                        "help": "Popover Timeout",
+                        "data": ""
+                    },
+                    "popoverShowDelay": {
+                        "displayName": "Popover show delay",
+                        "inputType": "number",
+                        "error": "Please select a time in the range of 0 - 5.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 5,
+                            "step": 0.1
+                        },
+                        "help": "Time before popover appears",
+                        "data": ""
+                    },
                     "menuLocale": {
                         "displayName": "Menu Location",
                         "inputType": "dropdown",
@@ -264,15 +290,15 @@
                         "error": "",
                         "validation": { },
                         "help": "Attributes that the video has",
-                        "data": { }
+                        "data": [ ]
                     },
                     "relations": {
                         "displayName": "Relations",
                         "inputType": "list",
                         "error": "",
                         "validation": { },
-                        "help": "Relations the video is a part of",
-                        "data": { }
+                        "help": "Related videos",
+                        "data": [ ]
                     }
                 }
             }
@@ -349,66 +375,6 @@
                         },
                         "help": "Videos that have this attribute",
                         "data": [ ]
-                    }
-                }
-            }
-        }
-    },
-    "relations": {
-        "displayName": "Relations",
-        "inputType": "",
-        "error": "",
-        "validation": { },
-        "help": "Relations that are in the exhibit",
-        "data": {
-            "relation": {
-                "displayName": "Relation",
-                "inputType": "",
-                "error": "",
-                "validation": { },
-                "help": "A relation in the exhibit",
-                "data": {
-                    "videoId": {
-                        "displayName": "Beginning Video",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "help": "Video the relation is coming from",
-                        "data": ""
-                    },
-                    "relatedId": {
-                        "displayName": "Ending Video",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "data": ""
-                    },
-                    "difficulty": {
-                        "displayName": "Ending Video",
-                        "inputType": "number",
-                        "error": "Please pick numbers in the range of -100 - 100.",
-                        "validation": {
-                            "required": "required",
-                            "min": -100,
-                            "max": 100
-                        },
-                        "data": 0,
-                        "help": "Video the relation is going to",
-                        "data": ""
-                    },
-                    "attributeId": {
-                        "displayName": "Attribute",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "help": "Attribute of this relation",
-                        "data": ""
                     }
                 }
             }

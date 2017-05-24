@@ -30,8 +30,14 @@
                 "isUrl": false,
                 "attribution": ""
             },
-            "relations": [ ], array of attributes by key to relation object
-            "attributes": [ ] array of attributes by key to attribute object
+            "relations": [ arry of relations objects specified below
+                {
+                    "relatedId": "0", related video
+                    "difficulty": 0, how hard end video is relative from the start video
+                    "attributeId": "0" attribute by key to attribute object (why they are related)
+                }
+            ],
+            "attributes": [ ]
         }
     },
     "attributes": {
@@ -41,14 +47,6 @@
             "x": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from left
             "y": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from top
             "videos": [ ] videos associated with this attribute
-        }
-    },
-    "relations": {
-        "0": {
-            "videoId": "0", start video
-            "relatedId": "0", end video
-            "difficulty": 0, how hard end video is relative from the start video
-            "attributeId": "0" attribute by key to attribute object (why they are related)
         }
     }
 }

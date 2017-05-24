@@ -14,7 +14,8 @@
   top: 0px;
   right: 0px;
   bottom: 0px;
-  left: 90%;
+  
+  width: 10%;
 
   height: 100%;
 }
@@ -35,9 +36,10 @@
   position: fixed;
 
   top: 0px;
-  right: 90%;
   bottom: 0px;
   left: 0px;
+
+  width: 10%;
 
   height: 100%;
 }

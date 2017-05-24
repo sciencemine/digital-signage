@@ -30,8 +30,14 @@
                 "isUrl": false,
                 "attribution": ""
             },
-            "relations": [ ],
-            "attributes": [ ]
+            "attributes": [ ],
+            "relations": [
+                {
+                    "relatedId": "",
+                    "difficulty": 0,
+                    "attributeId": ""
+                }
+            ]
         }
     },
     "attributes": {
@@ -41,14 +47,6 @@
             "x": 0,
             "y": 0,
             "videos": [ ]
-        }
-    },
-    "relations": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "0",
-            "difficulty": 0,
-            "attributeId": "0"
         }
     }
 }

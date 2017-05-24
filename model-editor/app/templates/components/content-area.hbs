@@ -1,0 +1,11 @@
+<div class="model-edit--title">
+  <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
+</div>
+
+{{properties-panel class="model-edit--properties-section" data=selectedVideo config=data.modelConfig}}
+
+<div class="model-edit--configuration-section">
+  {{generic-form isInline=true class="generic-form__bottom" data=newModel.config config=data.modelConfig.config}}
+</div>
+
+{{attribute-panel class="model-edit--attribute-section" data=newModel.attributes}}
