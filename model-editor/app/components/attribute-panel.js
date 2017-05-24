@@ -18,5 +18,10 @@ export default Ember.Component.extend({
         target: '#attributeNav'
       });
     }
+  },
+  actions: {
+    updateModal() {
+      this.get('updateModalCallback') ("Add Attribute", ".attributes.data.attribute", null);
+    }
   }
 });

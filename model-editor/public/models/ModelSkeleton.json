@@ -7,7 +7,9 @@
         "ui": {
             "idle": 0,
             "menuDwell": 0,
-            "menuLocale": ""
+            "popoverDwell": 0.0,
+            "menuLocale": "",
+            "showTime": 0.0
         },
         "keyboard": {
             "select": "",

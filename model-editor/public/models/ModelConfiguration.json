@@ -64,7 +64,7 @@
                             "max": 120
                         },
                         "data": "",
-                        "help": "Idle timeout"
+                        "help": "Idle timeout in seconds"
                     },
                     "menuDwell": {
                         "displayName": "Menu",
@@ -75,7 +75,7 @@
                             "min": 0,
                             "max": 30
                         },
-                        "help": "Menu Timeout",
+                        "help": "Menu Timeout in seconds",
                         "data": ""
                     },
                     "popoverDwell": {
@@ -86,9 +86,9 @@
                             "required": "required",
                             "min": 0,
                             "max": 30,
-                            "step": 0.1
+                            "step": 0.05
                         },
-                        "help": "Popover Timeout",
+                        "help": "Popover timeout in seconds",
                         "data": ""
                     },
                     "popoverShowDelay": {
@@ -99,9 +99,9 @@
                             "required": "required",
                             "min": 0,
                             "max": 5,
-                            "step": 0.1
+                            "step": 0.05
                         },
-                        "help": "Time before popover appears",
+                        "help": "Time before popover appears in seconds",
                         "data": ""
                     },
                     "menuLocale": {
@@ -131,7 +131,7 @@
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi",
-                            "size": "1"
+                            "size": "4"
                         },
                         "help": "Selection",
                         "data": ""
@@ -144,7 +144,7 @@
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi",
-                            "size": "1"
+                            "size": "4"
                         },
                         "help": "Forward in a List",
                         "data": ""
@@ -157,7 +157,7 @@
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi",
-                            "size": "1"
+                            "size": "4"
                         },
                         "help": "Cancelation",
                         "data": ""
@@ -170,7 +170,7 @@
                             "required": "required",
                             "maxlength": 1,
                             "pattern": "/\\w/gi",
-                            "size": "1"
+                            "size": "4"
                         },
                         "help": "Backward in a List",
                         "data": ""

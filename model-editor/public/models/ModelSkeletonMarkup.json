@@ -7,7 +7,9 @@
         "ui": {
             "idle": 0, seconds system is idle before returning home
             "menuDwell": 0, seconds menu should remain after mouse leaves
-            "menuLocale": "" top right bottom left
+            "popoverDwell": 0.0, seconds popover realains rendered while being hovered before derendering
+            "menuLocale": "", top right bottom left
+            "popoverShowDelay": 0.0 seconds of delay before popover  is rendered
         },
         "keyboard": { keys for keyboard actions
             "select": "",

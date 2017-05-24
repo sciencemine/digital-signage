@@ -4,6 +4,9 @@ export default Ember.Component.extend({
   initialModel: null,
   newModel: null,
   selectedVideo: null,
+  modalTitle: null,
+  modalConfig: null,
+  modalData: null,
 
   init() {
     this._super(...arguments);
@@ -40,6 +43,14 @@ export default Ember.Component.extend({
 
         this.get('selectedVideo.relations').push(data);
       }
+    }
+  },
+  actions: {
+    updateModalInfo (title, config, data) {
+      this.set('modalTitle', title);
+      this.set('modalConfig', this.get('data.modelConfig' + config));
+
+      this.set('modalData', (data ? this.get('newModel')[data] : null));
     }
   }
 });
