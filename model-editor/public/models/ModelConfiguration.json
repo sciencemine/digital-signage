@@ -303,7 +303,41 @@
                         "error": "",
                         "validation": { },
                         "help": "Related videos",
-                        "data": [ ]
+                        "data": {
+                            "relation": {
+                                "displayName": "Relation",
+                                "inputType": "",
+                                "error": "",
+                                "validation": "",
+                                "help": "A relation between the parent video and the child video",
+                                "data": {
+                                    "relatedId": {
+                                        "displayName": "Related Video",
+                                        "inputType": "text",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "A related video to the parent video",
+                                        "data": ""
+                                    },
+                                    "difficulty": {
+                                        "displayName": "Difficulty",
+                                        "inputType": "number",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "How hard the related video is relative to the parent video",
+                                        "data": ""
+                                    },
+                                    "attributeId": {
+                                        "displayName": "Attribute",
+                                        "inputType": "text",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "Why the videos are related",
+                                        "data": ""
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }

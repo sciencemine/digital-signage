@@ -9,7 +9,7 @@
             "menuDwell": 0,
             "popoverDwell": 0.0,
             "menuLocale": "",
-            "showTime": 0.0
+            "popoverShowDelay": 0.0
         },
         "keyboard": {
             "select": "",

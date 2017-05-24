@@ -20,8 +20,11 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    updateModal() {
-      this.get('updateModalCallback') ("Add Attribute", ".attributes.data.attribute", null);
+    addAttribute() {
+      this.get('updateModalCallback') ("Add Attribute", ".attributes.data.attribute");
+    },
+    editAttribute(path, key) {
+      this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", path, key);
     }
   }
 });

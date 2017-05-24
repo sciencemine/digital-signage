@@ -2,7 +2,9 @@
   <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
 </div>
 
-{{properties-panel class="content-area--properties-section" data=selectedVideo config=data.modelConfig}}
+<button {{action 'addVideo'}} data-toggle="modal" data-target="#formOverlay" type="button" class="btn btn-primary content-area--btn__video"><span class="glyphicon glyphicon-plus"/> Add Video</button>
+
+{{properties-panel relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class="content-area--properties-section" data=selectedVideo config=data.modelConfig}}
 
 <div class="content-area--configuration-section">
   {{generic-form isInline=true class="generic-form__bottom" data=newModel.config config=data.modelConfig.config}}
@@ -23,7 +25,7 @@
       </div>
 
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

@@ -47,3 +47,11 @@
 .content-area--modal__body {
   margin: 0% 5%;
 }
+
+.content-area--btn__video {
+  position: fixed;
+
+  left: 10%;
+
+  margin: 3px;
+}

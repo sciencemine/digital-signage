@@ -12,9 +12,7 @@
     {{/if}}
     <br>
 
-    <div class="btn-group" role="group" aria-label="...">
-      <button type="button" class="btn btn-warning btn-xs">Edit</button>
-      <button type="button" class="btn btn-danger btn-xs">Remove</button>
-    </div>
+    <button {{action 'updateModal'}} data-toggle="modal" data-target="#formOverlay" type="button" class="btn btn-warning btn-xs">Edit</button>
+    <button type="button" class="btn btn-danger btn-xs">Remove</button>
   </div>
 </div>
