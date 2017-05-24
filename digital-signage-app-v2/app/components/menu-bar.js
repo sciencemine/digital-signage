@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  displayVideos: {},
+  displayVideos: [],
   menuListStyle: "",
   menuBarStyle: "",
   filterType: "All",
@@ -9,34 +9,34 @@ export default Ember.Component.extend({
   renderMenu: false,
   menuTimeout: null,
   popoverTimeout: null,
-
+  popoverShowDelay: 0.25,
 
   init() {
     this._super(...arguments);
     this.set('displayVideos', this.get('videos'));
 
-    var listStyle = "video-list__menu video-list--flex__menu";
-    var barStyle = "menu-bar";
+    let listStyle = "video-list__menu video-list--flex__menu";
+    let barStyle = "menu-bar";
 
     switch (this.get('config.ui.menuLocale')) {
-      case "top": 
+      case "top":
         this.set('menuListStyle', listStyle + " video-list__top__menu video-list--flex--horizontal__menu");
         this.set('menuBarStyle', barStyle + " menu-bar__top");
         break;
-      case "right": 
+      case "right":
         this.set('menuListStyle', listStyle + " video-list__right__menu video-list--flex--verticle__menu");
         this.set('menuBarStyle', barStyle + " menu-bar__right");
         break;
-      case "bottom": 
+      case "bottom":
         this.set('menuListStyle', listStyle + " video-list__bottom__menu video-list--flex--horizontal__menu");
         this.set('menuBarStyle', barStyle + " menu-bar__bottom");
         this.set('useDropUp', true);
         break;
-      case "left": 
+      case "left":
         this.set('menuListStyle', listStyle + " video-list__left__menu video-list--flex--verticle__menu");
         this.set('menuBarStyle', barStyle + " menu-bar__left");
         break;
-      default: 
+      default:
         this.set('menuListStyle', listStyle + " video-list__top__menu video-list--flex--horizontal__menu");
         this.set('menuBarStyle', barStyle + " menu-bar__top");
         break;
@@ -50,14 +50,14 @@ export default Ember.Component.extend({
       component.$('[data-toggle="popover"]').popover({
         trigger: 'hover focus',
         delay: {
-          show: component.get('config.ui.showTime'),
+          show: (component.get('popoverShowDelay') * 1000),
           hide: '100'
         }
       }).on('shown.bs.popover', function () {  
         let timeout = setTimeout(function () {
           component.$('[data-toggle="popover"]').popover('hide');
           component.send('hidePopovers');
-        }, component.get('config.ui.popoverDwell'));
+        }, component.get('config.ui.popoverDwell') * 1000);
           
         clearTimeout(component.get('popoverTimeout'));
         component.set('popoverTimeout', timeout);
@@ -87,22 +87,21 @@ export default Ember.Component.extend({
         this.set('filterType', "All");
       }
       else {
-        let tempVideos = {};
         let attributes = this.get('attributes.' + newAttributeID + '.videos');
+        this.set('displayVideos', []);
 
         for (var videoID = 0; videoID < attributes.length; videoID++) {
-          tempVideos[videoID] = this.get('videos')[attributes[videoID]];
+          this.get('displayVideos').pushObject(this.get('videos')[attributes[videoID]]);
         }
 
-        this.set('displayVideos', tempVideos);
         this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
       }
     },
     
-    videoClicked(videoData) {
+    videoClicked(sender, videoData) {
       this.set('renderMenu', false);
-      this.get('onClickCallback') (videoData);
-	  this.send('hidePopovers');
+      this.get('onClickCallback') (this, videoData);
+      this.send('hidePopovers');
     },
     
     doNothing() {},

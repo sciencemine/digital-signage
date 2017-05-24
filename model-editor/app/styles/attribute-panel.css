@@ -2,7 +2,9 @@
   position: fixed;
 
   top: 0px;
-  bottom: 95%;
+  left: 0px;
+
+  min-height: 5%;
 
   width: 10%;
 
@@ -18,6 +20,8 @@
   height: 90%;
 
   overflow-y: scroll;
+
+  padding: 5% 0%;
 }
 
 .attribute-panel--scrollable::-webkit-scrollbar {
@@ -27,8 +31,10 @@
 .attribute-panel__footer {
   position: fixed;
 
-  top: 95%;
   bottom: 0px;
+  left: 0px;
+
+  min-height: 5%;
 
   width: 10%;
 }

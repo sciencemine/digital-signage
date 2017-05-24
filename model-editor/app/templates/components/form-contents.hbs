@@ -1,27 +1,33 @@
 {{yield}}
 
 {{#if inputId}}
-  {{#if data.inputType}}
+  {{#if config.inputType}}
     <div class="form-group">
-      <label id={{inputId}}>{{data.displayName}}</label>
-      <span class="help-block">{{data.help}}</span>
+      <label id={{inputId}}>{{config.displayName}}</label>
+      <span class="help-block">{{config.help}}</span>
     </div>
   {{/if}}
 {{/if}}
 
-{{#each-in data.data as |key value|}}
-  {{#if (is-array value.data)}}
+{{#each-in config.data as |key value|}}
+  {{#if (is-list value.inputType)}}
+    <div class="form-group">
+      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      <span class="help-block">{{value.help}}</span>
+    </div>
+    {{form-contents-list data=(if (is-attributes key) attributes relations) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName tagName="ul" class="list-group"}}
+  {{else if (is-array value.data)}}
     <div class="form-group">
       <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
       {{form-contents-select key=(create-id inputId key) data=value.data class="form-control input-sm"}}
       <span class="help-block">{{value.help}}</span>
     </div>
   {{else if (is-object value.data)}}
-    {{form-contents noLabel=noLabel inputId=(create-id inputId key) tagName='' data=value}}
+    {{form-contents data=(if data (get-data data key) data) noLabel=noLabel inputId=(create-id inputId key) tagName='' config=value}}
   {{else if (is-valid-input-type value.inputType)}}
     <div class="form-group">
       <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-input key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
+      {{form-contents-input placeholder=(if data (get-data data key) value.displayName) key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
       <span class="help-block">{{value.help}}</span>
     </div>
   {{/if}}

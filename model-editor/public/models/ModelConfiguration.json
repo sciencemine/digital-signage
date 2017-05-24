@@ -21,7 +21,8 @@
                 "inputType": "text",
                 "error": "",
                 "validation": {
-                    "required": "required"
+                    "required": "required",
+                    "size": 50
                 },
                 "help": "Description of the exhibit",
                 "data": ""
@@ -63,7 +64,7 @@
                             "max": 120
                         },
                         "data": "",
-                        "help": "Idle timeout"
+                        "help": "Idle timeout in seconds"
                     },
                     "menuDwell": {
                         "displayName": "Menu",
@@ -74,7 +75,33 @@
                             "min": 0,
                             "max": 30
                         },
-                        "help": "Menu Timeout",
+                        "help": "Menu Timeout in seconds",
+                        "data": ""
+                    },
+                    "popoverDwell": {
+                        "displayName": "Popover hover time",
+                        "inputType": "number",
+                        "error": "Please select a time in the range of 0 - 30.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 30,
+                            "step": 0.05
+                        },
+                        "help": "Popover timeout in seconds",
+                        "data": ""
+                    },
+                    "popoverShowDelay": {
+                        "displayName": "Popover show delay",
+                        "inputType": "number",
+                        "error": "Please select a time in the range of 0 - 5.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 5,
+                            "step": 0.05
+                        },
+                        "help": "Time before popover appears in seconds",
                         "data": ""
                     },
                     "menuLocale": {
@@ -103,7 +130,8 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi"
+                            "pattern": "/\\w/gi",
+                            "size": "4"
                         },
                         "help": "Selection",
                         "data": ""
@@ -115,7 +143,8 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi"
+                            "pattern": "/\\w/gi",
+                            "size": "4"
                         },
                         "help": "Forward in a List",
                         "data": ""
@@ -127,7 +156,8 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi"
+                            "pattern": "/\\w/gi",
+                            "size": "4"
                         },
                         "help": "Cancelation",
                         "data": ""
@@ -139,7 +169,8 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi"
+                            "pattern": "/\\w/gi",
+                            "size": "4"
                         },
                         "help": "Backward in a List",
                         "data": ""
@@ -264,15 +295,49 @@
                         "error": "",
                         "validation": { },
                         "help": "Attributes that the video has",
-                        "data": { }
+                        "data": [ ]
                     },
                     "relations": {
                         "displayName": "Relations",
                         "inputType": "list",
                         "error": "",
                         "validation": { },
-                        "help": "Relations the video is a part of",
-                        "data": { }
+                        "help": "Related videos",
+                        "data": {
+                            "relation": {
+                                "displayName": "Relation",
+                                "inputType": "",
+                                "error": "",
+                                "validation": "",
+                                "help": "A relation between the parent video and the child video",
+                                "data": {
+                                    "relatedId": {
+                                        "displayName": "Related Video",
+                                        "inputType": "text",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "A related video to the parent video",
+                                        "data": ""
+                                    },
+                                    "difficulty": {
+                                        "displayName": "Difficulty",
+                                        "inputType": "number",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "How hard the related video is relative to the parent video",
+                                        "data": ""
+                                    },
+                                    "attributeId": {
+                                        "displayName": "Attribute",
+                                        "inputType": "text",
+                                        "error": "",
+                                        "validation": "",
+                                        "help": "Why the videos are related",
+                                        "data": ""
+                                    }
+                                }
+                            }
+                        }
                     }
                 }
             }
@@ -349,66 +414,6 @@
                         },
                         "help": "Videos that have this attribute",
                         "data": [ ]
-                    }
-                }
-            }
-        }
-    },
-    "relations": {
-        "displayName": "Relations",
-        "inputType": "",
-        "error": "",
-        "validation": { },
-        "help": "Relations that are in the exhibit",
-        "data": {
-            "relation": {
-                "displayName": "Relation",
-                "inputType": "",
-                "error": "",
-                "validation": { },
-                "help": "A relation in the exhibit",
-                "data": {
-                    "videoId": {
-                        "displayName": "Beginning Video",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "help": "Video the relation is coming from",
-                        "data": ""
-                    },
-                    "relatedId": {
-                        "displayName": "Ending Video",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "data": ""
-                    },
-                    "difficulty": {
-                        "displayName": "Ending Video",
-                        "inputType": "number",
-                        "error": "Please pick numbers in the range of -100 - 100.",
-                        "validation": {
-                            "required": "required",
-                            "min": -100,
-                            "max": 100
-                        },
-                        "data": 0,
-                        "help": "Video the relation is going to",
-                        "data": ""
-                    },
-                    "attributeId": {
-                        "displayName": "Attribute",
-                        "inputType": "",
-                        "error": "",
-                        "validation": {
-                            "required": "required"
-                        },
-                        "help": "Attribute of this relation",
-                        "data": ""
                     }
                 }
             }

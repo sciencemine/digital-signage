@@ -1,0 +1,24 @@
+{{#unless data}}
+  <li class="list-group-item">
+    No data present.
+  </li>
+{{/unless}}
+
+{{#each-in data as |key value|}}
+  <li class="list-group-item">
+    <b>Name: </b>{{value.name}}<br>
+
+    <b>Description: </b>{{value.description}}<br>
+
+    {{#if value.difficulty}}
+      <b>Difficulty: </b>{{value.difficulty}}<br>
+    {{/if}}
+
+    {{#if value.attribute}}
+      <b>Attribute: </b>{{value.attribute}}<br>
+    {{/if}}
+
+    <button {{action (if (is-attributes attr) 'updateModal' 'editRelation') key}} data-toggle="modal" data-target="#formOverlay" type="button" class="btn btn-warning btn-xs">Edit</button>
+    <button type="button" class="btn btn-danger btn-xs">Remove</button>
+  </li>
+{{/each-in}}

@@ -7,7 +7,9 @@
         "ui": {
             "idle": 0,
             "menuDwell": 0,
-            "menuLocale": ""
+            "popoverDwell": 0.0,
+            "menuLocale": "",
+            "popoverShowDelay": 0.0
         },
         "keyboard": {
             "select": "",
@@ -17,38 +19,7 @@
         }
     },
     "videos": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "full": {
-                "fileIdentifier": "",
-                "isUrl": false, 
-                "attribution": ""
-            },
-            "teaser": {
-                "fileIdentifier": "",
-                "isUrl": false,
-                "attribution": ""
-            },
-            "relations": [ ],
-            "attributes": [ ]
-        }
     },
     "attributes": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "x": 0,
-            "y": 0,
-            "videos": [ ]
-        }
-    },
-    "relations": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "0",
-            "difficulty": 0,
-            "attributeId": "0"
-        }
     }
 }

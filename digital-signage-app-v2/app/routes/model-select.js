@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   models: [],
-  backgroundVideos: [],
 
   beforeModel() {
     let route = this;
@@ -21,11 +20,11 @@ export default Ember.Route.extend({
     return Ember.RSVP.Promise.all(modelData).then(res => {
       for (i = 0; i < this.get('models').length; i++) {
         res[i].fileName = this.get('models')[i];
-        res[i].backgroundVideos = {};
+        res[i].backgroundVideos = [];
 
         for (var j = 0; j < res[i].config.backgroundVideos.length; j++) {
           var vidKey = res[i].config.backgroundVideos[j];
-          res[i].backgroundVideos[vidKey] = res[i].videos[vidKey];
+          res[i].backgroundVideos.push(res[i].videos[vidKey]);
         }
       }
 

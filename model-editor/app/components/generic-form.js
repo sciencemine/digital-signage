@@ -1,5 +1,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  noLabel: true
+  noLabel: true,
+  isInline: false,
+  showTitle: true
 });

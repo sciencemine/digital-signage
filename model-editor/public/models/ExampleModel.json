@@ -7,7 +7,9 @@
         "ui": {
             "idle": 15,
             "menuDwell": 3,
-            "menuLocale": "top"
+            "popoverDwell": 5.0,
+            "menuLocale": "top",
+            "popoverShowDelay": 0.25
         },
         "keyboard": {
             "select": "w",
@@ -30,8 +32,14 @@
                 "isUrl": false,
                 "attribution": "Kenny"
             },
-            "relations": [ ],
-            "attributes": [ "0", "6" ]
+            "attributes": [ "0", "6" ],
+            "relations": [
+                {
+                    "relatedId": "1",
+                    "difficulty": 1,
+                    "attributeId": "0"
+                }
+            ]
         },
         "1": {
             "prettyName": "Kenny with a Rubber Band: Episode IIII - Return of the New Hope",
@@ -46,8 +54,14 @@
                 "isUrl": false,
                 "attribution": "Kenny"
             },
-            "relations": [ ],
-            "attributes": [ "0", "6" ]
+            "attributes": [ "0", "6" ],
+            "relations": [
+                {
+                    "relatedId": "0",
+                    "difficulty": -1,
+                    "attributeId": "0"
+                }
+            ]
         },
         "2": {
             "prettyName": "3 flappy 5 me",
@@ -62,8 +76,8 @@
                 "isUrl": false,
                 "attribution": "Kenny"
             },
-            "relations": [ ],
-            "attributes": [ "5", "6" ]
+            "attributes": [ "5", "6" ],
+            "relations": [ ]
         },
         "3": {
             "prettyName": "Kenny: Sticks - Electric Boogaloo",
@@ -78,8 +92,8 @@
                 "isUrl": false,
                 "attribution": "Kenny"
             },
-            "relations": [ ],
-            "attributes": [ "1", "3", "4", "6" ]
+            "attributes": [ "1", "3", "4", "6" ],
+            "relations": [ ]
         }
     },
     "attributes": {
@@ -124,20 +138,6 @@
             "x": 0.5,
             "y": 0.2,
             "videos": [ "0", "1", "2", "3" ]
-        }
-    },
-    "relations": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "1",
-            "difficulty": 1,
-            "attributeId": "0"
-        },
-        "1": {
-            "videoId": "1",
-            "relatedId": "0",
-            "difficulty": -1,
-            "attributeId": "0"
         }
     }
 }
