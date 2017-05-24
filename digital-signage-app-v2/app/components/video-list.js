@@ -39,7 +39,6 @@ export default AbstractList.extend({
   loop: true,
   popoverShowDelay: 0.25,
   muted: false,
-  popoverShowDelay: 250,
 
   init() {
     this._super(...arguments);
