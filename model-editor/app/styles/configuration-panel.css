@@ -1,0 +1,7 @@
+.configuration-panel {
+  margin-bottom: 0px!important;
+}
+
+.configuration-panel--expando:hover {
+  cursor: pointer;
+}

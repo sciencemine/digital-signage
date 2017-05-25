@@ -9,6 +9,8 @@ export default Ember.Component.extend({
   modalTitle: null,
   modalConfig: null,
   modalData: null,
+  attributesExpanded: true,
+  propertiesExpanded: true,
 
   init() {
     this._super(...arguments);
@@ -63,6 +65,12 @@ export default Ember.Component.extend({
       this.set('modalTitle', "Edit Relation");
       this.set('modalConfig', this.get('data.modelConfig.videos.data.video.data.relations.data.relation'));
       this.set('modalData', this.get('newModel.videos')[this.get('selectedVideoKey')].relations[relationKey]);
+    },
+    setAttributesExpanded(param) {
+      this.set('attributesExpanded', param);
+    },
+    setPropertiesExpanded(param) {
+      this.set('propertiesExpanded', param);
     }
   }
 });

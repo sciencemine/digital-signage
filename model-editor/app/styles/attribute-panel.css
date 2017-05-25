@@ -4,9 +4,9 @@
   top: 0px;
   left: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 5%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 
   z-index: 100;
 }
@@ -34,11 +34,15 @@
   bottom: 0px;
   left: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 5%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 }
 
 .attribute-panel__footer:hover {
+  cursor: pointer;
+}
+
+.attribute-panel--expando:hover {
   cursor: pointer;
 }

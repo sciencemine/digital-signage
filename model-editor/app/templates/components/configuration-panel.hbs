@@ -1,0 +1,14 @@
+<div class="panel panel-primary configuration-panel">
+  <div class="panel-heading">
+    <h4 class="panel-title">
+      {{config.displayName}} <small>{{config.help}}</small>
+        <span {{action 'toggleExpanded' on click}} class="{{if expanded 'glyphicon glyphicon-chevron-down' 'glyphicon glyphicon-chevron-up'}} pull-right configuration-panel--expando"></span>
+    </h4>
+  </div>
+
+  {{#if expanded}}
+    <div class="panel-body">
+      {{generic-form showTitle=false isInline=true data=data config=config}}
+    </div>
+  {{/if}}
+</div>

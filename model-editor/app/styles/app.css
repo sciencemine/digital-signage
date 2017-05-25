@@ -2,6 +2,7 @@
 @import 'model-select.css';
 
 /* Component css */
-@import 'attribute-panel.css';
 @import 'properties-panel.css';
+@import 'configuration-panel.css';
+@import 'attribute-panel.css';
 @import 'content-area.css';

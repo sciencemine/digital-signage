@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  expanded: true,
+
   didRender() {
     if (this.$('[data-toggle="attributeTooltip"]').length !== 0) {
       this.$('[data-toggle="attributeTooltip"]').tooltip({
@@ -25,6 +27,10 @@ export default Ember.Component.extend({
     },
     editAttribute(path, key) {
       this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", path, key);
+    },
+    toggleExpanded() {
+      this.set('expanded', !this.get('expanded'));
+      this.get('attributesExpandedCallback') (this.get('expanded'));
     }
   }
 });

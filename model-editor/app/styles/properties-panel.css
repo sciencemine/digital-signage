@@ -4,9 +4,9 @@
   top: 0px;
   right: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 5%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 
   z-index: 100;
 }
@@ -15,13 +15,22 @@
   position: relative;
 
   top: 5%;
-  bottom: 5%;
-
-  height: 90%;
 
   overflow-y: scroll;
 
   padding: 5% 0%;
+}
+
+.properties-panel--scrollable__with-footer {
+  bottom: 5%;
+
+  height: 90%;
+}
+
+.properties-panel--scrollable__no-footer {
+  bottom: 0%;
+
+  height: 95%;
 }
 
 .properties-panel--scrollable::-webkit-scrollbar {
@@ -34,11 +43,15 @@
   right: 0px;
   bottom: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 5%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 }
 
 .properties-panel__form {
   padding: 0px 5%;
+}
+
+.properties-panel--expando:hover {
+  cursor: pointer;
 }
