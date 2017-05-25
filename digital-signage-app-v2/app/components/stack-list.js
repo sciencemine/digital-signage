@@ -26,8 +26,7 @@ export default AbstractList.extend({
     isFlex: true,
     stackItemHighlight: '',
     loop: true,
-    //playersize: '',
-    
+      
     init(){
         this._super(...arguments);
     },

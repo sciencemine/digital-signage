@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
     selectedVidPos: 0,
     selectedStackIndex: 0,
-    stackStyle: ' ',
+    stackStyle: '',
     playerSize: '',
     isMuted: true,
     highlightedStyle: '',

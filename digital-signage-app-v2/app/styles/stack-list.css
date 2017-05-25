@@ -1,0 +1,46 @@
+/*
+.stack-list 
+{
+  position: absolute;
+
+  right: 0px;
+  left: 0px;
+  top: 20%;
+
+  z-index: 0;
+}
+
+.stack-list--flex 
+{
+  
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-around;
+
+  flex-wrap: wrap;
+  flex-direction: row;
+}
+
+.stack-list--item
+{
+    flex-basis: 10%;
+}*/
+
+
+.stack-list--flex 
+{
+    padding: 0px;
+    margin: 0px 5px 0px 5px;
+    display: flex;
+    height: 300px; /* Or whatever */
+}
+
+.stack-list--item 
+{
+    flex-basis: 10%;  /* Or whatever */
+    height: 100px; /* Or whatever */
+    margin: auto;  /* Magic! */
+}

@@ -1,19 +1,20 @@
 {{yield}}
 {{#if isFlex}}
-    <div class="video-list video-list--flex">
+    <div class="stack-list stack-list--flex">
     {{log data}}
     {{#each-in data as |key value|}}
-  
+        <div class="stack-list--item">
         {{video-stack videos=value.videos  highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) isMuted=(if (video-selected key selectedStackIndex) isMuted false) loop=true onSelectedCallback=(action 'select') 
         onClickCallback=(action 'stackSelected') cancelCallback=(action 'cancel') onHoverCallback=(action 'hover') stackIndex=key}}
+        </div>
     {{/each-in}}
     </div>
 {{else}}
-    {{!--{{#each-in data as |key value|}}
+    {{#each-in data as |key value|}}
       <div style={{make-stack-style x=value.x y=value.y}}>
         {{video-stack videos=value.videos  highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) isMuted=(if (video-selected key selectedStackIndex) isMuted false)loop=true onSelectedCallback=(action 'select') 
         onClickCallback=(action 'stackSelected') cancelCallback=(action 'cancel') onHoverCallback=(action 'hover') stackIndex=key}}
       </div>
-    {{/each-in}}--}}
+    {{/each-in}}
 {{/if}}
 
