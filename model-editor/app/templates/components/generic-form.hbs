@@ -3,6 +3,6 @@
 {{/if}}
 
 <form class={{if isInline "form-inline" "form-horizontal"}}>
-  {{form-contents relations=relations attributes=attributes updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) noLabel=noLabel data=data config=config}}
+  {{form-contents showHelp=showHelp showList=showList relations=relations attributes=attributes updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) noLabel=noLabel data=data config=config tagName=''}}<br><br>
   <button type="submit" class="btn btn-success btn-sm">Submit {{title}}</button>
 </form>

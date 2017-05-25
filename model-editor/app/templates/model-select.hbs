@@ -9,18 +9,9 @@
 
     <ul class="list-group">
       {{#each-in model as |key value|}}
-          {{#link-to "modelEdit" (query-params modelfile=value.fileName)}}
-            <li class="list-group-item model-select--element">
-              {{model-select-element name=value.config.prettyName description=value.config.description}}
-            </li>
-          {{/link-to}}
+        {{model-select-element tagName='li' class="list-group-item model-select--element" modelfile=value.fileName name=value.config.prettyName description=value.config.description}}
       {{/each-in}}
+      {{model-select-element tagName='li' class="list-group-item model-select--element" modelfile="ModelSkeleton" name="Add Exhibit" description="Creates a new exhibit to be added to the list"}}
     </ul>
-
-    <div class="panel-footer">
-      {{#link-to "modelEdit" (query-params modelfile="ModelSkeleton")}}
-        <h4 class="panel-title">Add Exhibit</h4>
-      {{/link-to}}
-    </div>
   </div>
 </div>

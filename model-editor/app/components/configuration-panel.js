@@ -4,7 +4,7 @@ export default Ember.Component.extend({
   expanded: true,
 
   actions: {
-    toggleExpanded() {
+    toggleView() {
       this.set('expanded', !this.get('expanded'));
     }
   }

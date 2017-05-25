@@ -2,7 +2,10 @@
   <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
 </div>
 
-<button {{action 'addVideo'}} data-toggle="modal" data-target="#formOverlay" type="button" class="btn btn-primary content-area--btn__video {{if attributesExpanded 'content-area--btn__video--offset'}}"><span class="glyphicon glyphicon-plus"/> Add Video</button>
+<div class="btn-group-vertical  content-area--btn__group {{if attributesExpanded 'content-area--btn__group--offset'}}" role="group" aria-label="...">
+  <button {{action 'addVideo'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Video</button>
+  <button {{action 'addAttribute'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
+</div>
 
 {{properties-panel propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class="content-area--properties-section" data=selectedVideo config=data.modelConfig}}
 
@@ -19,7 +22,7 @@
       </div>
 
       <div class="modal-body content-area--modal__body">
-        {{generic-form showTitle=false noLabel=false data=modalData config=modalConfig}}
+        {{generic-form showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
       </div>
 
       <div class="modal-footer">
@@ -28,3 +31,4 @@
     </div>
   </div>
 </div>
+

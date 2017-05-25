@@ -75,7 +75,7 @@
                             "min": 0,
                             "max": 30
                         },
-                        "help": "Menu Timeout in seconds",
+                        "help": "Menu timeout in seconds",
                         "data": ""
                     },
                     "popoverDwell": {
@@ -88,7 +88,7 @@
                             "max": 30,
                             "step": 0.05
                         },
-                        "help": "Popover timeout in seconds",
+                        "help": "Time before popovers hide themselves in seconds",
                         "data": ""
                     },
                     "popoverShowDelay": {
@@ -101,7 +101,7 @@
                             "max": 5,
                             "step": 0.05
                         },
-                        "help": "Time before popover appears in seconds",
+                        "help": "Time before popovers appear in seconds",
                         "data": ""
                     },
                     "menuLocale": {
@@ -111,7 +111,7 @@
                         "validation": {
                             "required": "required"
                         },
-                        "help": "Menu Position",
+                        "help": "Location of the menu on the screen",
                         "data": ["top", "right", "bottom", "left"]
                     }
                 }
@@ -146,7 +146,7 @@
                             "pattern": "/\\w/gi",
                             "size": "4"
                         },
-                        "help": "Forward in a List",
+                        "help": "Going forward in a list",
                         "data": ""
                     },
                     "cancel": {
@@ -172,7 +172,7 @@
                             "pattern": "/\\w/gi",
                             "size": "4"
                         },
-                        "help": "Backward in a List",
+                        "help": "Going backward in a List",
                         "data": ""
                     }
                 }

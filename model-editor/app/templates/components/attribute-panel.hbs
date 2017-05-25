@@ -1,11 +1,11 @@
 <div id="attribute-panel" data-spy="scroll" data-target="#attributeNav" class="panel panel-info {{if expanded 'attribute-panel--scrollable'}}">
-  <div class="attribute-panel--header panel-heading">
-    <h4 class="panel-title">Attributes <small>Scroll me</small><span {{action 'toggleExpanded' on click}} class="{{if expanded 'glyphicon glyphicon-chevron-up' 'glyphicon glyphicon-chevron-down'}} pull-right configuration-panel--expando"></span></h4>
+  <div {{action 'toggleView' on click}} class="attribute-panel--header panel-heading">
+    <h4 class="panel-title">Attributes <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
   {{#if expanded}}
     <div class="panel-body">
-      <p>List of attributes in the exhibit. Drag an attribute onto a video to add it or select "Add Attribute" at the bottom to create a new attribute.</p>
+      <p>List of attributes in the exhibit. Drag an attribute onto a video to add it or select the "Add Attribute" button to the right.</p>
     </div>
 
     <nav class="attribute-navbar navbar">
@@ -23,9 +23,5 @@
         {{attribute-list-item updateModalCallback=(action 'editAttribute') id=key tagName="li" class="list-group-item container-fluid" data=value}}
       {{/each-in}}
     </ul>
-
-    <div class="attribute-panel__footer panel-footer">
-      <button {{action 'addAttribute'}} type="button" class="btn btn-primary center-block" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
-    </div>
   {{/if}}
 </div>

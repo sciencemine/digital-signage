@@ -1,6 +1,6 @@
-<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info {{if expanded (if data "properties-panel--scrollable properties-panel--scrollable__no-footer" "properties-panel--scrollable properties-panel--scrollable__with-footer")}}">
-  <div class="properties-panel--header panel-heading">
-    <h4 class="panel-title">Properties <small>Scroll me</small><span {{action 'toggleExpanded' on click}} class="{{if expanded 'glyphicon glyphicon-chevron-up' 'glyphicon glyphicon-chevron-down'}} pull-right configuration-panel--expando"></span></h4>
+<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info {{if expanded "properties-panel--scrollable"}}">
+  <div {{action 'toggleView' on click}} class="properties-panel--header panel-heading">
+    <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
   {{#if expanded}}
@@ -13,18 +13,14 @@
         <div class="collapse navbar-collapse" id="propertiesNav">
           <ul class="nav navbar-nav">
             {{#each-in data as |key value|}}
-              <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
+              <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href="#{{key}}_label"><span class="glyphicon glyphicon-picture"/></a></li>
             {{/each-in}}
           </ul>
         </div>
       </nav>
 
       <div class="panel-body">
-        {{generic-form relations=relations attributes=attributes updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
-      </div>
-    {{else}}
-      <div class="properties-panel__footer panel-footer">
-        <button type="button" class="btn btn-primary center-block"><span class="glyphicon glyphicon-plus"/> Add Video</button>
+        {{generic-form showList=true showHelp=true showTitle=false relations=relations attributes=attributes updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
       </div>
     {{/if}}
   {{/if}}

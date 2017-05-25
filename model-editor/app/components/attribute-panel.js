@@ -22,13 +22,10 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    addAttribute() {
-      this.get('updateModalCallback') ("Add Attribute", ".attributes.data.attribute");
-    },
     editAttribute(path, key) {
       this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", path, key);
     },
-    toggleExpanded() {
+    toggleView() {
       this.set('expanded', !this.get('expanded'));
       this.get('attributesExpandedCallback') (this.get('expanded'));
     }

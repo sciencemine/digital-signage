@@ -58,12 +58,12 @@
   margin: 0% 5%;
 }
 
-.content-area--btn__video {
+.content-area--btn__group {
   position: fixed;
 
   margin: 3px;
 }
 
-.content-area--btn__video--offset {
+.content-area--btn__group--offset {
   left: calc(100px + 5%);
 }

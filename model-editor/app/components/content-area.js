@@ -66,6 +66,9 @@ export default Ember.Component.extend({
       this.set('modalConfig', this.get('data.modelConfig.videos.data.video.data.relations.data.relation'));
       this.set('modalData', this.get('newModel.videos')[this.get('selectedVideoKey')].relations[relationKey]);
     },
+    addAttribute() {
+      this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute");
+    },
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
     },

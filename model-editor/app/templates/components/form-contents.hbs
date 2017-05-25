@@ -3,7 +3,7 @@
 {{#if inputId}}
   {{#if config.inputType}}
     <div class="form-group">
-      <label id={{inputId}}>{{config.displayName}}</label>
+      <label id="{{inputId}}_label">{{config.displayName}}</label>
       <span class="help-block">{{config.help}}</span>
     </div>
   {{/if}}
@@ -11,24 +11,30 @@
 
 {{#each-in config.data as |key value|}}
   {{#if (is-list value.inputType)}}
-    <div class="form-group">
-      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      <span class="help-block">{{value.help}}</span>
-    </div>
-    {{form-contents-list data=(if (is-attributes key) attributes relations) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName tagName="ul" class="list-group"}}
+    {{#if showList}}
+      <div class="form-group">
+        <label id="{{create-id inputId key}}_label" class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+        <span class="help-block">{{value.help}}</span>
+      </div>
+      {{form-contents-list data=(if (is-attributes key) attributes relations) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName}}
+    {{/if}}
   {{else if (is-array value.data)}}
     <div class="form-group">
-      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-select key=(create-id inputId key) data=value.data class="form-control input-sm"}}
-      <span class="help-block">{{value.help}}</span>
+      <label id="{{create-id inputId key}}_label" for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      {{form-contents-select key=(create-id inputId key) help=value.help data=value.data class="form-control input-sm"}}
+      {{#if showHelp}}
+        <span class="help-block">{{value.help}}</span>
+      {{/if}}
     </div>
   {{else if (is-object value.data)}}
     {{form-contents data=(if data (get-data data key) data) noLabel=noLabel inputId=(create-id inputId key) tagName='' config=value}}
   {{else if (is-valid-input-type value.inputType)}}
     <div class="form-group">
-      <label for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-input placeholder=(if data (get-data data key) value.displayName) key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
-      <span class="help-block">{{value.help}}</span>
+      <label id="{{create-id inputId key}}_label" for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      {{form-contents-input placeholder=(if data (if (get-data data key) (get-data data key) value.displayName ) value.displayName) key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm")}}
+      {{#if showHelp}}
+        <span class="help-block">{{value.help}}</span>
+      {{/if}}
     </div>
   {{/if}}
 {{/each-in}}

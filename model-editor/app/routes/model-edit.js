@@ -29,8 +29,8 @@ export default Ember.Route.extend({
     return Ember.$.getJSON(path).then((modelData) => {
 
       if (this.modelfile === "ModelSkeleton") {
-        modelData.config.prettyName = "Exhibit Creation";
-        modelData.config.description = "Creating an exhibit model";
+        modelData.config.prettyName = "New Exhibit";
+        modelData.config.description = "Creating a new exhibit!";
       }
 
       this.newModel = modelData;

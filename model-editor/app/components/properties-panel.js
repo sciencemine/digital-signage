@@ -22,7 +22,7 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    toggleExpanded() {
+    toggleView() {
       this.set('expanded', !this.get('expanded'));
       this.get('propertiesExpandedCallback') (this.get('expanded'));
     }
