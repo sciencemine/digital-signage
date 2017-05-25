@@ -16,11 +16,11 @@
 {{menu-bar popoverShowDelay=data.config.ui.popoverShowDelay config=data.config videos=selectionVideos attributes=data.attributes onClickCallback=(action 'videoSelected')}}
 
 {{video-stack videos=data.videos modelIdentifier=data.config.modelIdentifier playerSize='video-stack--container' onClickCallback=(action 'doNothing') onHoverCallback=(action 'doNothing')}}
+
+{{stack-list videos=stackListData.videos highlightedStyle="video-list video-list-item--highlight"}}
 -->
-<div class="video-list video-list--flex">
-  {{stack-list videos=data.data.videos modelIdentifier=data.config.modelIdentifier stackStyle="" 
-  keyboard=data.config.keyboard onSelectedCallback=(action 'select') 
-  cancelCallback=(action 'cancel') onHoverCallback=(action 'doNothing')}}
-</div>
+
+{{stack-list data=stackListData}}
+
 
 {{yield}}

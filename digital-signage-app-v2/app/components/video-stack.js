@@ -6,6 +6,7 @@ export default Ember.Component.extend({
     stackStyle: ' ',
     playerSize: '',
     isMuted: true,
+    highlightedStyle: '',
     
     init() {
         this._super(...arguments);

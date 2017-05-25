@@ -21,13 +21,15 @@ export default Ember.Component.extend(KeyboardControls, {
     let stackData = {};
 
     for(var index in this.get('data.attributes')){
-      stackData[index] = this.get('data.attributes;')[index];
+      stackData[index] = this.get('data.attributes')[index];
       let videos = [];
-      for(var i in stackData[index].videos){
-        videos.push(this.get('data.videos')[i]);
+      for(var i =0; i < stackData[index].videos.length; i++){
+     
+        videos.push(this.get('data.videos')[stackData[index].videos[i]]);
       }
       stackData[index].videos = videos;
     }
+    this.set('stackListData', stackData);
 
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
