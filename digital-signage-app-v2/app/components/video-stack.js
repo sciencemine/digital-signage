@@ -34,6 +34,7 @@ export default Ember.Component.extend({
     actions: {
         stackClicked() {
             this.get('onClickCallback') (this.get('videos'), this.get('selectedVidPos'));
+            console.log('clicked')
         },
         getNextVid() {
             let arrayLength = this.get('videos').length;

@@ -1,0 +1,35 @@
+
+
+.stack-list--flex {
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
+
+  display: flex;
+  height: 300px;
+}
+
+.stack-list-item--selected {
+  flex-basis: 10%;
+  border-radius: 5px;
+}
+.stack-list-item--selected:hover {
+  cursor: pointer;
+}
+
+.stack-list-item--highlight {
+  border: 4px solid blue;
+}
+
+.stack-list-item--flex {
+  align-self: auto;
+}
+
+.stack-list-item{
+  flex-basis: 10%;
+  height: 100px;
+  margin: auto;
+}
+
+
+
+

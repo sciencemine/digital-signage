@@ -2,6 +2,7 @@
 
 {{#each-in videos as |key value|}}
   <div class="{{listItemClass}} {{if (video-selected key selectedVidPos)listItemSelected listItemSmall}}" data-container="body" data-toggle="popover" data-placement="auto top" data-title={{value.prettyName}} data-content={{value.description}}>
+  
     {{video-player highlightedStyle=(if (video-selected key selectedVidPos) listItemHighlight) muted=(if (video-selected key selectedVidPos) muted true) looping=true url=(if value.teaser.isUrl value.teaser.fileIdentifier (make-local-url modelIdentifier value.teaser.fileIdentifier)) onClickCallback=(action 'videoSelected') onHoverCallback=(action 'videoHovered') videoPos=key}}
   </div>
 {{/each-in}}
