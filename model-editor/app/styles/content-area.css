@@ -81,3 +81,15 @@
 .resize-vertical {
   resize: vertical;
 }
+
+.white {
+  color: white!important;
+}
+
+.no-underline {
+  text-decoration: none!important;
+}
+
+.no-underline:hover {
+  text-decoration: none!important;
+}

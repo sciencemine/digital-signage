@@ -5,13 +5,9 @@ export default Ember.Component.extend({
   isInline: false,
   showList: false,
   showHelp: false,
+  prefix: "",
 
   init() {
     this._super(...arguments);
-  },
-  actions: {
-    thing() {
-      //console.log('baba');
-    }
   }
 });

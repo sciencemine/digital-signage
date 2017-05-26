@@ -20,7 +20,7 @@
 
     <ul class="list-group attribute-list">
       {{#each-in data as |key value|}}
-        {{attribute-list-item updateModalCallback=(action 'editAttribute') id=key tagName='li' class="list-group-item container-fluid unselectable pointer" data=value}}
+        {{attribute-list-item deleteAttributeCallback=deleteAttributeCallback updateModalCallback=(action 'editAttribute') id=key key=key tagName='li' class="list-group-item container-fluid unselectable pointer" data=value}}
       {{/each-in}}
     </ul>
   {{/if}}

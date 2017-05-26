@@ -20,7 +20,11 @@
       </nav>
 
       <div class="panel-body">
-        {{generic-form showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+        {{generic-form onSubmitCallback=onSubmitCallback showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+      </div>
+    {{else}}
+      <div class="panel-body">
+        <p>No video selected. Select a video from the middle of the screen to see information about it.</p>
       </div>
     {{/if}}
   {{/if}}

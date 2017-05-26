@@ -1,8 +1,12 @@
 import Ember from 'ember';
 
 export function formContentsTextarea(params, hash) {
-  let returnHTML = `<textarea data-toggle="tooltip" data-placement="auto top" title="${hash.data.help}" type=${hash.data.inputType} id=${hash.key} class="${hash.class}" oninvalid="setCustomValidity('${hash.data.error}')" placeholder="${hash.placeholder}"`;
+  let returnHTML = `<textarea data-toggle="tooltip" data-placement="auto top" title="${hash.data.help}" id=${hash.key} class="${hash.class}" placeholder="${hash.placeholder}"`;
 
+  if (hash.data.error) {
+    returnHTML = returnHTML + ` oninvalid="setCustomValidity('${hash.data.error}');" oninput="setCustomValidity('');"`;
+  } 
+  
   for (var key in hash.data.validation) {
     let value = hash.data.validation[key];
     returnHTML = returnHTML + ` ${key}=${value}`;

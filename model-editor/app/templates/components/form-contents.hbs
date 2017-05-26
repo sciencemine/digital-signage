@@ -2,7 +2,7 @@
 
 {{#if inputId}}
   {{#if config.inputType}}
-    <div class="form-group">
+    <div class="form-group bg-info section-title">
       <label id="{{inputId}}_label">{{config.displayName}}</label>
       <span class="help-block">{{config.help}}</span>
     </div>
@@ -12,34 +12,40 @@
 {{#each-in config.data as |key value|}}
   {{#if (is-list value.inputType)}}
     {{#if showList}}
-      <div class="form-group">
-        <label id="{{create-id inputId key}}_label" class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
+      <div class="form-margin form-group">
+        <label id="{{create-id prefix inputId key}}_label" class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
         <span class="help-block">{{value.help}}</span>
       </div>
       {{form-contents-list data=(get-data data key) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName}}
     {{/if}}
   {{else if (is-array value.data)}}
-    <div class="form-group">
-      <label id="{{create-id inputId key}}_label" for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-select key=(create-id inputId key) help=value.help data=value.data class="form-control input-sm"}}
+    <div class="form-margin form-group">
+      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+      {{form-contents-select key=(create-id prefix inputId key) help=value.help data=value.data class="form-control input-sm"}}
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>
       {{/if}}
     </div>
   {{else if (is-object value.data)}}
-    {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel inputId=(create-id inputId key) tagName='' config=value}}
+    {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel inputId=(create-id prefix inputId key) tagName='' config=value}}
   {{else if (is-textarea value.inputType)}}
-    <div class="form-group">
-      <label id="{{create-id inputId key}}_label" for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id inputId key) data=value}}
+    <div class="form-margin form-group">
+      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+      {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix inputId key) data=value}}
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>
       {{/if}}
     </div>
   {{else if (is-valid-input-type value.inputType)}}
-    <div class="form-group">
-      <label id="{{create-id inputId key}}_label" for={{create-id inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label><br>
-      {{form-contents-input placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm" "pointer")}}
+    <div class="form-margin form-group">
+      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+      {{#unless (not-checkbox value.inputType)}}
+        <br>
+      {{/unless}}
+      {{form-contents-input placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm" "pointer")}}
+      {{#if (not-checkbox value.inputType)}}
+        <!--span class="glyphicon glyphicon-warning-sign form-control-feedback" aria-hidden="true"></span-->
+      {{/if}}
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>
       {{/if}}

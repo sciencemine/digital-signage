@@ -4,9 +4,12 @@ export default Ember.Component.extend({
   newModel: null,
   selectedVideo: null,
   selectedVideoKey: null,
-  modalTitle: null,
+  modalTitle: "",
   modalConfig: null,
   modalData: null,
+  modalPrefix: "",
+  modalPath: "",
+  modalKey: "",
   attributesExpanded: true,
   propertiesExpanded: true,
 
@@ -14,29 +17,27 @@ export default Ember.Component.extend({
     this._super(...arguments);
 
     this.set('newModel', this.get('data.modelData'));
-
-    this.send('setSelectedVideo', Object.keys(this.get('newModel.videos'))[0]);
-    this.send('replaceVideoAttributes');
-    this.send('replaceVideoRelations');
-  },
-  didRender() {
   },
   actions: {
     updateModalInfo(title, config, path, key) {
       this.set('modalTitle', title);
       this.set('modalConfig', this.get('data.modelConfig' + config));
-      this.set('modalData', (path ? this.get('newModel' + path)[key] : null));
+      this.set('modalData', (key ? this.get('newModel' + path)[key] : null));
+      this.set('modalPrefix', title.replace(/\s*/gi, ''));
+      this.set('modalPath', path);
+      this.set('modalKey', key);
     },
     addVideo() {
-      this.send('updateModalInfo', "Add Video", '.videos.data.video');
+      this.send('updateModalInfo', "Add Video", '.videos.data.video', '.videos');
     },
     editRelation(relationKey) {
       this.set('modalTitle', "Edit Relation");
       this.set('modalConfig', this.get('data.modelConfig.videos.data.video.data.relations.data.relation'));
       this.set('modalData', this.get('newModel.videos')[this.get('selectedVideoKey')].relations[relationKey]);
+      this.set('modalPrefix', 'relation');
     },
     addAttribute() {
-      this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute");
+      this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
@@ -47,6 +48,8 @@ export default Ember.Component.extend({
     setSelectedVideo(param) {
       this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
       this.set('selectedVideoKey', param);
+      this.send('replaceVideoAttributes');
+      this.send('replaceVideoRelations');
     },
     replaceVideoAttributes() {
       let attributes = this.get('selectedVideo.attributes');
@@ -54,7 +57,7 @@ export default Ember.Component.extend({
       this.set('selectedVideo.attributes', [ ]);
 
       for (var attribute = 0; attribute < attributes.length; attribute++) {
-        let attributeData = this.get('data.modelData.attributes')[attributes[attribute]];
+        let attributeData = this.get('newModel.attributes')[attributes[attribute]];
         let data = { };
 
         data.name = attributeData.prettyName;
@@ -82,8 +85,72 @@ export default Ember.Component.extend({
         this.get('selectedVideo.relations').push(data);
       }
     },
-    modalSubmit(data) {
-      //console.log(data);
+    configUpdate(data, path) {
+      this.set('newModel' + path, data);
+
+      return false;
+    },
+    dataUpdate(data, path, key) {console.log(data, path, key)
+      let newPath = 'newModel' + path;
+
+      if (key) {
+        newPath = newPath + "." + key;
+      }
+      else {
+        newPath = newPath + "." + makeId(this.get('newModel' + path));
+      }
+
+      this.set(newPath, data);
+
+      if (this.get('selectedVideoKey')) {
+        this.send('setSelectedVideo', this.get('selectedVideoKey'));
+      }
+
+      if (this.$('#formOverlay')) {
+        this.$('#formOverlay').modal('hide');
+      }
+
+      return false;
+    },
+    deleteAttribute(attributeId) {
+      let attributes = Ember.copy(this.get('newModel.attributes'));
+
+      for (var i = this.get('newModel.attributes')[attributeId].videos.length - 1; i >= 0; i--) {
+        let vidId = this.get('newModel.attributes')[attributeId].videos[i];
+        let vid = this.get('newModel.videos')[vidId];
+
+        vid.attributes.removeObject(attributeId);
+
+        for (var j = vid.relations.length - 1; j >= 0; j--) {
+          let relation = vid.relations[j];
+
+          if (relation.attributeId === attributeId) {
+            vid.relations.removeObject(relation);
+          }
+        }
+      }
+      
+      delete attributes[attributeId];
+      this.set('newModel.attributes', attributes);
+
+      if (this.get('selectedVideoKey')) {
+        this.send('setSelectedVideo', this.get('selectedVideoKey'));
+      }
     }
   }
 });
+
+function makeId(obj) {
+  let text;
+
+  do {
+    text = "";
+    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+    for(var i = 0; i < 5; i++) {
+      text += possible.charAt(Math.floor(Math.random() * possible.length));
+    }
+  } while (text in obj)
+
+  return text;
+}

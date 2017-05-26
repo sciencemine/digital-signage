@@ -84,10 +84,9 @@
                         "validation": {
                             "required": "required",
                             "min": 0,
-                            "max": 30,
-                            "step": 0.05
+                            "max": 30
                         },
-                        "help": "Time before popovers hide themselves in seconds",
+                        "help": "Time before popovers hide themselves in decimal seconds",
                         "data": ""
                     },
                     "popoverShowDelay": {
@@ -100,7 +99,7 @@
                             "max": 5,
                             "step": 0.05
                         },
-                        "help": "Time before popovers appear in seconds",
+                        "help": "Time before popovers appear decimal in seconds",
                         "data": ""
                     },
                     "menuLocale": {
@@ -129,7 +128,7 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi",
+                            "pattern": "\\w",
                             "size": "4"
                         },
                         "help": "Selection",
@@ -142,10 +141,10 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi",
+                            "pattern": "\\w",
                             "size": "4"
                         },
-                        "help": "Going forward in a list",
+                        "help": "Going backward in a list",
                         "data": ""
                     },
                     "cancel": {
@@ -155,7 +154,7 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi",
+                            "pattern": "\\w",
                             "size": "4"
                         },
                         "help": "Cancelation",
@@ -168,10 +167,10 @@
                         "validation": {
                             "required": "required",
                             "maxlength": 1,
-                            "pattern": "/\\w/gi",
+                            "pattern": "\\w",
                             "size": "4"
                         },
-                        "help": "Going backward in a List",
+                        "help": "Going forward in a List",
                         "data": ""
                     }
                 }
@@ -197,7 +196,8 @@
                         "inputType": "textarea",
                         "error": "",
                         "validation": {
-                            "required": "required"
+                            "required": "required",
+                            "rows": 4
                         },
                         "help": "Title of the video",
                         "data": ""
@@ -207,7 +207,8 @@
                         "inputType": "textarea",
                         "error": "",
                         "validation": {
-                            "required": "required"
+                            "required": "required",
+                            "rows": 4
                         },
                         "help": "Description for the video",
                         "data": ""
@@ -225,9 +226,9 @@
                                 "error": "Use files that are .mp4, .ogg, or .webm.",
                                 "validation": {
                                     "required": "required",
-                                    "pattern": "/^\\w.*\\.(mp4|ogg|webm)$/gi"
+                                    "pattern": "\\w.*\\.(mp4|ogg|webm)$"
                                 },
-                                "help": "Filename of the full video",
+                                "help": "Filename of the full video with extension (.mp4, .ogg, or .webm)",
                                 "data": ""
                             },
                             "isUrl": {
@@ -242,9 +243,7 @@
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
                                 "error": "",
-                                "validation": {
-                                    "required": "required"
-                                },
+                                "validation": { },
                                 "help": "Attribution for the video",
                                 "data": ""
                             }
@@ -263,9 +262,9 @@
                                 "error": "Use files that are .mp4, .ogg, or .webm.",
                                 "validation": {
                                     "required": "required",
-                                    "pattern": "/^\\w.*(\\.mp4|\\.ogg|\\.webm)$/gi"
+                                    "pattern": "\\w.*\\.(mp4|ogg|webm)$"
                                 },
-                                "help": "Filename of the teaser video",
+                                "help": "Filename of the teaser video with extension (.mp4, .ogg, or .webm)",
                                 "data": ""
                             },
                             "isUrl": {
@@ -280,9 +279,7 @@
                                 "displayName": "Video Attribution",
                                 "inputType": "text",
                                 "error": "",
-                                "validation": {
-                                    "required": "required"
-                                },
+                                "validation": { },
                                 "help": "Attribution for the video",
                                 "data": ""
                             }
@@ -302,41 +299,43 @@
                         "error": "",
                         "validation": { },
                         "help": "Related videos",
-                        "data": {
-                            "relation": {
-                                "displayName": "Relation",
-                                "inputType": "",
-                                "error": "",
-                                "validation": "",
-                                "help": "A relation between the parent video and the child video",
-                                "data": {
-                                    "relatedId": {
-                                        "displayName": "Related Video",
-                                        "inputType": "text",
-                                        "error": "",
-                                        "validation": "",
-                                        "help": "A related video to the parent video",
-                                        "data": ""
-                                    },
-                                    "difficulty": {
-                                        "displayName": "Difficulty",
-                                        "inputType": "number",
-                                        "error": "",
-                                        "validation": "",
-                                        "help": "How hard the related video is relative to the parent video",
-                                        "data": ""
-                                    },
-                                    "attributeId": {
-                                        "displayName": "Attribute",
-                                        "inputType": "text",
-                                        "error": "",
-                                        "validation": "",
-                                        "help": "Why the videos are related",
-                                        "data": ""
+                        "data": [
+                            {
+                                "relation": {
+                                    "displayName": "Relation",
+                                    "inputType": "",
+                                    "error": "",
+                                    "validation": "",
+                                    "help": "A relation between the parent video and the child video",
+                                    "data": {
+                                        "relatedId": {
+                                            "displayName": "Related Video",
+                                            "inputType": "text",
+                                            "error": "",
+                                            "validation": "",
+                                            "help": "A related video to the parent video",
+                                            "data": ""
+                                        },
+                                        "difficulty": {
+                                            "displayName": "Difficulty",
+                                            "inputType": "number",
+                                            "error": "",
+                                            "validation": "",
+                                            "help": "How hard the related video is relative to the parent video",
+                                            "data": ""
+                                        },
+                                        "attributeId": {
+                                            "displayName": "Attribute",
+                                            "inputType": "text",
+                                            "error": "",
+                                            "validation": "",
+                                            "help": "Why the videos are related",
+                                            "data": ""
+                                        }
                                     }
                                 }
                             }
-                        }
+                        ]
                     }
                 }
             }
@@ -389,7 +388,7 @@
                             "min": 0,
                             "max": 100
                         },
-                        "help": "Position from the left where the attribute is shown on home screen",
+                        "help": "Position from the left, as a percent of 100, where the attribute is shown on home screen",
                         "data": ""
                     },
                     "y":  {
@@ -401,7 +400,7 @@
                             "min": 0,
                             "max": 100
                         },
-                        "help": "Position from the top where the attribute is shown on home screen",
+                        "help": "Position from the top, as a percent of 100, where the attribute is shown on home screen",
                         "data": ""
                     },
                     "videos":  {

@@ -100,43 +100,43 @@
         "0": {
             "prettyName": "Rubber Band",
             "description": "Rubber bands are fun but they can be treacherous and have been known to turn on even the best rubber banders when they detect weakness.",
-            "x": 0.5,
-            "y": 0.5,
+            "x": 50,
+            "y": 50,
             "videos": [ "0", "1" ]
         },
         "1": {
             "prettyName": "Promark 747B",
             "description": "Promark Neil Peart Signature 747Bs are the ONLY way to play.",
-            "x": 0.8,
-            "y": 0.8,
+            "x": 80,
+            "y": 80,
             "videos": [ "3" ]
         },
         "3": {
             "prettyName": "Drum Sticks",
             "description": "I wanted to quit drumming, but my family said to STICK to it. Glad I did.",
-            "x": 0.2,
-            "y": 0.2,
+            "x": 20,
+            "y": 20,
             "videos": [ "3" ]
         },
         "4": {
             "prettyName": "Interpretive Dance",
             "description": "Like dancing, but more interpretive.",
-            "x": 0.2,
-            "y": 0.8,
+            "x": 20,
+            "y": 80,
             "videos": [ "2", "3" ]
         },
         "5": {
             "prettyName": "Birds",
             "description": "Birds can usually fly.",
-            "x": 0.8,
-            "y": 0.2,
+            "x": 80,
+            "y": 20,
             "videos": [ "2" ]
         },
         "6": {
             "prettyName": "Needs a Haircut",
             "description": "Looks like someone needs a haircut.",
-            "x": 0.5,
-            "y": 0.2,
+            "x": 50,
+            "y": 20,
             "videos": [ "0", "1", "2", "3" ]
         }
     }

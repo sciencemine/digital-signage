@@ -17,3 +17,13 @@
 .pointer:hover {
   cursor: pointer;
 }
+
+.section-title {
+  padding: 5px;
+
+  border-radius: 3px;
+}
+
+.form-margin {
+  margin: 5px 0px;
+}
