@@ -1,5 +1,5 @@
 <div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info {{if expanded "properties-panel--scrollable"}}">
-  <div {{action 'toggleView' on click}} class="properties-panel--header panel-heading">
+  <div {{action 'toggleView' on click}} class="properties-panel--header panel-heading unselectable">
     <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
@@ -20,7 +20,7 @@
       </nav>
 
       <div class="panel-body">
-        {{generic-form showList=true showHelp=true showTitle=false relations=relations attributes=attributes updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+        {{generic-form showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
       </div>
     {{/if}}
   {{/if}}

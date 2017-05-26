@@ -2,7 +2,14 @@
   <h3>{{config.displayName}}<small> {{config.help}}</small></h3>
 {{/if}}
 
-<form class={{if isInline "form-inline" "form-horizontal"}}>
-  {{form-contents showHelp=showHelp showList=showList relations=relations attributes=attributes updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) noLabel=noLabel data=data config=config tagName=''}}<br><br>
+<form class="form-{{if isInline 'inline' 'horizontal'}}" submit={{action 'submitForm'}}>
+  <button {{action 'toggleHelp'}} type="button" class="btn btn-info btn-sm">Turn help {{if showHelp "off" "on"}}</button><br>
+
+  {{#unless isInline}}<br>{{/unless}}
+
+  {{form-contents isInLine=isInline showHelp=showHelp showList=showList updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) noLabel=noLabel data=data config=config tagName=''}}
+
+  {{#if isInline}}<br><br>{{/if}}
+
   <button type="submit" class="btn btn-success btn-sm">Submit {{title}}</button>
 </form>

@@ -7,11 +7,11 @@
   <button {{action 'addAttribute'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
 </div>
 
-{{properties-panel propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class="content-area--properties-section" data=selectedVideo config=data.modelConfig}}
+{{properties-panel propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if attributesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
 
 {{configuration-panel data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
 
-{{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') class="content-area--attribute-section" data=newModel.attributes}}
+{{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
   <div class="modal-dialog" role="document">
@@ -22,7 +22,7 @@
       </div>
 
       <div class="modal-body content-area--modal__body">
-        {{generic-form showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
+        {{generic-form onSubmitCallback=(action 'modalSubmit') showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
       </div>
 
       <div class="modal-footer">

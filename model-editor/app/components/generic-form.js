@@ -20,5 +20,13 @@ export default Ember.Component.extend({
         });
       }
     }
+  },
+  actions: {
+    submitForm() {
+      //console.log('baba');
+    },
+    toggleHelp() {
+      this.set('showHelp', !this.get('showHelp'));
+    }
   }
 });

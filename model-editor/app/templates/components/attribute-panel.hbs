@@ -1,5 +1,5 @@
 <div id="attribute-panel" data-spy="scroll" data-target="#attributeNav" class="panel panel-info {{if expanded 'attribute-panel--scrollable'}}">
-  <div {{action 'toggleView' on click}} class="attribute-panel--header panel-heading">
+  <div {{action 'toggleView' on click}} class="attribute-panel--header panel-heading unselectable">
     <h4 class="panel-title">Attributes <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
@@ -20,7 +20,7 @@
 
     <ul class="list-group attribute-list">
       {{#each-in data as |key value|}}
-        {{attribute-list-item updateModalCallback=(action 'editAttribute') id=key tagName="li" class="list-group-item container-fluid" data=value}}
+        {{attribute-list-item updateModalCallback=(action 'editAttribute') id=key tagName='li' class="list-group-item container-fluid unselectable pointer" data=value}}
       {{/each-in}}
     </ul>
   {{/if}}

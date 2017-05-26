@@ -1,5 +1,5 @@
 <div class="panel panel-primary configuration-panel">
-  <div {{action 'toggleView' on click}} class="panel-heading configuration-panel--header">
+  <div {{action 'toggleView' on click}} class="panel-heading configuration-panel--header unselectable">
     <h4 class="panel-title">{{config.displayName}} <small>{{config.help}}<span class="pull-right">Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'down' 'up'}}" /></span></small></h4>
   </div>
 

@@ -8,14 +8,17 @@
   border-bottom: 1px solid grey;
 }
 
-.content-area--properties-section {
+.content-area--properties-large, .content-area--properties-small {
   position: fixed;
 
   top: 0px;
   right: 0px;
-  bottom: 0px;
   
   width: calc(100px + 5%);
+}
+
+.content-area--properties-large {
+  bottom: 0px;
 
   height: 100%;
 }
@@ -42,16 +45,19 @@
   left: 0px;
 }
 
-.content-area--attribute-section {
+.content-area--attribute-large, .content-area--attribute-small {
   position: fixed;
 
   top: 0px;
-  bottom: 0px;
   left: 0px;
 
   width: calc(100px + 5%);
+}
 
+.content-area--attribute-large {
   height: 100%;
+
+  bottom: 0px;
 }
 
 .content-area--modal__body {
@@ -66,4 +72,12 @@
 
 .content-area--btn__group--offset {
   left: calc(100px + 5%);
+}
+
+.resize-horizontal {
+  resize: horizontal;
+}
+
+.resize-vertical {
+  resize: vertical;
 }

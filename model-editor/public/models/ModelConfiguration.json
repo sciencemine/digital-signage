@@ -8,7 +8,7 @@
         "data": {
             "prettyName": {
                 "displayName": "Exhibit Title",
-                "inputType": "text",
+                "inputType": "textarea",
                 "error": "",
                 "validation": {
                     "required": "required"
@@ -18,11 +18,10 @@
             },
             "description": {
                 "displayName": "Description",
-                "inputType": "text",
+                "inputType": "textarea",
                 "error": "",
                 "validation": {
-                    "required": "required",
-                    "size": 50
+                    "required": "required"
                 },
                 "help": "Description of the exhibit",
                 "data": ""
@@ -195,7 +194,7 @@
                 "data": {
                     "prettyName": {
                         "displayName": "Title",
-                        "inputType": "text",
+                        "inputType": "textarea",
                         "error": "",
                         "validation": {
                             "required": "required"
@@ -205,7 +204,7 @@
                     },
                     "description": {
                         "displayName": "Description",
-                        "inputType": "text",
+                        "inputType": "textarea",
                         "error": "",
                         "validation": {
                             "required": "required"
@@ -363,7 +362,7 @@
                 "data": {
                     "prettyName": {
                         "displayName": "Attribute Name",
-                        "inputType": "text",
+                        "inputType": "textarea",
                         "error": "",
                         "validation": {
                             "required": "required"
@@ -373,7 +372,7 @@
                     },
                     "description": {
                         "displayName": "Attribute Description",
-                        "inputType": "text",
+                        "inputType": "textarea",
                         "error": "",
                         "validation": {
                             "required": "required"
