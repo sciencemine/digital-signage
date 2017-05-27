@@ -23,12 +23,46 @@ export default Ember.Component.extend({
         });
       }
     }
+
+    this.send('validateForm');
   },
   actions: {
     submitForm() {
       this.get('onSubmitCallback') (getValues(this.get('config.data'), this.get('prefix')), this.get('path'), this.get('key'));
 
       return false;
+    },
+    validateForm() {
+      this.send('validateInput');
+      this.send('validateTextarea');
+    },
+    validateInput() {
+      for (var i = this.$('input').length - 1; i >= 0; i--) {
+        let el = this.$('input')[i];
+
+        this.send('validate', el);
+      }
+    },
+    validateTextarea() {
+      for (var i = this.$('textarea').length - 1; i >= 0; i--) {
+        let el = this.$('textarea')[i];
+
+        this.send('validate', el);
+      }
+    },
+    validate(el) {
+      if (el.validity.valid) {
+        this.$('#' + el.id + '_div').removeClass("has-warning has-error").addClass("has-success");
+        this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-remove").addClass("glyphicon-ok");
+      }
+      else if (!el.value && !el.validity.valid) {
+        this.$('#' + el.id + '_div').removeClass("has-error has-success").addClass("has-warning");
+        this.$('#' + el.id + '_span').removeClass("glyphicon-remove glyphicon-ok").addClass("glyphicon-warning-sign");
+      }
+      else if (!el.validity.valid) {
+        this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
+        this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
+      }
     },
     toggleHelp() {
       this.set('showHelp', !this.get('showHelp'));
@@ -55,6 +89,9 @@ function getValues(data, prefix) {
       }
       else if (el[0].type === 'textarea') {
         value = el.val();
+      }
+      else if (el[0].type === 'number') {
+        value = el[0].valueAsNumber;
       }
       else {
         value = el[0].value;

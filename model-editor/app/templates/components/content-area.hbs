@@ -19,7 +19,7 @@
   {{/each-in}}
 </div>
 
-{{properties-panel onSubmitCallback=(action 'dataUpdate') propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if attributesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
+{{properties-panel onSubmitCallback=(action 'dataUpdate') propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if propertiesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
 
 {{configuration-panel onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
 

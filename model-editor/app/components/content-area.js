@@ -90,7 +90,7 @@ export default Ember.Component.extend({
 
       return false;
     },
-    dataUpdate(data, path, key) {console.log(data, path, key)
+    dataUpdate(data, path, key) {
       let newPath = 'newModel' + path;
 
       if (key) {
@@ -150,7 +150,7 @@ function makeId(obj) {
     for(var i = 0; i < 5; i++) {
       text += possible.charAt(Math.floor(Math.random() * possible.length));
     }
-  } while (text in obj)
+  } while (text in obj);
 
   return text;
 }
