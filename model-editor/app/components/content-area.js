@@ -136,6 +136,23 @@ export default Ember.Component.extend({
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
       }
+    },
+    saveModel() {
+      let prettyName = this.get('newModel.config.prettyName');
+
+      let download = confirm("Do you want to download the exhibit model for " + prettyName + "?");
+
+      if (download) {
+        let filename = prompt("Enter filename:") + ".json";
+
+        let a = document.createElement('a');
+
+        a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(this.get('newModel'))));
+
+        a.setAttribute('download', filename);
+
+        a.click();
+      }
     }
   }
 });

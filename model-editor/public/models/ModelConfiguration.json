@@ -27,14 +27,14 @@
                 "data": ""
             },
             "modelIdentifier": {
-                "displayName": "Filename",
+                "displayName": "Foldername for Exhibit",
                 "inputType": "text",
                 "error": "",
                 "validation": {
                     "required": "required"
                 },
                 "help": "Filename for this exhibit",
-                "data": ""
+                "data": "http://10.10.2.159/"
             },
             "backgroundVideos": {
                 "displayName": "Background Videos",
