@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   newModel: null,
+  validModel: false,
   selectedVideo: null,
   selectedVideoKey: null,
   modalTitle: "",
@@ -88,6 +89,8 @@ export default Ember.Component.extend({
     configUpdate(data, path) {
       this.set('newModel' + path, data);
 
+      this.set('validModel', true);
+
       return false;
     },
     dataUpdate(data, path, key) {
@@ -138,6 +141,12 @@ export default Ember.Component.extend({
       }
     },
     saveModel() {
+      if (!this.get('validModel')) {
+        alert("Please verify information in the configuratoin section.");
+
+        return;
+      }
+
       let prettyName = this.get('newModel.config.prettyName');
 
       let download = confirm("Do you want to download the exhibit model for " + prettyName + "?");
