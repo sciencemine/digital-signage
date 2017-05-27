@@ -12,7 +12,7 @@
       <div class="collapse navbar-collapse" id="attributeNav">
         <ul class="nav navbar-nav">
           {{#each-in data as |key value|}}
-            <li data-toggle="attributeTooltip" title={{value.prettyName}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
+            <li data-toggle="attributeTooltip" title={{value.prettyName}}><a href="#{{create-id prefix key}}"><span class="glyphicon glyphicon-picture"/></a></li>
           {{/each-in}}
         </ul>
       </div>
@@ -20,7 +20,7 @@
 
     <ul class="list-group attribute-list">
       {{#each-in data as |key value|}}
-        {{attribute-list-item deleteAttributeCallback=deleteAttributeCallback updateModalCallback=(action 'editAttribute') id=key key=key tagName='li' class="list-group-item container-fluid unselectable pointer" data=value}}
+        {{attribute-list-item deleteAttributeCallback=deleteAttributeCallback updateModalCallback=(action 'editAttribute') id=(create-id prefix key) key=key tagName='li' class="list-group-item container-fluid unselectable pointer" data=value}}
       {{/each-in}}
     </ul>
   {{/if}}

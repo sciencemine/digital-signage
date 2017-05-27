@@ -5,7 +5,7 @@ export default Ember.Component.extend({
   
   actions: {
     updateModal() {
-      this.get('updateModalCallback') ('.attributes', this.get('id'));
+      this.get('updateModalCallback') ('.attributes', this.get('key'));
     },
     deleteAttribute() {
       this.get('deleteAttributeCallback') (this.get('key'));

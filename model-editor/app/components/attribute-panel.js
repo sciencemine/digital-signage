@@ -2,6 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   expanded: true,
+  prefix: "attributes",
 
   didRender() {
     if (this.$('[data-toggle="attributeTooltip"]').length !== 0) {
