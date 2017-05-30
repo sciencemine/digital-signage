@@ -114,6 +114,11 @@ export default Ember.Component.extend({
         this.$('#formOverlay').modal('hide');
       }
 
+      this.set('modalTitle', null);
+      this.set('modalConfig', null);
+      this.set('modalData', null);
+      this.set('modalPrefix', null);
+
       return false;
     },
     deleteAttribute(attributeId) {

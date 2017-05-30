@@ -1,6 +1,6 @@
 <div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info {{if expanded "properties-panel--scrollable"}}">
   <div {{action 'toggleView' on click}} class="properties-panel--header panel-heading unselectable">
-    <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
+    <h4 class="panel-title">Properties <small>Scroll me.<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
   {{#if expanded}}
@@ -10,6 +10,7 @@
       </div>
 
       <nav class="properties-navbar navbar">
+        <p class="navbar-text">Click icons to navigate to specific properties</p>
         <div class="collapse navbar-collapse" id="propertiesNav">
           <ul class="nav navbar-nav">
             {{#each-in data as |key value|}}
