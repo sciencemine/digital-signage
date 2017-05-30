@@ -24,11 +24,17 @@ export default AbstractList.extend({
     selectedStackIndex: 0,
     isMuted: true,
     isFlex: true,
+    stackItemClass: '',
     stackItemHighlight: '',
+    stackItemSelected: '',    
     loop: true,
       
     init(){
         this._super(...arguments);
+    },
+    
+    didRender() {
+      this.send('updateFocus', true);
     },
     actions:{
         select(event){
@@ -59,7 +65,7 @@ export default AbstractList.extend({
           let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
           this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
         },
-        hover(stackIndex){
+        stackHovered(stackIndex){
           this.set('selectedStackIndex', stackIndex);
           //this.send('input');
         },
