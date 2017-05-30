@@ -89,9 +89,10 @@ export default Ember.Component.extend({
     configUpdate(data, path) {
       this.set('newModel' + path, data);
 
-      this.set('validModel', true);
-
       return false;
+    },
+    validateConfig(param) {
+      this.set('validModel', this.get('validModel') || param);
     },
     dataUpdate(data, path, key) {
       let newPath = 'newModel' + path;
@@ -140,9 +141,12 @@ export default Ember.Component.extend({
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
       }
     },
+    doNothing() {
+
+    },
     saveModel() {
       if (!this.get('validModel')) {
-        alert("Please verify information in the configuratoin section.");
+        alert("Please verify information in the configuration section.");
 
         return;
       }

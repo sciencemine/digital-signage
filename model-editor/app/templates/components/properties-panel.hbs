@@ -20,7 +20,7 @@
       </nav>
 
       <div class="panel-body">
-        {{generic-form prefix=prefix onSubmitCallback=onSubmitCallback showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+        {{generic-form validation=(action 'doNothing') prefix=prefix onSubmitCallback=onSubmitCallback showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
       </div>
     {{else}}
       <div class="panel-body">

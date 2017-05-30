@@ -7,6 +7,7 @@ export default Ember.Component.extend({
   showTooltips: false,
   showHelp: false,
   showList: false,
+  validForm: false,
   path: "",
   prefix: "",
   key: "",
@@ -25,6 +26,7 @@ export default Ember.Component.extend({
     }
 
     this.send('validateForm');
+    this.get('validation') (this.get('validForm'))
   },
   actions: {
     submitForm() {
@@ -33,6 +35,8 @@ export default Ember.Component.extend({
       return false;
     },
     validateForm() {
+      this.set('validForm', true);
+
       this.send('validateInput');
       this.send('validateTextarea');
     },
@@ -54,14 +58,20 @@ export default Ember.Component.extend({
       if (el.validity.valid) {
         this.$('#' + el.id + '_div').removeClass("has-warning has-error").addClass("has-success");
         this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-remove").addClass("glyphicon-ok");
+
+        this.set('validForm', this.get('validForm') && true);
       }
       else if (!el.value && !el.validity.valid) {
         this.$('#' + el.id + '_div').removeClass("has-error has-success").addClass("has-warning");
         this.$('#' + el.id + '_span').removeClass("glyphicon-remove glyphicon-ok").addClass("glyphicon-warning-sign");
+
+        this.set('validForm', this.get('validForm') && false);
       }
       else if (!el.validity.valid) {
         this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
         this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
+
+        this.set('validForm', this.get('validForm') && false);
       }
     },
     toggleHelp() {

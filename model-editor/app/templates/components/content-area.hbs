@@ -22,7 +22,7 @@
 
 {{properties-panel onSubmitCallback=(action 'dataUpdate') propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if propertiesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
 
-{{configuration-panel onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
+{{configuration-panel validation=(action "validateConfig") onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
 
 {{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
 
@@ -35,7 +35,7 @@
       </div>
 
       <div class="modal-body content-area--modal__body">
-        {{generic-form prefix=modalPrefix path=modalPath key=modalKey onSubmitCallback=(action 'dataUpdate') showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
+        {{generic-form validation=(action 'doNothing') prefix=modalPrefix path=modalPath key=modalKey onSubmitCallback=(action 'dataUpdate') showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
       </div>
 
       <div class="modal-footer">
