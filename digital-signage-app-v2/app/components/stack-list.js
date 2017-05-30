@@ -39,17 +39,17 @@ export default AbstractList.extend({
     actions:{
         select(event){
           this.send('selectedCallback', this.get('data')[this.get('selectedStackIndex')]);
-          //this.send('input');
+          this.send('input');
           event.stopPropagation();    
         },
         cancel(event){
           this.send('cancelCallback');
-          //this.send('input');
+          this.send('input');
           event.stopPropagation();
         },
         goPrevious(event){
           this.send('changeIndex', -1);
-          //this.send('input');
+          this.send('input');
           event.stopPropagation();
         },
         goNext(event){
@@ -67,7 +67,8 @@ export default AbstractList.extend({
         },
         stackHovered(stackIndex){
           this.set('selectedStackIndex', stackIndex);
-          //this.send('input');
+		  this.send('selectedStackIndex', this.get());
+          this.send('input');
         },
         input(){
           this.get('onInputCallback') ();

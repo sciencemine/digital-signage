@@ -1,10 +1,10 @@
 {{yield}}
 {{#if isFlex}}
-	<div>
+	<div class="stack-list--flex">
     {{#each-in data as |key value|}}
         <div class="{{stackItemClass}} {{if (video-selected key selectedStackIndex)stackItemSelected}}">
         
-          {{video-stack highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) videos=value.videos  highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) isMuted=(if (video-selected key selectedStackIndex) isMuted false) loop=true onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') stackIndex=key}}
+          {{video-stack highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) videos=value.videos highlightedStyle=(if (video-selected key selectedStackIndex) stackItemHighlight) isMuted=(if (video-selected key selectedStackIndex) isMuted false) loop=true onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') stackIndex=key}}
         </div>
     {{/each-in}}
 	</div>
