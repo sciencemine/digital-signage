@@ -57,8 +57,8 @@ export default AbstractList.extend({
           //this.send('input');
           event.stopPropagation();
         },
-        stackSelected(stackIndex){
-          this.send('selectedCallback', this.get('data')[stackIndex]);
+        stackClicked(videos, vidPos){
+          this.get('onClickCallback') (videos, vidPos);
         },
         changeIndex(indexDelta){
           let arrLength = this.get('attributeKeys').length;

@@ -1,14 +1,5 @@
 /*
-.stack-list 
-{
-  position: absolute;
 
-  right: 0px;
-  left: 0px;
-  top: 20%;
-
-  z-index: 0;
-}
 
 .stack-list--flex 
 {
@@ -24,11 +15,18 @@
   flex-direction: row;
 }
 
-.stack-list--item
-{
-    flex-basis: 10%;
-}*/
+*/
 
+.stack-list 
+{
+  position: fixed;
+
+  right: 0px;
+  left: 0px;
+  top: 20%;
+
+  z-index: 0;
+}
 
 .stack-list--flex 
 {
@@ -43,5 +41,39 @@
     flex-basis: 10%;  /* Or whatever */
     height: 100px; /* Or whatever */
     margin: auto;  /* Magic! */
+}
+
+.stack-list--flex:focus {
+  outline: 0;
+}
+
+.stack-list--flex:focus {
+  outline: 0;
+}
+
+.stack-list-item--selected {
+  flex-basis: 20%;
+
+  border-radius: 5px;
+}
+
+.stack-list-item--selected:hover {
+  cursor: pointer;
+}
+
+.stack-list-item--highlight {
+  border: 4px solid blue;
+}
+.stack-list:focus
+{
+	outline: 0;
+}
+
+.stack-list-item:focus{
+  outline: 0;
+}
+
+.no-outline:focus{
+  outline: 0;
 }
 
