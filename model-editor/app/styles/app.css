@@ -27,3 +27,11 @@
 .form-margin {
   margin: 5px 0px;
 }
+
+.flush-right {
+  right: 0px;
+}
+
+.flush-left {
+  left: 0px;
+}

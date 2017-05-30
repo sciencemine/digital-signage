@@ -33,7 +33,7 @@
                 "validation": {
                     "required": "required"
                 },
-                "help": "Filename for this exhibit",
+                "help": "Foldername for this exhibit",
                 "data": "http://10.10.2.159/"
             },
             "backgroundVideos": {
@@ -99,7 +99,7 @@
                             "max": 5,
                             "step": 0.05
                         },
-                        "help": "Time before popovers appear decimal in seconds",
+                        "help": "Time before popovers appear in decimal seconds",
                         "data": ""
                     },
                     "menuLocale": {

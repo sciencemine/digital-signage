@@ -1,51 +1,50 @@
 {{yield}}
 
-{{#if inputId}}
-  {{#if config.inputType}}
-    <div class="form-group bg-info section-title">
-      <label id="{{inputId}}_label">{{config.displayName}}</label>
-      <span class="help-block">{{config.help}}</span>
-    </div>
-  {{/if}}
+{{#if config.inputType}}
+  <div id={{create-id prefix "_div"}} class="form-group bg-info section-title">
+    <label id={{create-id prefix}}>{{config.displayName}}</label>
+    <span class="help-block">{{config.help}}</span>
+  </div>
 {{/if}}
 
 {{#each-in config.data as |key value|}}
   {{#if (is-list value.inputType)}}
     {{#if showList}}
-      <div class="form-margin form-group">
-        <label id="{{create-id prefix inputId key}}_label" class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+      <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+        <label id={{create-id prefix "_" key "_label"}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+        
         <span class="help-block">{{value.help}}</span>
       </div>
 
       {{form-contents-list data=(get-data data key) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName}}
     {{/if}}
   {{else if (is-array value.data)}}
-    <div class="form-margin form-group">
-      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
 
-      {{form-contents-select key=(create-id prefix inputId key) help=value.help data=value.data class="form-control input-sm"}}
+      {{form-contents-select key=(create-id prefix "_" key) help=value.help data=value.data class="form-control input-sm"}}
 
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>
       {{/if}}
     </div>
   {{else if (is-object value.data)}}
-    {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel inputId=(create-id prefix inputId key) tagName='' config=value}}
+    {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel prefix=(create-id prefix "_" key) tagName='' config=value}}
   {{else if (is-textarea value.inputType)}}
-    <div id="{{create-id prefix inputId key}}_div" class="form-margin form-group has-feedback">
-      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
 
-      {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix inputId key) data=value}}
+      {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix "_" key) data=value}}
 
-      <span id="{{create-id prefix inputId key}}_span" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+      <span id={{create-id prefix "_" key "_span"}} class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>
       {{/if}}
     </div>
   {{else if (is-valid-input-type value.inputType)}}
-    <div id="{{create-id prefix inputId key}}_div" class="form-margin form-group has-feedback {{if value.data "input-group"}}">
-      <label id="{{create-id prefix inputId key}}_label" for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback {{if value.data "input-group"}}">
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
 
       {{#unless (not-checkbox value.inputType)}}<br>{{/unless}}
 
@@ -53,10 +52,10 @@
         <span class="input-group-addon">{{value.data}}</span>
       {{/if}}
 
-      {{form-contents-input placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix inputId key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm" "pointer")}}
-
+      {{form-contents-input placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix "_" key) data=value class=(if (not-checkbox value.inputType) "form-control input-sm" "pointer")}}
+ 
       {{#if (not-checkbox value.inputType)}}
-        <span id="{{create-id prefix inputId key}}_span" class="glyphicon form-control-feedback" aria-hidden="true"></span>
+        <span id={{create-id prefix "_" key "_span"}} class="glyphicon form-control-feedback" aria-hidden="true"></span>
       {{/if}}
 
       {{#if showHelp}}

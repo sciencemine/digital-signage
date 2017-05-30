@@ -37,14 +37,6 @@
   right: calc(100px + 5%);
 }
 
-.content-area--configuration-section__flush-right {
-  right: 0px;
-}
-
-.content-area--configuration-section__flush-left {
-  left: 0px;
-}
-
 .content-area--attribute-large, .content-area--attribute-small {
   position: fixed;
 

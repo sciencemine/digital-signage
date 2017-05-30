@@ -3,11 +3,11 @@
 </div>
 
 <div class="btn-group-vertical content-area--btn__group {{if attributesExpanded 'content-area--btn__group--offset'}}" role="group" aria-label="...">
-  <button type="button" class="btn btn-warning">
-    {{#link-to "modelSelect"}}
+  {{#link-to "modelSelect"}}
+    <button type="button" class="btn btn-warning">
       <span class="white">Change Exhibits</span>
-    {{/link-to}}
-  </button>
+    </button>
+  {{/link-to}}
   <button {{action 'saveModel'}} type="button" class="btn btn-info"><span class="glyphicon glyphicon-save"/> Save Exhibit</button>
   <button {{action 'addVideo'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Video</button>
   <button {{action 'addAttribute'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>

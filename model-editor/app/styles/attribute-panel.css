@@ -32,3 +32,7 @@
 .attribute-panel__footer:hover {
   cursor: pointer;
 }
+
+.attribute-list {
+  padding-bottom: 5px;
+}

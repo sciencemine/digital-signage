@@ -75,13 +75,13 @@ function getValues(data, prefix) {
 
   for (var key in data) {
     if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
-      payload[key] = getValues(data[key].data, prefix + key);
+      payload[key] = getValues(data[key].data, prefix + "_" + key);
     }
     else if (Array.isArray(data[key].data)) {
       payload[key] = [ ];
     }
     else {
-      let el = Ember.$('#' + prefix + key);
+      let el = Ember.$('#' + prefix + "_" + key);
       let value;
 
       if (el[0].type === 'checkbox') {

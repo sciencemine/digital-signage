@@ -7,14 +7,14 @@ export function configurationCss([attributes, properties]) {
     css = css + " content-area--configuration-section__attributes";
   }
   else {
-    css = css + " content-area--configuration-section__flush-left";
+    css = css + " flush-left";
   }
 
   if(properties) {
     css = css + " content-area--configuration-section__properties";
   }
   else {
-    css = css + " content-area--configuration-section__flush-right";
+    css = css + " flush-right";
   }
 
   return css;
