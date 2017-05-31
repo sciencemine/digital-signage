@@ -7,9 +7,9 @@
         "ui": {
             "idle": 5,
             "menuDwell": 3,
-            "popoverDwell": 3000,
+            "popoverDwell": 5.0,
             "menuLocale": "top",
-            "popoverShowDelay": 1000
+            "popoverShowDelay": 0.25
         },
         "keyboard": {
             "select": "w",
@@ -23,6 +23,13 @@
             "prettyName": "Kenny with a Rubber Band: Episode X-II - A New Hope",
             "description": "Kenny shoots a rubber band... You won't believe what happens next!",
             "attributes": [ "0", "6" ],
+            "relations": [
+                {
+                    "relatedId": "1",
+                    "difficulty": 1,
+                    "attributeId": "0"
+                }
+            ],
             "full": {
                 "fileIdentifier": "kenny_band_1.mp4",
                 "isUrl": false,
@@ -38,6 +45,13 @@
             "prettyName": "Kenny with a Rubber Band: Episode IIII - Return of the New Hope",
             "description": "The phantom menace strikes back at the return of the revenge of the clones.",
             "attributes": [ "0", "6" ],
+            "relations": [
+                {
+                    "relatedId": "0",
+                    "difficulty": -1,
+                    "attributeId": "0"
+                }
+            ],
             "full": {
                 "fileIdentifier": "kenny_band_2.mp4",
                 "isUrl": false,
@@ -122,20 +136,6 @@
             "x": 0.5,
             "y": 0.2,
             "videos": [ "0", "1", "2", "3" ]
-        }
-    },
-    "relations": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "1",
-            "difficulty": 1,
-            "attributeId": "0"
-        },
-        "1": {
-            "videoId": "1",
-            "relatedId": "0",
-            "difficulty": -1,
-            "attributeId": "0"
         }
     }
 }
