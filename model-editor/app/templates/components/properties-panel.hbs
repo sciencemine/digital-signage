@@ -1,33 +1,32 @@
-<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-default properties-panel--scrollable">
-  <div class="properties-panel--header panel-heading">
-    <h4 class="panel-title">Properties <small>Scroll me</small></h4>
+<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info {{if expanded "properties-panel--scrollable"}}">
+  <div {{action 'toggleView' on click}} class="properties-panel--header panel-heading unselectable">
+    <h4 class="panel-title">Properties <small>Scroll me.<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
-  {{#if data}}
-    <div class="panel-body">
-      <p>List of properties the video has.</p>
-    </div>
-
-    <nav class="properties-navbar navbar">
-      <div class="collapse navbar-collapse" id="propertiesNav">
-        <ul class="nav navbar-nav">
-          {{#each-in data as |key value|}}
-            <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href="#{{key}}"><span class="glyphicon glyphicon-picture"/></a></li>
-          {{/each-in}}
-        </ul>
+  {{#if expanded}}
+    {{#if data}}
+      <div class="panel-body">
+        <p>List of properties the video has.</p>
       </div>
-    </nav>
 
-    <div class="panel-body">
-      {{generic-form class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
-    </div>
+      <nav class="properties-navbar navbar">
+        <p class="navbar-text">Click icons to navigate to specific properties</p>
+        <div class="collapse navbar-collapse" id="propertiesNav">
+          <ul class="nav navbar-nav">
+            {{#each-in data as |key value|}}
+              <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href={{create-id "#" prefix "_" key "_label"}}><span class="glyphicon glyphicon-picture"/></a></li>
+            {{/each-in}}
+          </ul>
+        </div>
+      </nav>
 
-    <div class="properties-panel__footer panel-footer">
-      Submit at bottom of scroll
-    </div>
-  {{else}}
-    <div class="properties-panel__footer panel-footer">
-      <button type="button" class="btn btn-primary center-block">Add Video</button>
-    </div>
+      <div class="panel-body">
+        {{generic-form validation=(action 'doNothing') prefix=prefix onSubmitCallback=onSubmitCallback showList=true showHelp=true showTitle=false updateModalCallback=updateModalCallback editRelationCallback=editRelationCallback class="properties-panel__form" noLabel=false data=data config=config.videos.data.video}}
+      </div>
+    {{else}}
+      <div class="panel-body">
+        <p>No video selected. Select a video from the middle of the screen to see information about it.</p>
+      </div>
+    {{/if}}
   {{/if}}
 </div>

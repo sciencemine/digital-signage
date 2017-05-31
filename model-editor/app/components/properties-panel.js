@@ -1,6 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  expanded: true,
+  prefix: "properties",
+
   didRender() {
     if (this.$('[data-toggle="propertiesTooltip"]').length !== 0) {
       this.$('[data-toggle="propertiesTooltip"]').tooltip({
@@ -17,6 +20,15 @@ export default Ember.Component.extend({
       this.$('#panel-body').scrollspy({
         target: '#propertiesNav'
       });
+    }
+  },
+  actions: {
+    toggleView() {
+      this.set('expanded', !this.get('expanded'));
+      this.get('propertiesExpandedCallback') (this.get('expanded'));
+    },
+    doNothing() {
+      
     }
   }
 });

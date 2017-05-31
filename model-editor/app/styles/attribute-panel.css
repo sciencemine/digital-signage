@@ -4,20 +4,21 @@
   top: 0px;
   left: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 7%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 
   z-index: 100;
+
+  cursor: pointer;
 }
 
 .attribute-panel--scrollable {
   position: relative;
 
-  top: 5%;
-  bottom: 5%;
+  top: calc(3px + 7%);
 
-  height: 90%;
+  height: 95%;
 
   overflow-y: scroll;
 
@@ -28,17 +29,10 @@
   display: none;
 }
 
-.attribute-panel__footer {
-  position: fixed;
-
-  bottom: 0px;
-  left: 0px;
-
-  min-height: 5%;
-
-  width: 10%;
-}
-
 .attribute-panel__footer:hover {
   cursor: pointer;
+}
+
+.attribute-list {
+  padding-bottom: 5px;
 }

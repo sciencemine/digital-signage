@@ -1,7 +1,7 @@
 import Ember from 'ember';
 
 export function formContentsSelect(params, hash) {
-  let returnHTML = `<select id=${hash.key} class="${hash.class}">`;
+  let returnHTML = `<select data-toggle="tooltip" data-placement="auto top" title="${hash.help}" id=${hash.key} class="${hash.class}">`;
 
   for (var i= 0; i < hash.data.length; i++) {
     let value = hash.data[i];

@@ -1,3 +1,5 @@
-<h4 class="list-group-item-heading">{{name}}</h4>
+{{#link-to "modelEdit" (query-params modelfile=modelfile)}}
+  <h4 class="list-group-item-heading">{{name}}</h4>
 
-<p class="list-group-item-text">{{description}}</p>
+  <p class="list-group-item-text">{{description}}</p>
+{{/link-to}}

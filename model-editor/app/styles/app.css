@@ -1,8 +1,37 @@
-/* Route css */
+/* Route styles */
 @import 'model-select.css';
 
-/* Component css */
-@import 'generic-form.css';
-@import 'attribute-panel.css';
+/* Component styles */
 @import 'properties-panel.css';
+@import 'configuration-panel.css';
+@import 'attribute-panel.css';
 @import 'content-area.css';
+
+/* helper styles */
+.unselectable {
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.section-title {
+  padding: 5px;
+
+  border-radius: 3px;
+}
+
+.form-margin {
+  margin: 5px 0px;
+}
+
+.flush-right {
+  right: 0px;
+}
+
+.flush-left {
+  left: 0px;
+}

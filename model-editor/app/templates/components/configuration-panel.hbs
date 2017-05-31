@@ -1,0 +1,11 @@
+<div class="panel panel-primary configuration-panel">
+  <div {{action 'toggleView' on click}} class="panel-heading configuration-panel--header unselectable">
+    <h4 class="panel-title">{{config.displayName}} <small>{{config.help}}<span class="pull-right">Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'down' 'up'}}" /></span></small></h4>
+  </div>
+
+  {{#if expanded}}
+    <div class="panel-body">
+      {{generic-form validation=validation path=path prefix=prefix onSubmitCallback=onSubmitCallback showTooltips=true noLabel=false showTitle=false isInline=true data=data config=config}}
+    </div>
+  {{/if}}
+</div>

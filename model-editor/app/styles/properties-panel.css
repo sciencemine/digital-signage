@@ -4,20 +4,21 @@
   top: 0px;
   right: 0px;
 
-  min-height: 5%;
+  min-height: calc(3px + 7%);
 
-  width: 10%;
+  width: calc(100px + 5%);
 
   z-index: 100;
+
+  cursor: pointer;
 }
 
 .properties-panel--scrollable {
   position: relative;
 
-  top: 5%;
-  bottom: 5%;
+  top: calc(3px + 7%);
 
-  height: 90%;
+  height: 95%;
 
   overflow-y: scroll;
 
@@ -26,17 +27,6 @@
 
 .properties-panel--scrollable::-webkit-scrollbar {
   display: none;
-}
-
-.properties-panel__footer {
-  position: fixed;
-
-  right: 0px;
-  bottom: 0px;
-
-  min-height: 5%;
-
-  width: 10%;
 }
 
 .properties-panel__form {

@@ -21,7 +21,7 @@
 }
 
 .model-select--element {
-  text-decoration: none;
+  border-bottom: 1px solid black;
 }
 
 .model-select--element:focus {
