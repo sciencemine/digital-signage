@@ -11,3 +11,9 @@
 @import 'content-area.css';
 @import 'menu-bar.css';
 @import 'model-select-element.css';
+
+/* Global Styles */
+.blue-border{
+  border-radius: 5px;
+	border: 4px solid blue;
+}

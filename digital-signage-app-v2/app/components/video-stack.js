@@ -6,7 +6,6 @@ export default Ember.Component.extend({
     stackStyle: '',
     playerSize: '',
     isMuted: true,
-    highlightedStyle: '',
     
     init() {
         this._super(...arguments);
@@ -34,15 +33,17 @@ export default Ember.Component.extend({
     actions: {
         stackClicked() {
             this.get('onClickCallback') (this.get('videos'), this.get('selectedVidPos'));
-            console.log('clicked')
+            
         },
         getNextVid() {
             let arrayLength = this.get('videos').length;
             let curArrayPos = this.get('selectedVidPos');
             this.set('selectedVidPos', (curArrayPos + 1) % arrayLength);
        },
-        hover() {
+        stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));
+			
+
         }
     }
 });

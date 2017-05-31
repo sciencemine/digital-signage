@@ -36,7 +36,7 @@ export default Ember.Component.extend({
 	looping: false,
 	playing: true,
 	muted: true,
-  highlightedStyle: '',
+	highlightedStyle: '',
 
 	click(event) {
 		this.get('onClickCallback') (this.get('videoPos'));

@@ -127,6 +127,7 @@ export default Ember.Component.extend(KeyboardControls, {
     doNothing(videos, selectedVidPos) {
       console.log(videos, selectedVidPos);
     },
+	
     pauseVideo() {
       this.set('videoPlaying', !this.get('videoPlaying'));
       this.set('displayVideoSelect', !this.get('videoPlaying'));

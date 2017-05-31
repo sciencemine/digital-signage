@@ -1,5 +1,4 @@
-<div class={{playerSize}}>
-  {{video-player isMuted=isMuted url=(if curVideo.teaser.isUrl curVideo.teaser.fileIdentifier (make-local-url modelIdentifier curVideo.teaser.fileIdentifier)) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'hover') onEndedCallback=(action 'getNextVid')}}
-</div>
 
-{{yield}}
+{{video-player highlightedStyle=(string-append stackStyle borderStyle) isMuted=(if (video-selected key selectedStackIndex) isMuted false) url=(if curVideo.teaser.isUrl curVideo.teaser.fileIdentifier (make-local-url modelIdentifier curVideo.teaser.fileIdentifier)) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') onEndedCallback=(action 'getNextVid')}}
+
+

@@ -54,7 +54,7 @@ export default AbstractList.extend({
         },
         goNext(event){
           this.send('changeIndex', 1);
-          //this.send('input');
+          this.send('input');
           event.stopPropagation();
         },
         stackClicked(videos, vidPos){
@@ -65,9 +65,9 @@ export default AbstractList.extend({
           let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
           this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
         },
-        stackHovered(stackIndex){
+        stackHovered(videos, stackIndex){
           this.set('selectedStackIndex', stackIndex);
-		  this.send('selectedStackIndex', this.get());
+          this.get('onHoverCallback') (videos, stackIndex);
           this.send('input');
         },
         input(){
