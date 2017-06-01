@@ -2,29 +2,13 @@
   <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
 </div>
 
-<div class="btn-group-vertical content-area--btn__group {{if attributesExpanded 'content-area--btn__group--offset'}}" role="group" aria-label="...">
-  {{#link-to "modelSelect"}}
-    <button type="button" class="btn btn-warning">
-      <span class="white">Change Exhibits</span>
-    </button>
-  {{/link-to}}
-  <button {{action 'saveModel'}} type="button" class="btn btn-info"><span class="glyphicon glyphicon-save"/> Save Exhibit</button>
-  <button {{action 'addVideo'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Video</button>
-  <button {{action 'addAttribute'}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
-</div>
-
-<div class="btn-group-vertical content-area--btn__group {{if attributesExpanded 'content-area--btn__group--offset'}}" role="group" aria-label="...">
-  <button class="btn btn-warning btn-sm" disabled="disabled">Videos</button>
-  {{#each-in newModel.videos as |key value|}}
-    <button {{action 'setSelectedVideo' key}} type="button" class="btn btn-warning btn-sm">{{value.prettyName}}</button>
-  {{/each-in}}
-</div>
-
 {{properties-panel onSubmitCallback=(action 'dataUpdate') propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if propertiesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
 
-{{configuration-panel validation=(action "validateConfig") onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
+{{configuration-panel configurationExpandedCallback=(action 'setConfigurationExpanded') validation=(action "validateConfig") onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
 
 {{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
+
+{{graph-visualizer videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
   <div class="modal-dialog" role="document">

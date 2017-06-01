@@ -5,14 +5,17 @@ export default Ember.Component.extend({
   validModel: false,
   selectedVideo: null,
   selectedVideoKey: null,
+
   modalTitle: "",
   modalConfig: null,
   modalData: null,
   modalPrefix: "",
   modalPath: "",
   modalKey: "",
+
   attributesExpanded: true,
   propertiesExpanded: true,
+  configurationExpanded: true,
 
   init() {
     this._super(...arguments);
@@ -46,9 +49,20 @@ export default Ember.Component.extend({
     setPropertiesExpanded(param) {
       this.set('propertiesExpanded', param);
     },
+    setConfigurationExpanded(param) {
+      this.set('configurationExpanded', param);
+
+      this.notifyPropertyChange('configurationExpanded');console.log(param);
+    },
     setSelectedVideo(param) {
-      this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
       this.set('selectedVideoKey', param);
+
+      if (param === null) {
+        this.set('selectedVideo', param);
+        return;
+      }
+
+      this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
       this.send('replaceVideoAttributes');
       this.send('replaceVideoRelations');
     },
@@ -95,16 +109,14 @@ export default Ember.Component.extend({
       this.set('validModel', this.get('validModel') || param);
     },
     dataUpdate(data, path, key) {
-      let newPath = 'newModel' + path;
-
       if (key) {
-        newPath = newPath + "." + key;
+        path = path + "." + key;
       }
       else {
-        newPath = newPath + "." + makeId(this.get('newModel' + path));
+        path = path + "." + makeId(this.get('newModel' + path));
       }
 
-      this.set(newPath, data);
+      this.set('newModel' + path, data);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
@@ -118,6 +130,8 @@ export default Ember.Component.extend({
       this.set('modalConfig', null);
       this.set('modalData', null);
       this.set('modalPrefix', null);
+
+      this.notifyPropertyChange('newModel');
 
       return false;
     },

@@ -26,7 +26,7 @@ export default Ember.Component.extend({
     }
 
     this.send('validateForm');
-    this.get('validation') (this.get('validForm'))
+    this.get('validation') (this.get('validForm'));
   },
   actions: {
     submitForm() {

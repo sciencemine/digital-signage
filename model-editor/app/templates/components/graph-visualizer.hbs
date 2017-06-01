@@ -1,0 +1,16 @@
+<div class="btn-group-vertical button__group" role="group" aria-label="...">
+  
+  {{#link-to 'modelSelect' tagName='button' type="button" class="btn btn-warning"}}
+    <span class="white"><span class="glyphicon glyphicon-home"/> Exhibit Selection</span>
+  {{/link-to}}
+  <button {{action addVideoCallback}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Video</button>
+  <button {{action addAttributeCallback}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
+  <button {{action 'addEdge'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"/> Add Edge</button>
+  <button {{action 'redrawGraph'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"/> Refresh Graph</button>
+</div>
+
+<div class="graph-container">
+  <div class="vis-network canvas-wrapper" tabindex="900">
+    <canvas class="graph-canvas" />
+  </div>
+</div>

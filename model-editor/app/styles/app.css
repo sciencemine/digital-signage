@@ -1,13 +1,14 @@
-/* Route styles */
+/* Route Styles */
 @import 'model-select.css';
 
-/* Component styles */
+/* Component Styles */
 @import 'properties-panel.css';
 @import 'configuration-panel.css';
 @import 'attribute-panel.css';
 @import 'content-area.css';
+@import 'graph-visualizer.css';
 
-/* helper styles */
+/* Global Styles */
 .unselectable {
   -webkit-user-select: none; /* Chrome/Safari */        
   -moz-user-select: none; /* Firefox */
@@ -32,6 +33,18 @@
   right: 0px;
 }
 
+.flush-bottom {
+  bottom: 0px;
+}
+
 .flush-left {
   left: 0px;
+}
+
+.attributes-offset {
+  left: calc(100px + 5%)
+}
+
+.properties-offset {
+  right: calc(100px + 5%)
 }

@@ -1,0 +1,32 @@
+.graph-container, .canvas-wrapper, .graph-canvas {
+  position: absolute;
+
+  top: 0px;
+
+  height: 100%;
+  width: 100%;
+}
+
+.canvas-wrapper, .graph-canvas {
+  position: relative;
+
+  overflow: hidden;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.canvas-wrapper {
+  touch-action: pan-y;
+}
+
+.graph-canvas {
+  touch-action: none;
+}
+
+.button__group {
+  z-index: 10;
+  
+  margin: 3px;
+}

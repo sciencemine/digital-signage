@@ -36,8 +36,18 @@
             "relations": [
                 {
                     "relatedId": "1",
-                    "difficulty": 1,
+                    "difficulty": 5,
                     "attributeId": "0"
+                },
+                {
+                    "relatedId": "2",
+                    "difficulty": -10,
+                    "attributeId": "6"
+                },
+                {
+                    "relatedId": "3",
+                    "difficulty": 25,
+                    "attributeId": "6"
                 }
             ]
         },
@@ -58,8 +68,13 @@
             "relations": [
                 {
                     "relatedId": "0",
-                    "difficulty": -1,
+                    "difficulty": -14,
                     "attributeId": "0"
+                },
+                {
+                    "relatedId": "2",
+                    "difficulty": -4,
+                    "attributeId": "6"
                 }
             ]
         },
@@ -76,8 +91,14 @@
                 "isUrl": false,
                 "attribution": "Kenny"
             },
-            "attributes": [ "5", "6" ],
-            "relations": [ ]
+            "attributes": [ "4", "5", "6" ],
+            "relations": [
+                {
+                    "relatedId": "3",
+                    "difficulty": -20,
+                    "attributeId": "4"
+                }
+            ]
         },
         "3": {
             "prettyName": "Kenny: Sticks - Electric Boogaloo",
@@ -93,7 +114,13 @@
                 "attribution": "Kenny"
             },
             "attributes": [ "1", "3", "4", "6" ],
-            "relations": [ ]
+            "relations": [
+                {
+                    "relatedId": "1",
+                    "difficulty": 16,
+                    "attributeId": "6"
+                }
+            ]
         }
     },
     "attributes": {
