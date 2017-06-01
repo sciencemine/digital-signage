@@ -30,15 +30,14 @@
 
 .stack-list--flex 
 {
-    padding: 0px;
-    margin: 0px 5px 0px 5px;
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
 	display: flex;
 
 	align-items: center;
 
 	justify-content: space-around;
-	
-	flex-wrap: wrap;
+
 	flex-direction: row;
     /*height: 100px;  Or whatever */
 }
@@ -50,7 +49,7 @@
 }
 
 .stack-list-item--flex {
-	flex-basis: 20%;
+	flex-basis: 15%;
 	align-self: auto;
 }
 
