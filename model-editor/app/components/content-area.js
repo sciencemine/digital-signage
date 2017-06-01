@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     addEdge(data, attrId) {
       let obj = { }
       obj.relatedId = data.to;
-      obj.difficulty = data.difficulty;
+      obj.difficulty = data.value;
       obj.attributeId = attrId;
 
       this.send('pushData', obj, ".videos." + data.from + ".relations");

@@ -107,9 +107,6 @@ export default Ember.Component.extend({
 
     this.set('rerender', false);
   },
-  addEdgeCallback: Ember.computed('graphData', function(data, callback) {
-    return callback(data);
-  }),
   actions: {
     toggleAddEdge() {
       this.get('network').addEdgeMode();

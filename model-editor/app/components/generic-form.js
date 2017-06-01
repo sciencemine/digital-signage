@@ -90,10 +90,12 @@ function getValues(data, prefix, clearValues) {
     }
     else if (Array.isArray(data[key].data)) {
       let el = Ember.$('#' + prefix + "_" + key);
-      payload[key] = [ ];
 
-      if (el) {
-        payload[key].push(el.val());
+      if (el[0]) {
+        payload[key] = el[0].value;
+      }
+      else {
+        payload[key] = [ ];
       }
     }
     else {
