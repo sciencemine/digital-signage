@@ -1,16 +1,36 @@
 <div class="btn-group-vertical button__group" role="group" aria-label="...">
-  
   {{#link-to 'modelSelect' tagName='button' type="button" class="btn btn-warning"}}
     <span class="white"><span class="glyphicon glyphicon-home"/> Exhibit Selection</span>
   {{/link-to}}
   <button {{action addVideoCallback}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Video</button>
   <button {{action addAttributeCallback}} type="button" class="btn btn-primary" data-toggle="modal" data-target="#formOverlay"><span class="glyphicon glyphicon-plus"/> Add Attribute</button>
-  <button {{action 'addEdge'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"/> Add Edge</button>
+  <button {{action 'toggleAddEdge'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-plus"/> Add Edge</button>
   <button {{action 'redrawGraph'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"/> Refresh Graph</button>
 </div>
 
 <div class="graph-container">
   <div class="vis-network canvas-wrapper" tabindex="900">
     <canvas class="graph-canvas" />
+  </div>
+</div>
+
+<div id="modal-container">
+  <div class="modal fade" id="addRelationOverlay" tabindex="-2" role="dialog" aria-labelledby="modalAddRelationOverlay">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modalAddRelationOverlay">Add a Relation</h4>
+        </div>
+
+        <div class="modal-body content-area--modal__body">
+          {{generic-form prefix="relation" onSubmitCallback=(action 'createEdge') validation=(action 'doNothing') showHelp=true showTitle=false noLabel=false data=modalData config=relationsConfig clearValues=true}}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>

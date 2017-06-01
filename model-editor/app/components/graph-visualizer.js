@@ -22,7 +22,7 @@ export default Ember.Component.extend({
       length: 300,
       scaling: {
         min: 1,
-        max: 10,
+        max: 12.5,
         label: {
           enabled: false,
         }
@@ -37,12 +37,22 @@ export default Ember.Component.extend({
     nodes: null,
     edges: null
   },
+
   rerender: false,
+  selectedVideo: null,
+  fromVid: null,
+  toVid: null,
+
+  modalData: {
+    attributeId: null,
+    relatedId: null,
+    difficulty: null
+  },
 
   didReceiveAttrs() {
-    this.set('graphData.nodes', new vis.DataSet([]));
+    let nodes = new vis.DataSet([]);
 
-    this.set('graphData.edges', new vis.DataSet([]));
+    let edges = new vis.DataSet([]);
 
     for (let video in this.get('data.videos')) {
       let vid = this.get('data.videos')[video];
@@ -65,19 +75,27 @@ export default Ember.Component.extend({
 
           edgeObj.from = video;
           edgeObj.to = vid.relations[i].relatedId;
-          edgeObj.value = Math.abs(vid.relations[i].difficulty);
+          edgeObj.value = Math.abs(diff);
           edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
           edgeObj.color = color;
           edgeObj.id = video + "_" + i;
           edgeObj.title = attr.prettyName;
 
-          this.get('graphData.edges').add(edgeObj);
+          edges.add(edgeObj);
         }
 
-      this.get('graphData.nodes').add(nodeObj);
+      nodes.add(nodeObj);
     }
 
-    this.set('rerender', true);
+    if (nodes !== this.get('graphData.nodes')) {
+      this.set('graphData.nodes', nodes);
+      this.set('graphData.edges', edges);
+
+      this.set('rerender', true);
+    }
+    else {
+      this.set('rerender', false);
+    }
   },
   didRender() {
     if (this.get('network') === null) {
@@ -93,7 +111,7 @@ export default Ember.Component.extend({
     return callback(data);
   }),
   actions: {
-    addEdge() {
+    toggleAddEdge() {
       this.get('network').addEdgeMode();
     },
     redrawGraph() {
@@ -103,19 +121,40 @@ export default Ember.Component.extend({
       this.set('graphOptions.manipulation.addEdge', function (data, callback) {
         let fromVid = component.get('data.videos')[data.from];
         let toVid = component.get('data.videos')[data.to];
-        let attributes = {};
+        let attributes = [ ];
+
+        component.set('fromVid', data.from);
+        component.set('toVid', data.to);
+
+        component.set('selectedVideo', data.from);
 
         for (let fromAttr = 0; fromAttr < fromVid.attributes.length; fromAttr++) {
           let attr = fromVid.attributes[fromAttr];
 
           if (toVid.attributes.includes(attr)) {
-            attributes[attr] = component.get('data.attributes')[attr];
+            attr = Ember.copy(component.get('data.attributes')[attr]);
+            attr.data = attr.prettyName;
+            attr.id = fromVid.attributes[fromAttr];
+
+            attributes.push(attr);
           }
         }
 
-        console.log(attributes);
+        component.set('relationsConfig.data.attributeId.data', attributes);
 
-        callback(data);
+        component.$("#addRelationOverlay")
+        .on('hide.bs.modal', function () {
+          let el = Ember.$("#addRelationOverlay");
+
+          component.set('relationsConfig.data.attributeId.data', [ ]);
+
+          Ember.$("#addRelationOverlay").replaceWith("");
+          component.$("#modal-container").append(el);
+
+          component.set('fromVid', null);
+          component.set('toVid', null);
+        })
+        .appendTo('body').modal('show');
       });
 
       let network = new vis.Network(container, this.get('graphData'), this.get('graphOptions'));
@@ -136,9 +175,42 @@ export default Ember.Component.extend({
         if (params.nodes.length === 0) {
           this.disableEditMode();
         }
+      })
+      .on("initRedraw", function () {
+
       });
 
       this.set('network', network);
+    },
+    createEdge(data) {
+      let attr = this.get('data.attributes')[data.attributeId];
+      let diff = data.difficulty;
+      let edgeObj = { };
+
+      let red = diff > 0 ? 10 * diff : 0;
+      let green = diff < 0 ? -10 * diff : 0;
+      let blue = 127 - ((red + green) / 2);
+
+      let color = "rgb(" + red + "," + green + "," + blue + ")";
+
+      edgeObj.from = this.get('fromVid');
+      edgeObj.to = this.get('toVid');
+      edgeObj.value = Math.abs(diff);
+      edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
+      edgeObj.color = color;
+      edgeObj.id = this.get('fromVid') + "_" + this.get('graphData.edges').length;
+      edgeObj.title = attr.prettyName;
+
+      this.get('graphData.edges').add(edgeObj);
+
+      if (Ember.$('#addRelationOverlay')) {
+        Ember.$('#addRelationOverlay').modal('hide');
+      }
+
+      this.get('addEdgeCallback') (edgeObj, data.attributeId);
+    },
+    doNothing() {
+
     }
   }
 });

@@ -43,6 +43,16 @@ export default Ember.Component.extend({
     addAttribute() {
       this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
+    addEdge(data, attrId) {
+      let obj = { }
+      obj.relatedId = data.to;
+      obj.difficulty = data.difficulty;
+      obj.attributeId = attrId;
+
+      this.send('pushData', obj, ".videos." + data.from + ".relations");
+
+      this.send('setSelectedVideo', data.from);
+    },
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
     },
@@ -52,7 +62,7 @@ export default Ember.Component.extend({
     setConfigurationExpanded(param) {
       this.set('configurationExpanded', param);
 
-      this.notifyPropertyChange('configurationExpanded');console.log(param);
+      this.notifyPropertyChange('configurationExpanded');
     },
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
@@ -134,6 +144,9 @@ export default Ember.Component.extend({
       this.notifyPropertyChange('newModel');
 
       return false;
+    },
+    pushData(data, path) {
+      this.get('newModel' + path).pushObject(data);
     },
     deleteAttribute(attributeId) {
       let attributes = Ember.copy(this.get('newModel.attributes'));

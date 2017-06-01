@@ -8,7 +8,7 @@
 
 {{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
 
-{{graph-visualizer videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
+{{graph-visualizer relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') addEdgeCallback=(action 'addEdge') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
   <div class="modal-dialog" role="document">

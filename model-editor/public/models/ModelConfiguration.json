@@ -310,7 +310,7 @@
                                     "data": {
                                         "relatedId": {
                                             "displayName": "Related Video",
-                                            "inputType": "text",
+                                            "inputType": "",
                                             "error": "",
                                             "validation": "",
                                             "help": "A related video to the parent video",
@@ -320,17 +320,24 @@
                                             "displayName": "Difficulty",
                                             "inputType": "number",
                                             "error": "",
-                                            "validation": "",
+                                            "validation": {
+                                                "required": "required",
+                                                "min": -25.5,
+                                                "max": 25.5,
+                                                "step": 0.1
+                                            },
                                             "help": "How hard the related video is relative to the parent video",
                                             "data": ""
                                         },
                                         "attributeId": {
                                             "displayName": "Attribute",
-                                            "inputType": "text",
+                                            "inputType": "dropdown",
                                             "error": "",
-                                            "validation": "",
+                                            "validation": {
+                                                "required": "required"
+                                            },
                                             "help": "Why the videos are related",
-                                            "data": ""
+                                            "data": [ ]
                                         }
                                     }
                                 }
