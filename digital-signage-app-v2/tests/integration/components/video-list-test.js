@@ -8,44 +8,60 @@ moduleForComponent('video-list', 'Integration | Component | video list', {
 
 test('it renders', function(assert) {
   let data = Ember.Object.create({
-    "videos": {
-        "0": {
-            "fileIdentifier": "kenny_band_1.mp4",
-            "isUrl": false,
-            "teaserStart": 0,
-            "teaserEnd": 1,
+    "videos": [
+        {
             "prettyName": "Kenny with a Rubber Band: Episode X-II - A New Hope",
             "description": "Kenny shoots a rubber band... You won't believe what happens next!",
-            "attributes": [ "0", "6" ]
+            "attributes": [ "0", "6" ],
+            "full": {
+                "fileIdentifier": "kenny_band_1.mp4",
+                "isUrl": false
+            },
+            "teaser": {
+                "fileIdentifier": "kenny_band_1.mp4",
+                "isUrl": false
+            }
         },
-        "1": {
-            "fileIdentifier": "kenny_band_2.mp4",
-            "isUrl": false,
-            "teaserStart": 0,
-            "teaserEnd": 1,
+        {
             "prettyName": "Kenny with a Rubber Band: Episode IIII - Return of the New Hope",
             "description": "The phantom menace strikes back at the return of the revenge of the clones.",
-            "attributes": [ "0", "6" ]
+            "attributes": [ "0", "6" ],
+            "full": {
+                "fileIdentifier": "kenny_band_2.mp4",
+                "isUrl": false
+            },
+            "teaser": {
+                "fileIdentifier": "kenny_band_2.mp4",
+                "isUrl": false
+            }
         },
-        "2": {
-            "fileIdentifier": "kenny_flap.mp4",
-            "isUrl": false,
-            "teaserStart": 0,
-            "teaserEnd": 1,
+        {
             "prettyName": "3 flappy 5 me",
             "description": "Our hero is sitting in the museum lab one day when Michael decides he needs a video to test stuff. The story unfolds as Kenny decides to make a video based on the lost footage from Josh.",
-            "attributes": [ "5", "6" ]
+            "attributes": [ "5", "6" ],
+            "full": {
+                "fileIdentifier": "kenny_flap.mp4",
+                "isUrl": false
+            },
+            "teaser": {
+                "fileIdentifier": "kenny_flap.mp4",
+                "isUrl": false
+            }
         },
-        "3": {
-            "fileIdentifier": "kenny_sticks.mp4",
-            "isUrl": false,
-            "teaserStart": 0,
-            "teaserEnd": 1,
+        {
             "prettyName": "Kenny: Sticks - Electric Boogaloo",
             "description": "Ever wonder what would happen when a talentless nerd decides to begin a career in air-drumming? Find out in this zany action adventure horror comedy drama starring Kendall Schmit as Kenny, the hapless air-drummer wannabe as his loyal friends and family help him on his tough road to stardom.",
-            "attributes": [ "1", "3", "4", "6" ]
+            "attributes": [ "1", "3", "4", "6" ],
+            "full": {
+                "fileIdentifier": "kenny_sticks.mp4",
+                "isUrl": false
+            },
+            "teaser": {
+                "fileIdentifier": "kenny_sticks.mp4",
+                "isUrl": false
+            }
         }
-    }
+    ]
 });
 
   // Set any properties with this.set('myProperty', 'value');
@@ -57,7 +73,13 @@ test('it renders', function(assert) {
     assert.ok(actual);
   });
 
-  this.render(hbs`{{video-list videos=testData modelIdentifier='' selectedCallback=(action baba) onClickCallback=(action baba)}}`);
+  this.render(hbs`{{video-list videos=testData modelIdentifier='' selectedCallback=(action baba)}}`);
 
   assert.equal(this.$().text().trim(), '');
+
+  this.render(hbs`{{#video-list videos=testData modelIdentifier='' selectedCallback=(action baba)}}
+    template block text
+    {{/video-list}}`);
+
+  assert.equal(this.$().text().trim(), 'template block text');
 });
