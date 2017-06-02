@@ -5,6 +5,8 @@
   right: 0px;
   left: 0px;
 
+  min-height: calc(3px + 7%);
+
   border-bottom: 1px solid grey;
 }
 
@@ -56,16 +58,6 @@
   margin: 0% 5%;
 }
 
-.content-area--btn__group {
-  position: fixed;
-
-  margin: 3px;
-}
-
-.content-area--btn__group--offset {
-  left: calc(100px + 5%);
-}
-
 .resize-horizontal {
   resize: horizontal;
 }
@@ -78,10 +70,14 @@
   color: white!important;
 }
 
-.no-underline {
-  text-decoration: none!important;
+.graph-area {
+  position: fixed;
+
+  z-index: -10;
+
+  top: calc(3px + 7%);
 }
 
-.no-underline:hover {
-  text-decoration: none!important;
+.graph-area--with-config {
+  bottom: 20%;
 }

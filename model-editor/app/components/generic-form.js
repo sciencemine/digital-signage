@@ -8,6 +8,7 @@ export default Ember.Component.extend({
   showHelp: false,
   showList: false,
   validForm: false,
+  clearValues: false,
   path: "",
   prefix: "",
   key: "",
@@ -26,11 +27,11 @@ export default Ember.Component.extend({
     }
 
     this.send('validateForm');
-    this.get('validation') (this.get('validForm'))
+    this.get('validation') (this.get('validForm'));
   },
   actions: {
     submitForm() {
-      this.get('onSubmitCallback') (getValues(this.get('config.data'), this.get('prefix')), this.get('path'), this.get('key'));
+      this.get('onSubmitCallback') (getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
 
       return false;
     },
@@ -80,34 +81,58 @@ export default Ember.Component.extend({
   }
 });
 
-function getValues(data, prefix) {
+function getValues(data, prefix, clearValues) {
   let payload = { };
 
   for (var key in data) {
     if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
-      payload[key] = getValues(data[key].data, prefix + "_" + key);
+      payload[key] = getValues(data[key].data, prefix + "_" + key, clearValues);
     }
     else if (Array.isArray(data[key].data)) {
-      payload[key] = [ ];
+      let el = Ember.$('#' + prefix + "_" + key);
+
+      if (el[0]) {
+        payload[key] = el[0].value;
+      }
+      else {
+        payload[key] = [ ];
+      }
     }
     else {
       let el = Ember.$('#' + prefix + "_" + key);
       let value;
 
-      if (el[0].type === 'checkbox') {
-        value = el[0].checked;
-      }
-      else if (el[0].type === 'textarea') {
-        value = el.val();
-      }
-      else if (el[0].type === 'number') {
-        value = el[0].valueAsNumber;
-      }
-      else {
-        value = el[0].value;
-      }
+      if (el[0]) {
+        if (el[0].type === 'checkbox') {
+          value = el[0].checked;
+          if (clearValues) {
+            el[0].checked = false;
+          }
+        }
+        else if (el[0].type === 'textarea') {
+          value = el.val();
 
-      payload[key] = value;
+          if (clearValues) {
+            el[0].value = null;
+          }
+        }
+        else if (el[0].type === 'number') {
+          value = el[0].valueAsNumber;
+
+          if (clearValues) {
+            el[0].value = null;
+          }
+        }
+        else {
+          value = el[0].value;
+
+          if (clearValues) {
+            el[0].value = null;
+          }
+        }
+
+        payload[key] = value;
+      }
     }
   }
 
