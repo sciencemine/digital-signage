@@ -1,10 +1,12 @@
 .graph-container, .canvas-wrapper, .graph-canvas {
-  position: absolute;
-
   top: 0px;
 
   height: 100%;
   width: 100%;
+}
+
+.graph-container {
+  position: absolute;
 }
 
 .canvas-wrapper, .graph-canvas {
@@ -33,4 +35,18 @@
 
 #addRelationOverlay {
   z-index: 
+}
+
+.canvas-popover {
+  position: absolute;
+
+  background-color: #ddd;
+  border-radius: 10px;
+
+  padding: 7px;
+
+  min-width: 50px;
+  max-width: 200px;
+
+  overflow-x: wrap;
 }

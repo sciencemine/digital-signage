@@ -17,6 +17,14 @@ export default Ember.Component.extend({
   propertiesExpanded: true,
   configurationExpanded: true,
 
+  attributeDrop: {
+    attributeId: null,
+    location: {
+      x: null,
+      y: null
+    }
+  },
+
   init() {
     this._super(...arguments);
 
@@ -44,7 +52,7 @@ export default Ember.Component.extend({
       this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
     addEdge(data, attrId) {
-      let obj = { }
+      let obj = { };
       obj.relatedId = data.to;
       obj.difficulty = data.value;
       obj.attributeId = attrId;
@@ -52,6 +60,30 @@ export default Ember.Component.extend({
       this.send('pushData', obj, ".videos." + data.from + ".relations");
 
       this.send('setSelectedVideo', data.from);
+    },
+    updateAttributeDrop(x, y, attributeId) {
+      let obj = {
+        attributeId: attributeId,
+        location: {
+          x: x,
+          y: y
+        }
+      };
+
+      obj.location.y = obj.location.y - (this.$(window).height() * 0.07 + 3);
+
+      if (this.get('attributesExpanded')) {
+        obj.location.x = obj.location.x - (this.$(window).width() * 0.05 + 100);
+      }
+
+      this.set('attributeDrop', obj);
+    },
+    addAttributeToVideo(videoId) {
+      if (videoId) {
+        this.get('newModel.videos')[videoId].attributes.pushObject(this.get('attributeDrop.attributeId'));
+
+        this.send('setSelectedVideo', videoId);
+      }
     },
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
@@ -67,8 +99,8 @@ export default Ember.Component.extend({
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
 
-      if (param === null) {
-        this.set('selectedVideo', param);
+      if (!param) {
+        this.set('selectedVideo', null);
         return;
       }
 
@@ -77,7 +109,7 @@ export default Ember.Component.extend({
       this.send('replaceVideoRelations');
     },
     replaceVideoAttributes() {
-      let attributes = this.get('selectedVideo.attributes');
+      let attributes = this.get('.attributes');
 
       this.set('selectedVideo.attributes', [ ]);
 

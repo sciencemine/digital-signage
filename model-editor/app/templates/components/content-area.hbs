@@ -6,9 +6,9 @@
 
 {{configuration-panel configurationExpandedCallback=(action 'setConfigurationExpanded') validation=(action "validateConfig") onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
 
-{{attribute-panel attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
+{{attribute-panel attributeDropCallback=(action 'updateAttributeDrop') attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
 
-{{graph-visualizer relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') addEdgeCallback=(action 'addEdge') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
+{{graph-visualizer relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation attributeDrop=attributeDrop getVideoCallback=(action 'addAttributeToVideo') videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') addEdgeCallback=(action 'addEdge') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
   <div class="modal-dialog" role="document">

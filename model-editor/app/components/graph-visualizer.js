@@ -39,15 +39,12 @@ export default Ember.Component.extend({
   },
 
   rerender: false,
-  selectedVideo: null,
   fromVid: null,
   toVid: null,
 
-  modalData: {
-    attributeId: null,
-    relatedId: null,
-    difficulty: null
-  },
+  popoverTitle: null,
+  popoverContent: null,
+  attributeDrop: null,
 
   didReceiveAttrs() {
     let nodes = new vis.DataSet([]);
@@ -60,7 +57,6 @@ export default Ember.Component.extend({
 
       nodeObj.id = video;
       nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
-      nodeObj.title = vid.prettyName;
 
         for (let i = 0; i < vid.relations.length; i++) {
           let attr = this.get('data.attributes')[vid.relations[i].attributeId];
@@ -79,7 +75,6 @@ export default Ember.Component.extend({
           edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
           edgeObj.color = color;
           edgeObj.id = video + "_" + i;
-          edgeObj.title = attr.prettyName;
 
           edges.add(edgeObj);
         }
@@ -107,6 +102,12 @@ export default Ember.Component.extend({
 
     this.set('rerender', false);
   },
+  dropObserver: Ember.observer('attributeDrop', function() {
+    let network = this.get('network');
+    let domPos = Ember.copy(this.get('attributeDrop.location'));
+
+    this.get('getVideoCallback') (network.getNodeAt(domPos));
+  }),
   actions: {
     toggleAddEdge() {
       this.get('network').addEdgeMode();
@@ -122,8 +123,6 @@ export default Ember.Component.extend({
 
         component.set('fromVid', data.from);
         component.set('toVid', data.to);
-
-        component.set('selectedVideo', data.from);
 
         for (let fromAttr = 0; fromAttr < fromVid.attributes.length; fromAttr++) {
           let attr = fromVid.attributes[fromAttr];
@@ -160,21 +159,34 @@ export default Ember.Component.extend({
       .on("selectNode", function (params) {
         component.get('videoSelectedCallback') (params.nodes[0]);
       })
+      .on("deselectNode", function () {
+        component.get('videoSelectedCallback') (null);
+      })
+      .on("hoverNode", function (param) {
+        // popover support stuff. built-in support not working. 
+        // let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
+        // let el = component.$(".canvas-popover");
+
+        // component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
+        // component.set('popoverContent', component.get('data.videos')[param.node].description);
+ 
+        // el.css("left", nodePos.x).css("top", nodePos.y);
+        // el.removeClass("hidden");
+      })
+      .on("blurNode", function () {
+        component.$(".canvas-popover").addClass("hidden");
+      })
       .on("dragStart", function (params) {
+        component.$(".canvas-popover").addClass("hidden");
         if (params.nodes.length === 1) {
           component.get('videoSelectedCallback') (params.nodes[0]);
         }
       })
-      .on("deselectNode", function () {
-        component.get('videoSelectedCallback') (null);
-      })
       .on("click", function (params) {
+        component.$(".canvas-popover").addClass("hidden");
         if (params.nodes.length === 0) {
           this.disableEditMode();
         }
-      })
-      .on("initRedraw", function () {
-
       });
 
       this.set('network', network);

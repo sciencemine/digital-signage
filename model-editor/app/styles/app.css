@@ -19,6 +19,10 @@
   cursor: pointer;
 }
 
+.cursor--default:hover {
+  cursor: default;
+}
+
 .section-title {
   padding: 5px;
 
