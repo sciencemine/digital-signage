@@ -94,7 +94,7 @@ export default Ember.Component.extend({
     setConfigurationExpanded(param) {
       this.set('configurationExpanded', param);
 
-      this.notifyPropertyChange('configurationExpanded');
+      this.notifyPropertyChange('setConfigurationExpandedd');
     },
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
@@ -109,7 +109,7 @@ export default Ember.Component.extend({
       this.send('replaceVideoRelations');
     },
     replaceVideoAttributes() {
-      let attributes = this.get('.attributes');
+      let attributes = this.get('selectedVideo.attributes');
 
       this.set('selectedVideo.attributes', [ ]);
 

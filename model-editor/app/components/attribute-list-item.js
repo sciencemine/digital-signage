@@ -1,10 +1,12 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  key: null,
+
+  startX: null,
+  startY: null,
 
   dragEnd(event) {
-    this.get('attributeDropCallback') (event.pageX, event.pageY, this.get('key'));
+    this.get('attributeDropCallback') (event.clientX, event.clientY, this.get('key'));
   },
 
   actions: {

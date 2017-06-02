@@ -105,7 +105,7 @@ export default Ember.Component.extend({
   dropObserver: Ember.observer('attributeDrop', function() {
     let network = this.get('network');
     let domPos = Ember.copy(this.get('attributeDrop.location'));
-
+console.log(domPos);
     this.get('getVideoCallback') (network.getNodeAt(domPos));
   }),
   actions: {
