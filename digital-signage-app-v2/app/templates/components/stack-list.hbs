@@ -3,7 +3,7 @@
 	<div class="stack-list--flex">
     {{#each-in data as |key value|}}
         <div class="{{stackItemClass}}">
-          {{video-stack videos=value.videos borderStyle=(if (video-selected key selectedStackIndex) "blue-border") loop=true onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') selectedStackIndex=key}}
+          {{video-stack videos=value.videos borderStyle=(if (video-selected key selectedStackKey) "blue-border") loop=true onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') selectedStackIndex=key}}
         </div>
     {{/each-in}}
 	</div>

@@ -28,14 +28,20 @@ export default AbstractList.extend({
     stackItemHighlight: '',
     stackItemSelected: '',    
     loop: true,
+    focus: false,
       
     init(){
         this._super(...arguments);
+        this.set('attributeKeys', Object.keys(this.get('data')));
     },
     
     didRender() {
       this.send('updateFocus', true);
     },
+
+    selectedStackKey: Ember.computed('attributeKeys', 'selectedStackIndex', function() {
+      return this.get('attributeKeys')[this.get('selectedStackIndex')];
+    }),
     actions:{
         select(event){
           this.send('selectedCallback', this.get('data')[this.get('selectedStackIndex')]);
@@ -48,11 +54,17 @@ export default AbstractList.extend({
           event.stopPropagation();
         },
         goPrevious(event){
+          if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
+            this.send('underflowCallback');
+          }
           this.send('changeIndex', -1);
           this.send('input');
           event.stopPropagation();
         },
         goNext(event){
+          if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
+            this.send('overflowCallback');
+          }
           this.send('changeIndex', 1);
           this.send('input');
           event.stopPropagation();
@@ -66,7 +78,7 @@ export default AbstractList.extend({
           this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
         },
         stackHovered(videos, stackIndex){
-          this.set('selectedStackIndex', stackIndex);
+          this.set('selectedStackKey', stackIndex);
           this.get('onHoverCallback') (videos, stackIndex);
           this.send('input');
         },
