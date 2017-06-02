@@ -6,7 +6,9 @@ export default Ember.Component.extend({
   startY: null,
 
   dragEnd(event) {
-    this.get('attributeDropCallback') (event.clientX, event.clientY, this.get('key'));
+    console.log(event.pageX, this.$(".list-group-item").offset().left, event.offsetX);
+    console.log(event.pageY, this.$(".list-group-item").offset().top, event.offsetY); 
+    this.get('attributeDropCallback') (event.pageX - this.$().offset().left, event.pageY - Ember.$("#attribute-panel").offset().top, this.get('key'));
   },
 
   actions: {
