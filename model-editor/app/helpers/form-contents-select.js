@@ -5,7 +5,16 @@ export function formContentsSelect(params, hash) {
 
   for (var i= 0; i < hash.data.length; i++) {
     let value = hash.data[i];
-    returnHTML = returnHTML + `<option>${value}</option>`;
+
+    if (typeof(value) === 'object' && !Array.isArray(value)) {
+      returnHTML = returnHTML + `<option value=${value.id}>`;
+      value = value.data;
+    }
+    else {
+      returnHTML = returnHTML + `<option value=${value}>`;
+    }
+
+    returnHTML = returnHTML + `${value}</option>`;
   }
 
   return Ember.String.htmlSafe(returnHTML + `</select>`);

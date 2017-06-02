@@ -7,6 +7,8 @@ export default Ember.Component.extend({
   actions: {
     toggleView() {
       this.set('expanded', !this.get('expanded'));
+
+      this.get('configurationExpandedCallback') (this.get('expanded'));
     }
   }
 });

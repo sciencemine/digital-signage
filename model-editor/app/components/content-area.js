@@ -5,14 +5,25 @@ export default Ember.Component.extend({
   validModel: false,
   selectedVideo: null,
   selectedVideoKey: null,
+
   modalTitle: "",
   modalConfig: null,
   modalData: null,
   modalPrefix: "",
   modalPath: "",
   modalKey: "",
+
   attributesExpanded: true,
   propertiesExpanded: true,
+  configurationExpanded: true,
+
+  attributeDrop: {
+    attributeId: null,
+    location: {
+      x: null,
+      y: null
+    }
+  },
 
   init() {
     this._super(...arguments);
@@ -40,20 +51,65 @@ export default Ember.Component.extend({
     addAttribute() {
       this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
+    addEdge(data, attrId) {
+      let obj = { };
+      obj.relatedId = data.to;
+      obj.difficulty = data.value;
+      obj.attributeId = attrId;
+
+      this.send('pushData', obj, ".videos." + data.from + ".relations");
+
+      this.send('setSelectedVideo', data.from);
+    },
+    updateAttributeDrop(x, y, attributeId) {
+      let obj = {
+        attributeId: attributeId,
+        location: {
+          x: x,
+          y: y
+        }
+      };
+
+      obj.location.y = obj.location.y - (this.$(window).height() * 0.07 + 3);
+
+      if (this.get('attributesExpanded')) {
+        obj.location.x = obj.location.x - (this.$(window).width() * 0.05 + 100);
+      }
+
+      this.set('attributeDrop', obj);
+    },
+    addAttributeToVideo(videoId) {
+      if (videoId) {
+        this.get('newModel.videos')[videoId].attributes.pushObject(this.get('attributeDrop.attributeId'));
+
+        this.send('setSelectedVideo', videoId);
+      }
+    },
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
     },
     setPropertiesExpanded(param) {
       this.set('propertiesExpanded', param);
     },
+    setConfigurationExpanded(param) {
+      this.set('configurationExpanded', param);
+
+      this.notifyPropertyChange('configurationExpanded');
+    },
     setSelectedVideo(param) {
-      this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
       this.set('selectedVideoKey', param);
+
+      if (!param) {
+        this.set('selectedVideo', null);
+        return;
+      }
+
+      this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
       this.send('replaceVideoAttributes');
       this.send('replaceVideoRelations');
     },
     replaceVideoAttributes() {
-      let attributes = this.get('selectedVideo.attributes');
+      let attributes = this.get('.attributes');
 
       this.set('selectedVideo.attributes', [ ]);
 
@@ -95,16 +151,14 @@ export default Ember.Component.extend({
       this.set('validModel', this.get('validModel') || param);
     },
     dataUpdate(data, path, key) {
-      let newPath = 'newModel' + path;
-
       if (key) {
-        newPath = newPath + "." + key;
+        path = path + "." + key;
       }
       else {
-        newPath = newPath + "." + makeId(this.get('newModel' + path));
+        path = path + "." + makeId(this.get('newModel' + path));
       }
 
-      this.set(newPath, data);
+      this.set('newModel' + path, data);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
@@ -119,7 +173,12 @@ export default Ember.Component.extend({
       this.set('modalData', null);
       this.set('modalPrefix', null);
 
+      this.notifyPropertyChange('newModel');
+
       return false;
+    },
+    pushData(data, path) {
+      this.get('newModel' + path).pushObject(data);
     },
     deleteAttribute(attributeId) {
       let attributes = Ember.copy(this.get('newModel.attributes'));
