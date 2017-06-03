@@ -19,15 +19,17 @@
       {{form-contents-list data=(get-data data key) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName}}
     {{/if}}
   {{else if (is-array value.data)}}
-    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
-      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+    {{#if value.data}}
+      <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+        <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
 
-      {{form-contents-select key=(create-id prefix "_" key) help=value.help data=value.data class="form-control input-sm"}}
+        {{form-contents-select key=(create-id prefix "_" key) help=value.help data=value.data class="form-control input-sm"}}
 
-      {{#if showHelp}}
-        <span class="help-block">{{value.help}}</span>
-      {{/if}}
-    </div>
+        {{#if showHelp}}
+          <span class="help-block">{{value.help}}</span>
+        {{/if}}
+      </div>
+    {{/if}}
   {{else if (is-object value.data)}}
     {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel prefix=(create-id prefix "_" key) tagName='' config=value}}
   {{else if (is-textarea value.inputType)}}

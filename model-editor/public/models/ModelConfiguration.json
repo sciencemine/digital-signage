@@ -77,18 +77,6 @@
                         "help": "Menu timeout in seconds",
                         "data": ""
                     },
-                    "popoverDwell": {
-                        "displayName": "Popover hover time",
-                        "inputType": "number",
-                        "error": "Please select a time in the range of 0 - 30.",
-                        "validation": {
-                            "required": "required",
-                            "min": 0,
-                            "max": 30
-                        },
-                        "help": "Time before popovers hide themselves in decimal seconds",
-                        "data": ""
-                    },
                     "popoverShowDelay": {
                         "displayName": "Popover show delay",
                         "inputType": "number",
@@ -100,6 +88,18 @@
                             "step": 0.05
                         },
                         "help": "Time before popovers appear in decimal seconds",
+                        "data": ""
+                    },
+                    "popoverDwell": {
+                        "displayName": "Popover hover time",
+                        "inputType": "number",
+                        "error": "Please select a time in the range of 0 - 30.",
+                        "validation": {
+                            "required": "required",
+                            "min": 0,
+                            "max": 30
+                        },
+                        "help": "Time before popovers hide themselves in decimal seconds",
                         "data": ""
                     },
                     "menuLocale": {

@@ -12,7 +12,7 @@
   **/
 import Ember from 'ember';
 
-export default Ember.Component.extend({
+export default Ember.Component.extend({  
   actions: {
     updateModal(key) {
       this.get('updateModalCallback') ("Edit " + this.get('prettyName'), ".attributes.data.attribute", ".attributes", key);

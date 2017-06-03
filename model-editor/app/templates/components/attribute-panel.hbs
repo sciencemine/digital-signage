@@ -21,7 +21,14 @@
 
     <ul class="list-group attribute-list">
       {{#each-in data as |key value|}}
-        {{attribute-list-item attributeDropCallback=attributeDropCallback deleteAttributeCallback=deleteAttributeCallback updateModalCallback=(action 'editAttribute') id=(create-id prefix "_" key) key=key data=value}}
+        {{attribute-list-item
+          attributeDropCallback=attributeDropCallback
+          deleteAttributeCallback=deleteAttributeCallback
+          updateModalCallback=(action 'editAttribute')
+          id=(create-id prefix "_" key)
+          key=key
+          data=value
+        }}
       {{/each-in}}
     </ul>
   {{/if}}

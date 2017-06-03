@@ -2,13 +2,55 @@
   <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
 </div>
 
-{{properties-panel onSubmitCallback=(action 'dataUpdate') propertiesExpandedCallback=(action 'setPropertiesExpanded') relations=selectedVideoRelations attributes=selectedVideoAttributes updateModalCallback=(action 'updateModalInfo') editRelationCallback=(action 'editRelation') class=(if propertiesExpanded "content-area--properties-large" "content-area--properties-small") data=selectedVideo config=data.modelConfig}}
+{{properties-panel
+  onSubmitCallback=(action 'dataUpdate')
+  propertiesExpandedCallback=(action 'setPropertiesExpanded')
+  updateModalCallback=(action 'updateModalInfo')
+  editRelationCallback=(action 'editRelation')
+  class=(if propertiesExpanded "content-area--properties-large" "content-area--properties-small")
+  data=selectedVideo
+  attributes=selectedVideoAttributes
+  relations=selectedVideoRelations
+  config=data.modelConfig
+  vidKey=selectedVideoKey
+}}
 
-{{configuration-panel configurationExpandedCallback=(action 'setConfigurationExpanded') validation=(action "validateConfig") onSubmitCallback=(action 'configUpdate') prefix="config" path=".config" data=newModel.config config=data.modelConfig.config class=(configuration-css attributesExpanded propertiesExpanded)}}
+{{configuration-panel
+  configurationExpandedCallback=(action 'setConfigurationExpanded')
+  validation=(action "validateConfig")
+  onSubmitCallback=(action 'configUpdate')
+  class=(configuration-css attributesExpanded propertiesExpanded)
+  data=newModel.config
+  config=data.modelConfig.config
+}}
 
-{{attribute-panel attributeDropCallback=(action 'updateAttributeDrop') attributesExpandedCallback=(action 'setAttributesExpanded') updateModalCallback=(action 'updateModalInfo') deleteAttributeCallback=(action 'deleteAttribute') class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small") data=newModel.attributes}}
+{{attribute-panel
+  attributeDropCallback=(action 'updateAddAttributeData')
+  attributesExpandedCallback=(action 'setAttributesExpanded')
+  updateModalCallback=(action 'updateModalInfo')
+  deleteAttributeCallback=(action 'deleteAttribute')
+  class=(if attributesExpanded "content-area--attribute-large" "content-area--attribute-small")
+  data=newModel.attributes
+}}
 
-{{graph-visualizer relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation attributeDrop=attributeDrop getVideoCallback=(action 'addAttributeToVideo') videoSelectedCallback=(action 'setSelectedVideo') saveModelCallback=(action 'saveModel') addVideoCallback=(action 'addVideo') addAttributeCallback=(action 'addAttribute') addEdgeCallback=(action 'addEdge') attributesExpanded=attributesExpanded propertiesExpanded=propertiesExpanded configurationExpanded=configurationExpanded data=newModel}}
+{{graph-visualizer
+  getVideoCallback=(action 'addAttributeToVideo')
+  videoSelectedCallback=(action 'setSelectedVideo')
+  saveModelCallback=(action 'saveModel')
+  addVideoCallback=(action 'addVideo')
+  addAttributeCallback=(action 'addAttribute')
+  addEdgeCallback=(action 'addEdge')
+  removeEdgeCallback=(action 'removeEdge')
+  relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation
+  addAttributeData=addAttributeData
+  editAttributeData=editAttributeData
+  addVideoData=addVideoData
+  editVideoData=editVideoData
+  attributesExpanded=attributesExpanded
+  propertiesExpanded=propertiesExpanded
+  configurationExpanded=configurationExpanded
+  data=newModel
+}}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
   <div class="modal-dialog" role="document">
@@ -19,7 +61,18 @@
       </div>
 
       <div class="modal-body content-area--modal__body">
-        {{generic-form validation=(action 'doNothing') prefix=modalPrefix path=modalPath key=modalKey onSubmitCallback=(action 'dataUpdate') showHelp=true showTitle=false noLabel=false data=modalData config=modalConfig}}
+        {{generic-form
+          validation=(action 'doNothing')
+          onSubmitCallback=(action 'dataUpdate')
+          prefix=modalPrefix
+          path=modalPath
+          key=modalKey
+          showHelp=true
+          showTitle=false
+          noLabel=false
+          data=modalData
+          config=modalConfig
+        }}
       </div>
 
       <div class="modal-footer">

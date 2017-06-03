@@ -3,6 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   expanded: true,
   prefix: "properties",
+  path: ".videos",
+  key: null,
+  attributes: null,
+  relations: null,
 
   didRender() {
     if (this.$('[data-toggle="propertiesTooltip"]').length !== 0) {
@@ -16,8 +20,8 @@ export default Ember.Component.extend({
       });
     }
 
-    if (this.$('#panel-body').length !== 0) {
-      this.$('#panel-body').scrollspy({
+    if (this.$('.panel-body').length !== 0) {
+      this.$('.panel-body').scrollspy({
         target: '#propertiesNav'
       });
     }
@@ -26,6 +30,14 @@ export default Ember.Component.extend({
     toggleView() {
       this.set('expanded', !this.get('expanded'));
       this.get('propertiesExpandedCallback') (this.get('expanded'));
+    },
+    submitForm(data, path, key) {
+      let newData = data;
+      
+      newData.attributes = this.get('attributes');
+      newData.relations = this.get('relations');
+      
+      this.get('onSubmitCallback') (newData, this.get('path'), key);
     },
     doNothing() {
       

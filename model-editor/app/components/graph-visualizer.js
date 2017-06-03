@@ -14,12 +14,13 @@ export default Ember.Component.extend({
     nodes: {
       size: 15,
       borderWidth: 2,
-      shadow: true
+      shadow: true,
+      shape: "circle"
     },
     edges: {
       shadow: true,
       arrows: 'to',
-      length: 300,
+      length: 400,
       scaling: {
         min: 1,
         max: 12.5,
@@ -38,19 +39,31 @@ export default Ember.Component.extend({
     edges: null
   },
 
-  rerender: false,
+  /* for adding edges */
   fromVid: null,
   toVid: null,
+  relationsLength: null,
 
   popoverTitle: null,
   popoverContent: null,
-  attributeDrop: null,
-
-  didReceiveAttrs() {
+  
+  /* graph updata data */
+  addAttributeData: null,
+  editAttributeData: null,
+  addVideoData: null,
+  editVideoData: null,
+  
+  /* editor states */
+  removeEdgeMode: false,
+  
+  init() {
+    this._super(...arguments);
+    
     let nodes = new vis.DataSet([]);
 
     let edges = new vis.DataSet([]);
 
+    /* Creates the initial graph */
     for (let video in this.get('data.videos')) {
       let vid = this.get('data.videos')[video];
       let nodeObj = { };
@@ -63,56 +76,93 @@ export default Ember.Component.extend({
           let diff = vid.relations[i].difficulty;
           let edgeObj = { };
 
+          /* controls colors of the edges */
           let red = diff > 0 ? 10 * diff : 0;
           let green = diff < 0 ? -10 * diff : 0;
-          let blue = 127 - ((red + green) / 2);
-
+          let blue = 127 - (red + green) / 2;
           let color = "rgb(" + red + "," + green + "," + blue + ")";
 
           edgeObj.from = video;
           edgeObj.to = vid.relations[i].relatedId;
           edgeObj.value = Math.abs(diff);
+          edgeObj.pos = i;
           edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
           edgeObj.color = color;
-          edgeObj.id = video + "_" + i;
+          edgeObj.id = video + "_" + i + "_" + vid.relations[i].attributeId;
+          edgeObj.attr = vid.relations[i].attributeId;
 
           edges.add(edgeObj);
-        }
+        }//for
 
       nodes.add(nodeObj);
-    }
+    }//for
 
-    if (nodes !== this.get('graphData.nodes')) {
-      this.set('graphData.nodes', nodes);
-      this.set('graphData.edges', edges);
-
-      this.set('rerender', true);
-    }
-    else {
-      this.set('rerender', false);
-    }
+    this.set('graphData.nodes', nodes);
+    this.set('graphData.edges', edges);
   },
+  
   didRender() {
     if (this.get('network') === null) {
-      this.send('redrawGraph');
-    }
-    else if (this.get('rerender')) {
-      this.get('network').setData(this.get('graphData'));
-    }
-
-    this.set('rerender', false);
+      this.send('drawGraph');
+    }//if
   },
-  dropObserver: Ember.observer('attributeDrop', function() {
-    let network = this.get('network');
-    let domPos = Ember.copy(this.get('attributeDrop.location'));
-//console.log(domPos);
-    this.get('getVideoCallback') (network.getNodeAt(domPos));
+  addAttributeObserver: Ember.observer('addAttributeData', function() {
+    if (this.get('addAttributeData')) {
+      let network = this.get('network');
+      let domPos = Ember.copy(this.get('addAttributeData.location'));
+      
+      this.get('getVideoCallback') (network.getNodeAt(domPos));
+    }//if
+  }),
+  editAttributeObserver: Ember.observer('editAttributeData', function() {
+    if (this.get('editAttributeData')) {
+      let attr = this.get('editAttributeData');
+      let newLabel = attr.data.prettyName.length > 10 ? attr.data.prettyName.substr(0, 6) + " ..." : attr.data.prettyName;
+      let edges = this.get('graphData.edges');
+      
+      edges.forEach(function (edge) {
+        if (edge.id.substr(edge.id.lastIndexOf('_') + 1) === attr.attributeId) {
+          let newAttr = edge;
+          
+          newAttr.label = newLabel;
+          
+          edges.update(newAttr);
+        }//if
+      });
+    }//if
+  }),
+  addVideoObserver: Ember.observer('addVideoData', function() {
+    if (this.get('addVideoData')) {
+      let vidId = Ember.copy(this.get('addVideoData.videoId'));
+      let vid = Ember.copy(this.get('addVideoData.data'));
+      let nodeObj = { };
+
+      nodeObj.id = vidId;
+      nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
+      
+      this.get('graphData.nodes').add(nodeObj);
+    }//if
+  }),
+  editVideoObserver: Ember.observer('editVideoData', function() {
+    if (this.get('editVideoData')) {
+      let vidId = Ember.copy(this.get('editVideoData.videoId'));
+      let vid = Ember.copy(this.get('editVideoData.data'));
+      let nodeObj = { };
+
+      nodeObj.id = vidId;
+      nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
+      
+      this.get('graphData.nodes').update(nodeObj);
+    }
   }),
   actions: {
-    toggleAddEdge() {
+    addEdgeMode() {
       this.get('network').addEdgeMode();
     },
-    redrawGraph() {
+    deleteEdgeMode() {
+      this.set('removeEdgeMode', !this.get('removeEdgeMode'));
+    },
+    drawGraph() {
       let container = this.$('.graph-container')[0];
       let component = this;
 
@@ -123,6 +173,7 @@ export default Ember.Component.extend({
 
         component.set('fromVid', data.from);
         component.set('toVid', data.to);
+        component.set('relationsLength', fromVid.relations.length);
 
         for (let fromAttr = 0; fromAttr < fromVid.attributes.length; fromAttr++) {
           let attr = fromVid.attributes[fromAttr];
@@ -133,8 +184,13 @@ export default Ember.Component.extend({
             attr.id = fromVid.attributes[fromAttr];
 
             attributes.push(attr);
-          }
-        }
+          }//if
+        }//for
+        
+        if (attributes.length === 0) {
+          alert("Warning! Trying to make a relation between two videos with no shared attributes.");
+          return;
+        }//if
 
         component.set('relationsConfig.data.attributeId.data', attributes);
 
@@ -149,6 +205,7 @@ export default Ember.Component.extend({
 
           component.set('fromVid', null);
           component.set('toVid', null);
+          component.set('relationsLength', null);
         })
         .appendTo('body').modal('show');
       });
@@ -156,37 +213,47 @@ export default Ember.Component.extend({
       let network = new vis.Network(container, this.get('graphData'), this.get('graphOptions'));
 
       network
-      .on("selectNode", function (params) {
-        component.get('videoSelectedCallback') (params.nodes[0]);
+      .on("selectNode", function (param) {
+        component.get('videoSelectedCallback') (param.nodes[0]);
       })
-      .on("deselectNode", function () {
-        component.get('videoSelectedCallback') (null);
+      .on("deselectNode", function (param) {
+        if (param.nodes.length === 0) {
+          component.get('videoSelectedCallback') (null);
+        }
       })
       .on("hoverNode", function (param) {
-        // popover support stuff. built-in support not working. 
-        // let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
-        // let el = component.$(".canvas-popover");
+        //popover support stuff. built-in support not working. 
+        let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
+        let el = component.$(".canvas-popover");
 
-        // component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
-        // component.set('popoverContent', component.get('data.videos')[param.node].description);
+        component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
+        component.set('popoverContent', component.get('data.videos')[param.node].description);
  
-        // el.css("left", nodePos.x).css("top", nodePos.y);
-        // el.removeClass("hidden");
+        el.css("left", nodePos.x).css("top", nodePos.y);
+        el.removeClass("hidden");
       })
       .on("blurNode", function () {
         component.$(".canvas-popover").addClass("hidden");
       })
-      .on("dragStart", function (params) {
+      .on("dragStart", function () {
         component.$(".canvas-popover").addClass("hidden");
-        if (params.nodes.length === 1) {
-          component.get('videoSelectedCallback') (params.nodes[0]);
-        }
       })
-      .on("click", function (params) {
+      .on("click", function (param) {
         component.$(".canvas-popover").addClass("hidden");
-        if (params.nodes.length === 0) {
+        
+        if (param.nodes.length === 0) {
           this.disableEditMode();
-        }
+        }//if
+
+        if (param.edges.length === 1 && component.get('removeEdgeMode')) {
+          let edges = component.get('graphData.edges');
+          let edge = edges.get(param.edges[0]);
+          
+          edges.remove(edge);
+          
+          component.set('removeEdgeMode', false);
+          component.get('removeEdgeCallback') (edge.from, edge.pos);
+        }//if
       });
 
       this.set('network', network);
@@ -205,18 +272,24 @@ export default Ember.Component.extend({
       edgeObj.from = this.get('fromVid');
       edgeObj.to = this.get('toVid');
       edgeObj.value = Math.abs(diff);
+      edgeObj.pos = this.get('relationsLength');
       edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
       edgeObj.color = color;
-      edgeObj.id = this.get('fromVid') + "_" + this.get('graphData.edges').length;
+      edgeObj.id = edgeObj.from + "_" + this.get('graphData.edges').length;
       edgeObj.title = attr.prettyName;
+      edgeObj.attr = data.attributeId;
 
       this.get('graphData.edges').add(edgeObj);
 
       if (Ember.$('#addRelationOverlay')) {
         Ember.$('#addRelationOverlay').modal('hide');
       }
-
+      
       this.get('addEdgeCallback') (edgeObj, data.attributeId);
+
+      this.get('videoSelectedCallback', edgeObj.from);
+      
+      this.get('network').selectNodes([edgeObj.from]);
     },
     doNothing() {
 

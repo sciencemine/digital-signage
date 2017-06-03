@@ -3,8 +3,10 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   newModel: null,
   validModel: false,
-  selectedVideo: null,
   selectedVideoKey: null,
+  selectedVideo: null,
+  selectedVideoAttributes: null,
+  selectedVideoRelations: null,
 
   modalTitle: "",
   modalConfig: null,
@@ -17,12 +19,26 @@ export default Ember.Component.extend({
   propertiesExpanded: true,
   configurationExpanded: true,
 
-  attributeDrop: {
+  addAttributeData: {
     attributeId: null,
     location: {
       x: null,
       y: null
     }
+  },
+  editAttributeData: {
+    attributeId: null,
+    data: {
+      
+    }
+  },
+  addVideoData: {
+    videoId: null,
+    data: { }
+  },
+  editVideoData: {
+    videoId: null,
+    data: { }
   },
 
   init() {
@@ -61,7 +77,10 @@ export default Ember.Component.extend({
 
       this.send('setSelectedVideo', data.from);
     },
-    updateAttributeDrop(x, y, attributeId) {
+    removeEdge(vidId, pos) {
+      this.get('newModel.videos')[vidId].relations.removeAt(pos);
+    },
+    updateAddAttributeData(x, y, attributeId) {
       let obj = {
         attributeId: attributeId,
         location: {
@@ -70,19 +89,25 @@ export default Ember.Component.extend({
         }
       };
 
-      obj.location.y = obj.location.y - (this.$(window).height() * 0.07 + 3);
+      obj.location.x = obj.location.x - Ember.$(".vis-network").offset().left;
+      obj.location.y = obj.location.y - Ember.$(".vis-network").offset().top;
 
-      if (this.get('attributesExpanded')) {
-        obj.location.x = obj.location.x - (this.$(window).width() * 0.05 + 100);
-      }
-
-      this.set('attributeDrop', obj);
+      this.set('addAttributeData', obj);
     },
     addAttributeToVideo(videoId) {
-      if (videoId) {
-        this.get('newModel.videos')[videoId].attributes.pushObject(this.get('attributeDrop.attributeId'));
-
-        this.send('setSelectedVideo', videoId);
+      let vidId = Ember.copy(videoId);
+      
+      if (vidId) {
+        let component = this;
+        let attrId = Ember.copy(this.get('addAttributeData.attributeId'));
+        
+        this.get('newModel.videos')[vidId].attributes.pushObject(attrId);
+        this.get('newModel.attributes')[attrId].videos.pushObject(videoId);
+        this.send('setSelectedVideo', vidId);
+        
+        setTimeout(function() {
+          component.notifyPropertyChange('selectedVideo');
+        }, 10);
       }
     },
     setAttributesExpanded(param) {
@@ -93,8 +118,6 @@ export default Ember.Component.extend({
     },
     setConfigurationExpanded(param) {
       this.set('configurationExpanded', param);
-
-      this.notifyPropertyChange('setConfigurationExpandedd');
     },
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
@@ -105,6 +128,8 @@ export default Ember.Component.extend({
       }
 
       this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
+      this.set('selectedVideoAttributes', Ember.copy(this.get('newModel.videos')[param].attributes));
+      this.set('selectedVideoRelations', Ember.copy(this.get('newModel.videos')[param].relations));
       this.send('replaceVideoAttributes');
       this.send('replaceVideoRelations');
     },
@@ -114,7 +139,7 @@ export default Ember.Component.extend({
       this.set('selectedVideo.attributes', [ ]);
 
       for (var attribute = 0; attribute < attributes.length; attribute++) {
-        let attributeData = this.get('newModel.attributes')[attributes[attribute]];
+        let attributeData = Ember.copy(this.get('newModel.attributes')[attributes[attribute]]);
         let data = { };
 
         data.name = attributeData.prettyName;
@@ -131,12 +156,12 @@ export default Ember.Component.extend({
 
       for (var relation = 0; relation < relations.length; relation++) {
         let data = { };
-        let relatedVid = this.get('newModel.videos')[relations[relation].relatedId];
+        let relatedVid = Ember.copy(this.get('newModel.videos')[relations[relation].relatedId]);
 
         data.name = relatedVid.prettyName;
         data.description = relatedVid.description;
         data.difficulty = relations[relation].difficulty;
-        data.attribute = this.get('newModel.attributes')[relations[relation].attributeId].prettyName;
+        data.attribute = Ember.copy(this.get('newModel.attributes')[relations[relation].attributeId].prettyName);
         data.key = relation;
 
         this.get('selectedVideo.relations').push(data);
@@ -151,12 +176,42 @@ export default Ember.Component.extend({
       this.set('validModel', this.get('validModel') || param);
     },
     dataUpdate(data, path, key) {
+      let newKey;
+      
       if (key) {
         path = path + "." + key;
       }
       else {
-        path = path + "." + makeId(this.get('newModel' + path));
+        newKey = makeId(this.get('newModel' + path));
+        path = path + "." + newKey;
       }
+
+      if (path.indexOf(".videos") !== -1) {
+        let obj = { data: { } };
+        
+        obj.videoId = key ? key : newKey;
+        obj.data = data;
+        
+        if (key) {
+          this.set('editVideoData', obj);
+        }//if
+        else {
+          this.set('addVideoData', obj);
+        }//else
+      }//if
+
+      if (path.indexOf(".attributes") !== -1) {
+        let obj = { data: { } };
+        
+        obj.attributeId = key ? key : newKey;
+        obj.data = data;
+        
+        if (key) {
+          data.videos = Ember.copy(this.get('newModel.attributes')[key].videos);
+          obj.data.oldPrettyName = Ember.copy(this.get('newModel.attributes')[key].prettyName);
+          this.set('editAttributeData', obj);
+        }//if
+      }//if
 
       this.set('newModel' + path, data);
 
@@ -183,13 +238,13 @@ export default Ember.Component.extend({
     deleteAttribute(attributeId) {
       let attributes = Ember.copy(this.get('newModel.attributes'));
 
-      for (var i = this.get('newModel.attributes')[attributeId].videos.length - 1; i >= 0; i--) {
+      for (var i = 0; i < this.get('newModel.attributes')[attributeId].videos.length; i++) {
         let vidId = this.get('newModel.attributes')[attributeId].videos[i];
         let vid = this.get('newModel.videos')[vidId];
 
         vid.attributes.removeObject(attributeId);
 
-        for (var j = vid.relations.length - 1; j >= 0; j--) {
+        for (var j = 0; j < vid.relations.length; j++) {
           let relation = vid.relations[j];
 
           if (relation.attributeId === attributeId) {
