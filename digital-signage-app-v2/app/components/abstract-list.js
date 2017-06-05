@@ -27,6 +27,8 @@ import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
+  focus: false,
+
   init() {
     this._super(...arguments);
   },

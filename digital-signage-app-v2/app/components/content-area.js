@@ -125,7 +125,7 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     },
     doNothing(videos, selectedVidPos) {
-      console.log(videos, selectedVidPos);
+      //console.log(videos, selectedVidPos);
     },
 	
     pauseVideo() {

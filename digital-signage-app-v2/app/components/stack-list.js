@@ -16,7 +16,7 @@
  * @author Zach Valenzuela & Alex Reid
  * @date 5/11/2017
  */
-
+import Ember from 'ember';
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
@@ -28,7 +28,6 @@ export default AbstractList.extend({
     stackItemHighlight: '',
     stackItemSelected: '',    
     loop: true,
-    focus: false,
       
     init(){
         this._super(...arguments);
@@ -40,6 +39,7 @@ export default AbstractList.extend({
     },
 
     selectedStackKey: Ember.computed('attributeKeys', 'selectedStackIndex', function() {
+      //console.log('any string');
       return this.get('attributeKeys')[this.get('selectedStackIndex')];
     }),
     actions:{
@@ -67,6 +67,7 @@ export default AbstractList.extend({
           }
           this.send('changeIndex', 1);
           this.send('input');
+          //console.log(this.get('selectedStackKey'), this.get('selectedStackIndex'));
           event.stopPropagation();
         },
         stackClicked(videos, vidPos){
@@ -77,13 +78,12 @@ export default AbstractList.extend({
           let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
           this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
         },
-        stackHovered(videos, stackIndex){
-          this.set('selectedStackKey', stackIndex);
-          this.get('onHoverCallback') (videos, stackIndex);
+        stackHovered(videos, stackKey){
+          this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));
+          this.get('onHoverCallback') (videos, stackKey);
           this.send('input');
         },
-        input(){
-          this.get('onInputCallback') ();
-        }
+        input()
+        {}
     }
 });

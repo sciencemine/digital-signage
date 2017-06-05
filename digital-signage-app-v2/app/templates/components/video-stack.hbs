@@ -1,4 +1,6 @@
 
-{{video-player highlightedStyle=(string-append stackStyle borderStyle) isMuted=(if (video-selected key selectedStackIndex) isMuted false) url=(if curVideo.teaser.isUrl curVideo.teaser.fileIdentifier (make-local-url modelIdentifier curVideo.teaser.fileIdentifier)) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') onEndedCallback=(action 'getNextVid')}}
+{{video-player highlightedStyle=(string-append stackStyle borderStyle) videoPos=selectedVidPos isMuted=(if (video-selected key selectedStackIndex) isMuted true) url=(if curVideo.teaser.isUrl curVideo.teaser.fileIdentifier (make-local-url modelIdentifier curVideo.teaser.fileIdentifier)) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') onEndedCallback=(action 'getNextVid')}}
+
+{{!log curVideo.teaser.fileIdentifier}}
 
 

@@ -37,13 +37,13 @@ export default Ember.Component.extend({
         },
         getNextVid() {
             let arrayLength = this.get('videos').length;
-            let curArrayPos = this.get('selectedVidPos');
+            let curArrayPos = parseInt(this.get('selectedVidPos'));
+            //console.log("Hello, here's some #'s, curArrayPos: ", curArrayPos, "arrayLength: ", arrayLength, "selectedVidPos: ", this.get('selectedVidPos'));
             this.set('selectedVidPos', (curArrayPos + 1) % arrayLength);
+            
        },
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));
-			
-
         }
     }
 });

@@ -44,6 +44,7 @@ export default Ember.Component.extend({
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
+    //console.log("boop: ", this.get('videoPos'));
 	},
   willClearRender() {
     this.set('playingObserver', null);
@@ -83,6 +84,7 @@ export default Ember.Component.extend({
   			this.$().find("video").get(0).play();
   		}
   		else {
+        //console.log(this.get('videoPos'));
   			this.get('onEndedCallback') (this.get('videoPos'));
   		}
   	},
