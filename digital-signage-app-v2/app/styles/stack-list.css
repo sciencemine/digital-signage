@@ -1,6 +1,8 @@
 
-.stack-list--flex 
+.stack-list--flex-container 
 {
+  position: absolute;
+  top: 20%;
   padding: 0px;
   margin: 0px 5px 0px 5px;
 	display: flex;
@@ -14,8 +16,17 @@
 }
 
 
-.stack-list--flex:focus {
+.stack-list--flex-container:focus {
   outline: 0;
+}
+
+.stack-list--non-flex-container{
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+
 }
 
 .stack-list-item--flex {
@@ -51,15 +62,7 @@
 .non-flex-list-item{
   position: absolute;
   width: calc(200px + 5%);
-
 }
 
-.non-flex-container{
-  position: absolute;
-  top: 20%;
-  left: 0%;
-  right: 0%;
-  bottom: 0%;
 
-}
 

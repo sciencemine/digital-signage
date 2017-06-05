@@ -18,7 +18,7 @@
 {{video-stack videos=data.videos modelIdentifier=data.config.modelIdentifier playerSize='video-stack--container' onClickCallback=(action 'doNothing') onHoverCallback=(action 'doNothing')}}
 -->
 
-{{stack-list focus=true data=stackListData class="stack-list no-outline" stackItemClass="stack-list-item--flex" keyboard=data.config.keyboard loop=true videos=selectionVideos onSelectedCallback=(action 'select') onHoverCallback=(action 'doNothing') onClickCallback=(action 'doNothing') onCancelledCallback=(action 'cancel')}}
+{{stack-list isFlex=false focus=true data=stackListData class="stack-list no-outline" stackItemClass="stack-list-item--flex" keyboard=data.config.keyboard loop=true videos=selectionVideos onSelectedCallback=(action 'select') onHoverCallback=(action 'doNothing') onClickCallback=(action 'doNothing') onCancelledCallback=(action 'cancel')}}
 
 
 {{yield}}
