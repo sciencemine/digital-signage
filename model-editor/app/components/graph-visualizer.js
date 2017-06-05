@@ -5,7 +5,10 @@ export default Ember.Component.extend({
   classNames: ['graph-area'],
   classNameBindings: ['attributesExpanded:attributes-offset:flush-left', 'propertiesExpanded:properties-offset:flush-right', 'configurationExpanded:graph-area--with-config:flush-bottom'],
 
+  /* The actual graph */
   network: null,
+  
+  /* Options for the graph from vis api */
   graphOptions: {
     manipulation: { },
     interaction: {
@@ -34,26 +37,29 @@ export default Ember.Component.extend({
       }
     }
   },
+  
+  /* Data object containing the nodes and edges in the graph */
   graphData: {
     nodes: null,
     edges: null
   },
 
-  /* for adding edges */
+  /* For adding edges */
   fromVid: null,
   toVid: null,
   relationsLength: null,
 
+  /* Popover contents */
   popoverTitle: null,
   popoverContent: null,
   
-  /* graph updata data */
+  /* Graph updata data */
   addAttributeData: null,
   editAttributeData: null,
   addVideoData: null,
   editVideoData: null,
   
-  /* editor states */
+  /* Editor states */
   removeEdgeMode: false,
   
   init() {
@@ -68,8 +74,9 @@ export default Ember.Component.extend({
       let vid = this.get('data.videos')[video];
       let nodeObj = { };
 
+      /* Creates the node object to be added */
       nodeObj.id = video;
-      nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
+      nodeObj.label = shortenName(vid.prettyName);
 
         for (let i = 0; i < vid.relations.length; i++) {
           let attr = this.get('data.attributes')[vid.relations[i].attributeId];
@@ -82,11 +89,12 @@ export default Ember.Component.extend({
           let blue = 127 - (red + green) / 2;
           let color = "rgb(" + red + "," + green + "," + blue + ")";
 
+          /* Creates the edge object to be added */
           edgeObj.from = video;
           edgeObj.to = vid.relations[i].relatedId;
           edgeObj.value = Math.abs(diff);
           edgeObj.pos = i;
-          edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
+          edgeObj.label = shortenName(attr.prettyName);
           edgeObj.color = color;
           edgeObj.id = video + "_" + i + "_" + vid.relations[i].attributeId;
           edgeObj.attr = vid.relations[i].attributeId;
@@ -117,7 +125,7 @@ export default Ember.Component.extend({
   editAttributeObserver: Ember.observer('editAttributeData', function() {
     if (this.get('editAttributeData')) {
       let attr = this.get('editAttributeData');
-      let newLabel = attr.data.prettyName.length > 10 ? attr.data.prettyName.substr(0, 6) + " ..." : attr.data.prettyName;
+      let newLabel = shortenName(attr.data.prettyName);
       let edges = this.get('graphData.edges');
       
       edges.forEach(function (edge) {
@@ -138,7 +146,7 @@ export default Ember.Component.extend({
       let nodeObj = { };
 
       nodeObj.id = vidId;
-      nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
+      nodeObj.label = shortenName(vid.prettyName);
       
       this.get('graphData.nodes').add(nodeObj);
     }//if
@@ -150,7 +158,7 @@ export default Ember.Component.extend({
       let nodeObj = { };
 
       nodeObj.id = vidId;
-      nodeObj.label = vid.prettyName.length > 10 ? vid.prettyName.substr(0, 6) + " ..." : vid.prettyName;
+      nodeObj.label = shortenName(vid.prettyName);
       
       this.get('graphData.nodes').update(nodeObj);
     }
@@ -273,7 +281,7 @@ export default Ember.Component.extend({
       edgeObj.to = this.get('toVid');
       edgeObj.value = Math.abs(diff);
       edgeObj.pos = this.get('relationsLength');
-      edgeObj.label = attr.prettyName.length > 10 ? attr.prettyName.substr(0, 6) + " ..." : attr.prettyName;
+      edgeObj.label = shortenName(attr.prettyName);shortenName(attr.prettyName);
       edgeObj.color = color;
       edgeObj.id = edgeObj.from + "_" + this.get('graphData.edges').length;
       edgeObj.title = attr.prettyName;
@@ -296,3 +304,7 @@ export default Ember.Component.extend({
     }
   }
 });
+
+function shortenName(name) {
+  return name.length > 15 ? name.substr(0, 11) + " ..." : name;
+}

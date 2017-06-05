@@ -306,14 +306,14 @@
                                     "inputType": "",
                                     "error": "",
                                     "validation": "",
-                                    "help": "A relation between the parent video and the child video",
+                                    "help": "A relation between the starting video and the ending video",
                                     "data": {
                                         "relatedId": {
                                             "displayName": "Related Video",
                                             "inputType": "",
                                             "error": "",
                                             "validation": "",
-                                            "help": "A related video to the parent video",
+                                            "help": "A related video to the starting video",
                                             "data": ""
                                         },
                                         "difficulty": {
@@ -326,7 +326,7 @@
                                                 "max": 25.5,
                                                 "step": 0.1
                                             },
-                                            "help": "How hard the related video is relative to the parent video",
+                                            "help": "How hard the related video is relative to the starting video from -25.5 (easier) to 25.5 (harder).",
                                             "data": ""
                                         },
                                         "attributeId": {
