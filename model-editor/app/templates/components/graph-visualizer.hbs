@@ -33,7 +33,7 @@
         <div class="modal-body content-area--modal__body">
           {{generic-form
             onSubmitCallback=(action 'createEdge')
-            validation=(action 'doNothing')
+            validationCallback=(action 'doNothing')
             prefix="relation"
             showHelp=true
             showTitle=false

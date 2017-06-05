@@ -14,9 +14,9 @@
 }}
 
 {{configuration-panel
-  configurationExpandedCallback=(action 'setConfigurationExpanded')
-  validation=(action "validateConfig")
   onSubmitCallback=(action 'configUpdate')
+  configurationExpandedCallback=(action 'setConfigurationExpanded')
+  validationCallback=(action "validateConfig")
   class=(configuration-css attributesExpanded propertiesExpanded)
   data=newModel.config
   config=data.modelConfig.config
@@ -60,7 +60,7 @@
 
       <div class="modal-body content-area--modal__body">
         {{generic-form
-          validation=(action 'doNothing')
+          validationCallback=(action 'doNothing')
           onSubmitCallback=(action 'dataUpdate')
           prefix=modalPrefix
           path=modalPath
