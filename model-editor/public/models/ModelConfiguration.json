@@ -9,7 +9,7 @@
             "prettyName": {
                 "displayName": "Exhibit Title",
                 "inputType": "textarea",
-                "error": "",
+                "error": "Title of the exhibit",
                 "validation": {
                     "required": "required"
                 },
@@ -19,7 +19,7 @@
             "description": {
                 "displayName": "Description",
                 "inputType": "textarea",
-                "error": "",
+                "error": "Description of the exhibit",
                 "validation": {
                     "required": "required"
                 },
@@ -27,13 +27,13 @@
                 "data": ""
             },
             "modelIdentifier": {
-                "displayName": "Foldername for Exhibit",
+                "displayName": "Folder name for Exhibit",
                 "inputType": "text",
-                "error": "",
+                "error": "Folder name for this exhibit",
                 "validation": {
                     "required": "required"
                 },
-                "help": "Foldername for this exhibit",
+                "help": "Folder name for this exhibit",
                 "data": "http://10.10.2.159/"
             },
             "backgroundVideos": {
@@ -105,7 +105,7 @@
                     "menuLocale": {
                         "displayName": "Menu Location",
                         "inputType": "dropdown",
-                        "error": "Please use on of the following: top, right, bottom, left.",
+                        "error": "",
                         "validation": {
                             "required": "required"
                         },
@@ -157,7 +157,7 @@
                             "pattern": "\\w",
                             "size": "4"
                         },
-                        "help": "Cancelation",
+                        "help": "Cancellation",
                         "data": ""
                     },
                     "next": {
@@ -194,7 +194,7 @@
                     "prettyName": {
                         "displayName": "Title",
                         "inputType": "textarea",
-                        "error": "",
+                        "error": "Title of the video",
                         "validation": {
                             "required": "required",
                             "rows": 4
@@ -205,7 +205,7 @@
                     "description": {
                         "displayName": "Description",
                         "inputType": "textarea",
-                        "error": "",
+                        "error": "Description for the video",
                         "validation": {
                             "required": "required",
                             "rows": 4
@@ -223,7 +223,7 @@
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "error": "Use files that are .mp4, .ogg, or .webm.",
+                                "error": "Use files that have a .mp4, .ogg, or .webm extension.",
                                 "validation": {
                                     "required": "required",
                                     "pattern": "\\w.*\\.(mp4|ogg|webm)$"
@@ -259,7 +259,7 @@
                             "fileIdentifier": {
                                 "displayName": "Filename",
                                 "inputType": "text",
-                                "error": "Use files that are .mp4, .ogg, or .webm.",
+                                "error": "Use files that have a .mp4, .ogg, or .webm extension.",
                                 "validation": {
                                     "required": "required",
                                     "pattern": "\\w.*\\.(mp4|ogg|webm)$"
@@ -319,7 +319,7 @@
                                         "difficulty": {
                                             "displayName": "Difficulty",
                                             "inputType": "number",
-                                            "error": "",
+                                            "error": "How hard the related video is relative to the starting video from -25.5 (easier) to 25.5 (harder).",
                                             "validation": {
                                                 "required": "required",
                                                 "min": -25.5,
@@ -369,21 +369,21 @@
                     "prettyName": {
                         "displayName": "Attribute Name",
                         "inputType": "textarea",
-                        "error": "",
+                        "error": "The name of the attribute.",
                         "validation": {
                             "required": "required"
                         },
-                        "help": "The name of the attribute",
+                        "help": "The name of the attribute.",
                         "data": ""
                     },
                     "description": {
                         "displayName": "Attribute Description",
                         "inputType": "textarea",
-                        "error": "",
+                        "error": "The description of the attribute.",
                         "validation": {
                             "required": "required"
                         },
-                        "help": "The description of the attribute",
+                        "help": "The description of the attribute.",
                         "data": ""
                     },
                     "x": {
