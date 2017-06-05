@@ -13,7 +13,9 @@
       <div class="collapse navbar-collapse" id="attributeNav">
         <ul class="nav navbar-nav">
           {{#each-in data as |key value|}}
-            <li data-toggle="attributeTooltip" title={{value.prettyName}}><a href={{create-id "#" prefix "_" key}}><span class="glyphicon glyphicon-picture"/></a></li>
+            <li draggable="true" ondragend={{action 'attributeDrop' key}} data-toggle="attributeTooltip" title={{value.prettyName}}>
+              <a href={{create-id "#" prefix "_" key}}><span class="glyphicon glyphicon-picture"/></a>
+            </li>
           {{/each-in}}
         </ul>
       </div>

@@ -1,9 +1,49 @@
+/*******************************************************************************
+ * COMPONENT:
+ *  attribute-panel
+ *
+ * DESCRIPTION:
+ *  Attribute panel that appears on the bottom of the screen
+ * 
+ * PARAMETERS:
+ *  attributeDropCallback - Callback for when an attribute is dropped on the 
+ *    screen
+ *  attributeExpandedCallback - Callback for when the attribute panel is
+ *    collapsed or expanded
+ *  updateModalCallback - Callback for updating the modal information
+ *  deleteAttributeCallback - Callback for when an attribute is deleted
+ *  data - Data from the attribute in the model
+ *
+ * AUTHOR:
+ *  Michael Fryer
+ *
+ * DATE:
+ *  June 5th, 2017
+ ******************************************************************************/
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  classNameBindings: ['expanded:content-area--attribute-large:content-area--attribute-small'],
+  
+  /* Properties for the properties panel to know */
   expanded: true,
   prefix: "attributes",
+  path: ".attributes",
+  data: null,
 
+  /*****************************************************************************
+   * EVENT:
+   *  didRender
+   *
+   * DESCRIPTION:
+   *  When the dom renders, turns on tooltips and the scrollspy
+   * 
+   * AUTHOR:
+   *  Michael Fryer
+   *
+   * DATE:
+   *  June 5th, 2017
+   ****************************************************************************/
   didRender() {
     if (this.$('[data-toggle="attributeTooltip"]').length !== 0) {
       this.$('[data-toggle="attributeTooltip"]').tooltip({
@@ -14,18 +54,67 @@ export default Ember.Component.extend({
           hide: '100'
         }
       });
-    }
+    }//if
 
     if (this.$('.attribute-list').length !== 0) {
       this.$('.attribute-list').scrollspy({
         target: '#attributeNav'
       });
-    }
+    }//if
   },
   actions: {
-    editAttribute(path, key) {
-      this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", path, key);
+    /***************************************************************************
+     * ACTION:
+     *  editAttribute
+     *
+     * DESCRIPTION:
+     *  Callback for editing an attribute. Sends the proper data back to the container
+     *
+     * PARAMETERS:
+     *  key - They key for which object is going to be edited
+     *
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 5th, 2017
+     **************************************************************************/
+    editAttribute(key) {
+      this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", this.get('path'), key);
     },
+    /***************************************************************************
+     * ACTION:
+     *  attributeDrop
+     *
+     * DESCRIPTION:
+     *  Callback for adding an attribute to a video
+     *
+     * PARAMETERS:
+     *  key - They key for which object is going to be edited
+     *  event - The drop event
+     *
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 5th, 2017
+     **************************************************************************/
+    attributeDrop(key, event) {
+      this.get('attributeDropCallback') (event.clientX, event.clientY, key);
+    },
+    /***************************************************************************
+     * ACTION:
+     *  toggleView
+     *
+     * DESCRIPTION:
+     *  Toggles if the attributes panel should be expanded or not.
+     *
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 5th, 2017
+     **************************************************************************/
     toggleView() {
       this.set('expanded', !this.get('expanded'));
       this.get('attributesExpandedCallback') (this.get('expanded'));
