@@ -2,7 +2,6 @@ import Ember from 'ember';
 
 export default Ember.Route.extend({
   modelfile: null,
-  newModel: null,
   modelConfig: null,
 
   beforeModel(params) {
@@ -33,7 +32,6 @@ export default Ember.Route.extend({
         modelData.config.description = "Creating a new exhibit!";
       }
 
-      this.newModel = modelData;
       data.modelData = modelData;
 
       return data;

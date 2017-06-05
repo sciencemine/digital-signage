@@ -16,7 +16,7 @@
         <span class="help-block">{{value.help}}</span>
       </div>
 
-      {{form-contents-list data=(get-data data key) updateModalCallback=(if updateModalCallback updateModalCallback null) editRelationCallback=(if editRelationCallback editRelationCallback null) attr=key prettyName=value.displayName}}
+      {{form-contents-list data=(get-data data key) attr=key prettyName=value.displayName}}
     {{/if}}
   {{else if (is-array value.data)}}
     {{#if value.data}}

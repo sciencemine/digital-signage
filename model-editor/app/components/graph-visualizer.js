@@ -53,8 +53,8 @@ export default Ember.Component.extend({
   popoverTitle: null,
   popoverContent: null,
   
-  /* Graph updata data */
-  addAttributeData: null,
+  /* Graph update data */
+  addAttrToVideoData: null,
   editAttributeData: null,
   addVideoData: null,
   editVideoData: null,
@@ -114,12 +114,12 @@ export default Ember.Component.extend({
       this.send('drawGraph');
     }//if
   },
-  addAttributeObserver: Ember.observer('addAttributeData', function() {
-    if (this.get('addAttributeData')) {
+  addAttributeObserver: Ember.observer('addAttrToVideoData', function() {
+    if (this.get('addAttrToVideoData')) {
       let network = this.get('network');
-      let domPos = Ember.copy(this.get('addAttributeData.location'));
+      let domPos = Ember.copy(this.get('addAttrToVideoData.domPos'));
       
-      this.get('getVideoCallback') (network.getNodeAt(domPos));
+      this.get('getVideoCallback') (network.getNodeAt(domPos), this.get('addAttrToVideoData.attributeId'));
     }//if
   }),
   editAttributeObserver: Ember.observer('editAttributeData', function() {
@@ -260,7 +260,7 @@ export default Ember.Component.extend({
           edges.remove(edge);
           
           component.set('removeEdgeMode', false);
-          component.get('removeEdgeCallback') (edge.from, edge.pos);
+          component.get('removeRelationCallback') (edge.from, edge.pos);
         }//if
       });
 
@@ -293,7 +293,7 @@ export default Ember.Component.extend({
         Ember.$('#addRelationOverlay').modal('hide');
       }
       
-      this.get('addEdgeCallback') (edgeObj, data.attributeId);
+      this.get('addRelationCallback') (edgeObj, data.attributeId);
 
       this.get('videoSelectedCallback', edgeObj.from);
       
