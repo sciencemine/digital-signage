@@ -68,7 +68,8 @@ export default Ember.Component.extend({
      *  editAttribute
      *
      * DESCRIPTION:
-     *  Callback for editing an attribute. Sends the proper data back to the container
+     *  Callback for editing an attribute. Sends the proper data back to the
+     *    container
      *
      * PARAMETERS:
      *  key - They key for which object is going to be edited
@@ -91,7 +92,7 @@ export default Ember.Component.extend({
      *
      * PARAMETERS:
      *  key - They key for which object is going to be edited
-     *  event - The drop event
+     *  event - The event that was fired
      *
      * AUTHOR:
      *  Michael Fryer
