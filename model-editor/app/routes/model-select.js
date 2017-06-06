@@ -3,12 +3,14 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   models: [],
   backgroundVideos: [],
+  version: null,
 
   beforeModel() {
     let route = this;
 
-    return Ember.$.getJSON('modelList.json').then(data => {
+    return Ember.$.getJSON('ModelInformation.json').then((data) => {
       route.set('models', data.models);
+      route.set('version', data.version);
     });
   },
   model() {
@@ -18,7 +20,13 @@ export default Ember.Route.extend({
       modelData.push(Ember.$.getJSON('/models/' + this.get('models')[i] + '.json'));
     }
 
-    return Ember.RSVP.Promise.all(modelData).then(res => {
+    return Ember.RSVP.Promise.all(modelData).then((res) => {
+      let data = {
+        models: null,
+        version: null
+      };
+      
+      
       for (i = 0; i < this.get('models').length; i++) {
         res[i].fileName = this.get('models')[i];
         res[i].backgroundVideos = {};
@@ -28,8 +36,12 @@ export default Ember.Route.extend({
           res[i].backgroundVideos[vidKey] = res[i].videos[vidKey];
         }
       }
+      
+      data.models = res;
+      
+      data.version = this.version;
 
-      return res;
+      return data;
     });
   }
 });

@@ -8,10 +8,20 @@
     </div>
 
     <ul class="list-group">
-      {{#each-in model as |key value|}}
-        {{model-select-element tagName='li' class="list-group-item model-select--element" modelfile=value.fileName name=value.config.prettyName description=value.config.description}}
+      {{#each-in model.models as |key value|}}
+        {{model-select-element
+          modelfile=value.fileName
+          name=value.config.prettyName
+          description=value.config.description
+          version=model.version
+        }}
       {{/each-in}}
-      {{model-select-element tagName='li' class="list-group-item model-select--element" modelfile="ModelSkeleton" name="Add Exhibit" description="Creates a new exhibit to be added to the list"}}
+      {{model-select-element
+        modelfile="ModelSkeleton"
+        name="Add Exhibit"
+        description="Creates a new exhibit to be added to the list"
+        version=model.version
+      }}
     </ul>
   </div>
 </div>
