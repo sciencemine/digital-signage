@@ -6,6 +6,14 @@
         "validation": { },
         "help": "Configure the exhibit characteristics",
         "data": {
+            "version": {
+                "displayName": "Model Version",
+                "inputType": "",
+                "error": "",
+                "validation": { },
+                "help": "Version of the exhibit model",
+                "data": 0.1
+            },
             "prettyName": {
                 "displayName": "Exhibit Title",
                 "inputType": "textarea",
@@ -34,7 +42,7 @@
                     "required": "required"
                 },
                 "help": "Folder name for this exhibit",
-                "data": "http://10.10.2.159/"
+                "data": ""
             },
             "backgroundVideos": {
                 "displayName": "Background Videos",
@@ -62,7 +70,7 @@
                             "min": 0,
                             "max": 120
                         },
-                        "data": "",
+                        "data": "Seconds",
                         "help": "Idle timeout in seconds"
                     },
                     "menuDwell": {
@@ -75,7 +83,7 @@
                             "max": 30
                         },
                         "help": "Menu timeout in seconds",
-                        "data": ""
+                        "data": "Seconds"
                     },
                     "popoverShowDelay": {
                         "displayName": "Popover show delay",
@@ -88,7 +96,7 @@
                             "step": 0.05
                         },
                         "help": "Time before popovers appear in decimal seconds",
-                        "data": ""
+                        "data": "Seconds"
                     },
                     "popoverDwell": {
                         "displayName": "Popover hover time",
@@ -100,7 +108,7 @@
                             "max": 30
                         },
                         "help": "Time before popovers hide themselves in decimal seconds",
-                        "data": ""
+                        "data": "Seconds"
                     },
                     "menuLocale": {
                         "displayName": "Menu Location",
@@ -396,7 +404,7 @@
                             "max": 100
                         },
                         "help": "Position from the left, as a percent of 100, where the attribute is shown on home screen",
-                        "data": ""
+                        "data": "%"
                     },
                     "y":  {
                         "displayName": "Y Position",
@@ -408,7 +416,7 @@
                             "max": 100
                         },
                         "help": "Position from the top, as a percent of 100, where the attribute is shown on home screen",
-                        "data": ""
+                        "data": "%"
                     },
                     "videos":  {
                         "displayName": "Videos",

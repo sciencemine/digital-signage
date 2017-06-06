@@ -1,5 +1,6 @@
 {
     "config": {
+        "version": 0.1,
         "prettyName": "",
         "modelIdentifier": "",
         "description" : "",
