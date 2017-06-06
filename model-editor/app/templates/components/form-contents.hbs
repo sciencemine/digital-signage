@@ -16,14 +16,23 @@
         <span class="help-block">{{value.help}}</span>
       </div>
 
-      {{form-contents-list data=(get-data data key) attr=key prettyName=value.displayName}}
+      {{form-contents-list
+        data=(get-data data key)
+        attr=key
+        prettyName=value.displayName
+      }}
     {{/if}}
   {{else if (is-array value.data)}}
     {{#if value.data}}
       <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
         <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
-        {{form-contents-select key=(create-id prefix "_" key) help=value.help data=value.data class="form-control input-sm"}}
+        {{form-contents-select
+          key=(create-id prefix "_" key)
+          help=value.help
+          data=value.data
+          class="form-control input-sm"
+        }}
 
         {{#if showHelp}}
           <span class="help-block">{{value.help}}</span>
@@ -43,7 +52,13 @@
     <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
       <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
-      {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix "_" key) data=value}}
+      {{form-contents-textarea
+        class=(textarea-css isInLine)
+        placeholder=value.displayName
+        value=(if data (get-data data key))
+        key=(create-id prefix "_" key)
+        data=value
+      }}
 
       <span id={{create-id prefix "_" key "_span"}} class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
@@ -58,7 +73,7 @@
       <div class="input-group">
         {{form-contents-input
           placeholder=value.displayName
-          value=(if data (if (get-data data key) (get-data data key)))
+          value=(if data (get-data data key))
           key=(create-id prefix "_" key)
           data=value
           class=(unless (is-checkbox value.inputType) "form-control input-sm" "pointer")

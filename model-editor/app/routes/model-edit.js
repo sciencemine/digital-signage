@@ -31,7 +31,8 @@ export default Ember.Route.extend({
         modelData.config.prettyName = "New Exhibit";
         modelData.config.description = "Creating a new exhibit!";
       }
-
+      
+      modelData.version = data.modelConfig.config.data.version.data;
       data.modelData = modelData;
 
       return data;
