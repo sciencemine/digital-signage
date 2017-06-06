@@ -84,10 +84,7 @@ export default Ember.Component.extend({
           let edgeObj = { };
 
           /* controls colors of the edges */
-          let red = diff > 0 ? 10 * diff : 0;
-          let green = diff < 0 ? -10 * diff : 0;
-          let blue = 127 - (red + green) / 2;
-          let color = "rgb(" + red + "," + green + "," + blue + ")";
+          let color = createRGBcolor(diff);
 
           /* Creates the edge object to be added */
           edgeObj.from = video;
@@ -270,12 +267,8 @@ export default Ember.Component.extend({
       let attr = this.get('data.attributes')[data.attributeId];
       let diff = data.difficulty;
       let edgeObj = { };
-
-      let red = diff > 0 ? 10 * diff : 0;
-      let green = diff < 0 ? -10 * diff : 0;
-      let blue = 127 - ((red + green) / 2);
-
-      let color = "rgb(" + red + "," + green + "," + blue + ")";
+      
+      let color = createRGBcolor(diff);
 
       edgeObj.from = this.get('fromVid');
       edgeObj.to = this.get('toVid');
@@ -307,4 +300,12 @@ export default Ember.Component.extend({
 
 function shortenName(name) {
   return name.length > 15 ? name.substr(0, 11) + " ..." : name;
-}
+}//shortenName
+
+function createRGBcolor(diff) {
+  let red = diff > 0 ? 10 * diff : 0;
+  let green = diff < 0 ? -10 * diff : 0;
+  let blue = 127 - ((red + green) / 2);
+
+  return "rgb(" + red + "," + green + "," + blue + ")";
+}//createRGBcolor
