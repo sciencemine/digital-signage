@@ -1,8 +1,9 @@
 {
     "config": {
-        "prettyName": "", 
-        "modelIdentifier": "",
+        "version": 0.0,
+        "prettyName": "",
         "description" : "",
+        "modelIdentifier": "",
         "backgroundVideos": [ ],
         "ui": {
             "idle": 0,

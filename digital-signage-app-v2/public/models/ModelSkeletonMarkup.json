@@ -1,8 +1,9 @@
 {
     "config": {
-        "prettyName": "", 
-        "modelIdentifier": "",
-        "description" : "",
+        "version": 0.0, the version of the model
+        "prettyName": "", the nice displayname for the exhibit
+        "description" : "", the description of the model
+        "modelIdentifier": "", the file path tho get to the data
         "backgroundVideos": [ ], array of background videos by key to video object
         "ui": {
             "idle": 0, seconds system is idle before returning home
@@ -46,8 +47,8 @@
         "0": {
             "prettyName": "",
             "description": "",
-            "x": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from left
-            "y": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from top
+            "x": 0, x position on screen as an interger percent (e.g. 25, 50, 75) from left
+            "y": 0, x position on screen as an interger percent (e.g. 25, 50, 75) from top
             "videos": [ ] videos associated with this attribute
         }
     }
