@@ -31,7 +31,14 @@
       </div>
     {{/if}}
   {{else if (is-object value.data)}}
-    {{form-contents showHelp=showHelp showTooltips=showTooltips data=(if data (get-data data key) data) noLabel=noLabel prefix=(create-id prefix "_" key) tagName='' config=value}}
+    {{form-contents
+      showHelp=showHelp
+      showTooltips=showTooltips
+      data=(if data (get-data data key) data)
+      noLabel=noLabel
+      prefix=(create-id prefix "_" key)
+      config=value
+    }}
   {{else if (is-textarea value.inputType)}}
     <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
       <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
