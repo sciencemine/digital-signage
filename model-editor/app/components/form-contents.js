@@ -11,7 +11,6 @@
  *  isInline - If the form is to be inline or now
  *  showHelp - If the form is to show help messages or not
  *  showList - If the form is to show lists or not
- *  noLabel - If the form is to not have labels
  *  data - The data to populate the form with
  *  config - The configuration object for the form
  *

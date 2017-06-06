@@ -11,7 +11,7 @@
   {{#if (is-list value.inputType)}}
     {{#if showList}}
       <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
-        <label id={{create-id prefix "_" key "_label"}} class={{if noLabel "sr-only"}}>{{value.displayName}}</label>
+        <label id={{create-id prefix "_" key "_label"}}>{{value.displayName}}</label>
         
         <span class="help-block">{{value.help}}</span>
       </div>
@@ -21,7 +21,7 @@
   {{else if (is-array value.data)}}
     {{#if value.data}}
       <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
-        <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+        <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
         {{form-contents-select key=(create-id prefix "_" key) help=value.help data=value.data class="form-control input-sm"}}
 
@@ -41,7 +41,7 @@
     }}
   {{else if (is-textarea value.inputType)}}
     <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
-      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
       {{form-contents-textarea class=(textarea-css isInLine) placeholder=value.displayName value=(if data (if (get-data data key) (get-data data key))) key=(create-id prefix "_" key) data=value}}
 
@@ -53,7 +53,7 @@
     </div>
   {{else if (is-valid-input-type value.inputType)}}
     <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
-      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label {{if noLabel "sr-only"}}">{{value.displayName}}</label>
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
       {{#if value.data "input-group"}}
         <div class={{if value.data "input-group"}}>
