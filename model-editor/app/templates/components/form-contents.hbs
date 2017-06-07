@@ -22,6 +22,21 @@
         prettyName=value.displayName
       }}
     {{/if}}
+  {{else if (is-glyphicons value.inputType)}}
+    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+      <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
+
+      {{form-contents-select-glyphicons
+        key=(create-id prefix "_" key)
+        help=value.help
+        data=value.data
+        class="form-control input-sm"
+      }}
+
+      {{#if showHelp}}
+        <span class="help-block">{{value.help}}</span>
+      {{/if}}
+    </div>
   {{else if (is-array value.data)}}
     {{#if value.data}}
       <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">

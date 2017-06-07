@@ -61,7 +61,8 @@ export default Ember.Component.extend({
           delay: {
             show: 250,
             hide: 100
-          }
+          },
+          html: true
         });
       }//if
     }//if

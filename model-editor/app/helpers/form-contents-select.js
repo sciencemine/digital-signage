@@ -10,7 +10,6 @@
  *  hash - A hash of all named properties. Must contain the following
  *    key - The unique id to use for the select
  *    class - The css style to be applied to the select
- *    placeholder - The placeholder data for the select
  *    help - A help message
  *    data - Array of objects to select from. If array is of objects and not
  *      primitive types, objects must have the following keys

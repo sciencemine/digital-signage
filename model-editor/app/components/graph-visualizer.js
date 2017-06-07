@@ -167,6 +167,12 @@ export default Ember.Component.extend({
     deleteEdgeMode() {
       this.set('removeEdgeMode', !this.get('removeEdgeMode'));
     },
+    deleteVideoMode() {
+      
+    },
+    deleteAttributeMode() {
+      
+    },
     drawGraph() {
       let container = this.$('.graph-container')[0];
       let component = this;
