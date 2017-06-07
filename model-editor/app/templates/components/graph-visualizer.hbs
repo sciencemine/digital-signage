@@ -12,11 +12,11 @@
     <span class="glyphicon glyphicon-plus"/> Add <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><a {{action addVideoCallback}} href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
+      <li {{action addVideoCallback}} data-toggle="modal" data-target="#formOverlay"><a href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
       <li role="separator" class="divider"></li>
-      <li><a {{action addAttributeCallback}} href="#">Attribute <span class="glyphicon glyphicon-tags"/></a></li>
+      <li {{action addAttributeCallback}} data-toggle="modal" data-target="#formOverlay"><a href="#">Attribute <span class="glyphicon glyphicon-tag"/></a></li>
       <li role="separator" class="divider"></li>
-      <li><a {{action 'addEdgeMode'}} href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
+      <li {{action 'addEdgeMode'}}><a href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
     </ul>
   </div>
   
@@ -28,7 +28,7 @@
     <ul class="dropdown-menu">
       <li><a {{action 'deleteVideoMode'}} href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
       <li role="separator" class="divider"></li>
-      <li><a {{action 'deleteAttributeMode'}} href="#">Attribute <span class="glyphicon glyphicon-tags"/></a></li>
+      <li><a {{action 'deleteAttributeMode'}} href="#">Attribute <span class="glyphicon glyphicon-tag"/></a></li>
       <li role="separator" class="divider"></li>
       <li><a {{action 'deleteEdgeMode'}} href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
     </ul>

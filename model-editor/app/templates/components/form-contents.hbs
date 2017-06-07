@@ -23,7 +23,7 @@
       }}
     {{/if}}
   {{else if (is-glyphicons value.inputType)}}
-    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+    <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback has-success">
       <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
       {{form-contents-select-glyphicons
@@ -32,6 +32,8 @@
         data=value.data
         class="form-control input-sm"
       }}
+      
+      <span id={{create-id prefix "_" key "_span"}} class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
       {{#if showHelp}}
         <span class="help-block">{{value.help}}</span>

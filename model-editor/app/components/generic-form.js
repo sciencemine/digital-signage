@@ -107,6 +107,7 @@ export default Ember.Component.extend({
 
       this.send('validateInput');
       this.send('validateTextarea');
+      this.send('validateSelect');
     },
     /***************************************************************************
      * ACTION:
@@ -146,6 +147,27 @@ export default Ember.Component.extend({
         let el = this.$('textarea')[i];
 
         this.send('validateElement', el);
+      }//for
+    },
+    /***************************************************************************
+     * ACTION:
+     *  validateSelect
+     *
+     * DESCRIPTION:
+     *  Validates all the select tags
+     *
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 5th, 2017
+     **************************************************************************/
+    validateSelect() {
+      for (var i = this.$('select').length - 1; i >= 0; i--) {
+        let el = this.$('select')[0];
+        let glyphicon = this.$('#' + el.id + "_span");
+        
+        glyphicon.attr("class", "glyphicon form-control-feedback " + el.value);
       }//for
     },
     /***************************************************************************
