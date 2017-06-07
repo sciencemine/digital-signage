@@ -19,6 +19,11 @@
   cursor: pointer;
 }
 
+.grab:hover {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
 .cursor--default:hover {
   cursor: default;
 }

@@ -4,7 +4,7 @@
   top: 0px;
   right: 0px;
 
-  min-height: calc(3px + 7%);
+  min-height: calc(3px + 5%);
 
   width: calc(100px + 5%);
 
@@ -16,7 +16,7 @@
 .properties-panel--scrollable {
   position: relative;
 
-  top: calc(3px + 7%);
+  top: calc(3px + 5%);
 
   height: 95%;
 

@@ -236,9 +236,15 @@ export default Ember.Component.extend({
         //popover support stuff. built-in support not working. 
         let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
         let el = component.$(".canvas-popover");
+        let content = '';
+        
+        for (var i = 0; i < component.get('data.videos')[param.node].attributes.length; i++) {
+          let attributeId = component.get('data.videos')[param.node].attributes[i];
+          content = content + component.get('data.attributes')[attributeId].prettyName + '\n';
+        }
 
         component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
-        component.set('popoverContent', component.get('data.videos')[param.node].description);
+        component.set('popoverContent', content);
  
         el.css("left", nodePos.x).css("top", nodePos.y);
         el.removeClass("hidden");
