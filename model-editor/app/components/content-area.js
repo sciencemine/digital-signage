@@ -189,6 +189,42 @@ export default Ember.Component.extend({
     },
     /***************************************************************************
      * ACTION:
+     *  removeVideo
+     *
+     * DESCRIPTION:
+     *  Removes a video from the model
+     *
+     * PARAMETERS:
+     *  vidId - The video to be removed
+     * 
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 9th, 2017
+     **************************************************************************/
+    removeVideo(vidId) {
+      let videos = this.get('newModel.videos');
+      
+      for (var attribute in this.get('newModel.attributes')) {
+        this.get('newModel.attributes')[attribute].videos.removeObject(vidId);
+      }//for
+      
+      for (var video in videos) {
+        let videoObj = videos[video];
+        
+        for (var i = 0; i < videoObj.relations.length; i++) {
+          if (videoObj.relations[i].relatedId === vidId) {
+            videos[video].relations.removeAt(i);
+          }//if
+        }//for
+      }//for
+      
+      delete videos[vidId];
+      this.set('newModel.videos', videos);
+    },
+    /***************************************************************************
+     * ACTION:
      *  updateAddAttrToVideoData
      *
      * DESCRIPTION:
@@ -567,16 +603,16 @@ export default Ember.Component.extend({
 
           if (relation.attributeId === attributeId) {
             vid.relations.removeObject(relation);
-          }
-        }
-      }
+          }//if
+        }//for
+      }//for
       
       delete attributes[attributeId];
       this.set('newModel.attributes', attributes);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
-      }
+      }//if
     },
     /***************************************************************************
      * ACTION:

@@ -28,7 +28,7 @@
 }
 
 .button__group {
-  z-index: 10;
+  z-index: 100;
   
   margin: 3px;
 }

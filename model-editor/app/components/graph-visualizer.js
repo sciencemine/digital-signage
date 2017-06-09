@@ -61,6 +61,7 @@ export default Ember.Component.extend({
   
   /* Editor states */
   removeEdgeMode: false,
+  removeVideoMode: false,
   
   init() {
     this._super(...arguments);
@@ -168,7 +169,7 @@ export default Ember.Component.extend({
       this.set('removeEdgeMode', !this.get('removeEdgeMode'));
     },
     deleteVideoMode() {
-      
+      this.set('removeVideoMode', !this.get('removeVideoMode'));
     },
     deleteAttributeMode() {
       
@@ -270,6 +271,23 @@ export default Ember.Component.extend({
           
           component.set('removeEdgeMode', false);
           component.get('removeRelationCallback') (edge.from, edge.pos);
+        }//if
+        
+        if (param.nodes.length === 1 && component.get('removeVideoMode')) {
+          if (confirm("Are you sure you want to remove the video \"" + component.get('data.videos')[param.nodes[0]].prettyName + "\"?")) {
+            let vidId = param.nodes[0];
+              
+            component.get('graphData.edges').forEach(function (edge) {
+              if (edge.from === vidId || edge.to === vidId) {
+                component.get('graphData.edges').remove(edge);
+              }//if
+            });
+            
+            component.get('graphData.nodes').remove(vidId);
+            component.get('removeVideoCallback') (vidId);
+          }//if
+          
+          component.set('removeVideoMode', false);
         }//if
       });
 
