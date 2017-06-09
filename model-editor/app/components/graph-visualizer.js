@@ -237,15 +237,15 @@ export default Ember.Component.extend({
         //popover support stuff. built-in support not working. 
         let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
         let el = component.$(".canvas-popover");
-        let content = '';
+        let content = `<ul>`;
         
         for (var i = 0; i < component.get('data.videos')[param.node].attributes.length; i++) {
           let attributeId = component.get('data.videos')[param.node].attributes[i];
-          content = content + component.get('data.attributes')[attributeId].prettyName + '\n';
+          content = content + `<li>` + `${component.get('data.attributes')[attributeId].prettyName}` + `</li>`;
         }
 
         component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
-        component.set('popoverContent', content);
+        component.set('popoverContent', Ember.String.htmlSafe(content + `</ul>`));
  
         el.css("left", nodePos.x).css("top", nodePos.y);
         el.removeClass("hidden");
@@ -267,10 +267,16 @@ export default Ember.Component.extend({
           let edges = component.get('graphData.edges');
           let edge = edges.get(param.edges[0]);
           
-          edges.remove(edge);
-          
-          component.set('removeEdgeMode', false);
-          component.get('removeRelationCallback') (edge.from, edge.pos);
+          if (confirm("Are you sure you want to remove the relation between \"" +
+                      component.get('data.videos')[edge.from].prettyName +
+                      "\" to \"" + component.get('data.videos')[edge.to].prettyName +
+                      "\" related by \"" + component.get('data.attributes')[edge.attr].prettyName +
+                      "\"?")) {
+            edges.remove(edge);
+            
+            component.set('removeEdgeMode', false);
+            component.get('removeRelationCallback') (edge.from, edge.pos);
+          }//if
         }//if
         
         if (param.nodes.length === 1 && component.get('removeVideoMode')) {
