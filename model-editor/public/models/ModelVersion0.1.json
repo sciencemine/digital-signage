@@ -46,13 +46,38 @@
             },
             "backgroundVideos": {
                 "displayName": "Background Videos",
-                "inputType": "",
+                "inputType": "multi-select",
                 "error": "",
-                "validation": {
-                    "required": "required"
-                },
-                "help": "Background videos to be displayed on the exhibit",
-                "data": [ ]
+                "validation": { },
+                "help": "Background videos to be displayed on the exhibit. (Control or command click to select multiple)",
+                "data": [
+                    {
+                        "id": {
+                            "displayName": "Video Id",
+                            "inputType": "",
+                            "error": "",
+                            "validation": { },
+                            "help": "Id of the video.",
+                            "data": ""
+                        },
+                        "data": {
+                            "displayName": "Video Name",
+                            "inputType": "",
+                            "error": "",
+                            "validation": { },
+                            "help": "Name of the video",
+                            "data": ""
+                        },
+                        "selected": {
+                            "displayName": "Selected",
+                            "inputType": "",
+                            "error": "",
+                            "validation": { },
+                            "help": "If it is selected",
+                            "data": ""
+                        }
+                    }
+                ]
             },
             "ui": {
                 "displayName": "User Interface",

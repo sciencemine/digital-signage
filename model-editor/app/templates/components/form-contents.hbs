@@ -47,7 +47,8 @@
         {{form-contents-select
           key=(create-id prefix "_" key)
           help=value.help
-          data=value.data
+          data=(if (is-multi-select value.inputType) (get-data data key) value.data)
+          multiple=(is-multi-select value.inputType)
           class="form-control input-sm"
         }}
 

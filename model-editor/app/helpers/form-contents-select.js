@@ -11,10 +11,12 @@
  *    key - The unique id to use for the select
  *    class - The css style to be applied to the select
  *    help - A help message
+ *    multiple - If it is a multi select
  *    data - Array of objects to select from. If array is of objects and not
  *      primitive types, objects must have the following keys
  *      id - The value of the option
  *      data - The text to be displayed
+ *      selected - If the option is to be selected
  *
  * AUTHOR:
  *  Michael Fryer
@@ -26,13 +28,26 @@ import Ember from 'ember';
 
 export function formContentsSelect(params, hash) {
   let returnHTML = `<select data-toggle="tooltip" data-placement="auto top" ` +
-                   `title="${hash.help}" id=${hash.key} class="${hash.class}">`;
+                   `title="${hash.help}" id=${hash.key} class="${hash.class}"`;
+                   
+  if (hash.multiple) {
+    returnHTML = returnHTML + ` multiple`;
+  }
+  
+  returnHTML = returnHTML + `>`;
 
   for (var i= 0; i < hash.data.length; i++) {
     let value = hash.data[i];
 
     if (typeof(value) === 'object' && !Array.isArray(value)) {
-      returnHTML = returnHTML + `<option value=${value.id}>`;
+      returnHTML = returnHTML + `<option value=${value.id} `;
+      
+      if (value.selected) {
+        returnHTML = returnHTML + `selected="selected"`;
+      }//if
+      
+      returnHTML = returnHTML + `>`;
+      
       value = value.data;
     }
     else {

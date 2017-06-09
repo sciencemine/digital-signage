@@ -27,7 +27,17 @@ export default Ember.Component.extend({
   expanded: true,
   prefix: "config",
   path: ".config",
+  configModelData: null,
 
+  dataObserver: Ember.observer('data', function () {
+      
+    this.send('replaceBackgroundVideos');
+  }),
+  init() {
+    this._super(...arguments);
+    
+    this.send('replaceBackgroundVideos');
+  },
   actions: {
     /***************************************************************************
      * ACTION:
@@ -46,6 +56,24 @@ export default Ember.Component.extend({
       this.set('expanded', !this.get('expanded'));
 
       this.get('configurationExpandedCallback') (this.get('expanded'));
+    },
+    replaceBackgroundVideos() {
+      let newData = Ember.copy(this.get('data'));
+      let bgVids = newData.config.backgroundVideos;
+      let replacementBgVids = [];
+      
+      for (var video in newData.videos) {
+        let obj = {};
+        
+        obj.id = video;
+        obj.data = newData.videos[video].prettyName;
+        obj.selected = (bgVids.indexOf(video) === -1 ? false : true);
+        
+        replacementBgVids.push(obj);
+      }//for
+      
+      newData.config.backgroundVideos = replacementBgVids
+      this.set('configModelData', newData.config);
     }
   }
 });
