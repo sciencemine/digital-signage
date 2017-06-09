@@ -262,6 +262,9 @@ export default Ember.Component.extend({
         if (param.nodes.length === 0) {
           this.disableEditMode();
         }//if
+        else if (param.nodes.length === 1) {
+          component.get('videoSelectedCallback') (param.nodes[0]);
+        }//else if
 
         if (param.edges.length === 1 && component.get('removeEdgeMode')) {
           let edges = component.get('graphData.edges');
