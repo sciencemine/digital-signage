@@ -71,8 +71,14 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
-
+    let modelIdentifier;
+    
     this.set('newModel', this.get('data.modelData'));
+    
+    modelIdentifier = this.get('newModel.config.modelIdentifier');
+    modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
+    
+    this.set('newModel.config.modelIdentifier', modelIdentifier);
   },
   actions: {
     /***************************************************************************
@@ -637,19 +643,34 @@ export default Ember.Component.extend({
 
       let prettyName = this.get('newModel.config.prettyName');
 
-      let download = confirm("Do you want to download the exhibit model for " + prettyName + "?");
-
+      let download = confirm("Do you want to download the exhibit model for " +
+                              prettyName + "? (Cancel for no).");
+      
       if (download) {
+        let isScienceMine = confirm("Is this exhibit model for the Science Mine? (Cancel for no).");
         let filename = prompt("Enter filename:") + ".json";
+        
+        if (filename !== "null.json") {
+          let modelData = this.get('newModel');
 
-        let a = document.createElement('a');
+          let a = document.createElement('a');
+          
+          if (isScienceMine) {
+            let modelIdentifier = modelData.config.modelIdentifier;
+            
+            modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
+            modelIdentifier = 'http://10.10.2.159/' + modelIdentifier;
+            
+            modelData.config.modelIdentifier = modelIdentifier;
+          }//if
 
-        a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(this.get('newModel'))));
+          a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
 
-        a.setAttribute('download', filename);
+          a.setAttribute('download', filename);
 
-        a.click();
-      }
+          a.click();
+        }//if
+      }//if
     },
     /***************************************************************************
      * ACTION:
