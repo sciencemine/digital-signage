@@ -215,7 +215,7 @@ export default Ember.Component.extend({
         
         for (var i = 0; i < videoObj.relations.length; i++) {
           if (videoObj.relations[i].relatedId === vidId) {
-            videos[video].relations.removeAt(i);
+            videoObj.relations.removeAt(i);
           }//if
         }//for
       }//for
