@@ -72,7 +72,6 @@ export default Ember.Component.extend({
   			this.$('video')[0].play();
   		}
   		else {
-        //console.log(this.get('videoPos'));
   			this.get('onEndedCallback') (this.get('videoPos'));
   		}
   	},
