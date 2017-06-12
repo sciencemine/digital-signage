@@ -72,7 +72,7 @@ export default Ember.Component.extend({
         replacementBgVids.push(obj);
       }//for
       
-      newData.config.backgroundVideos = replacementBgVids
+      newData.config.backgroundVideos = replacementBgVids;
       this.set('configModelData', newData.config);
     }
   }

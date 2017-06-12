@@ -23,6 +23,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  startX: null,
+  startY: null,
+  
+  dragStart(event) {
+    this.set('startX', event.clientX);
+    this.set('startY', event.clientY);
+  },
   /*****************************************************************************
    * EVENT:
    *  dragEnd
@@ -41,6 +48,7 @@ export default Ember.Component.extend({
    *  June 5th, 2017
    ****************************************************************************/
   dragEnd(event) {
+    console.log(window.outerHeight, this.$().offset().top, event.offsetY)
     this.get('attributeDropCallback') (event.clientX, event.clientY, this.get('key'));
   },
   actions: {
