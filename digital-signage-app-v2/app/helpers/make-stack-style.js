@@ -1,9 +1,7 @@
 import Ember from 'ember';
 
 export function makeStackStyle([arg1, arg2]) {
-  let left = arg1 * 100;
-  let top = arg2 * 100;
-  return Ember.String.htmlSafe(`left: ${left}%; top: ${top}%;`) ; 
+  return Ember.String.htmlSafe(`left: ${arg1}%; top: ${arg2}%;`);
 }
 
 export default Ember.Helper.helper(makeStackStyle);

@@ -5,8 +5,18 @@ import { module, test } from 'qunit';
 module('Unit | Helper | string append');
 
 // Replace this with your real tests.
-test('it works', function(assert) {
-  let result = stringAppend([42]);
-  assert.ok(result);
+test('no strings', function(assert) {
+  let result = stringAppend([]);
+  assert.ok(result === "");
+});
+
+test('one string', function(assert) {
+  let result = stringAppend(["one"]);
+  assert.ok(result === "one ");
+});
+
+test('two strings', function(assert) {
+  let result = stringAppend(["one", "two"]);
+  assert.ok(result === "one two ");
 });
 
