@@ -1,6 +1,33 @@
+<div class={{playerSize}}>
+{{!A}}
+	{{video-player 
+	class=(unless showVidA "hidden")
+	playing=(unless showVidA "false")
+	highlightedStyle=(string-append stackStyle borderStyle) 
+	looping=(is-single-video videos) 
+	videoPos=selectedVidAPos 
+	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
+	onClickCallback=(action 'stackClicked') 
+	onHoverCallback=(action 'stackHovered') 
+	onEndedCallback=(action 'getNextVideoA')
+	}}
 
-{{video-player highlightedStyle=(string-append stackStyle borderStyle) videoPos=selectedVidPos isMuted=(if (video-selected key selectedStackIndex) isMuted true) url=(if curVideo.teaser.isUrl curVideo.teaser.fileIdentifier (make-local-url modelIdentifier curVideo.teaser.fileIdentifier)) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'stackHovered') onEndedCallback=(action 'getNextVid')}}
+{{!B}}
+{{#unless (is-single-video videos)}}
+	{{video-player 
+	class=(if showVidA "hidden")
+	playing=(if showVidA "false")
+	highlightedStyle=(string-append stackStyle borderStyle) 
+	looping=(is-single-video videos) 
+	videoPos=selectedVidBPos 
+	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
+	onClickCallback=(action 'stackClicked') 
+	onHoverCallback=(action 'stackHovered') 
+	onEndedCallback=(action 'getNextVideoB')
+	}}
+{{/unless}}	
+</div>
 
-{{!log curVideo.teaser.fileIdentifier}}
-
-
+{{yield}}
