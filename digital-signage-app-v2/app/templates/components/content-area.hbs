@@ -49,20 +49,4 @@
   onClickCallback=(action 'videoSelected')
 }}
 
-{{!stack-list
-  focus=true
-  isFlex=false
-  data=stackListData
-  class="stack-list no-outline"
-  stackItemClass="stack-list-item--flex"
-  keyboard=data.config.keyboard
-  videos=selectionVideos
-  onSelectedCallback=(action 'doNothing')
-  onHoverCallback=(action 'doNothing')
-  onClickCallback=(action 'doNothing')
-  onCancelledCallback=(action 'doNothing')
-  onInputCallback=(action 'resetTimeout')
-}}
-
-
 {{yield}}

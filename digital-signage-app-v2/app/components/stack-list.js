@@ -11,7 +11,37 @@
  * 
  *  stackItemHighlight - class of stack list item when it is highlighted
  * 
- * 
+ *  data - object with keys of attributes and video keys replaced with objects as follows:
+ *  "": {
+ *    "prettyName": "",
+ *    "description": "",
+ *    "x": 0,
+ *    "y": 0,
+ *    "videos": [
+ *      {
+ *        "prettyName": "",
+ *        "description": "",
+ *        "attributes": [ ],
+ *        "relations": [
+ *          {
+ *            "relatedId": "",
+ *            "difficulty": 1,
+ *            "attributeId": ""
+ *          }
+ *        ],
+ *        "full": {
+ *          "fileIdentifier": "",
+ *          "isUrl": false,
+ *          "attribution": ""
+ *        },
+ *        "teaser": {
+ *          "fileIdentifier": "",
+ *          "isUrl": false,
+ *          "attribution": ""
+ *        }
+ *      }
+ *    ]
+ *  }
  *
  * @author Zach Valenzuela & Alex Reid
  * @date 5/11/2017
