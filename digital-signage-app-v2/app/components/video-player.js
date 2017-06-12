@@ -45,7 +45,6 @@ export default Ember.Component.extend({
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
-    //console.log("boop: ", this.get('videoPos'));
 	},
   willClearRender() {
     this.set('playingObserver', null);
@@ -53,7 +52,7 @@ export default Ember.Component.extend({
 	playingObserver: Ember.observer('playing', function() {
     if (this) {
       var p = this.get("playing");
-      var videoElement = this.$().find("video").get(0);
+      var videoElement = this.$('video')[0];
       if (videoElement) {
         if (p) {
           videoElement.play();
@@ -70,9 +69,7 @@ export default Ember.Component.extend({
   actions: {
   	ended() {
   		if (this.get('looping')) {
-        //console.log("Hello");
-  			this.$().find("video").get(0).play();
-        //console.log("video-player ended");
+  			this.$('video')[0].play();
   		}
   		else {
         //console.log(this.get('videoPos'));
@@ -81,7 +78,7 @@ export default Ember.Component.extend({
   	},
     play() {
       if (this.get('playing')) {
-        this.$().find("video").get(0).play();
+        this.$('video')[0].play();
       }
     }
   }

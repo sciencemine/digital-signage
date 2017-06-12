@@ -28,6 +28,42 @@ export default AbstractList.extend({
     stackItemHighlight: '',
     stackItemSelected: '',    
     loop: true,
+    
+    select: function(event){
+      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')]);
+      this.input();
+      event.stopPropagation();    
+    },
+    cancel: function(event){
+      this.cancelCallback();
+      this.input();
+      event.stopPropagation();
+    },
+    goPrevious: function(event){
+      if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
+        this.underflowCallback();
+      }
+      this.changeIndex(-1);
+      this.input();
+      event.stopPropagation();
+    },
+    goNext: function(event){
+      if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
+        this.overflowCallback();
+      }
+      this.changeIndex(1);
+      this.input();
+      
+      event.stopPropagation();
+    },
+    changeIndex: function(indexDelta) {
+      let arrLength = this.get('attributeKeys').length;
+      let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
+      this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
+    },
+    input: function() {
+      
+    },
       
     init(){
         this._super(...arguments);
@@ -35,55 +71,20 @@ export default AbstractList.extend({
     },
     
     didRender() {
-      this.send('updateFocus', true);
+      this.updateFocus(this.get('focus'));
     },
 
     selectedStackKey: Ember.computed('attributeKeys', 'selectedStackIndex', function() {
-      //console.log('any string');
       return this.get('attributeKeys')[this.get('selectedStackIndex')];
     }),
     actions:{
-        select(event){
-          this.send('selectedCallback', this.get('data')[this.get('selectedStackIndex')]);
-          this.send('input');
-          event.stopPropagation();    
-        },
-        cancel(event){
-          this.send('cancelCallback');
-          this.send('input');
-          event.stopPropagation();
-        },
-        goPrevious(event){
-          if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
-            this.send('underflowCallback');
-          }
-          this.send('changeIndex', -1);
-          this.send('input');
-          event.stopPropagation();
-        },
-        goNext(event){
-          if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
-            this.send('overflowCallback');
-          }
-          this.send('changeIndex', 1);
-          this.send('input');
-          //console.log(this.get('selectedStackKey'), this.get('selectedStackIndex'));
-          event.stopPropagation();
-        },
         stackClicked(videos, vidPos){
           this.get('onClickCallback') (videos, vidPos);
-        },
-        changeIndex(indexDelta){
-          let arrLength = this.get('attributeKeys').length;
-          let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
-          this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
         },
         stackHovered(videos, stackKey){
           this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));
           this.get('onHoverCallback') (videos, stackKey);
-          this.send('input');
-        },
-        input()
-        {}
+          this.input();
+        }
     }
 });
