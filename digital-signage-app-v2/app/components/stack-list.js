@@ -29,30 +29,30 @@ export default AbstractList.extend({
     stackItemSelected: '',    
     loop: true,
     
-    select: function(event){
+    select: function(event) {
       this.selectedCallback(this.get('data')[this.get('selectedStackIndex')]);
-      this.input();
+      this.inputCallback();
       event.stopPropagation();    
     },
-    cancel: function(event){
+    cancel: function(event) {
       this.cancelCallback();
-      this.input();
+      this.inputCallback();
       event.stopPropagation();
     },
-    goPrevious: function(event){
+    goPrevious: function(event) { 
       if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
         this.underflowCallback();
       }
       this.changeIndex(-1);
-      this.input();
+      this.inputCallback();
       event.stopPropagation();
     },
-    goNext: function(event){
+    goNext: function(event) {
       if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
         this.overflowCallback();
       }
       this.changeIndex(1);
-      this.input();
+      this.inputCallback();
       
       event.stopPropagation();
     },
@@ -60,9 +60,6 @@ export default AbstractList.extend({
       let arrLength = this.get('attributeKeys').length;
       let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
       this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
-    },
-    input: function() {
-      
     },
       
     init(){
@@ -78,13 +75,13 @@ export default AbstractList.extend({
       return this.get('attributeKeys')[this.get('selectedStackIndex')];
     }),
     actions:{
-        stackClicked(videos, vidPos){
+        stackClicked(videos, vidPos) {
           this.get('onClickCallback') (videos, vidPos);
         },
-        stackHovered(videos, stackKey){
+        stackHovered(videos, stackKey) {
           this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));
           this.get('onHoverCallback') (videos, stackKey);
-          this.input();
+          this.inputCallback();
         }
     }
 });

@@ -20,9 +20,11 @@
       listItemHighlight="video-list-item--highlight"
       keyboard=data.config.keyboard
       videos=selectionVideos
-      modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect
+      modelIdentifier=data.config.modelIdentifier
+      focus=displayVideoSelect
       onSelectedCallback=(action 'videoSelected')
-      onCancelledCallback=(action 'cancelPressed') onInputCallback=(action 'resetTimeout')
+      onCancelledCallback=(action 'cancelPressed')
+      onInputCallback=(action 'resetTimeout')
     }}
 {{/if}}
 
@@ -59,6 +61,7 @@
   onHoverCallback=(action 'doNothing')
   onClickCallback=(action 'doNothing')
   onCancelledCallback=(action 'doNothing')
+  onInputCallback=(action 'resetTimeout')
 }}
 
 

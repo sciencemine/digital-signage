@@ -43,7 +43,7 @@ export default AbstractList.extend({
   select: function(event) {
     this.selectedCallback(this.get('videos')[this.get('selectedVidPos')]);
 
-    this.input();
+    this.inputCallback();
 
     event.stopPropagation();
   },
@@ -54,14 +54,14 @@ export default AbstractList.extend({
 
     this.alterSelected(-1);
 
-    this.input();
+    this.inputCallback();
 
     event.stopPropagation();
   },
   cancel: function(event) {
     this.cancelCallback();
 
-    this.input();
+    this.inputCallback();
 
     event.stopPropagation();
   },
@@ -72,7 +72,7 @@ export default AbstractList.extend({
 
     this.alterSelected(1);
 
-    this.input();
+    this.inputCallback();
 
     event.stopPropagation();
   },
@@ -82,9 +82,6 @@ export default AbstractList.extend({
     let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
 
     this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
-  },
-  input: function() {
-    this.get('onInputCallback') ();
   },
 
   init() {
@@ -114,7 +111,7 @@ export default AbstractList.extend({
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);
 
-      this.input();
+      this.inputCallback();
     }
   }
 });
