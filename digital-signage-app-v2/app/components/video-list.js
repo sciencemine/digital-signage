@@ -102,11 +102,11 @@ export default AbstractList.extend({
       }
     }
 
-    this.set('focus', this.get('focus'));
+    this.updateFocus(this.get('focus'));
   },
   actions: {
     videoSelected(videoPos) {
-      this.send('selectedCallback', this.get('videos')[videoPos]);
+      this.selectedCallback(this.get('videos')[videoPos]);
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);

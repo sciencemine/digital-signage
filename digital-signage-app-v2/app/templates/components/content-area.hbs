@@ -1,4 +1,3 @@
-<!--
 <div class="video-player__background--container">
   {{video-player
     muted=displayVideoSelect
@@ -44,14 +43,15 @@
 
 {{menu-bar
   popoverShowDelay=data.config.ui.popoverShowDelay
-  config=data.config videos=selectionVideos
+  config=data.config
+  videos=selectionVideos
   attributes=data.attributes
   onClickCallback=(action 'videoSelected')
 }}
--->
 
-{{stack-list
+{{!stack-list
   focus=true
+  isFlex=false
   data=stackListData
   class="stack-list no-outline"
   stackItemClass="stack-list-item--flex"
