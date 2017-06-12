@@ -36,7 +36,8 @@ export default Ember.Component.extend({
 	looping: false,
 	playing: true,
 	muted: true,
-  highlightedStyle: '',
+	highlightedStyle: '',
+  preloaded: 0,
 
 	click(event) {
 		this.get('onClickCallback') (this.get('videoPos'));
@@ -44,10 +45,10 @@ export default Ember.Component.extend({
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
+    //console.log("boop: ", this.get('videoPos'));
 	},
   willClearRender() {
     this.set('playingObserver', null);
-    this.set('urlObserver', null);
   },
 	playingObserver: Ember.observer('playing', function() {
     if (this) {
@@ -66,23 +67,15 @@ export default Ember.Component.extend({
       }
     }
   }),
-	urlObserver: Ember.observer('url', function() {
-    if (this) {
-      var videoElement = this.$().find("video").get(0);
-      if (videoElement) {
-        videoElement.load();
-      }
-      else {
-        console.log("No video element found");
-      }
-    }
-  }),
   actions: {
   	ended() {
   		if (this.get('looping')) {
+        //console.log("Hello");
   			this.$().find("video").get(0).play();
+        //console.log("video-player ended");
   		}
   		else {
+        //console.log(this.get('videoPos'));
   			this.get('onEndedCallback') (this.get('videoPos'));
   		}
   	},

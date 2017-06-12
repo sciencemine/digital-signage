@@ -1,11 +1,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-    selectedVidPos: 0,
+    selectedVidAPos: 0,
+    selectedVidBPos: 0,
     selectedStackIndex: 0,
-    stackStyle: ' ',
+    stackStyle: '',
     playerSize: '',
     isMuted: true,
+    showVidA: true,
     
     init() {
         this._super(...arguments);
@@ -27,19 +29,37 @@ export default Ember.Component.extend({
                 break;
         }
     },
-    curVideo: Ember.computed('videos', 'selectedVidPos', function () {
-        return this.get('videos')[this.get('selectedVidPos')];
+    videoA: Ember.computed('videos', 'selectedVidAPos', function () {
+        return this.get('videos')[this.get('selectedVidAPos')];
+    }),
+    videoB: Ember.computed('videos', 'selectedVidBPos', function () {
+        return this.get('videos')[this.get('selectedVidBPos')];
     }),
     actions: {
         stackClicked() {
-            this.get('onClickCallback') (this.get('videos'), this.get('selectedVidPos'));
+            this.get('onClickCallback') (this.get('videos'), (showVidA ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
+            
         },
-        getNextVid() {
+        getNextVideoA() {
             let arrayLength = this.get('videos').length;
-            let curArrayPos = this.get('selectedVidPos');
-            this.set('selectedVidPos', (curArrayPos + 1) % arrayLength);
-       },
-        hover() {
+            if (arrayLength === 1) {
+                return;
+            }
+            let curArrayPos = parseInt(this.get('selectedVidAPos'));
+            this.set('selectedVidAPos', (curArrayPos + 2) % arrayLength);
+            this.set('showVidA', false);        
+        },
+        getNextVideoB(){
+            let arrayLength = this.get('videos').length;
+            if (arrayLength === 1) {
+                return;
+            }
+            let curArrayPos = parseInt(this.get('selectedVidBPos'));
+            this.set('selectedVidBPos', (curArrayPos + 2) % arrayLength);
+            this.set('showVidA', true);
+        },
+
+        stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));
         }
     }
