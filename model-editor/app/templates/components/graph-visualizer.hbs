@@ -41,8 +41,8 @@
 </div>
 
 <div class="canvas-popover unselectable cursor--default" class="hidden">
-  <h3>{{popoverTitle}}</h3>
-  <h4>Attributes:</h4>
+  <h4>{{popoverTitle}}</h4>
+  <h6>Attributes:</h6>
   <p>
   <ul class="list-group">
     {{#each-in popoverContent.attributes as |key value|}}
@@ -52,7 +52,7 @@
             <span class="glyphicon {{value.glyphicon}}"/>
           </div>
           <div class="media-body">
-            <h4 class="media-heading">{{value.prettyName}}</h4>
+            <h5 class="media-heading">{{value.prettyName}}</h5>
             <button type="button" class="btn btn-xs btn-danger" {{action 'removeAttribute' popoverContent.videoId value.id}}>Remove</button>
           </div>
         </div>
