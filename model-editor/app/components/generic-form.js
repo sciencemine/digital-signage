@@ -253,13 +253,15 @@ function getValues(data, prefix, clearValues) {
       let el = Ember.$('#' + prefix + "_" + key);
       payload[key] = [ ];
 
-      if (el[0].multiple) {
-        for (var i = 0; i < el.val().length; i++) {
-          payload[key].push(el.val()[i]);
-        }//for
-      }//if
-      else if (el[0]) {
-        payload[key] = el[0].value;
+      if (el[0]) {
+        if (el[0].multiple) {
+          for (var i = 0; i < el.val().length; i++) {
+            payload[key].push(el.val()[i]);
+          }//for
+        }//if
+        else if (el[0]) {
+          payload[key] = el[0].value;
+        }//if
       }//if
     }//else if
     else {

@@ -23,6 +23,13 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  offsetX: null,
+  offsetY: null,
+  
+  dragStart(event) {
+    this.set('offsetX', event.offsetX + Ember.$("#" + this.elementId).offset().left);
+    this.set('offsetY', event.offsetY + Ember.$("#" + this.elementId).offset().top);
+  },
   /*****************************************************************************
    * EVENT:
    *  dragEnd
