@@ -74,6 +74,11 @@ export default Ember.Component.extend({
 
     return "rgb(" + red + "," + green + "," + blue + ")";
   },
+  
+  hidePopover: function() {
+    this.set('popoverNodeId', null);
+    this.$(".canvas-popover").addClass("hidden");
+  },
 
   popoverContent: Ember.computed('popoverNodeId', function() {
     let data = {
@@ -206,16 +211,11 @@ export default Ember.Component.extend({
     deleteVideoMode() {
       this.set('removeVideoMode', !this.get('removeVideoMode'));
     },
-    deleteAttributeMode() {
-      
-    },
     removeAttribute(videoId, attributeId) {
       if (confirm("Are you sure that you want to remove " +
           this.get('data.attributes')[attributeId].prettyName + " from " +
           this.get('data.videos')[videoId].prettyName + "? (Cancel for no)")) {
         this.get('removeAttributeCallback') (videoId, attributeId);
-        this.set('popoverNodeId', null);
-        this.$(".canvas-popover").addClass("hidden");
       }
     },
     drawGraph() {
@@ -289,13 +289,13 @@ export default Ember.Component.extend({
         el.removeClass("hidden");
       })
       .on("blurNode", function () {
-        component.$(".canvas-popover").addClass("hidden");
+        component.hidePopover();
       })
       .on("dragStart", function () {
-        component.$(".canvas-popover").addClass("hidden");
+        component.hidePopover();
       })
       .on("click", function (param) {
-        component.$(".canvas-popover").addClass("hidden");
+        component.hidePopover();
         
         if (param.nodes.length === 0) {
           this.disableEditMode();
