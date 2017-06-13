@@ -214,7 +214,17 @@ export default Ember.Component.extend({
     removeAttribute(videoId, attributeId) {
       if (confirm("Are you sure that you want to remove " +
           this.get('data.attributes')[attributeId].prettyName + " from " +
-          this.get('data.videos')[videoId].prettyName + "? (Cancel for no)")) {
+          this.get('data.videos')[videoId].prettyName + "? This will remove all" +
+          " relations this video has. (Cancel for no)")) {
+        
+        (function IIFE(component) {
+          component.get('graphData.edges').forEach(function (edge) {
+            if ((edge.from === videoId || edge.to === videoId) && edge.attr === attributeId) {
+              component.get('graphData.edges').remove(edge);
+            }//if
+          });
+        })(this);
+        
         this.get('removeAttributeCallback') (videoId, attributeId);
       }
     },
