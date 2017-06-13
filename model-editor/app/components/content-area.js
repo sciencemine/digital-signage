@@ -294,6 +294,34 @@ export default Ember.Component.extend({
     },
     /***************************************************************************
      * ACTION:
+     *  removeAttributeFromVideo
+     *
+     * DESCRIPTION:
+     *  Removes an attribute from the video and removes the video to the list of videos
+     *    that has the attribute in attributes
+     *
+     * PARAMETERS:
+     *  videoId - The key of the video that is getting added
+     *  attrId - The attribute that is getting added
+     * 
+     * AUTHOR:
+     *  Michael Fryer
+     *
+     * DATE:
+     *  June 12th, 2017
+     **************************************************************************/
+    removeAttributeFromVideo(videoId, attrId) {
+      let component = this;
+      
+      this.get('newModel.videos')[videoId].attributes.removeObject(attrId);
+      this.get('newModel.attributes')[attrId].videos.removeObject(videoId);
+      
+      setTimeout(function() {
+        component.notifyPropertyChange('selectedVideo');
+      }, 10);
+    },
+    /***************************************************************************
+     * ACTION:
      *  setAttributesExpanded
      *
      * DESCRIPTION:

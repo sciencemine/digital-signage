@@ -28,8 +28,6 @@
     <ul class="dropdown-menu">
       <li><a {{action 'deleteVideoMode'}} href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
       <li role="separator" class="divider"></li>
-      <li><a {{action 'deleteAttributeMode'}} href="#">Attribute <span class="glyphicon glyphicon-tag"/></a></li>
-      <li role="separator" class="divider"></li>
       <li><a {{action 'deleteEdgeMode'}} href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
     </ul>
   </div>
@@ -45,7 +43,23 @@
 <div class="canvas-popover unselectable cursor--default" class="hidden">
   <h3>{{popoverTitle}}</h3>
   <h4>Attributes:</h4>
-  <p>{{popoverContent}}</p>
+  <p>
+  <ul class="list-group">
+    {{#each-in popoverContent.attributes as |key value|}}
+      <li class="list-group-item">
+        <div class="media">
+          <div class="media-left">
+            <span class="glyphicon {{value.glyphicon}}"/>
+          </div>
+          <div class="media-body">
+            <h4 class="media-heading">{{value.prettyName}}</h4>
+            <button type="button" class="btn btn-xs btn-danger" {{action 'removeAttribute' popoverContent.videoId value.id}}>Remove</button>
+          </div>
+        </div>
+      </li>
+    {{/each-in}}
+  </ul>
+  </p>
 </div>
 
 <div id="modal-container">

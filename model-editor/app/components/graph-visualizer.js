@@ -51,7 +51,7 @@ export default Ember.Component.extend({
 
   /* Popover contents */
   popoverTitle: null,
-  popoverContent: null,
+  popoverNodeId: null,
   
   /* Graph update data */
   addAttrToVideoData: null,
@@ -62,6 +62,41 @@ export default Ember.Component.extend({
   /* Editor states */
   removeEdgeMode: false,
   removeVideoMode: false,
+
+  shortenName: function(name) {
+    return name.length > 15 ? name.substr(0, 11) + " ..." : name;
+  },
+
+  createRGBcolor: function(diff) {
+    let red = diff > 0 ? 10 * diff : 0;
+    let green = diff < 0 ? -10 * diff : 0;
+    let blue = 127 - ((red + green) / 2);
+
+    return "rgb(" + red + "," + green + "," + blue + ")";
+  },
+
+  popoverContent: Ember.computed('popoverNodeId', function() {
+    let data = {
+      videoId: this.get('popoverNodeId'),
+      attributes: [ ]
+    };
+
+    if (this.get('popoverNodeId')) {
+      for (let i = 0; i < this.get('data.videos')[this.get('popoverNodeId')].attributes.length; i++) {
+        let attributeId = this.get('data.videos')[this.get('popoverNodeId')].attributes[i];
+        let attributeObj = this.get('data.attributes')[attributeId];
+        let popoverData = { };
+
+        popoverData.prettyName = attributeObj.prettyName;
+        popoverData.id = attributeId;
+        popoverData.glyphicon = (attributeObj.glyphicon ? this.get('data.attributes')[attributeId].glyphicon : "glyphicon-tag");
+
+        data.attributes.push(popoverData);
+      }
+    }
+
+    return data;
+  }),
   
   init() {
     this._super(...arguments);
@@ -77,7 +112,7 @@ export default Ember.Component.extend({
 
       /* Creates the node object to be added */
       nodeObj.id = video;
-      nodeObj.label = shortenName(vid.prettyName);
+      nodeObj.label = this.shortenName(vid.prettyName);
 
         for (let i = 0; i < vid.relations.length; i++) {
           let attr = this.get('data.attributes')[vid.relations[i].attributeId];
@@ -85,14 +120,14 @@ export default Ember.Component.extend({
           let edgeObj = { };
 
           /* controls colors of the edges */
-          let color = createRGBcolor(diff);
+          let color = this.createRGBcolor(diff);
 
           /* Creates the edge object to be added */
           edgeObj.from = video;
           edgeObj.to = vid.relations[i].relatedId;
           edgeObj.value = Math.abs(diff);
           edgeObj.pos = i;
-          edgeObj.label = shortenName(attr.prettyName);
+          edgeObj.label = this.shortenName(attr.prettyName);
           edgeObj.color = color;
           edgeObj.id = video + "_" + i + "_" + vid.relations[i].attributeId;
           edgeObj.attr = vid.relations[i].attributeId;
@@ -123,7 +158,7 @@ export default Ember.Component.extend({
   editAttributeObserver: Ember.observer('editAttributeData', function() {
     if (this.get('editAttributeData')) {
       let attr = this.get('editAttributeData');
-      let newLabel = shortenName(attr.data.prettyName);
+      let newLabel = this.shortenName(attr.data.prettyName);
       let edges = this.get('graphData.edges');
       
       edges.forEach(function (edge) {
@@ -144,7 +179,7 @@ export default Ember.Component.extend({
       let nodeObj = { };
 
       nodeObj.id = vidId;
-      nodeObj.label = shortenName(vid.prettyName);
+      nodeObj.label = this.shortenName(vid.prettyName);
       
       this.get('graphData.nodes').add(nodeObj);
     }//if
@@ -156,7 +191,7 @@ export default Ember.Component.extend({
       let nodeObj = { };
 
       nodeObj.id = vidId;
-      nodeObj.label = shortenName(vid.prettyName);
+      nodeObj.label = this.shortenName(vid.prettyName);
       
       this.get('graphData.nodes').update(nodeObj);
     }
@@ -173,6 +208,15 @@ export default Ember.Component.extend({
     },
     deleteAttributeMode() {
       
+    },
+    removeAttribute(videoId, attributeId) {
+      if (confirm("Are you sure that you want to remove " +
+          this.get('data.attributes')[attributeId].prettyName + " from " +
+          this.get('data.videos')[videoId].prettyName + "? (Cancel for no)")) {
+        this.get('removeAttributeCallback') (videoId, attributeId);
+        this.set('popoverNodeId', null);
+        this.$(".canvas-popover").addClass("hidden");
+      }
     },
     drawGraph() {
       let container = this.$('.graph-container')[0];
@@ -234,18 +278,12 @@ export default Ember.Component.extend({
         }
       })
       .on("hoverNode", function (param) {
-        //popover support stuff. built-in support not working. 
+        //popover support stuff. built-in support not working.
         let nodePos = this.canvasToDOM(this.getPositions([param.node])[param.node]);
         let el = component.$(".canvas-popover");
-        let content = `<ul>`;
-        
-        for (var i = 0; i < component.get('data.videos')[param.node].attributes.length; i++) {
-          let attributeId = component.get('data.videos')[param.node].attributes[i];
-          content = content + `<li>` + `${component.get('data.attributes')[attributeId].prettyName}` + `</li>`;
-        }
+        component.set('popoverNodeId', param.node);
 
         component.set('popoverTitle', component.get('data.videos')[param.node].prettyName);
-        component.set('popoverContent', Ember.String.htmlSafe(content + `</ul>`));
  
         el.css("left", nodePos.x).css("top", nodePos.y);
         el.removeClass("hidden");
@@ -307,13 +345,13 @@ export default Ember.Component.extend({
       let diff = data.difficulty;
       let edgeObj = { };
       
-      let color = createRGBcolor(diff);
+      let color = this.createRGBcolor(diff);
 
       edgeObj.from = this.get('fromVid');
       edgeObj.to = this.get('toVid');
       edgeObj.value = Math.abs(diff);
       edgeObj.pos = this.get('relationsLength');
-      edgeObj.label = shortenName(attr.prettyName);shortenName(attr.prettyName);
+      edgeObj.label = this.shortenName(attr.prettyName);
       edgeObj.color = color;
       edgeObj.id = edgeObj.from + "_" + this.get('graphData.edges').length;
       edgeObj.title = attr.prettyName;
@@ -336,15 +374,3 @@ export default Ember.Component.extend({
     }
   }
 });
-
-function shortenName(name) {
-  return name.length > 15 ? name.substr(0, 11) + " ..." : name;
-}//shortenName
-
-function createRGBcolor(diff) {
-  let red = diff > 0 ? 10 * diff : 0;
-  let green = diff < 0 ? -10 * diff : 0;
-  let blue = 127 - ((red + green) / 2);
-
-  return "rgb(" + red + "," + green + "," + blue + ")";
-}//createRGBcolor
