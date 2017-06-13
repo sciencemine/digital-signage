@@ -3,7 +3,7 @@ import vis from 'npm:vis';
 
 export default Ember.Component.extend({
   classNames: ['graph-area'],
-  classNameBindings: ['attributesExpanded:attributes-offset:flush-left', 'propertiesExpanded:properties-offset:flush-right', 'configurationExpanded:graph-area--with-config:flush-bottom'],
+  classNameBindings: [],
 
   /* The actual graph */
   network: null,
@@ -78,6 +78,19 @@ export default Ember.Component.extend({
   hidePopover: function() {
     this.set('popoverNodeId', null);
     this.$(".canvas-popover").addClass("hidden");
+  },
+  
+  setStyle: function(attr, prop) {
+    let el = Ember.$("#" + this.elementId);
+    let width = Ember.$(window).width();
+    let height = Ember.$(window).height();
+    
+    el.css('top', Ember.$("#content-area--header").height() + Ember.$("#content-area--header").offset().top);
+    el.css('right', (prop ? width - Ember.$("#properties-panel").offset().left : 0));
+    el.css('bottom', Ember.$("#configuration-panel").height());
+    el.css('left', (attr ? Ember.$("#attribute-panel").width() : 0));
+    
+    console.log(el.css("top"), el.css("right"), el.css("bottom"), el.css("left"))
   },
 
   popoverContent: Ember.computed('popoverNodeId', function() {
@@ -201,6 +214,9 @@ export default Ember.Component.extend({
       this.get('graphData.nodes').update(nodeObj);
     }
   }),
+  panelObservers: Ember.observer('attributesExpanded', 'propertiesExpanded', 'configurationExpanded', function() {
+    this.setStyle(this.get('attributesExpanded'), this.get('propertiesExpanded'), this.get('configurationExpanded'));
+  }),
   actions: {
     addEdgeMode() {
       this.get('network').addEdgeMode();
@@ -229,6 +245,8 @@ export default Ember.Component.extend({
       }
     },
     drawGraph() {
+      this.setStyle(this.get('attributesExpanded'), this.get('propertiesExpanded'), this.get('configurationExpanded'));
+      
       let container = this.$('.graph-container')[0];
       let component = this;
 
