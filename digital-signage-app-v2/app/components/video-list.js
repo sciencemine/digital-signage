@@ -17,7 +17,7 @@
  * 
  *  keyboard - keyboard object from model
  * 
- *  modelIdentifier - model identifier from confic
+ *  modelIdentifier - model identifier from config
  * 
  *  focus - if the list should be focused
  * 
@@ -39,6 +39,50 @@ export default AbstractList.extend({
   loop: true,
   popoverShowDelay: 0.25,
   muted: false,
+  
+  select: function(event) {
+    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')]);
+
+    this.inputCallback();
+
+    event.stopPropagation();
+  },
+  goPrevious: function(event) {
+    if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
+      this.underflowCallback();
+    }
+
+    this.alterSelected(-1);
+
+    this.inputCallback();
+
+    event.stopPropagation();
+  },
+  cancel: function(event) {
+    this.cancelCallback();
+
+    this.inputCallback();
+
+    event.stopPropagation();
+  },
+  goNext: function(event) {
+    if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
+      this.overflowCallback();
+    }
+
+    this.alterSelected(1);
+
+    this.inputCallback();
+
+    event.stopPropagation();
+  },
+  alterSelected: function(param) {
+    let vidArrayLength = this.get('videos').length;
+    //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
+    let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
+
+    this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
+  },
 
   init() {
     this._super(...arguments);
@@ -58,62 +102,16 @@ export default AbstractList.extend({
       }
     }
 
-    this.send('updateFocus', true);
+    this.updateFocus(this.get('focus'));
   },
   actions: {
-    select(event) {
-      this.send('selectedCallback', this.get('videos')[this.get('selectedVidPos')]);
-
-      this.send('input');
-
-      event.stopPropagation();
-    },
-    goPrevious(event) {
-      if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
-        this.send('underflowCallback');
-      }
-
-      this.send('alterSelected', -1);
-
-      this.send('input');
-
-      event.stopPropagation();
-    },
-    cancel(event) {
-      this.send('cancelCallback');
-
-      this.send('input');
-
-      event.stopPropagation();
-    },
-    goNext(event) {
-      if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
-        this.send('overflowCallback');
-      }
-
-      this.send('alterSelected', 1);
-
-      this.send('input');
-
-      event.stopPropagation();
-    },
     videoSelected(videoPos) {
-      this.send('selectedCallback', this.get('videos')[videoPos]);
-    },
-    alterSelected(param) {
-      let vidArrayLength = this.get('videos').length;
-      //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
-      let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
-
-      this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
+      this.selectedCallback(this.get('videos')[videoPos]);
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);
 
-      this.send('input');
-    },
-    input() {
-      this.get('onInputCallback') ();
+      this.inputCallback();
     }
   }
 });
