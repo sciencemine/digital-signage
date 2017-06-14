@@ -12,7 +12,6 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoUrl: null,
   backgroundVideoKeys: null,
   selectionVideos: [],
-  stackListData: null,
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -63,20 +62,7 @@ export default Ember.Component.extend(KeyboardControls, {
   },
 
   init() {
-    let backgroundId = this.get('data.config.backgroundVideos')[0];
-
-    let stackData = {};
-
-    for(let index in this.get('data.attributes')){
-      stackData[index] = this.get('data.attributes')[index];
-      let videos = [];
-      for(let i = 0; i < stackData[index].videos.length; i++){
-     
-        videos.push(this.get('data.videos')[stackData[index].videos[i]]);
-      }
-      stackData[index].videos = videos;
-    }
-    
+    let backgroundId = this.get('data.config.backgroundVideos')[0];   
     this.set('stackListData', stackData);
 
     this._super(...arguments);
@@ -125,8 +111,8 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     },
     doNothing() {
-      //console.log(videos, selectedVidPos);
     },
+
     cancelPressed() {
       this.cancel();
     },
