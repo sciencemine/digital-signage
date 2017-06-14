@@ -39,9 +39,6 @@ export default Ember.Component.extend({
    * DESCRIPTION:
    *  When the drag ends, send the cursor position back to the container along
    *    with the key for the attribute
-   *
-   * PARAMETERS:
-   *  event - the drag event
    * 
    * AUTHOR:
    *  Michael Fryer
@@ -49,7 +46,7 @@ export default Ember.Component.extend({
    * DATE:
    *  June 5th, 2017
    ****************************************************************************/
-  dragEnd(event) {
+  dragEnd() {
     this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), this.get('key'));
     this.set('dragX', null);
     this.set('dragY', null);

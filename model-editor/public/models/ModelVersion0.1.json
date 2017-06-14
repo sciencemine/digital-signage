@@ -34,6 +34,17 @@
                 "help": "Description of the exhibit",
                 "data": ""
             },
+            "backgroundImage": {
+                "displayName": "Map Image",
+                "inputType": "text",
+                "error": "Name of map image file",
+                "validation": {
+                    "required": "required",
+                    "pattern": "\\w.*\\.(jpeg|gif|png|apng|svg|bmp|ico)$"
+                },
+                "help": "Name of map image file",
+                "data": ""
+            },
             "modelIdentifier": {
                 "displayName": "Folder name for Exhibit",
                 "inputType": "text",

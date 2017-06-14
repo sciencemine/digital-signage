@@ -4,6 +4,7 @@
         "prettyName": "Kenny",
         "modelIdentifier": "kenny",
         "description" : "Kenny: Starting life in another world",
+        "backgroundImage": "",
         "backgroundVideos": ["3", "2"],
         "ui": {
             "idle": 15,

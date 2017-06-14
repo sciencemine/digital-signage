@@ -4,6 +4,7 @@
         "prettyName": "",
         "modelIdentifier": "",
         "description" : "",
+        "backgroundImage": "",
         "backgroundVideos": [ ],
         "ui": {
             "idle": 0,
