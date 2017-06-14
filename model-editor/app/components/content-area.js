@@ -583,8 +583,13 @@ export default Ember.Component.extend({
       this.set('modalConfig', null);
       this.set('modalData', null);
       this.set('modalPrefix', null);
-
-      //this.notifyPropertyChange('newModel');
+      
+      (function(component) {
+        setTimeout(function() {
+          console.log('hehexp', component.get('newModel'))
+          component.notifyPropertyChange('newModel');
+        }, 20);
+      })(this);
     },
     /***************************************************************************
      * ACTION:

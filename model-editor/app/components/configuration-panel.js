@@ -29,6 +29,24 @@ export default Ember.Component.extend({
   path: ".config",
   configModelData: null,
   
+  replaceBackgroundVideos: function() {
+    let newData = Ember.copy(this.get('data'));
+    let bgVids = newData.config.backgroundVideos;
+    let replacementBgVids = [];
+    
+    for (var video in newData.videos) {
+      let obj = {};
+      
+      obj.id = video;
+      obj.data = newData.videos[video].prettyName;
+      obj.selected = (bgVids.indexOf(video) === -1 ? false : true);
+      
+      replacementBgVids.push(obj);
+    }//for
+    
+    newData.config.backgroundVideos = replacementBgVids;
+    this.set('configModelData', newData.config);
+  },
   setStyle: function() {
     let el = Ember.$("#" + this.elementId);
     
@@ -38,16 +56,16 @@ export default Ember.Component.extend({
   expandedObserver: Ember.observer('attributesExpanded', 'propertiesExpanded', function() {
     this.setStyle();
   }),
-  dataObserver: Ember.observer('data', function () {  
-    this.send('replaceBackgroundVideos');
-  }),
   init() {
     this._super(...arguments);
     
-    this.send('replaceBackgroundVideos');
+    this.replaceBackgroundVideos();
   },
   didRender() {
     this.setStyle();
+  },
+  didUpdateAttrs() {
+    this.replaceBackgroundVideos();
   },
   actions: {
     /***************************************************************************
@@ -67,24 +85,6 @@ export default Ember.Component.extend({
       this.set('expanded', !this.get('expanded'));
 
       this.get('configurationExpandedCallback') (this.get('expanded'));
-    },
-    replaceBackgroundVideos() {
-      let newData = Ember.copy(this.get('data'));
-      let bgVids = newData.config.backgroundVideos;
-      let replacementBgVids = [];
-      
-      for (var video in newData.videos) {
-        let obj = {};
-        
-        obj.id = video;
-        obj.data = newData.videos[video].prettyName;
-        obj.selected = (bgVids.indexOf(video) === -1 ? false : true);
-        
-        replacementBgVids.push(obj);
-      }//for
-      
-      newData.config.backgroundVideos = replacementBgVids;
-      this.set('configModelData', newData.config);
     }
   }
 });

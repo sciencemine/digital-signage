@@ -103,11 +103,15 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     validateForm() {
-      this.set('validForm', true);
+      (function(component) {
+        setTimeout(function() {
+          component.set('validForm', true);
 
-      this.send('validateInput');
-      this.send('validateTextarea');
-      this.send('validateSelect');
+          component.send('validateInput');
+          component.send('validateTextarea');
+          component.send('validateSelect');
+        }, 10);
+      })(this);
     },
     /***************************************************************************
      * ACTION:
