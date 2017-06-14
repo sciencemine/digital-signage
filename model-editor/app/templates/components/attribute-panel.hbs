@@ -1,5 +1,5 @@
-<div id="attribute-panel" data-spy="scroll" data-target="#attributeNav" class="panel panel-info {{if expanded 'attribute-panel--scrollable'}}">
-  <div {{action 'toggleView' on click}} class="attribute-panel--header panel-heading unselectable">
+<div id="attribute-panel" data-spy="scroll" data-target="#attributeNav" class="panel panel-info attribute-panel--scrollable">
+  <div id="attribute-panel--header" {{action 'toggleView' on click}} class="attribute-panel--header panel-heading unselectable">
     <h4 class="panel-title">Attributes <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
   </div>
 
@@ -21,7 +21,7 @@
       </div>
     </nav>
 
-    <ul class="list-group attribute-list">
+    <ul class="list-group">
       {{#each-in data as |key value|}}
         {{attribute-list-item
           attributeDropCallback=attributeDropCallback

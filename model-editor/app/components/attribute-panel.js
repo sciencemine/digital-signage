@@ -30,7 +30,19 @@ export default Ember.Component.extend({
   prefix: "attributes",
   path: ".attributes",
   data: null,
-
+  
+  setStyle: function() {
+    let header = this.$("#attribute-panel--header");
+    let panel = this.$("#attribute-panel");
+    let titleBottom = Ember.$("#content-area--header").height() +
+                      Ember.$("#content-area--header").offset().top +
+                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+                      
+    header.css('bottom', Ember.$(window).height() - titleBottom);
+    
+    panel.css('top', (this.get('expanded') ? titleBottom : 0));
+    panel.css('height', (this.get('expanded') ? Ember.$(window).height() - titleBottom : 0));
+  },
   /*****************************************************************************
    * EVENT:
    *  didRender
@@ -61,6 +73,8 @@ export default Ember.Component.extend({
         target: '#attributeNav'
       });
     }//if
+    
+    this.setStyle();
   },
   actions: {
     /***************************************************************************

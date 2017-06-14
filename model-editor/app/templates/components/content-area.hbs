@@ -1,4 +1,4 @@
-<div id="content-area--header" class="content-area--title">
+<div id="content-area--header" class="page-header content-area--title">
   <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
 </div>
 
@@ -17,7 +17,9 @@
   onSubmitCallback=(action 'configUpdate')
   configurationExpandedCallback=(action 'setConfigurationExpanded')
   validationCallback=(action "validateConfig")
-  class=(configuration-css attributesExpanded propertiesExpanded)
+  class="content-area--configuration-section"
+  attributesExpanded=attributesExpanded
+  propertiesExpanded=propertiesExpanded
   data=newModel
   config=data.modelConfig.config
 }}

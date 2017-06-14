@@ -4,8 +4,6 @@
   top: 0px;
   left: 0px;
 
-  min-height: calc(3px + 5%);
-
   width: calc(100px + 5%);
 
   z-index: 100;
@@ -16,10 +14,6 @@
 .attribute-panel--scrollable {
   position: relative;
 
-  top: calc(3px + 5%);
-
-  height: 95%;
-
   overflow-y: scroll;
 
   padding: 5% 0%;
@@ -27,12 +21,4 @@
 
 .attribute-panel--scrollable::-webkit-scrollbar {
   display: none;
-}
-
-.attribute-panel__footer:hover {
-  cursor: pointer;
-}
-
-.attribute-list {
-  padding-bottom: 5px;
 }

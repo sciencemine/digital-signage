@@ -584,7 +584,7 @@ export default Ember.Component.extend({
       this.set('modalData', null);
       this.set('modalPrefix', null);
 
-      this.notifyPropertyChange('newModel');
+      //this.notifyPropertyChange('newModel');
     },
     /***************************************************************************
      * ACTION:

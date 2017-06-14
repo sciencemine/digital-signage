@@ -28,15 +28,26 @@ export default Ember.Component.extend({
   prefix: "config",
   path: ".config",
   configModelData: null,
-
-  dataObserver: Ember.observer('data', function () {
-      
+  
+  setStyle: function() {
+    let el = Ember.$("#" + this.elementId);
+    
+    el.css('right', (this.get('propertiesExpanded') ? Ember.$("#properties-panel").width() : 0));
+    el.css('left', (this.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
+  },
+  expandedObserver: Ember.observer('attributesExpanded', 'propertiesExpanded', function() {
+    this.setStyle();
+  }),
+  dataObserver: Ember.observer('data', function () {  
     this.send('replaceBackgroundVideos');
   }),
   init() {
     this._super(...arguments);
     
     this.send('replaceBackgroundVideos');
+  },
+  didRender() {
+    this.setStyle();
   },
   actions: {
     /***************************************************************************

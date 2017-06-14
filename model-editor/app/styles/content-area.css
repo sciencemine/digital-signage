@@ -1,11 +1,5 @@
 .content-area--title {
   text-align: center;
-
-  top: 0px;
-  right: 0px;
-  left: 0px;
-
-  border-bottom: 1px solid grey;
 }
 
 .content-area--properties-large, .content-area--properties-small {
@@ -29,14 +23,6 @@
   bottom: 0px;
 }
 
-.content-area--configuration-section__attributes {
-  left: calc(100px + 5%);
-}
-
-.content-area--configuration-section__properties {
-  right: calc(100px + 5%);
-}
-
 .content-area--attribute-large, .content-area--attribute-small {
   position: fixed;
 
@@ -54,18 +40,6 @@
 
 .content-area--modal__body {
   margin: 0% 5%;
-}
-
-.resize-horizontal {
-  resize: horizontal;
-}
-
-.resize-vertical {
-  resize: vertical;
-}
-
-.white {
-  color: white!important;
 }
 
 .graph-area {

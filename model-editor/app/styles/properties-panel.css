@@ -4,8 +4,6 @@
   top: 0px;
   right: 0px;
 
-  min-height: calc(3px + 5%);
-
   width: calc(100px + 5%);
 
   z-index: 100;
@@ -16,10 +14,6 @@
 .properties-panel--scrollable {
   position: relative;
 
-  top: calc(3px + 5%);
-
-  height: 95%;
-
   overflow-y: scroll;
 
   padding: 5% 0%;
@@ -27,8 +21,4 @@
 
 .properties-panel--scrollable::-webkit-scrollbar {
   display: none;
-}
-
-.properties-panel__form {
-  padding: 0px 5%;
 }

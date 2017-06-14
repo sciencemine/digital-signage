@@ -38,22 +38,14 @@
   margin: 5px 0px;
 }
 
-.flush-right {
-  right: 0px;
+.resize-horizontal {
+  resize: horizontal;
 }
 
-.flush-bottom {
-  bottom: 0px;
+.resize-vertical {
+  resize: vertical;
 }
 
-.flush-left {
-  left: 0px;
-}
-
-.attributes-offset {
-  left: calc(100px + 5%)
-}
-
-.properties-offset {
-  right: calc(100px + 5%)
+.white {
+  color: white!important;
 }

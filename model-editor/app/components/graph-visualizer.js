@@ -80,17 +80,17 @@ export default Ember.Component.extend({
     this.$(".canvas-popover").addClass("hidden");
   },
   
-  setStyle: function(attr, prop) {
+  setStyle: function() {
     let el = Ember.$("#" + this.elementId);
     let width = Ember.$(window).width();
-    let height = Ember.$(window).height();
+    let titleBottom = Ember.$("#content-area--header").height() +
+                 Ember.$("#content-area--header").offset().top +
+                 parseInt(Ember.$("#content-area--header").css('paddingBottom'));
     
-    el.css('top', Ember.$("#content-area--header").height() + Ember.$("#content-area--header").offset().top);
-    el.css('right', (prop ? width - Ember.$("#properties-panel").offset().left : 0));
+    el.css('top', titleBottom);
+    el.css('right', (this.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
     el.css('bottom', Ember.$("#configuration-panel").height());
-    el.css('left', (attr ? Ember.$("#attribute-panel").width() : 0));
-    
-    console.log(el.css("top"), el.css("right"), el.css("bottom"), el.css("left"))
+    el.css('left', (this.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
   },
 
   popoverContent: Ember.computed('popoverNodeId', function() {
@@ -215,7 +215,7 @@ export default Ember.Component.extend({
     }
   }),
   panelObservers: Ember.observer('attributesExpanded', 'propertiesExpanded', 'configurationExpanded', function() {
-    this.setStyle(this.get('attributesExpanded'), this.get('propertiesExpanded'), this.get('configurationExpanded'));
+    this.setStyle();
   }),
   actions: {
     addEdgeMode() {
@@ -245,7 +245,7 @@ export default Ember.Component.extend({
       }
     },
     drawGraph() {
-      this.setStyle(this.get('attributesExpanded'), this.get('propertiesExpanded'), this.get('configurationExpanded'));
+      this.setStyle();
       
       let container = this.$('.graph-container')[0];
       let component = this;
