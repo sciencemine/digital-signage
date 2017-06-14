@@ -36,7 +36,7 @@ export default Ember.Component.extend({
 	looping: false,
 	playing: true,
 	muted: true,
-  highlightedStyle: '',
+	highlightedStyle: '',
 
 	click(event) {
 		this.get('onClickCallback') (this.get('videoPos'));
@@ -47,48 +47,46 @@ export default Ember.Component.extend({
 	},
   willClearRender() {
     this.set('playingObserver', null);
-    this.set('urlObserver', null);
   },
 	playingObserver: Ember.observer('playing', function() {
-    if (this) {
-      var p = this.get("playing");
-      var videoElement = this.$().find("video").get(0);
-      if (videoElement) {
-        if (p) {
-          videoElement.play();
-        }
-        else {
-          videoElement.pause();
-        }
+    var p = this.get("playing");
+    var videoElement = this.$('video')[0];
+    if (videoElement) {
+      if (p) {
+        videoElement.play();
       }
       else {
-        console.log("No video element found!");
+        videoElement.pause();
       }
     }
-  }),
-	urlObserver: Ember.observer('url', function() {
-    if (this) {
-      var videoElement = this.$().find("video").get(0);
-      if (videoElement) {
-        videoElement.load();
-      }
-      else {
-        console.log("No video element found");
-      }
+    else {
+      console.log("No video element found!");
     }
   }),
   actions: {
   	ended() {
-  		if (this.get('looping')) {
-  			this.$().find("video").get(0).play();
-  		}
-  		else {
-  			this.get('onEndedCallback') (this.get('videoPos'));
-  		}
+      if (this.$('video')) {
+        if (this.get('looping')) {
+          var videoElement = this.$('video')[0];
+          
+          if (videoElement) {
+            videoElement.play();
+          }
+        }
+        else {
+          this.get('onEndedCallback') (this.get('videoPos'));
+        }
+      }
   	},
     play() {
-      if (this.get('playing')) {
-        this.$().find("video").get(0).play();
+      if (this.$('video')) {
+        if (this.get('playing')) {
+          var videoElement = this.$('video')[0];
+          
+          if (videoElement) {
+            videoElement.play();
+          }
+        }
       }
     }
   }

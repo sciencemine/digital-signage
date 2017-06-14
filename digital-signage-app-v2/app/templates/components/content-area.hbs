@@ -1,17 +1,52 @@
 <div class="video-player__background--container">
-  {{video-player muted=displayVideoSelect class=(if displayVideo 'video-player__hidden' 'video-player__darken') playing=(if displayVideo false true) url=(make-local-url data.config.modelIdentifier backgroundVideoUrl) onEndedCallback=(action 'cycleBackground')}}
+  {{video-player
+    muted=displayVideoSelect
+    class=(if displayVideo 'video-player__hidden' 'video-player__darken')
+    playing=(if displayVideo false true)
+    url=(make-local-url data.config.modelIdentifier backgroundVideoUrl)
+    onEndedCallback=(action 'cycleBackground')
+  }}
 </div>
 
+
 {{#if displayVideoSelect}}
-    {{video-list selectedVidPos=0 class="video-list video-list--flex" listItemClass="video-list-item--flex" listItemSmall="video-list-item--flex__small" listItemSelected="video-list-item--selected" listItemHighlight="video-list-item--highlight" keyboard=data.config.keyboard videos=selectionVideos modelIdentifier=data.config.modelIdentifier focus=displayVideoSelect onSelectedCallback=(action 'videoSelected') onCancelledCallback=(action 'cancel') onInputCallback=(action 'resetTimeout')}}
+    {{video-list
+      selectedVidPos=0
+      class="video-list video-list--flex"
+      listItemClass="video-list-item--flex"
+      listItemSmall="video-list-item--flex__small"
+      listItemSelected="video-list-item--selected"
+      listItemHighlight="video-list-item--highlight"
+      keyboard=data.config.keyboard
+      videos=selectionVideos
+      modelIdentifier=data.config.modelIdentifier
+      focus=displayVideoSelect
+      onSelectedCallback=(action 'videoSelected')
+      onCancelledCallback=(action 'cancelPressed')
+      onInputCallback=(action 'resetTimeout')
+    }}
 {{/if}}
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
-    {{video-player playing=videoPlaying muted=false url=video onClickCallback=(action 'videoSelected' bubbles=false) onHoverCallback=(action 'doNothing') onEndedCallback=(action 'videoEnded') videoPos=backgroundVideoPos}}
+    {{video-player
+      playing=videoPlaying
+      muted=false
+      url=video
+      onClickCallback=(action 'videoSelected' bubbles=false)
+      onHoverCallback=(action 'doNothing')
+      onEndedCallback=(action 'videoEnded')
+      videoPos=backgroundVideoPos
+    }}
   </div>
 {{/if}}
 
-{{menu-bar popoverShowDelay=data.config.ui.popoverShowDelay config=data.config videos=selectionVideos attributes=data.attributes onClickCallback=(action 'videoSelected')}}
+{{menu-bar
+  popoverShowDelay=data.config.ui.popoverShowDelay
+  config=data.config
+  videos=selectionVideos
+  attributes=data.attributes
+  onClickCallback=(action 'videoSelected')
+}}
 
 {{yield}}

@@ -46,8 +46,8 @@
         "0": {
             "prettyName": "",
             "description": "",
-            "x": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from left
-            "y": 0, x position on screen as decimal percent (e.g. 0.5, 0.75) from top
+            "x": 0, x position on screen as percent from left
+            "y": 0, x position on screen as percent from top
             "videos": [ ] videos associated with this attribute
         }
     }

@@ -1,5 +1,33 @@
 <div class={{playerSize}}>
-  {{video-player highlightedStyle=stackStyle isMuted=isMuted url=(make-local-url modelIdentifier curVideo.teaser.fileIdentifier) onClickCallback=(action 'stackClicked') onHoverCallback=(action 'hover') onEndedCallback=(action 'getNextVid')}}
+{{!A}}
+	{{video-player 
+	class=(unless showVidA "hidden")
+	playing=showVidA
+	highlightedStyle=(string-append stackStyle borderStyle) 
+	looping=(is-single-video videos) 
+	videoPos=selectedVidAPos 
+	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
+	onClickCallback=(action 'stackClicked') 
+	onHoverCallback=(action 'stackHovered') 
+	onEndedCallback=(action 'getNextVideoA')
+	}}
+
+{{!B}}
+{{#unless (is-single-video videos)}}
+	{{video-player 
+	class=(if showVidA "hidden")
+	playing=(if showVidA false true)
+	highlightedStyle=(string-append stackStyle borderStyle) 
+	looping=(is-single-video videos) 
+	videoPos=selectedVidBPos 
+	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
+	onClickCallback=(action 'stackClicked') 
+	onHoverCallback=(action 'stackHovered') 
+	onEndedCallback=(action 'getNextVideoB')
+	}}
+{{/unless}}	
 </div>
 
 {{yield}}

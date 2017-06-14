@@ -1,1 +1,31 @@
 {{yield}}
+
+{{#if isFlex}}
+	<div class="stack-list--flex-container">
+    {{#each-in data as |key value|}}
+        <div class="{{stackItemClass}}">
+          {{video-stack
+            videos=value.videos
+            borderStyle=(if (video-selected key selectedStackKey) "blue-border")
+            onClickCallback=(action 'stackClicked')
+            onHoverCallback=(action 'stackHovered')
+            selectedStackIndex=key
+          }}
+        </div>
+    {{/each-in}}
+	</div>
+{{else}}
+  <div class="stack-list--non-flex-container">
+    {{#each-in data as |key value|}}
+        <div style={{make-stack-style value.x value.y}} class="non-flex-list-item">
+          {{video-stack
+            videos=value.videos
+            borderStyle=(if (video-selected key selectedStackKey) "blue-border")
+            onClickCallback=(action 'stackClicked')
+            onHoverCallback=(action 'stackHovered')
+            selectedStackIndex=key
+          }}
+      </div>
+    {{/each-in}}
+  </div>  
+{{/if}}
