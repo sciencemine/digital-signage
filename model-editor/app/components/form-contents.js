@@ -31,5 +31,11 @@ export default Ember.Component.extend({
 
   init() {
     this._super(...arguments);
+  },
+  didUpdateAttrs() {
+    if (this.get('data')) {
+      this.notifyPropertyChange('data');
+      this.rerender();
+    }
   }
 });

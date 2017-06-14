@@ -586,7 +586,6 @@ export default Ember.Component.extend({
       
       (function(component) {
         setTimeout(function() {
-          console.log('hehexp', component.get('newModel'))
           component.notifyPropertyChange('newModel');
         }, 20);
       })(this);

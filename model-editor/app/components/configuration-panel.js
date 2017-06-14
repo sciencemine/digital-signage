@@ -30,7 +30,7 @@ export default Ember.Component.extend({
   configModelData: null,
   
   replaceBackgroundVideos: function() {
-    let newData = Ember.copy(this.get('data'));
+    let newData = this.get('data');
     let bgVids = newData.config.backgroundVideos;
     let replacementBgVids = [];
     
@@ -45,7 +45,9 @@ export default Ember.Component.extend({
     }//for
     
     newData.config.backgroundVideos = replacementBgVids;
+
     this.set('configModelData', newData.config);
+    this.notifyPropertyChange('configModelData');
   },
   setStyle: function() {
     let el = Ember.$("#" + this.elementId);
@@ -53,9 +55,6 @@ export default Ember.Component.extend({
     el.css('right', (this.get('propertiesExpanded') ? Ember.$("#properties-panel").width() : 0));
     el.css('left', (this.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
   },
-  expandedObserver: Ember.observer('attributesExpanded', 'propertiesExpanded', function() {
-    this.setStyle();
-  }),
   init() {
     this._super(...arguments);
     

@@ -70,6 +70,12 @@ export default Ember.Component.extend({
     this.send('validateForm');
     this.get('validationCallback') (this.get('validForm'));
   },
+  didUpdateAttrs() {
+    if (this.get('data')) {
+      this.notifyPropertyChange('data');
+      this.rerender();
+    }
+  },
   actions: {
     /***************************************************************************
      * ACTION:
