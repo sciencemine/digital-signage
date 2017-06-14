@@ -1,5 +1,6 @@
 .video-player__video {
     width: 100%;
+    border-radius: 5px;
 }
 
 .video-player__background--container {

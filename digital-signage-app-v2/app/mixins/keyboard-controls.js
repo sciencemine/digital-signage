@@ -12,9 +12,54 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
-  didRender() {
-    this.send('updateFocus', this.get('focus'));
+  focus: false,
+  
+  /**
+   * Called from keyPress event when the select button is pressed
+   *
+   * @param{event} event
+   */
+  select: function(event) {
+    console.log('select() needs to be implemented in subcomponent', event);
   },
+  /**
+   * Called from keyPress event when the previous button is pressed
+   *
+   * @param{event} event
+   */
+  goPrevious: function(event) {
+    console.log('goPrevious() needs to be implemented in subcomponent', event);
+  },
+  /**
+   * Called from keyPress event when the cancel button is pressed
+   *
+   * @param{event} event
+   */
+  cancel: function(event) {
+    console.log('cancel() needs to be implemented in subcomponent', event);
+  },
+  /**
+   * Called from keyPress event when the next button is pressed
+   *
+   * @param{event} event
+   */
+  goNext: function(event) {
+    console.log('goNext() needs to be implemented in subcomponent', event);
+  },
+  /**
+   * Called from didRender and changeFocusObserver. updates the focus of the 
+   * DOM to this element
+   *
+   */
+  updateFocus: function() {
+    console.log('UpdateFocus() needs to be implemented.');
+  },
+  
+  //adds an observer for the parameter that was passed. fires when it is changed
+  //up a level. allows for change of focus to the lists
+  changeFocusObserver: Ember.observer('focus', function() {
+    this.updateFocus(this.get('focus'));
+  }),
 
   //checks input on key down to see if it is valid
   //This needs to be pulled from the model later, not be hard coded
@@ -22,65 +67,18 @@ export default Ember.Mixin.create({
     if (this.get('focus')) {
       switch (String.fromCharCode(event.keyCode).toLowerCase()) {
         case this.get('keyboard.select').toLowerCase():
-          this.send('select', event);
+          this.select(event);
           break;
         case this.get('keyboard.previous').toLowerCase():
-          this.send('goPrevious', event);
+          this.goPrevious(event);
           break;
         case this.get('keyboard.cancel').toLowerCase():
-          this.send('cancel', event);
+          this.cancel(event);
           break;
         case this.get('keyboard.next').toLowerCase():
-          this.send('goNext', event);
+          this.goNext(event);
           break;
       }
-    }
-  },
-  //adds an observer for the parameter that was passed. fires when it is changed
-  //up a level. allows for change of fovus to the lists
-  changeFocusObserver: Ember.observer('focus', function() {
-    this.send('updateFocus', this.get('focus'));
-  }),
-  actions: {
-    /**
-     * Called from keyPress event when the select button is pressed
-     *
-     * @param{event} event
-     */
-    select(event) {
-      console.log('select() needs to be implemented in subcomponent', event);
-    },
-    /**
-     * Called from keyPress event when the previous button is pressed
-     *
-     * @param{event} event
-     */
-    goPrevious(event) {
-      console.log('goPrevious() needs to be implemented in subcomponent', event);
-    },
-    /**
-     * Called from keyPress event when the cancel button is pressed
-     *
-     * @param{event} event
-     */
-    cancel(event) {
-      console.log('cancel() needs to be implemented in subcomponent', event);
-    },
-    /**
-     * Called from keyPress event when the next button is pressed
-     *
-     * @param{event} event
-     */
-    goNext(event) {
-      console.log('goNext() needs to be implemented in subcomponent', event);
-    },
-    /**
-     * Called from didRender and changeFocusObserver. updates the focus of the 
-     * DOM to this element
-     *
-     */
-    updateFocus() {
-      console.log('UpdateFocus() needs to be implemented.');
     }
   }
 });
