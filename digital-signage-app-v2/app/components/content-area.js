@@ -75,8 +75,8 @@ export default Ember.Component.extend(KeyboardControls, {
       this.get('selectionVideos').pushObject(this.get('data.videos')[vid]);
     }
 
-    let afterVideoListData = {
-      history: {
+    let afterVideoListData = [
+      {
         prettyName: "History",
         description: "",
         x: 0,
@@ -106,16 +106,19 @@ export default Ember.Component.extend(KeyboardControls, {
           }
         ]
       }
-    };
+    ];
 
-    for(let index in this.get('data.attributes')){
-      afterVideoListData[index] = this.get('data.attributes')[index];
+    for (let index in this.get('data.attributes')){
       let videos = [];
-      for(let i = 0; i < afterVideoListData[index].videos.length; i++){
+
+      afterVideoListData.push(this.get('data.attributes')[index]);
+
+      for (let i = 0; i < afterVideoListData[index].videos.length; i++){
      
         videos.push(this.get('data.videos')[afterVideoListData[index].videos[i]]);
       }
-      afterVideoListData[index].videos = videos;
+
+      afterVideoListData[afterVideoListData.length - 1].videos = videos;
     }
     
     this.set('afterVideoListData', afterVideoListData);
