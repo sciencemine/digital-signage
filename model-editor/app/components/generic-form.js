@@ -48,6 +48,8 @@ export default Ember.Component.extend({
 
       inputValid = inputValid && this.validateElement(el);
     }//for
+
+    return inputValid;
   },
   validateTextarea: function() {
     let textareaValid = true;
@@ -57,6 +59,8 @@ export default Ember.Component.extend({
 
       textareaValid = textareaValid && this.validateElement(el);
     }//for
+
+    return textareaValid;
   },
   validateSelect: function() {
     let selectValid = true;
@@ -85,6 +89,8 @@ export default Ember.Component.extend({
         selectValid = selectValid && true;
       }//else
     }//for
+
+    return selectValid;
   },
   validateElement: function(el) {
       if (el.validity.valid) {
@@ -230,6 +236,9 @@ export default Ember.Component.extend({
       if (this.get('validForm')) {
         this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
       }//if
+      else {
+        alert("Please verify the contents of the form before submission");
+      }
 
       return false;
     },
