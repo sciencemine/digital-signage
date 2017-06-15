@@ -27,32 +27,32 @@ import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
+  selectedCallback: function(selected) {
+    this.get('onSelectedCallback')(this, selected);
+  },
+  overflowCallback: function() {
+    this.get('onOverflowCallback') (this);
+  },
+  underflowCallback: function() {
+    this.get('onUnderflowCallback') (this);
+  },
+  cancelCallback: function(selected) {
+    this.get('onCancelledCallback') (this, selected);
+  },
+  inputCallback: function() {
+    this.get('onInputCallback') ();
+  },
+  updateFocus: function(param) {
+    if (param) {
+      this.$().attr('tabindex', 1);
+      this.$().focus();
+    }//if
+    else {
+      this.$().attr('tabindex', -1);
+      this.$().blur();
+    }//else
+  },
   init() {
     this._super(...arguments);
-  },
-  actions: {
-    selectedCallback(selected) {
-      this.get('onSelectedCallback')(this, selected);
-    },
-    overflowCallback() {
-      this.get('onOverflowCallback')(this);
-    },
-    underflowCallback() {
-      this.get('onUnderflowCallback')(this);
-    },
-    cancelCallback(selected) {
-      this.get('onCancelledCallback')(this, selected);
-    },
-    //sets the focus to the list if focus is true otherwise blurs it
-    updateFocus(param) {
-      if (param) {
-        this.$().attr('tabindex', 1);
-        this.$().focus();
-      }//if
-      else {
-        this.$().attr('tabindex', -1);
-        this.$().blur();
-      }//else
-    }
   }
 });

@@ -1,0 +1,68 @@
+
+.stack-list--flex-container 
+{
+  position: absolute;
+  top: 20%;
+  padding: 0px;
+  margin: 0px 5px 0px 5px;
+	display: flex;
+
+	align-items: center;
+
+	justify-content: space-around;
+
+	flex-direction: row;
+    /*height: 100px;  Or whatever */
+}
+
+
+.stack-list--flex-container:focus {
+  outline: 0;
+}
+
+.stack-list--non-flex-container{
+  position: absolute;
+  top: 20%;
+  left: 0%;
+  right: 0%;
+  bottom: 0%;
+
+}
+
+.stack-list-item--flex {
+	flex-basis: 15%;
+	align-self: auto;
+}
+
+.stack-list-item--selected {
+  border-radius: 5px;
+  border: 4px solid blue;
+}
+
+.stack-list-item--selected:hover {
+  cursor: pointer;
+}
+
+.stack-list-item--highlight {
+  border: 4px solid blue;
+}
+.stack-list:focus
+{
+	outline: 0;
+}
+
+.stack-list-item:focus{
+  outline: 0;
+}
+
+.no-outline:focus{
+  outline: 0;
+}
+
+.non-flex-list-item{
+  position: absolute;
+  width: calc(200px + 5%);
+}
+
+
+
