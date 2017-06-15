@@ -49,4 +49,43 @@ import AbstractList from './abstract-list';
 export default AbstractList.extend({
 
 
+<<<<<<< HEAD
+=======
+export default Ember.Component.extend({
+  videoListData: null,
+
+  init() {
+    this._super(...arguments);
+
+    this.set('videoListData', this.get('data')['history'].videos);
+  },
+  didRender() {
+
+  },
+  actions: {
+    /* Stack List Controller */
+    stackListHover() {
+
+    },
+    stackListCancel() {
+
+    },
+    stackListSelect() {
+
+    },
+    stackListInput() {
+
+    },
+    /* Video List Controller */
+    videoListCancel() {
+
+    },
+    videoListSelect(){
+
+    },
+    videoListInput() {
+
+    },
+  }
+>>>>>>> 674bfe0c019579184a2a9a569ea09dd72d5c4bff
 });
