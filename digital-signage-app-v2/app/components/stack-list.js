@@ -109,11 +109,11 @@ export default AbstractList.extend({
       this.updateFocus(this.get('focus'));
     },
     actions:{
-        stackSelecte(videos, vidPos) {
+        stackSelected(videos, vidPos) {
           this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {
-          this.set('selectedStackIndex', this.get('data').indexOf(stackKey));
+          this.set('selectedStackIndex', stackKey);
           this.get('onHoverCallback') (videos, stackKey);
           this.inputCallback();
         }
