@@ -1,8 +1,10 @@
 {
     "config": {
-        "prettyName": "", 
+        "version": 0.1,
+        "prettyName": "",
         "modelIdentifier": "",
         "description" : "",
+        "backgroundImage": "",
         "backgroundVideos": [ ],
         "ui": {
             "idle": 0,
@@ -19,36 +21,7 @@
         }
     },
     "videos": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "attributes": [ ],
-            "relations": [
-                {
-                    "relatedId": "",
-                    "difficulty": 0,
-                    "attributeId": ""
-                }
-            ],
-            "full": {
-                "fileIdentifier": "",
-                "isUrl": false, 
-                "attribution": ""
-            },
-            "teaser": {
-                "fileIdentifier": "",
-                "isUrl": false,
-                "attribution": ""
-            }
-        }
     },
     "attributes": {
-        "0": {
-            "prettyName": "",
-            "description": "",
-            "x": 0,
-            "y": 0,
-            "videos": [ ]
-        }
     }
 }
