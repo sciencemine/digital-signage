@@ -46,7 +46,7 @@ export default Ember.Component.extend({
     for (let i = this.$('input').length - 1; i >= 0; i--) {
       let el = this.$('input')[i];
 
-      inputValid = inputValid && this.validateElement(el);
+      inputValid = this.validateElement(el) && inputValid;
     }//for
 
     return inputValid;
@@ -57,7 +57,7 @@ export default Ember.Component.extend({
     for (let i = this.$('textarea').length - 1; i >= 0; i--) {
       let el = this.$('textarea')[i];
 
-      textareaValid = textareaValid && this.validateElement(el);
+      textareaValid = this.validateElement(el) && textareaValid;
     }//for
 
     return textareaValid;
@@ -75,18 +75,18 @@ export default Ember.Component.extend({
         if (this.$("#" + el.id).val().length === 0) {
           this.makeWarning(el);
 
-          selectValid = selectValid && false;
+          selectValid = false && selectValid;
         }//if
         else {
           this.makeSuccess(el);
 
-          selectValid = selectValid && true;
+          selectValid = true && selectValid;
         }//else
       }//if
       else {
         this.makeSuccess(el);
 
-        selectValid = selectValid && true;
+        selectValid = true && selectValid;
       }//else
     }//for
 
@@ -238,7 +238,7 @@ export default Ember.Component.extend({
       }//if
       else {
         alert("Please verify the contents of the form before submission");
-      }
+      }//elses
 
       return false;
     },
