@@ -41,7 +41,7 @@
     </div>
   {{else if (is-array value.data)}}
     {{#if value.data}}
-      <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group">
+      <div id={{create-id prefix "_" key "_div"}} class="form-margin form-group has-feedback">
         <label id={{create-id prefix "_" key "_label"}} for={{create-id prefix inputId key}} class="control-label">{{value.displayName}}</label>
 
         {{form-contents-select
@@ -51,6 +51,8 @@
           multiple=(is-multi-select value.inputType)
           class="form-control input-sm"
         }}
+
+        <span id={{create-id prefix "_" key "_span"}} class="glyphicon form-control-feedback" aria-hidden="true"></span>
 
         {{#if showHelp}}
           <span class="help-block">{{value.help}}</span>

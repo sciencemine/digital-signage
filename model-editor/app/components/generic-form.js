@@ -39,6 +39,142 @@ export default Ember.Component.extend({
   path: "",
   prefix: "",
   key: "",
+
+  validateInput: function() {
+    let inputValid = true;
+
+    for (let i = this.$('input').length - 1; i >= 0; i--) {
+      let el = this.$('input')[i];
+
+      inputValid = inputValid && this.validateElement(el);
+    }//for
+  },
+  validateTextarea: function() {
+    let textareaValid = true;
+
+    for (let i = this.$('textarea').length - 1; i >= 0; i--) {
+      let el = this.$('textarea')[i];
+
+      textareaValid = textareaValid && this.validateElement(el);
+    }//for
+  },
+  validateSelect: function() {
+    let selectValid = true;
+
+    for (let i = this.$('select').length - 1; i >= 0; i--) {
+      let el = this.$('select')[i];
+      let glyphicon = this.$('#' + el.id + "_span");
+      
+      glyphicon.attr("class", "glyphicon form-control-feedback " + el.value);
+
+      if (el.multiple && this.$("#" + el.id).val()) {
+        if (this.$("#" + el.id).val().length === 0) {
+          this.makeWarning(el);
+
+          selectValid = selectValid && false;
+        }//if
+        else {
+          this.makeSuccess(el);
+
+          selectValid = selectValid && true;
+        }//else
+      }//if
+      else {
+        this.makeSuccess(el);
+
+        selectValid = selectValid && true;
+      }//else
+    }//for
+  },
+  validateElement: function(el) {
+      if (el.validity.valid) {
+        this.makeSuccess(el);
+
+        return true;
+      }//if
+      else if (!el.value && !el.validity.valid) {
+        this.makeWarning(el);
+      }//else if
+      else if (!el.validity.valid) {
+        this.makeError(el);
+      }//else if
+
+      return false;
+  },
+  makeSuccess(el) {
+    this.$('#' + el.id + '_div').removeClass("has-warning has-error").addClass("has-success");
+    this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-remove").addClass("glyphicon-ok");
+  },
+  makeWarning(el) {
+    this.$('#' + el.id + '_div').removeClass("has-error has-success").addClass("has-warning");
+    this.$('#' + el.id + '_span').removeClass("glyphicon-remove glyphicon-ok").addClass("glyphicon-warning-sign");
+  },
+  makeError(el) {
+    this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
+    this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
+  },
+  getValues: function() {
+    let payload = { };
+
+    for (let key in data) {
+      if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
+        payload[key] = this.getValues(data[key].data, prefix + "_" + key, clearValues);
+      }//if
+      else if (Array.isArray(data[key].data)) {
+        let el = Ember.$('#' + prefix + "_" + key);
+        payload[key] = [ ];
+
+        if (el[0]) {
+          if (el[0].multiple) {
+            for (var i = 0; i < el.val().length; i++) {
+              payload[key].push(el.val()[i]);
+            }//for
+          }//if
+          else if (el[0]) {
+            payload[key] = el[0].value;
+          }//if
+        }//if
+      }//else if
+      else {
+        let el = Ember.$('#' + prefix + "_" + key);
+        let value;
+
+        if (el[0]) {
+          if (el[0].type === 'checkbox') {
+            value = el[0].checked;
+            if (clearValues) {
+              el[0].checked = false;
+            }//if
+          }//if
+          else if (el[0].type === 'textarea') {
+            value = el.val();
+
+            if (clearValues) {
+              el[0].value = null;
+            }//if
+          }//else if
+          else if (el[0].type === 'number') {
+            value = el[0].valueAsNumber;
+
+            if (clearValues) {
+              el[0].value = null;
+            }//if
+          }//else if
+          else {
+            value = el[0].value;
+
+            if (clearValues) {
+              el[0].value = null;
+            }//if
+          }//else
+
+          payload[key] = value;
+        }//if
+      }//else
+    }//for
+
+    return payload;
+  },
   
   /*****************************************************************************
    * EVENT:
@@ -91,7 +227,9 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     submitForm() {
-      this.get('onSubmitCallback') (getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
+      if (this.get('validForm')) {
+        this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
+      }//if
 
       return false;
     },
@@ -111,108 +249,14 @@ export default Ember.Component.extend({
     validateForm() {
       (function(component) {
         setTimeout(function() {
-          component.set('validForm', true);
+          let valid = true;
+          valid = component.validateInput() && valid;
+          valid = component.validateTextarea() && valid;
+          valid = component.validateSelect() && valid;
 
-          component.send('validateInput');
-          component.send('validateTextarea');
-          component.send('validateSelect');
+          component.set('validForm', valid);
         }, 10);
       })(this);
-    },
-    /***************************************************************************
-     * ACTION:
-     *  validateInput
-     *
-     * DESCRIPTION:
-     *  Validates all the input tags
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    validateInput() {
-      for (var i = this.$('input').length - 1; i >= 0; i--) {
-        let el = this.$('input')[i];
-
-        this.send('validateElement', el);
-      }
-    },
-    /***************************************************************************
-     * ACTION:
-     *  validateTextarea
-     *
-     * DESCRIPTION:
-     *  Validates all the textarea tags
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    validateTextarea() {
-      for (var i = this.$('textarea').length - 1; i >= 0; i--) {
-        let el = this.$('textarea')[i];
-
-        this.send('validateElement', el);
-      }//for
-    },
-    /***************************************************************************
-     * ACTION:
-     *  validateSelect
-     *
-     * DESCRIPTION:
-     *  Validates all the select tags
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    validateSelect() {
-      for (var i = this.$('select').length - 1; i >= 0; i--) {
-        let el = this.$('select')[0];
-        let glyphicon = this.$('#' + el.id + "_span");
-        
-        glyphicon.attr("class", "glyphicon form-control-feedback " + el.value);
-      }//for
-    },
-    /***************************************************************************
-     * ACTION:
-     *  validateElement
-     *
-     * DESCRIPTION:
-     *  Checks the validity on a specific element and applies the appropriate
-     *    ui styles necessary
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    validateElement(el) {
-      if (el.validity.valid) {
-        this.$('#' + el.id + '_div').removeClass("has-warning has-error").addClass("has-success");
-        this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-remove").addClass("glyphicon-ok");
-
-        this.set('validForm', this.get('validForm') && true);
-      }//if
-      else if (!el.value && !el.validity.valid) {
-        this.$('#' + el.id + '_div').removeClass("has-error has-success").addClass("has-warning");
-        this.$('#' + el.id + '_span').removeClass("glyphicon-remove glyphicon-ok").addClass("glyphicon-warning-sign");
-
-        this.set('validForm', this.get('validForm') && false);
-      }//else if
-      else if (!el.validity.valid) {
-        this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
-        this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
-
-        this.set('validForm', this.get('validForm') && false);
-      }//else if
     },
     /***************************************************************************
      * ACTION:
@@ -232,85 +276,3 @@ export default Ember.Component.extend({
     }
   }
 });
-
-/*******************************************************************************
- * FUNCTION:
- *  getValues
- *
- * DESCRIPTION:
- *  Gets the values of all of the input fields an creates a data object. This
- *    will recursively call itself to capture nested objects. 
- *
- * PARAMETERS:
- *  data - A skeleton of the data object that is going to be constructed
- *  prefix - The prefix that is used for the id in the dom
- *  clearValues - Boolean if the values should be cleared after reading
- * 
- * AUTHOR:
- *  Michael Fryer
- *
- * DATE:
- *  June 5th, 2017
- ******************************************************************************/
-function getValues(data, prefix, clearValues) {
-  let payload = { };
-
-  for (var key in data) {
-    if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
-      payload[key] = getValues(data[key].data, prefix + "_" + key, clearValues);
-    }//if
-    else if (Array.isArray(data[key].data)) {
-      let el = Ember.$('#' + prefix + "_" + key);
-      payload[key] = [ ];
-
-      if (el[0]) {
-        if (el[0].multiple) {
-          for (var i = 0; i < el.val().length; i++) {
-            payload[key].push(el.val()[i]);
-          }//for
-        }//if
-        else if (el[0]) {
-          payload[key] = el[0].value;
-        }//if
-      }//if
-    }//else if
-    else {
-      let el = Ember.$('#' + prefix + "_" + key);
-      let value;
-
-      if (el[0]) {
-        if (el[0].type === 'checkbox') {
-          value = el[0].checked;
-          if (clearValues) {
-            el[0].checked = false;
-          }//if
-        }//if
-        else if (el[0].type === 'textarea') {
-          value = el.val();
-
-          if (clearValues) {
-            el[0].value = null;
-          }//if
-        }//else if
-        else if (el[0].type === 'number') {
-          value = el[0].valueAsNumber;
-
-          if (clearValues) {
-            el[0].value = null;
-          }//if
-        }//else if
-        else {
-          value = el[0].value;
-
-          if (clearValues) {
-            el[0].value = null;
-          }//if
-        }//else
-
-        payload[key] = value;
-      }//if
-    }//else
-  }//for
-
-  return payload;
-}//getValues

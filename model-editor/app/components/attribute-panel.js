@@ -30,6 +30,8 @@ export default Ember.Component.extend({
   prefix: "attributes",
   path: ".attributes",
   data: null,
+  dragX: null,
+  dragY: null,
   
   setStyle: function() {
     let header = this.$("#attribute-panel--header");
@@ -77,6 +79,12 @@ export default Ember.Component.extend({
     this.setStyle();
   },
   actions: {
+    dragging(event) {
+      if (event.clientX !== 0 && event.clientY !== 0) {
+        this.set('dragX', event.clientX);
+        this.set('dragY', event.clientY);
+      }//if
+    },
     /***************************************************************************
      * ACTION:
      *  editAttribute
@@ -106,7 +114,6 @@ export default Ember.Component.extend({
      *
      * PARAMETERS:
      *  key - They key for which object is going to be edited
-     *  event - The event that was fired
      *
      * AUTHOR:
      *  Michael Fryer
@@ -114,8 +121,10 @@ export default Ember.Component.extend({
      * DATE:
      *  June 5th, 2017
      **************************************************************************/
-    attributeDrop(key, event) {
-      this.get('attributeDropCallback') (event.clientX, event.clientY, key);
+    attributeDrop(key) {
+      this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), key);
+      this.set('dragX', null);
+      this.set('dragY', null);
     },
     /***************************************************************************
      * ACTION:
