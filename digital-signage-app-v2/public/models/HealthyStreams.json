@@ -1,12 +1,14 @@
 {
   "config":{
-    "version": 0.1,
     "prettyName":"Healthy Streams",
     "description":"What makes a stream healthy?",
+    "backgroundImage":"map.png",
     "modelIdentifier":"http://10.10.2.159/smds",
-    "backgroundImage": "",
     "backgroundVideos":[
-
+      "eyVxK",
+      "3ePOi",
+      "kwudO",
+      "G3CP8"
     ],
     "ui":{
       "idle":15,
@@ -266,6 +268,86 @@
       "relations":[
 
       ]
+    },
+    "eyVxK":{
+      "prettyName":"Silverbow 1",
+      "description":"Silverbow Creek",
+      "full":{
+        "fileIdentifier":"SILVERBOW-01.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"SILVERBOW-01-tz.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+
+      ],
+      "relations":[
+
+      ]
+    },
+    "3ePOi":{
+      "prettyName":"Silverbow 2",
+      "description":"Silverbow creek",
+      "full":{
+        "fileIdentifier":"SILVERBOW-02.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"SILVERBOW-02-tz.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+
+      ],
+      "relations":[
+
+      ]
+    },
+    "kwudO":{
+      "prettyName":"Silverbow 3",
+      "description":"Silverbow creek",
+      "full":{
+        "fileIdentifier":"SILVERBOW-03.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"SILVERBOW-03-tz.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+
+      ],
+      "relations":[
+
+      ]
+    },
+    "G3CP8":{
+      "prettyName":"Silverbow 4",
+      "description":"Silverbow creek",
+      "full":{
+        "fileIdentifier":"SILVERBOW-04.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"SILVERBOW-04-tz.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+
+      ],
+      "relations":[
+
+      ]
     }
   },
   "attributes":{
@@ -325,5 +407,6 @@
         "Nh8US"
       ]
     }
-  }
+  },
+  "version":0.1
 }
