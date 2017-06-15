@@ -67,27 +67,31 @@ export default AbstractList.extend({
       this.inputCallback();
       event.stopPropagation();
     },
-    goPrevious: function(event) { 
-      if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
+    goPrevious: function(event) {
+      if (this.get('selectedStackIndex') - 1 < 0 && !this.get('loop')) {
         this.underflowCallback();
 
         return;
       }
       else {
         this.changeIndex(-1);
+
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'))
       }
       
       this.inputCallback();
       event.stopPropagation();
     },
     goNext: function(event) {
-      if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('data').length && !this.get('loop')) {
+      if (this.get('selectedStackIndex') + 1 === this.get('data').length && !this.get('loop')) {
         this.overflowCallback();
 
         return;
       }
       else {
         this.changeIndex(1);
+
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'))
       }
 
       this.inputCallback();
