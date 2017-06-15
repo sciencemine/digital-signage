@@ -50,6 +50,8 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   videoListData: null,
   stackListFocus: true,
+  stackListSelectedPos: 0,
+  videoListSelectedPos: 0,
 
   init() {
     this._super(...arguments);
@@ -75,9 +77,13 @@ export default Ember.Component.extend({
     },
     stackListOverflow() {
       this.set('stackListFocus', false);
+      this.set('videoListSelectedPos', 0);
     },
     stackListUnderflow() {
+      let stack = this.get('data')[this.get('stackListSelectedPos')];
+
       this.set('stackListFocus', false);
+      this.set('videoListSelectedPos', stack.videos.length - 1);
     },
     /* Video List Controller */
     videoListCancelled() {
@@ -91,9 +97,13 @@ export default Ember.Component.extend({
     },
     videoListOverflow() {
       this.set('stackListFocus', true);
+
+      this.set('stackListSelectedPos', 0);
     },
     videoListUnderflow() {
       this.set('stackListFocus', true);
+
+      this.set('stackListSelectedPos', this.get('data').length - 1);
     }
   }
 });
