@@ -108,12 +108,8 @@ export default AbstractList.extend({
     didRender() {
       this.updateFocus(this.get('focus'));
     },
-
-    selectedStackKey: Ember.computed('data', 'selectedStackIndex', function() {
-      return this.get('data')[this.get('selectedStackIndex')];
-    }),
     actions:{
-        stackSelected(videos, vidPos) {
+        stackSelecte(videos, vidPos) {
           this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {
