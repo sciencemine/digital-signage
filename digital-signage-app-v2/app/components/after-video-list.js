@@ -48,9 +48,6 @@
 import AbstractList from './abstract-list';
 export default AbstractList.extend({
 
-
-<<<<<<< HEAD
-=======
 export default Ember.Component.extend({
   videoListData: null,
   stackListFocus: true,
@@ -100,5 +97,4 @@ export default Ember.Component.extend({
       this.set('stackListFocus', true);
     }
   }
->>>>>>> 674bfe0c019579184a2a9a569ea09dd72d5c4bff
 });
