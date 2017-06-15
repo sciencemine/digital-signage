@@ -50,9 +50,11 @@ export default AbstractList.extend({
   goPrevious: function(event) {
     if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
       this.underflowCallback();
+      return;
     }
-
-    this.alterSelected(-1);
+    else{
+      this.alterSelected(-1);
+    }
 
     this.inputCallback();
 
@@ -68,10 +70,11 @@ export default AbstractList.extend({
   goNext: function(event) {
     if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
       this.overflowCallback();
+      return;
     }
-
-    this.alterSelected(1);
-
+    else{
+      this.alterSelected(1);
+    }
     this.inputCallback();
 
     event.stopPropagation();
