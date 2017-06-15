@@ -45,8 +45,7 @@
  * @date 6/15/2017
  */
 
-import AbstractList from './abstract-list';
-export default AbstractList.extend({
+import Ember from 'ember';
 
 export default Ember.Component.extend({
   videoListData: null,
@@ -55,20 +54,20 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
-    this.set('videoListData', this.get('data')['history'].videos);
+    this.set('videoListData', this.get('data')[0].videos);
   },
   didRender() {
 
   },
   actions: {
     /* Stack List Controller */
-    stackListHover(videos, vidPos) {
+    stackListHover(videos) {
       this.set('videoListData', videos);
     },
     stackListCancelled() {
       console.log('Stack list canceled');
     },
-    stackListSelected(videos, vidPos) {
+    stackListSelected(videos) {
       this.set('videoListData', videos);
     },
     stackListInput() {
@@ -84,7 +83,7 @@ export default Ember.Component.extend({
     videoListCancelled() {
       this.set('stackListFocus', true);
     },
-    videoListSelected(sender, selected, selectedPos) {
+    videoListSelected(sender, selected) {
       this.get('videoSelectedCallback') (sender, selected);
     },
     videoListInput() {

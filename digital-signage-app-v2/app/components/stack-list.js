@@ -101,7 +101,7 @@ export default AbstractList.extend({
       this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
     },
       
-    init(){
+    init(){console.log(this.get('data'))
         this._super(...arguments);
     },
     

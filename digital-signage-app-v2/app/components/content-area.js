@@ -76,6 +76,21 @@ export default Ember.Component.extend(KeyboardControls, {
     }
 
     let afterVideoListData = [
+    ];
+
+    for (let key in this.get('data.attributes')){
+      let videos = [];
+
+      afterVideoListData.push(Ember.copy(this.get('data.attributes')[key]));
+
+      for (let i = 0; i < afterVideoListData[afterVideoListData.length - 1].videos.length; i++){
+        videos.push(this.get('data.videos')[afterVideoListData[afterVideoListData.length - 1].videos[i]]);
+      }
+
+      afterVideoListData[afterVideoListData.length - 1].videos = videos;
+    }
+
+    afterVideoListData.unshift(
       {
         prettyName: "History",
         description: "",
@@ -105,21 +120,7 @@ export default Ember.Component.extend(KeyboardControls, {
             }
           }
         ]
-      }
-    ];
-
-    for (let index in this.get('data.attributes')){
-      let videos = [];
-
-      afterVideoListData.push(this.get('data.attributes')[index]);
-
-      for (let i = 0; i < afterVideoListData[index].videos.length; i++){
-     
-        videos.push(this.get('data.videos')[afterVideoListData[index].videos[i]]);
-      }
-
-      afterVideoListData[afterVideoListData.length - 1].videos = videos;
-    }
+      });
     
     this.set('afterVideoListData', afterVideoListData);
   },

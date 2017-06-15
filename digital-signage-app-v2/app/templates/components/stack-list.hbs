@@ -5,6 +5,7 @@
     {{#each-in data as |key value|}}
         <div class="{{stackItemClass}}">
           {{video-stack
+            modelIdentifier=modelIdentifier
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackKey) "blue-border")
             onHoverCallback=(action 'stackHovered')
@@ -18,6 +19,7 @@
     {{#each-in data as |key value|}}
         <div style={{make-stack-style value.x value.y}} class="non-flex-list-item">
           {{video-stack
+            modelIdentifier=modelIdentifier
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackKey) "blue-border")
             onHoverCallback=(action 'stackHovered')
