@@ -113,7 +113,7 @@ export default AbstractList.extend({
       return this.get('data')[this.get('selectedStackIndex')];
     }),
     actions:{
-        stackClicked(videos, vidPos) {
+        stackSelected(videos, vidPos) {
           this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {

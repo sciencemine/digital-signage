@@ -67,7 +67,7 @@ export default Ember.Component.extend({
     stackListCancelled() {
       console.log('Stack list canceled');
     },
-    stackListSelected(videos) {
+    stackListSelected(sender, videos) {
       this.set('videoListData', videos);
     },
     stackListInput() {

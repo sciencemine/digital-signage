@@ -9,6 +9,7 @@
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackKey) "blue-border")
             onHoverCallback=(action 'stackHovered')
+            onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
           }}
         </div>
@@ -23,6 +24,7 @@
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackKey) "blue-border")
             onHoverCallback=(action 'stackHovered')
+            onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
           }}
       </div>

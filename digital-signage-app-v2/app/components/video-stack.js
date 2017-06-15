@@ -37,7 +37,7 @@ export default Ember.Component.extend({
     }),
     actions: {
         stackClicked() {
-            this.get('onClickCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
+            this.get('onSelectedCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
             
         },
         getNextVideoA() {
