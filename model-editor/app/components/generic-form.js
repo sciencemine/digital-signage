@@ -233,12 +233,14 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     submitForm() {
+      component.get('validationCallback') (valid);
+      
       if (this.get('validForm')) {
         this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
       }//if
       else {
         alert("Please verify the contents of the form before submission");
-      }//elses
+      }//else
 
       return false;
     },
