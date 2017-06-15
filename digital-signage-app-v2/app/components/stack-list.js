@@ -72,16 +72,26 @@ export default AbstractList.extend({
     goPrevious: function(event) { 
       if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
         this.underflowCallback();
+
+        return;
       }
-      this.changeIndex(-1);
+      else {
+        this.changeIndex(-1);
+      }
+      
       this.inputCallback();
       event.stopPropagation();
     },
     goNext: function(event) {
       if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
         this.overflowCallback();
+
+        return;
       }
-      this.changeIndex(1);
+      else {
+        this.changeIndex(1);
+      }
+
       this.inputCallback();
       
       event.stopPropagation();
