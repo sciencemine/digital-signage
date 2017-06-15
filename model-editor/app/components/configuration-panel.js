@@ -51,8 +51,8 @@ export default Ember.Component.extend({
   },
   setStyle: function() {
     let el = Ember.$("#" + this.elementId);
-    
-    el.css('right', (this.get('propertiesExpanded') ? Ember.$("#properties-panel").width() : 0));
+
+    el.css('right', (this.get('propertiesExpanded') ? Ember.$(window).width() - Ember.$("#properties-panel").offset().left : 0));
     el.css('left', (this.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
   },
   init() {
@@ -82,6 +82,7 @@ export default Ember.Component.extend({
      **************************************************************************/
     toggleView() {
       this.set('expanded', !this.get('expanded'));
+      this.setStyle();
 
       this.get('configurationExpandedCallback') (this.get('expanded'));
     }
