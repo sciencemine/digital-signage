@@ -10,7 +10,7 @@
 
 
 {{#if displayVideoSelect}}
-    {{video-list
+    {{!video-list
       selectedVidPos=0
       class="video-list video-list--flex"
       listItemClass="video-list-item--flex"
@@ -27,7 +27,12 @@
     }}
 {{/if}}
 
-
+{{!after-video-list
+  data=afterVideoListData
+  config=data.config
+  onInputCallback=(action 'resetTimeout')
+  videoSelectedCallback=(action 'videoSelected')
+}}
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">

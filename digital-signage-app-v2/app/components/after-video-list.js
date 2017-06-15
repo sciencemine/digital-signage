@@ -53,6 +53,7 @@ export default AbstractList.extend({
 =======
 export default Ember.Component.extend({
   videoListData: null,
+  stackListFocus: true,
 
   init() {
     this._super(...arguments);
@@ -64,28 +65,40 @@ export default Ember.Component.extend({
   },
   actions: {
     /* Stack List Controller */
-    stackListHover() {
-
+    stackListHover(videos, vidPos) {
+      this.set('videoListData', videos);
     },
-    stackListCancel() {
-
+    stackListCancelled() {
+      console.log('Stack list canceled');
     },
-    stackListSelect() {
-
+    stackListSelected(videos, vidPos) {
+      this.set('videoListData', videos);
     },
     stackListInput() {
-
+      this.get('onInputCallback');
+    },
+    stackListOverflow() {
+      this.set('stackListFocus', false);
+    },
+    stackListUnderflow() {
+      this.set('stackListFocus', false);
     },
     /* Video List Controller */
-    videoListCancel() {
-
+    videoListCancelled() {
+      this.set('stackListFocus', true);
     },
-    videoListSelect(){
-
+    videoListSelected(sender, selected, selectedPos) {
+      this.get('videoSelectedCallback') (sender, selected);
     },
     videoListInput() {
-
+      this.get('onInputCallback');
     },
+    videoListOverflow() {
+      this.set('stackListFocus', true);
+    },
+    videoListUnderflow() {
+      this.set('stackListFocus', true);
+    }
   }
 >>>>>>> 674bfe0c019579184a2a9a569ea09dd72d5c4bff
 });

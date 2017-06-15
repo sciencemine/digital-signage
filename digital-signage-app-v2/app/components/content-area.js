@@ -12,6 +12,7 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoUrl: null,
   backgroundVideoKeys: null,
   selectionVideos: [],
+  afterVideoListData: null,
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -73,6 +74,51 @@ export default Ember.Component.extend(KeyboardControls, {
     for (let vid in this.get('data.videos')) {
       this.get('selectionVideos').pushObject(this.get('data.videos')[vid]);
     }
+
+    let afterVideoListData = {
+      history: {
+        prettyName: "History",
+        description: "",
+        x: 0,
+        y: 0,
+        videos: [
+          {
+            prettyName: "onasioentast",
+            description: "oansionasnt",
+            attributes: [ ],
+            relations: [
+              {
+                relatedId: "",
+                difficulty: 1,
+                attributeId: ""
+              }
+            ],
+            full: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            },
+            teaser: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            }
+          }
+        ]
+      }
+    };
+
+    for(let index in this.get('data.attributes')){
+      afterVideoListData[index] = this.get('data.attributes')[index];
+      let videos = [];
+      for(let i = 0; i < afterVideoListData[index].videos.length; i++){
+     
+        videos.push(this.get('data.videos')[afterVideoListData[index].videos[i]]);
+      }
+      afterVideoListData[index].videos = videos;
+    }
+    
+    this.set('afterVideoListData', afterVideoListData);
   },
   
   click() {
