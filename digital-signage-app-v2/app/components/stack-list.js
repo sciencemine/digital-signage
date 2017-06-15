@@ -50,7 +50,6 @@ import Ember from 'ember';
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
-    attributeKeys: [],
     selectedStackIndex: 0,
     isMuted: true,
     isFlex: true,
@@ -62,7 +61,7 @@ export default AbstractList.extend({
     select: function(event) {
       this.selectedCallback(this.get('data')[this.get('selectedStackIndex')], this.get('selectedStackIndex'));
       this.inputCallback();
-      event.stopPropagation();    
+      event.stopPropagation();  
     },
     cancel: function(event) {
       this.cancelCallback();
@@ -83,7 +82,7 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     goNext: function(event) {
-      if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
+      if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('data').length && !this.get('loop')) {
         this.overflowCallback();
 
         return;
@@ -97,29 +96,28 @@ export default AbstractList.extend({
       event.stopPropagation();
     },
     changeIndex: function(indexDelta) {
-      let arrLength = this.get('attributeKeys').length;
+      let arrLength = this.get('data').length;
       let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
       this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
     },
       
     init(){
         this._super(...arguments);
-        this.set('attributeKeys', Object.keys(this.get('data')));
     },
     
     didRender() {
       this.updateFocus(this.get('focus'));
     },
 
-    selectedStackKey: Ember.computed('attributeKeys', 'selectedStackIndex', function() {
-      return this.get('attributeKeys')[this.get('selectedStackIndex')];
+    selectedStackKey: Ember.computed('data', 'selectedStackIndex', function() {
+      return this.get('data')[this.get('selectedStackIndex')];
     }),
     actions:{
         stackClicked(videos, vidPos) {
           this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {
-          this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));
+          this.set('selectedStackIndex', this.get('data').indexOf(stackKey));
           this.get('onHoverCallback') (videos, stackKey);
           this.inputCallback();
         }
