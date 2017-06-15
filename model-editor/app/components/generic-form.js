@@ -233,7 +233,7 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     submitForm() {
-      component.get('validationCallback') (this.get('validForm'));
+      this.get('validationCallback') (this.get('validForm'));
 
       if (this.get('validForm')) {
         this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
