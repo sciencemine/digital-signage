@@ -113,7 +113,7 @@ export default Ember.Component.extend({
     this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
     this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
   },
-  getValues: function() {
+  getValues: function(data, prefix, clearValues) {
     let payload = { };
 
     for (let key in data) {
