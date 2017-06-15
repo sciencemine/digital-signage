@@ -32,6 +32,7 @@
 .stack-list-item--flex {
 	flex-basis: 15%;
 	align-self: auto;
+  padding: 17px;
 }
 
 .stack-list-item--selected {
