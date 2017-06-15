@@ -85,7 +85,7 @@ export default Ember.Component.extend({
       this.set('stackListFocus', false);
       this.set('videoListSelectedPos', stack.videos.length - 1);
     },
-    stackListStackChanged(videos, index) {
+    stackListStackChanged(videos) {
       this.set('videoListData', videos);
     },
     /* Video List Controller */
