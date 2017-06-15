@@ -60,7 +60,7 @@ export default AbstractList.extend({
     loop: true,
     
     select: function(event) {
-      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')]);
+      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')], this.get('selectedStackIndex'));
       this.inputCallback();
       event.stopPropagation();    
     },
@@ -106,7 +106,7 @@ export default AbstractList.extend({
     }),
     actions:{
         stackClicked(videos, vidPos) {
-          this.get('onClickCallback') (videos, vidPos);
+          this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {
           this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));

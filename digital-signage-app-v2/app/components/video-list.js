@@ -41,7 +41,7 @@ export default AbstractList.extend({
   muted: false,
   
   select: function(event) {
-    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')]);
+    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')], this.get('selectedVidPos'));
 
     this.inputCallback();
 
@@ -106,7 +106,7 @@ export default AbstractList.extend({
   },
   actions: {
     videoSelected(videoPos) {
-      this.selectedCallback(this.get('videos')[videoPos]);
+      this.selectedCallback(this.get('videos')[videoPos], videoPos);
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);
