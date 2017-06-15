@@ -46,7 +46,6 @@
  * @author Zach Valenzuela & Alex Reid
  * @date 5/11/2017
  */
-import Ember from 'ember';
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
@@ -101,7 +100,7 @@ export default AbstractList.extend({
       this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
     },
       
-    init(){console.log(this.get('data'))
+    init() {
         this._super(...arguments);
     },
     
