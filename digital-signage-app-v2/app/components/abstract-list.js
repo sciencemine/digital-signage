@@ -4,7 +4,7 @@
  * DESCRIPTION:
  *  This is the highest level list to be inherited by all othe lists.
  *  use `import AbstractList from './abstract-list'` in your lists to import this
- *  library. Then use `export default AbstractList.extend({ code here });
+ *  library. Then use `export default AbstractList.extend({ code here });`
  *  to extend this object in your other lists.
  *
  * CALLBACKS

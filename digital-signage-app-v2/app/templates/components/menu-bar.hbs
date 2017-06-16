@@ -1,6 +1,9 @@
 <div class="{{menuBarStyle}}">
   {{#if renderMenu}}
     {{#video-list
+      onSelectedCallback=(action 'videoClicked')
+      onInputCallback=(action 'doNothing')
+      onHoverCallback=(action 'doNothing')
       class=menuListStyle 
       istItemClass="video-list-item--flex__menu"
       listItemSmall="video-list-item--flex__small__menu"
@@ -9,8 +12,6 @@
       muted=true
       videos=displayVideos
       modelIdentifier=config.modelIdentifier
-      onSelectedCallback=(action 'videoClicked')
-      onInputCallback=(action 'doNothing')
       }}
       <div>
         <span class="filter-label">

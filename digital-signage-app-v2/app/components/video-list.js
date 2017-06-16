@@ -113,6 +113,8 @@ export default AbstractList.extend({
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);
+      
+      this.get('onHoverCallback') (videoPos);
 
       this.inputCallback();
     }
