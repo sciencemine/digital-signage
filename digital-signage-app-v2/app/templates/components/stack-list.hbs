@@ -7,7 +7,7 @@
           {{video-stack
             modelIdentifier=modelIdentifier
             videos=value.videos
-            borderStyle=(if (video-selected key selectedStackIndex) "blue-border")
+            borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
             onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
@@ -22,7 +22,7 @@
           {{video-stack
             modelIdentifier=modelIdentifier
             videos=value.videos
-            borderStyle=(if (video-selected key selectedStackIndex) "blue-border")
+            borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
             onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
