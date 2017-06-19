@@ -12,7 +12,8 @@
 	justify-content: space-around;
 
 	flex-direction: row;
-    /*height: 100px;  Or whatever */
+
+  z-index: 50;
 }
 
 

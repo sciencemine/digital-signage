@@ -11,8 +11,8 @@
  * 
  *  stackItemHighlight - class of stack list item when it is highlighted
  * 
- *  data - object with keys of attributes and video keys replaced with objects as follows:
- *  "": {
+ *  data - array of attributes and video keys replaced with objects as follows:
+ *  {
  *    "prettyName": "",
  *    "description": "",
  *    "x": 0,

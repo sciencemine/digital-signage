@@ -9,8 +9,8 @@
  * PARAMETERS
  *  
  * 
- *  data - object with keys of attributes and video keys replaced with objects as follows:
- *  "": {
+ *  data - array of attributes and video keys replaced with objects as follows:
+ *  {
  *    "prettyName": "",
  *    "description": "",
  *    "x": 0,
@@ -69,8 +69,11 @@ export default Ember.Component.extend({
     stackListCancelled() {
       console.log('Stack list canceled');
     },
-    stackListSelected(sender, videos) {
-      this.set('videoListData', videos);
+    stackListSelected(sender, stack) {
+      this.set('videoListData', stack.videos);
+      
+      this.set('stackListFocus', false);
+      this.set('videoListSelectedPos', 0);
     },
     stackListInput() {
       this.get('onInputCallback');

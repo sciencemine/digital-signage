@@ -13,6 +13,7 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoKeys: null,
   selectionVideos: [],
   afterVideoListData: null,
+  showAfterVideoList: true,
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -181,7 +182,8 @@ export default Ember.Component.extend(KeyboardControls, {
       let backgroundId = this.get('data.config.backgroundVideos')[this.get('backgroundVideoPos')];
       this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     },
-    doNothing() {
+    doNothing(sender, selected) {
+      console.log(selected);
     },
 
     cancelPressed() {

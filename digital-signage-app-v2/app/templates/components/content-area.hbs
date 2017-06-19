@@ -27,12 +27,14 @@
     }}
 {{/if}}
 
-{{after-video-list
-  data=afterVideoListData
-  config=data.config
-  onInputCallback=(action 'resetTimeout')
-  videoSelectedCallback=(action 'videoSelected')
-}}
+{{#if showAfterVideoList}}
+  {{after-video-list
+    data=afterVideoListData
+    config=data.config
+    onInputCallback=(action 'resetTimeout')
+    videoSelectedCallback=(action 'doNothing')
+  }}
+{{/if}}
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
