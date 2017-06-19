@@ -3,8 +3,11 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   modelfile: null,
   modelData: null,
-  version: null, 
+  version: null,
 
+  didTransition() {
+    console.log('baba')
+  },
   beforeModel(params) {
     let qp = params.queryParams;
 
@@ -20,6 +23,7 @@ export default Ember.Route.extend({
         res.config.description = "Creating a new exhibit!";
       }
       
+      this.modelfile = qp.modelfile;
       this.modelData = res;
     });
   },
@@ -33,6 +37,7 @@ export default Ember.Route.extend({
     return Ember.$.getJSON(path).then((modelConfig) => {
       data.modelData.version = modelConfig.config.data.version.data;
       data.modelConfig = modelConfig;
+      data.modelfile = this.modelfile
 
       return data;
     }).fail(() => {
