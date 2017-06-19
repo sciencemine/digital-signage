@@ -65,6 +65,8 @@ export default Ember.Component.extend({
     /* Stack List Controller */
     stackListHover(videos) {
       this.set('videoListData', videos);
+      this.set('videoListSelectedPos', 0);
+      this.set('stackListFocus', true);
     },
     stackListCancelled() {
       console.log('Stack list canceled');
@@ -90,6 +92,7 @@ export default Ember.Component.extend({
     },
     stackListStackChanged(videos) {
       this.set('videoListData', videos);
+      this.set('videoListSelectedPos', 0);
     },
     /* Video List Controller */
     videoListCancelled() {
@@ -108,9 +111,12 @@ export default Ember.Component.extend({
     },
     videoListUnderflow() {
       this.set('stackListFocus', true);
-
       this.set('stackListSelectedPos', this.get('data').length - 1);
       this.set('videoListData', this.get('data')[this.get('stackListSelectedPos')].videos);
+    },
+    videoListHover(videoPos) {
+      this.set('videoListSelectedPos', videoPos);
+      this.set('stackListFocus', false);
     }
   }
 });

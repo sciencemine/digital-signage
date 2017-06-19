@@ -1,16 +1,17 @@
 <div class="{{menuBarStyle}}">
   {{#if renderMenu}}
     {{#video-list
+      onSelectedCallback=(action 'videoClicked')
+      onInputCallback=(action 'doNothing')
+      onHoverCallback=(action 'doNothing')
       class=menuListStyle 
       istItemClass="video-list-item--flex__menu"
       listItemSmall="video-list-item--flex__small__menu"
       listItemSelected="video-list-item--selected__menu"
-      listItemHighlight="video-list-item--highlight__menu"
+      listItemHighlight="blue-border"
       muted=true
       videos=displayVideos
       modelIdentifier=config.modelIdentifier
-      onSelectedCallback=(action 'videoClicked')
-      onInputCallback=(action 'doNothing')
       }}
       <div>
         <span class="filter-label">

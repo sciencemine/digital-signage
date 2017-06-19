@@ -54,7 +54,6 @@ export default AbstractList.extend({
     isFlex: true,
     stackItemClass: '',
     stackItemHighlight: '',
-    stackItemSelected: '',    
     loop: true,
     
     select: function(event) {
@@ -76,7 +75,7 @@ export default AbstractList.extend({
       else {
         this.changeIndex(-1);
 
-        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'))
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
       }
       
       this.inputCallback();
@@ -91,7 +90,7 @@ export default AbstractList.extend({
       else {
         this.changeIndex(1);
 
-        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'))
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
       }
 
       this.inputCallback();

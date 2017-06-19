@@ -45,10 +45,6 @@
   cursor: pointer;
 }
 
-.video-list-item--highlight {
-  border: 4px solid blue;
-}
-
 /* Menu CSS */
 .video-list__menu {
   position: absolute;
