@@ -297,9 +297,6 @@ export default Ember.Component.extend({
       let network = new vis.Network(container, this.get('graphData'), this.get('graphOptions'));
 
       network
-      .on("selectNode", function (param) {
-        component.get('videoSelectedCallback') (param.nodes[0]);
-      })
       .on("deselectNode", function (param) {
         if (param.nodes.length === 0) {
           component.get('videoSelectedCallback') (null);

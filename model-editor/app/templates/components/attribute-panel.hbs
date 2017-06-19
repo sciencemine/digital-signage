@@ -13,9 +13,9 @@
       <div class="collapse navbar-collapse" id="attributeNav">
         <ul class="nav navbar-nav">
           {{#each-in data as |key value|}}
-            <li draggable="true" ondrag={{action 'dragging'}} ondragend={{action 'attributeDrop' key}} data-toggle="attributeTooltip" title={{value.prettyName}}>
-              <a href={{create-id "#" prefix "_" key}}><span class="glyphicon {{if value.glyphicon value.glyphicon 'glyphicon-tag'}}"/></a>
-            </li>
+            {{#link-to "modelEdit" tagName="li" class="navbar-text nav-icon-link" invokeAction=(action 'scrollDiv' (create-id "#" prefix "_" key))}}
+              <span draggable="true" ondrag={{action 'dragging'}} ondragend={{action 'attributeDrop' key}} class="glyphicon {{if value.glyphicon value.glyphicon 'glyphicon-tag'}}" data-toggle="attributeTooltip" title={{value.prettyName}} />
+            {{/link-to}}
           {{/each-in}}
         </ul>
       </div>

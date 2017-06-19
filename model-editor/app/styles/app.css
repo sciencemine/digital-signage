@@ -49,3 +49,11 @@
 .white {
   color: white!important;
 }
+
+.nav-icon-link {
+  color: #428bca;
+}
+
+.nav-icon-link:hover {
+  cursor: pointer;
+}

@@ -14,7 +14,9 @@
         <div class="collapse navbar-collapse" id="propertiesNav">
           <ul class="nav navbar-nav">
             {{#each-in data as |key value|}}
-              <li data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}}><a href={{create-id "#" prefix "_" key "_label"}}><span class="glyphicon glyphicon-picture"/></a></li>
+              {{#link-to "modelEdit" tagName="li" class="navbar-text nav-icon-link" invokeAction=(action 'scrollDiv' (create-id "#" prefix "_" key "_label"))}}
+                <span class="glyphicon glyphicon-picture" data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}} />
+              {{/link-to}}
             {{/each-in}}
           </ul>
         </div>
