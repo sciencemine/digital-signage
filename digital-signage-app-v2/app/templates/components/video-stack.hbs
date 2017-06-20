@@ -6,7 +6,7 @@
 	highlightedStyle=(string-append stackStyle borderStyle) 
 	looping=(is-single-video videos) 
 	videoPos=selectedVidAPos 
-	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	muted=isMuted
 	url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
 	onClickCallback=(action 'stackClicked') 
 	onHoverCallback=(action 'stackHovered') 
@@ -21,7 +21,7 @@
 	highlightedStyle=(string-append stackStyle borderStyle) 
 	looping=(is-single-video videos) 
 	videoPos=selectedVidBPos 
-	isMuted=(if (video-selected key selectedStackIndex) isMuted true) 
+	muted=isMuted
 	url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
 	onClickCallback=(action 'stackClicked') 
 	onHoverCallback=(action 'stackHovered') 

@@ -57,7 +57,7 @@ export default AbstractList.extend({
     loop: true,
     
     select: function(event) {
-      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')], this.get('selectedStackIndex'));
+      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
       this.inputCallback();
       event.stopPropagation();  
     },

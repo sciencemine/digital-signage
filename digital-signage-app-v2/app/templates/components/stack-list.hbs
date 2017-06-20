@@ -11,6 +11,7 @@
             onHoverCallback=(action 'stackHovered')
             onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
+            isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
         </div>
     {{/each-in}}
@@ -26,6 +27,7 @@
             onHoverCallback=(action 'stackHovered')
             onSelectedCallback=(action 'stackSelected')
             selectedStackIndex=key
+            isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
       </div>
     {{/each-in}}

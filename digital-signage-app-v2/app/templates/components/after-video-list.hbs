@@ -3,16 +3,13 @@
   onSelectedCallback=(action 'stackListSelected')
   onCancelledCallback=(action 'stackListCancelled')
   onInputCallback=(action 'stackListInput')
-  onUnderflowCallback=(action 'stackListUnderflow')
-  onOverflowCallback=(action 'stackListOverflow')
   onStackChangeCallback=(action 'stackListStackChanged')
   class="stack-list no-outline"
   selectedStackIndex=stackListSelectedPos
-  stackItemHighlight=(if stackListFocus "blue-border" "yellow-border")
+  stackItemHighlight=(if stackListFocus "blue-border" "white-border")
   focus=stackListFocus
   isFlex=true
   data=data
-  loop=false
   stackItemClass="stack-list-item--flex"
   keyboard=config.keyboard
   modelIdentifier=config.modelIdentifier
@@ -22,18 +19,15 @@
   onSelectedCallback=(action 'videoListSelected')
   onCancelledCallback=(action 'videoListCancelled')
   onInputCallback=(action 'videoListInput')
-  onUnderflowCallback=(action 'videoListUnderflow')
-  onOverflowCallback=(action 'videoListOverflow')
   onHoverCallback=(action 'videoListHover')
   class="video-list video-list--flex"
   selectedVidPos=videoListSelectedPos
   listItemClass="video-list-item--flex"
   listItemSmall="video-list-item--flex__small"
   listItemSelected="video-list-item--selected"
-  listItemHighlight=(if stackListFocus "yellow-border" "blue-border")
+  listItemHighlight=(unless stackListFocus "blue-border")
   keyboard=config.keyboard
   videos=videoListData
-  loop=false
   modelIdentifier=config.modelIdentifier
   focus=(if stackListFocus false true)
  }}
