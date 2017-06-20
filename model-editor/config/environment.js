@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'model-editor',
     environment: environment,
-    rootURL: '/',
+    rootURL: '',
     locationType: 'hash',
     EmberENV: {
       FEATURES: {
@@ -47,10 +47,6 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-
-  }
-
-  if (environment === 'demo') {
     ENV['ember-cli-mirage'] = {
       enabled: true
     }
