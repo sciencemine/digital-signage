@@ -44,14 +44,7 @@ export default AbstractList.extend({
     event.stopPropagation();
   },
   goPrevious: function(event) {
-    if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
-      this.underflowCallback();
-      return;
-    }
-    else{
-      this.changeIndex(-1);
-    }
-
+    this.changeIndex(-1);
     this.inputCallback();
 
     event.stopPropagation();
