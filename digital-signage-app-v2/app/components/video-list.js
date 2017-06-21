@@ -69,7 +69,7 @@ export default AbstractList.extend({
 
     this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
   },
-
+  
   init() {
     this._super(...arguments);
   },

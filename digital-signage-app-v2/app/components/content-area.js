@@ -119,28 +119,6 @@ export default Ember.Component.extend(KeyboardControls, {
               isUrl: false,
               attribution: ""
             }
-          },
-          {
-            prettyName: "ioenasihoetna",
-            description: "oansionasnt",
-            attributes: [ ],
-            relations: [
-              {
-                relatedId: "",
-                difficulty: 1,
-                attributeId: ""
-              }
-            ],
-            full: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            },
-            teaser: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            }
           }
         ]
       }

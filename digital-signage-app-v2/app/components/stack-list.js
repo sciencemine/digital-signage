@@ -93,7 +93,6 @@ export default AbstractList.extend({
   init() {
       this._super(...arguments);
   },
-  
   didRender() {
     this.updateFocus(this.get('focus'));
   },
