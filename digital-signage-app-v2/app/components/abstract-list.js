@@ -40,5 +40,5 @@ export default Ember.Component.extend(KeyboardControls, {
     if (this.$().is(':focus') !== this.get('focus')) {
       this.updateFocus(this.get('focus'));
     }
-  },
+  }
 });

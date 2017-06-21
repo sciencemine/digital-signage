@@ -73,6 +73,25 @@ export default AbstractList.extend({
   init() {
     this._super(...arguments);
   },
+  didRender() {
+    if (this.get('displayPopovers')) {
+      let component = this;
+      
+      if (this.$('[data-toggle="popover"]').length !== 0){
+        component.$('[data-toggle="popover"]').popover({
+          trigger: 'hover focus',
+          delay: {
+            show: (component.get('popoverShowDelay') * 1000),
+            hide: '100'
+          }
+        });	
+      }
+    }
+    
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
+    }
+  },
   actions: {
     videoSelected(videoPos) {
       this.selectedCallback(this.get('videos')[videoPos], videoPos);
