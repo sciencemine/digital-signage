@@ -31,12 +31,6 @@ export default Ember.Component.extend(KeyboardControls, {
   selectedCallback: function(selected, selectedPos) {
     this.get('onSelectedCallback')(this, selected, selectedPos);
   },
-  overflowCallback: function() {
-    this.get('onOverflowCallback') (this);
-  },
-  underflowCallback: function() {
-    this.get('onUnderflowCallback') (this);
-  },
   cancelCallback: function(selected) {
     this.get('onCancelledCallback') (this, selected);
   },

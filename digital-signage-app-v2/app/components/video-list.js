@@ -20,9 +20,6 @@
  *  modelIdentifier - model identifier from config
  * 
  *  focus - if the list should be focused
- * 
- *  loop - determines if the list loops to the start. default true. if false,
- *   over/under flow callbacks are required
  *
  * @author Michael Fryer
  * @date 5/11/2017
@@ -36,7 +33,6 @@ export default AbstractList.extend({
   listItemSelected: '',
   listItemHighlight: '',
   displayPopovers: false,
-  loop: true,
   popoverShowDelay: 0.25,
   muted: false,
   
@@ -53,7 +49,7 @@ export default AbstractList.extend({
       return;
     }
     else{
-      this.alterSelected(-1);
+      this.changeIndex(-1);
     }
 
     this.inputCallback();
@@ -68,18 +64,12 @@ export default AbstractList.extend({
     event.stopPropagation();
   },
   goNext: function(event) {
-    if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
-      this.overflowCallback();
-      return;
-    }
-    else{
-      this.alterSelected(1);
-    }
+    this.changeIndex(1);
     this.inputCallback();
 
     event.stopPropagation();
   },
-  alterSelected: function(param) {
+  changeIndex: function(param) {
     let vidArrayLength = this.get('videos').length;
     //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
     let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;

@@ -7,8 +7,6 @@
  *  increasing or decreasing difficulty
  *
  * PARAMETERS
- *  
- * 
  *  data - array of attributes and video keys replaced with objects as follows:
  *  {
  *    "prettyName": "",
@@ -44,7 +42,6 @@
  * @authors Michael Fryer, Zach Valenzuela, Alex Reid
  * @date 6/15/2017
  */
-//Since we are no longer using overflow/underflow anywhere we are going to want to remove it at a later time
 import Ember from 'ember';
 
 export default Ember.Component.extend({
@@ -79,16 +76,6 @@ export default Ember.Component.extend({
     stackListInput() {
       this.get('onInputCallback');
     },
-    stackListOverflow() {
-      // this.set('stackListFocus', false);
-      // this.set('videoListSelectedPos', 0);
-    },
-    stackListUnderflow() {
-      // let stack = this.get('data')[this.get('stackListSelectedPos')];
-
-      // this.set('stackListFocus', false);
-      // this.set('videoListSelectedPos', stack.videos.length - 1);
-    },
     stackListStackChanged(videos) {
       this.set('videoListData', videos);
     },
@@ -102,15 +89,6 @@ export default Ember.Component.extend({
     },
     videoListInput() {
       this.get('onInputCallback');
-    },
-    videoListOverflow() {
-      // this.set('stackListFocus', true);
-      // this.set('stackListSelectedPos', 0);
-    },
-    videoListUnderflow() {
-      // this.set('stackListFocus', true);
-      // this.set('stackListSelectedPos', this.get('data').length - 1);
-      // this.set('videoListData', this.get('data')[this.get('stackListSelectedPos')].videos);
     },
     videoListHover(videoPos) {
       this.set('videoListSelectedPos', videoPos);

@@ -49,75 +49,62 @@
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
-    selectedStackIndex: 0,
-    isMuted: true,
-    isFlex: true,
-    stackItemClass: '',
-    stackItemHighlight: '',
-    loop: true,
+  selectedStackIndex: 0,
+  isMuted: true,
+  isFlex: true,
+  stackItemClass: '',
+  stackItemHighlight: '',
+  
+  select: function(event) {
+    this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    this.inputCallback();
     
-    select: function(event) {
-      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
-      this.inputCallback();
-      event.stopPropagation();  
-    },
-    cancel: function(event) {
-      this.cancelCallback();
-      this.inputCallback();
-      event.stopPropagation();
-    },
-    goPrevious: function(event) {
-      if (this.get('selectedStackIndex') - 1 < 0 && !this.get('loop')) {
-        this.underflowCallback();
-
-        return;
-      }
-      else {
-        this.changeIndex(-1);
-
-        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
-      }
-      
-      this.inputCallback();
-      event.stopPropagation();
-    },
-    goNext: function(event) {
-      if (this.get('selectedStackIndex') + 1 === this.get('data').length && !this.get('loop')) {
-        this.overflowCallback();
-
-        return;
-      }
-      else {
-        this.changeIndex(1);
-
-        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
-      }
-
-      this.inputCallback();
-      
-      event.stopPropagation();
-    },
-    changeIndex: function(indexDelta) {
-      let arrLength = this.get('data').length;
-      let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
-      this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
-    },
-      
-    init() {
-        this._super(...arguments);
-    },
+    event.stopPropagation();  
+  },
+  goPrevious: function(event) {
+    this.changeIndex(-1);
+    this.inputCallback();
     
-    didRender() {
-      this.updateFocus(this.get('focus'));
+    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    
+    event.stopPropagation();
+  },
+  cancel: function(event) {
+    this.cancelCallback();
+    this.inputCallback();
+    
+    event.stopPropagation();
+  },
+  goNext: function(event) {
+    this.changeIndex(1);
+    this.inputCallback();
+    
+    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    
+    event.stopPropagation();
+  },
+  changeIndex: function(indexDelta) {
+    let arrLength = this.get('data').length;
+    let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
+    
+    this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
+  },
+    
+  init() {
+      this._super(...arguments);
+  },
+  
+  didRender() {
+    this.updateFocus(this.get('focus'));
+  },
+  actions:{
+    stackSelected(videos, vidPos) {
+      this.selectedCallback(videos, vidPos);
     },
-    actions:{
-        stackSelected(videos, vidPos) {
-          this.selectedCallback(videos, vidPos);
-        },
-        stackHovered(videos, stackKey) {
-          this.set('selectedStackIndex', stackKey);
-          this.get('onHoverCallback') (videos, stackKey);
-          this.inputCallback();
-        }
+    stackHovered(videos, stackKey) {
+      this.set('selectedStackIndex', stackKey);
+      this.get('onHoverCallback') (videos, stackKey);
+      this.inputCallback();
     }
+  }
 });
