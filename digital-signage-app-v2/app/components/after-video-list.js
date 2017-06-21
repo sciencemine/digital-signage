@@ -66,7 +66,7 @@ export default Ember.Component.extend({
       this.set('stackListFocus', true);
     },
     stackListCancelled() {
-      console.log('Stack list canceled');
+      this.get('onCancelCallback');
     },
     stackListSelected(sender, videos) {
       this.set('videoListData', videos);

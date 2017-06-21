@@ -1,18 +1,16 @@
 <div class="video-player__background--container">
   {{!video-player
-    onEndedCallback=(action 'cycleBackground')
     muted=displayVideoSelect
     class=(if displayVideo 'video-player__hidden' 'video-player__darken')
     playing=(if displayVideo false true)
     url=(make-local-url data.config.modelIdentifier backgroundVideoUrl)
+    onEndedCallback=(action 'cycleBackground')
   }}
 </div>
 
-{{#if displayVideoSelect}}
-    {{!video-list
-      onSelectedCallback=(action 'videoSelected')
-      onCancelledCallback=(action 'cancelPressed')
-      onInputCallback=(action 'resetTimeout')
+
+{{!-- {{#if displayVideoSelect}}
+    {{video-list
       selectedVidPos=0
       class="video-list video-list--flex"
       listItemClass="video-list-item--flex"
@@ -23,38 +21,41 @@
       videos=selectionVideos
       modelIdentifier=data.config.modelIdentifier
       focus=displayVideoSelect
+      onSelectedCallback=(action 'videoSelected')
+      onCancelledCallback=(action 'cancelPressed')
+      onInputCallback=(action 'resetTimeout')
     }}
-{{/if}}
+{{/if}} --}}
 
 {{#if showAfterVideoList}}
   {{after-video-list
-    onInputCallback=(action 'resetTimeout')
-    videoSelectedCallback=(action 'doNothing')
     data=afterVideoListData
     config=data.config
+    onInputCallback=(action 'resetTimeout')
+    videoSelectedCallback=(action 'doNothing')
   }}
 {{/if}}
 
 {{!-- {{#if displayVideo}}
   <div class="video-player__fullscreen">
     {{video-player
-      onClickCallback=(action 'videoSelected' bubbles=false)
-      onHoverCallback=(action 'doNothing')
-      onEndedCallback=(action 'videoEnded')
       playing=videoPlaying
       muted=false
       url=video
+      onClickCallback=(action 'videoSelected' bubbles=false)
+      onHoverCallback=(action 'doNothing')
+      onEndedCallback=(action 'videoEnded')
       videoPos=backgroundVideoPos
     }}
   </div>
 {{/if}} --}}
 
 {{menu-bar
-  onClickCallback=(action 'videoSelected')
   popoverShowDelay=data.config.ui.popoverShowDelay
   config=data.config
   videos=selectionVideos
   attributes=data.attributes
+  onClickCallback=(action 'videoSelected')
 }}
 
 {{yield}}

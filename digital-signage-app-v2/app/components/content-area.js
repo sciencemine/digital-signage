@@ -169,7 +169,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
       let timeout = setTimeout(() => {
                       component.hideVideoSelect();
-                      component.set('focus', true);console.log('resetTimeout')
+                      component.set('focus', true);
                     }, this.get('data.config.ui.idle') * 1000);
 
       this.set('displayVideoSelectTimeout', timeout);
