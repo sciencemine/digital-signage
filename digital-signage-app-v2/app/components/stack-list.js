@@ -11,8 +11,8 @@
  * 
  *  stackItemHighlight - class of stack list item when it is highlighted
  * 
- *  data - object with keys of attributes and video keys replaced with objects as follows:
- *  "": {
+ *  data - array of attributes and video keys replaced with objects as follows:
+ *  {
  *    "prettyName": "",
  *    "description": "",
  *    "x": 0,
@@ -46,70 +46,76 @@
  * @author Zach Valenzuela & Alex Reid
  * @date 5/11/2017
  */
-import Ember from 'ember';
 import AbstractList from './abstract-list';
 
 export default AbstractList.extend({
-    attributeKeys: [],
     selectedStackIndex: 0,
     isMuted: true,
     isFlex: true,
     stackItemClass: '',
     stackItemHighlight: '',
-    stackItemSelected: '',    
     loop: true,
     
     select: function(event) {
-      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')]);
+      this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
       this.inputCallback();
-      event.stopPropagation();    
+      event.stopPropagation();  
     },
     cancel: function(event) {
       this.cancelCallback();
       this.inputCallback();
       event.stopPropagation();
     },
-    goPrevious: function(event) { 
-      if (parseInt(this.get('selectedStackIndex')) - 1 < 0 && !this.get('loop')) {
+    goPrevious: function(event) {
+      if (this.get('selectedStackIndex') - 1 < 0 && !this.get('loop')) {
         this.underflowCallback();
+
+        return;
       }
-      this.changeIndex(-1);
+      else {
+        this.changeIndex(-1);
+
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+      }
+      
       this.inputCallback();
       event.stopPropagation();
     },
     goNext: function(event) {
-      if (parseInt(this.get('selectedStackIndex')) + 1 === this.get('attributeKeys').length && !this.get('loop')) {
+      if (this.get('selectedStackIndex') + 1 === this.get('data').length && !this.get('loop')) {
         this.overflowCallback();
+
+        return;
       }
-      this.changeIndex(1);
+      else {
+        this.changeIndex(1);
+
+        this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+      }
+
       this.inputCallback();
       
       event.stopPropagation();
     },
     changeIndex: function(indexDelta) {
-      let arrLength = this.get('attributeKeys').length;
+      let arrLength = this.get('data').length;
       let curIndex = parseInt(this.get('selectedStackIndex')) + arrLength;
       this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
     },
       
-    init(){
+    init() {
         this._super(...arguments);
-        this.set('attributeKeys', Object.keys(this.get('data')));
     },
     
     didRender() {
       this.updateFocus(this.get('focus'));
     },
-
-    selectedStackKey: Ember.computed('attributeKeys', 'selectedStackIndex', function() {
-      return this.get('attributeKeys')[this.get('selectedStackIndex')];
-    }),
     actions:{
-        stackClicked(videos, vidPos) {
-          this.get('onClickCallback') (videos, vidPos);
+        stackSelected(videos, vidPos) {
+          this.selectedCallback(videos, vidPos);
         },
         stackHovered(videos, stackKey) {
-          this.set('selectedStackIndex', this.get('attributeKeys').indexOf(stackKey));
+          this.set('selectedStackIndex', stackKey);
           this.get('onHoverCallback') (videos, stackKey);
           this.inputCallback();
         }

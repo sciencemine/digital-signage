@@ -1,5 +1,5 @@
 <div class="video-player__background--container">
-  {{video-player
+  {{!video-player
     muted=displayVideoSelect
     class=(if displayVideo 'video-player__hidden' 'video-player__darken')
     playing=(if displayVideo false true)
@@ -10,7 +10,7 @@
 
 
 {{#if displayVideoSelect}}
-    {{video-list
+    {{!video-list
       selectedVidPos=0
       class="video-list video-list--flex"
       listItemClass="video-list-item--flex"
@@ -27,7 +27,14 @@
     }}
 {{/if}}
 
-
+{{#if showAfterVideoList}}
+  {{after-video-list
+    data=afterVideoListData
+    config=data.config
+    onInputCallback=(action 'resetTimeout')
+    videoSelectedCallback=(action 'doNothing')
+  }}
+{{/if}}
 
 {{#if displayVideo}}
   <div class="video-player__fullscreen">

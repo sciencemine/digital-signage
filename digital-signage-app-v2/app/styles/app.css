@@ -13,7 +13,10 @@
 @import 'model-select-element.css';
 
 /* Global Styles */
-.blue-border{
-  border-radius: 5px;
+.blue-border {
   border: 4px solid blue;
+}
+
+.white-border {
+  border: 4px solid white;
 }

@@ -4,7 +4,7 @@
  * DESCRIPTION:
  *  This is the highest level list to be inherited by all othe lists.
  *  use `import AbstractList from './abstract-list'` in your lists to import this
- *  library. Then use `export default AbstractList.extend({ /* code here /* });
+ *  library. Then use `export default AbstractList.extend({ code here });`
  *  to extend this object in your other lists.
  *
  * CALLBACKS
@@ -22,13 +22,14 @@
  *
  * @author Michael Fryer
  * @date 5/11/2017
- */
+ **/
+ 
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
-  selectedCallback: function(selected) {
-    this.get('onSelectedCallback')(this, selected);
+  selectedCallback: function(selected, selectedPos) {
+    this.get('onSelectedCallback')(this, selected, selectedPos);
   },
   overflowCallback: function() {
     this.get('onOverflowCallback') (this);

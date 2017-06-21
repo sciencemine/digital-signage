@@ -12,6 +12,8 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoUrl: null,
   backgroundVideoKeys: null,
   selectionVideos: [],
+  afterVideoListData: null,
+  showAfterVideoList: true,
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -73,6 +75,78 @@ export default Ember.Component.extend(KeyboardControls, {
     for (let vid in this.get('data.videos')) {
       this.get('selectionVideos').pushObject(this.get('data.videos')[vid]);
     }
+
+    let afterVideoListData = [
+    ];
+
+    for (let key in this.get('data.attributes')){
+      let videos = [];
+
+      afterVideoListData.push(Ember.copy(this.get('data.attributes')[key]));
+
+      for (let i = 0; i < afterVideoListData[afterVideoListData.length - 1].videos.length; i++){
+        videos.push(this.get('data.videos')[afterVideoListData[afterVideoListData.length - 1].videos[i]]);
+      }
+
+      afterVideoListData[afterVideoListData.length - 1].videos = videos;
+    }
+
+    afterVideoListData.unshift(
+      {
+        prettyName: "History",
+        description: "",
+        x: 0,
+        y: 0,
+        videos: [
+          {
+            prettyName: "ioenasihoetna",
+            description: "oansionasnt",
+            attributes: [ ],
+            relations: [
+              {
+                relatedId: "",
+                difficulty: 1,
+                attributeId: ""
+              }
+            ],
+            full: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            },
+            teaser: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            }
+          },
+          {
+            prettyName: "ioenasihoetna",
+            description: "oansionasnt",
+            attributes: [ ],
+            relations: [
+              {
+                relatedId: "",
+                difficulty: 1,
+                attributeId: ""
+              }
+            ],
+            full: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            },
+            teaser: {
+              fileIdentifier: "kenny_band_1.mp4",
+              isUrl: false,
+              attribution: ""
+            }
+          }
+        ]
+      }
+    );
+    
+    this.set('afterVideoListData', afterVideoListData);
   },
   
   click() {
@@ -108,7 +182,8 @@ export default Ember.Component.extend(KeyboardControls, {
       let backgroundId = this.get('data.config.backgroundVideos')[this.get('backgroundVideoPos')];
       this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
     },
-    doNothing() {
+    doNothing(sender, selected) {
+      console.log(selected);
     },
 
     cancelPressed() {
