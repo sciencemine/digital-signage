@@ -89,12 +89,8 @@ export default AbstractList.extend({
     
     this.set('selectedStackIndex', (curIndex + indexDelta) % arrLength);
   },
-    
   init() {
-      this._super(...arguments);
-  },
-  didRender() {
-    this.updateFocus(this.get('focus'));
+    this._super(...arguments);
   },
   actions:{
     stackSelected(videos, vidPos) {

@@ -52,16 +52,6 @@ export default Ember.Component.extend(KeyboardControls, {
 
     this.send('resetTimeout');
   },
-  updateFocus: function(param) {
-    if (param) {
-      this.$().attr('tabindex', 2);
-      this.$().focus();
-    }//if
-    else {
-      this.$().attr('tabindex', -2);
-      this.$().blur();
-    }//else
-  },
 
   init() {
     let backgroundId = this.get('data.config.backgroundVideos')[0];   

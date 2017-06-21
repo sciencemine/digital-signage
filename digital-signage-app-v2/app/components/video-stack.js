@@ -41,23 +41,28 @@ export default Ember.Component.extend({
         },
         getNextVideoA() {
             let arrayLength = this.get('videos').length;
+            
             if (arrayLength === 1) {
                 return;
             }
+            
             let curArrayPos = parseInt(this.get('selectedVidAPos'));
+            
             this.set('selectedVidAPos', (curArrayPos + 2) % arrayLength);
             this.set('showVidA', false);        
         },
         getNextVideoB(){
             let arrayLength = this.get('videos').length;
+            
             if (arrayLength === 1) {
                 return;
             }
+            
             let curArrayPos = parseInt(this.get('selectedVidBPos'));
+            
             this.set('selectedVidBPos', (curArrayPos + 2) % arrayLength);
             this.set('showVidA', true);
         },
-
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));
         }

@@ -36,18 +36,9 @@ export default Ember.Component.extend(KeyboardControls, {
   inputCallback: function() {
     this.get('onInputCallback') ();
   },
-  updateFocus: function(param) {
-    if (param) {
-      this.$().attr('tabindex', 1);
-      this.$().focus();
-    }//if
-    else {
-      this.$().attr('tabindex', -1);
-      this.$().blur();
-    }//else
+  didRender() {
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
+    }
   },
-
-  init() {
-    this._super(...arguments);
-  }
 });
