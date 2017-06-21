@@ -116,6 +116,11 @@ export default Ember.Component.extend(KeyboardControls, {
     
     this.set('afterVideoListData', afterVideoListData);
   },
+  didRender() {
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
+    }
+  },
   
   click() {
     this.set('focus', false);
@@ -164,7 +169,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
       let timeout = setTimeout(() => {
                       component.hideVideoSelect();
-                      component.set('focus', true);
+                      component.set('focus', true);console.log('resetTimeout')
                     }, this.get('data.config.ui.idle') * 1000);
 
       this.set('displayVideoSelectTimeout', timeout);

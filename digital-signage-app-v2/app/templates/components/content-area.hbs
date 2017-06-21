@@ -28,7 +28,7 @@
 
 {{#if showAfterVideoList}}
   {{after-video-list
-    onInputCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
     videoSelectedCallback=(action 'doNothing')
     data=afterVideoListData
     config=data.config
