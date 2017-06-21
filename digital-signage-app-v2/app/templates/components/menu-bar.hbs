@@ -26,7 +26,8 @@
           </button>
 
           <ul class="dropdown-menu">
-            <li class="dropdown-header menu-bar--list--element--border">Filter Videos</li>
+            
+            <li class="glyphicon glyphicon-filter" class="dropdown-header menu-bar--list--element--border">FilterVideos</li>
             {{#each-in attributes as |key value|}}
               <li data-container="body" data-toggle="popover" data-placement="auto right" data-title={{value.prettyName}} data-content={{value.description}} {{action 'setMenuVideos' key}} class="menu-bar--list--element menu-bar--list--element--border">
                 <div class="media">
