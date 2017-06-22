@@ -13,7 +13,6 @@ import Ember from 'ember';
 
 export default Ember.Mixin.create({
   focus: false,
-  
   /**
    * Called from keyPress event when the select button is pressed
    *
@@ -51,8 +50,15 @@ export default Ember.Mixin.create({
    * DOM to this element
    *
    */
-  updateFocus: function() {
-    console.log('UpdateFocus() needs to be implemented.');
+  updateFocus: function(param) {
+    if (param) {
+      this.$().attr('tabindex', 10);
+      this.$().focus();
+    }//if
+    else {
+      this.$().attr('tabindex', -10);
+      this.$().blur();
+    }//else
   },
   
   //adds an observer for the parameter that was passed. fires when it is changed
@@ -62,9 +68,8 @@ export default Ember.Mixin.create({
   }),
 
   //checks input on key down to see if it is valid
-  //This needs to be pulled from the model later, not be hard coded
   keyDown(event) {
-    if (this.get('focus')) {
+    if (this.$().is(':focus')) {
       switch (String.fromCharCode(event.keyCode).toLowerCase()) {
         case this.get('keyboard.select').toLowerCase():
           this.select(event);

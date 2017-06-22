@@ -4,7 +4,7 @@
 
   right: 0px;
   left: 0px;
-  top: 40%;
+  top: calc(40% + 28px);
 
   z-index: 50;
 }
@@ -43,10 +43,6 @@
 
 .video-list-item--selected:hover {
   cursor: pointer;
-}
-
-.video-list-item--highlight {
-  border: 4px solid blue;
 }
 
 /* Menu CSS */

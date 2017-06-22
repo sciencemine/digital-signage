@@ -12,7 +12,8 @@
 	justify-content: space-around;
 
 	flex-direction: row;
-    /*height: 100px;  Or whatever */
+
+  z-index: 50;
 }
 
 
@@ -32,6 +33,7 @@
 .stack-list-item--flex {
 	flex-basis: 15%;
 	align-self: auto;
+  padding: 17px;
 }
 
 .stack-list-item--selected {

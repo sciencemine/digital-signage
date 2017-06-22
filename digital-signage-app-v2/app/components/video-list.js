@@ -20,9 +20,6 @@
  *  modelIdentifier - model identifier from config
  * 
  *  focus - if the list should be focused
- * 
- *  loop - determines if the list loops to the start. default true. if false,
- *   over/under flow callbacks are required
  *
  * @author Michael Fryer
  * @date 5/11/2017
@@ -36,24 +33,18 @@ export default AbstractList.extend({
   listItemSelected: '',
   listItemHighlight: '',
   displayPopovers: false,
-  loop: true,
   popoverShowDelay: 0.25,
   muted: false,
   
   select: function(event) {
-    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')]);
+    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')], this.get('selectedVidPos'));
 
     this.inputCallback();
 
     event.stopPropagation();
   },
   goPrevious: function(event) {
-    if (parseInt(this.get('selectedVidPos')) - 1 < 0 && !this.get('loop')) {
-      this.underflowCallback();
-    }
-
-    this.alterSelected(-1);
-
+    this.changeIndex(-1);
     this.inputCallback();
 
     event.stopPropagation();
@@ -66,24 +57,19 @@ export default AbstractList.extend({
     event.stopPropagation();
   },
   goNext: function(event) {
-    if (parseInt(this.get('selectedVidPos')) + 1 === this.get('videos').length && !this.get('loop')) {
-      this.overflowCallback();
-    }
-
-    this.alterSelected(1);
-
+    this.changeIndex(1);
     this.inputCallback();
 
     event.stopPropagation();
   },
-  alterSelected: function(param) {
+  changeIndex: function(param) {
     let vidArrayLength = this.get('videos').length;
     //it was taking selectedVidPos as a string for some reason ¯\_(ツ)_/¯
     let curVidPos = parseInt(this.get('selectedVidPos')) + vidArrayLength;
 
     this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
   },
-
+  
   init() {
     this._super(...arguments);
   },
@@ -101,16 +87,18 @@ export default AbstractList.extend({
         });	
       }
     }
-
-    this.updateFocus(this.get('focus'));
+    
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
+    }
   },
   actions: {
     videoSelected(videoPos) {
-      this.selectedCallback(this.get('videos')[videoPos]);
+      this.selectedCallback(this.get('videos')[videoPos], videoPos);
     },
     videoHovered(videoPos) {
-      this.set('selectedVidPos', videoPos);
-
+      this.set('selectedVidPos', videoPos);   
+      this.get('onHoverCallback') (videoPos);
       this.inputCallback();
     }
   }
