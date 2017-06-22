@@ -128,6 +128,7 @@
     "attributes": {
         "0": {
             "prettyName": "Rubber Band",
+            "glyphicon": "glyphicon-tag",
             "description": "Rubber bands are fun but they can be treacherous and have been known to turn on even the best rubber banders when they detect weakness.",
             "x": 50,
             "y": 50,
@@ -135,6 +136,7 @@
         },
         "1": {
             "prettyName": "Promark 747B",
+            "glyphicon": "glyphicon-tag",
             "description": "Promark Neil Peart Signature 747Bs are the ONLY way to play.",
             "x": 80,
             "y": 80,
@@ -142,6 +144,7 @@
         },
         "3": {
             "prettyName": "Drum Sticks",
+            "glyphicon": "glyphicon-tag",
             "description": "I wanted to quit drumming, but my family said to STICK to it. Glad I did.",
             "x": 20,
             "y": 20,
@@ -149,6 +152,7 @@
         },
         "4": {
             "prettyName": "Interpretive Dance",
+            "glyphicon": "glyphicon-tag",
             "description": "Like dancing, but more interpretive.",
             "x": 20,
             "y": 80,
@@ -156,6 +160,7 @@
         },
         "5": {
             "prettyName": "Birds",
+            "glyphicon": "glyphicon-tag",
             "description": "Birds can usually fly.",
             "x": 80,
             "y": 20,
@@ -163,6 +168,7 @@
         },
         "6": {
             "prettyName": "Needs a Haircut",
+            "glyphicon": "glyphicon-tag",
             "description": "Looks like someone needs a haircut.",
             "x": 50,
             "y": 20,
