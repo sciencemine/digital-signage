@@ -353,6 +353,7 @@
   "attributes":{
     "dRGuH":{
       "prettyName":"Raparian Habitats",
+      "glyphicon": "glyphicon-tag",
       "description":"Raparian Habitats",
       "x":0,
       "y":0,
@@ -365,6 +366,7 @@
     },
     "zFN8z":{
       "prettyName":"Critters",
+      "glyphicon": "glyphicon-tag",
       "description":"Critters",
       "x":0,
       "y":0,
@@ -377,6 +379,7 @@
     },
     "N57vQ":{
       "prettyName":"The 5Cs",
+      "glyphicon": "glyphicon-tag",
       "description":"Cold, Clear, Clean, Complex, and Connected",
       "x":0,
       "y":0,
@@ -390,6 +393,7 @@
     },
     "yiG8M":{
       "prettyName":"Plants",
+      "glyphicon": "glyphicon-tag",
       "description":"Plants",
       "x":0,
       "y":0,
@@ -400,6 +404,7 @@
     },
     "PykEi":{
       "prettyName":"Beavers",
+      "glyphicon": "glyphicon-tag",
       "description":"Beavers",
       "x":0,
       "y":0,
