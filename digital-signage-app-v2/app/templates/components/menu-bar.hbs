@@ -26,12 +26,18 @@
           </button>
 
           <ul class="dropdown-menu">
-            <li class="dropdown-header menu-bar--list--element--border">Filter Videos</li>
+            
+            <li class="glyphicon glyphicon-filter" class="dropdown-header menu-bar--list--element--border">FilterVideos</li>
             {{#each-in attributes as |key value|}}
-              <li data-container="body" data-toggle="popover" data-placement="auto right" data-title={{value.prettyName}} data-content={{value.description}} class="menu-bar--list--element menu-bar--list--element--border">
-                <span {{action 'setMenuVideos' key}}>
-                  {{value.prettyName}}
-                </span>
+              <li data-container="body" data-toggle="popover" data-placement="auto right" data-title={{value.prettyName}} data-content={{value.description}} {{action 'setMenuVideos' key}} class="menu-bar--list--element menu-bar--list--element--border">
+                <div class="media">
+                  <div class="media-left">
+                    <span class="glyphicon {{value.glyphicon}}"/>
+                  </div>
+                  <div class="media-body">
+                    <h5 class="media-heading">{{value.prettyName}}</h5>
+                  </div>
+                </div>
               </li>
             {{/each-in}}
           </ul>
