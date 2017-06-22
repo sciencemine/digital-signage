@@ -133,34 +133,6 @@
             "y": 50,
             "videos": [ "0", "1" ]
         },
-        "1": {
-            "prettyName": "Promark 747B",
-            "description": "Promark Neil Peart Signature 747Bs are the ONLY way to play.",
-            "x": 80,
-            "y": 80,
-            "videos": [ "3" ]
-        },
-        "3": {
-            "prettyName": "Drum Sticks",
-            "description": "I wanted to quit drumming, but my family said to STICK to it. Glad I did.",
-            "x": 20,
-            "y": 20,
-            "videos": [ "3" ]
-        },
-        "4": {
-            "prettyName": "Interpretive Dance",
-            "description": "Like dancing, but more interpretive.",
-            "x": 20,
-            "y": 80,
-            "videos": [ "2", "3" ]
-        },
-        "5": {
-            "prettyName": "Birds",
-            "description": "Birds can usually fly.",
-            "x": 80,
-            "y": 20,
-            "videos": [ "2" ]
-        },
         "6": {
             "prettyName": "Needs a Haircut",
             "description": "Looks like someone needs a haircut.",
