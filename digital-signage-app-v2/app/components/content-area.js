@@ -70,8 +70,8 @@ export default Ember.Component.extend(KeyboardControls, {
         video.id = vidId;
         
         mapData[mapData.length - 1].videos[i] = video;
-      }
-    }
+      }//for
+    }//for
     
     mapData.sort(function(a, b) {
       return (a.y - b.y) || (a.x - b.x);
@@ -95,7 +95,7 @@ export default Ember.Component.extend(KeyboardControls, {
             edgeObj.diff = edgeData.difficulty;
             
             edges.push(edgeObj);  
-          }
+          }//if
         });
       });
       
@@ -121,19 +121,19 @@ export default Ember.Component.extend(KeyboardControls, {
           let videoId;
           
           if (videoIndex > 4) {
-            return;
-          }
+            break;
+          }//if
           
           videoId = topoEdges[videoIndex];
           
           topoEdges[videoIndex] = this.get('data.videos')[videoId];
-        }
+        }//for
         
         attribute.videos = topoEdges;
-      }
+      }//if
       else {
         attribute.videos = nodes[0];
-      }
+      }//else
     }, this);
 
     this.set('mapData', mapData);
@@ -148,31 +148,27 @@ export default Ember.Component.extend(KeyboardControls, {
       let fromTreeIndex;
       let toTreeIndex;
 
-      if(!rel) {
+      if (!rel) {
         break;
-      }
+      }//if
       
       for (let treeIndex = 0; treeIndex < nodes.length; treeIndex++) {
         let tree = nodes[treeIndex];
-         
-        if (!rel) {
-          break;
-        }
         
         for (let nodeIndex = 0; nodeIndex < tree.length; nodeIndex++) {
           let node = tree[nodeIndex];
           
           if (node.id.toString() === rel.from) {
             fromTreeIndex = treeIndex;
-          }
+          }//if
           else if (node.id.toString() === rel.to) {
             toTreeIndex = treeIndex;
-          }
-        }
+          }//else if
+        }//for
         
         if (fromTreeIndex === undefined || toTreeIndex === undefined) {
           continue;
-        }
+        }//if
         
         if (fromTreeIndex !== toTreeIndex) {
           let newTree = nodes[fromTreeIndex].concat(nodes[toTreeIndex]);
@@ -186,8 +182,10 @@ export default Ember.Component.extend(KeyboardControls, {
           numTrees = numTrees + 1;
           
           rel = null;
-        }
-      }
+          
+          break;
+        }//if
+      }//for
       
     } while (numTrees < numNodes - 1);
 
