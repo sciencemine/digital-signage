@@ -1,5 +1,6 @@
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
+import toposort from 'npm:toposort';
 
 export default Ember.Component.extend(KeyboardControls, {
   displayVideoSelect: false,
@@ -14,6 +15,8 @@ export default Ember.Component.extend(KeyboardControls, {
   selectionVideos: [],
   afterVideoListData: null,
   showAfterVideoList: false,
+  
+  mapData: [ ],
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -51,6 +54,144 @@ export default Ember.Component.extend(KeyboardControls, {
     this.pauseVideo();
 
     this.send('resetTimeout');
+  },
+  makeMapData: function() {
+    let mapData = [ ];
+    
+    for (let key in this.get('data.attributes')) {
+      
+      mapData.push(Ember.copy(this.get('data.attributes')[key]));
+      mapData[mapData.length - 1].id = key;
+      
+      for (let i = 0; i < mapData[mapData.length - 1].videos.length; i++) {
+        let vidId = mapData[mapData.length - 1].videos[i];
+        let video =  this.get('data.videos')[vidId];
+        
+        video.id = vidId;
+        
+        mapData[mapData.length - 1].videos[i] = video;
+      }
+    }
+    
+    mapData.sort(function(a, b) {
+      return (a.y - b.y) || (a.x - b.x);
+    });
+    
+    mapData.forEach(function(attribute) {
+      let nodes = [ ];
+      let edges = [ ];
+      
+      nodes = attribute.videos;
+      
+      nodes.forEach(function(node, index) {
+      nodes[index] = [ node ];
+        
+        node.relations.forEach(function(edgeData) {
+          let edgeObj = { };
+          
+          if (edgeData.difficulty >= 0 && edgeData.attributeId === attribute.id) {
+            edgeObj.to = edgeData.relatedId;
+            edgeObj.from = node.id;
+            edgeObj.diff = edgeData.difficulty;
+            
+            edges.push(edgeObj);  
+          }
+        });
+      });
+      
+      edges.sort(function(a, b) {
+        return a.diff - b.diff;
+      });
+      
+      if (edges.length) {
+        let topoEdges = [ ];
+
+        this.kruskals(nodes, edges).forEach(function(edge) {
+          let arr = [ ];
+          
+          arr[0] = edge.from;
+          arr[1] = edge.to;
+          
+          topoEdges.push(arr);
+        });
+        
+        topoEdges = toposort(topoEdges);
+        
+        for (let videoIndex = 0; videoIndex < topoEdges.length; videoIndex++) {
+          let videoId;
+          
+          if (videoIndex > 4) {
+            return;
+          }
+          
+          videoId = topoEdges[videoIndex];
+          
+          topoEdges[videoIndex] = this.get('data.videos')[videoId];
+        }
+        
+        attribute.videos = topoEdges;
+      }
+      else {
+        attribute.videos = nodes[0];
+      }
+    }, this);
+
+    this.set('mapData', mapData);
+  },
+  kruskals: function(nodes, edges) {
+    let numTrees = 0;
+    let kst = [ ];
+    let numNodes = nodes.length;
+
+    do {
+      let rel = edges.shift();
+      let fromTreeIndex;
+      let toTreeIndex;
+
+      if(!rel) {
+        break;
+      }
+      
+      for (let treeIndex = 0; treeIndex < nodes.length; treeIndex++) {
+        let tree = nodes[treeIndex];
+         
+        if (!rel) {
+          break;
+        }
+        
+        for (let nodeIndex = 0; nodeIndex < tree.length; nodeIndex++) {
+          let node = tree[nodeIndex];
+          
+          if (node.id.toString() === rel.from) {
+            fromTreeIndex = treeIndex;
+          }
+          else if (node.id.toString() === rel.to) {
+            toTreeIndex = treeIndex;
+          }
+        }
+        
+        if (fromTreeIndex === undefined || toTreeIndex === undefined) {
+          continue;
+        }
+        
+        if (fromTreeIndex !== toTreeIndex) {
+          let newTree = nodes[fromTreeIndex].concat(nodes[toTreeIndex]);
+          nodes.push(newTree);
+          
+          nodes.splice(fromTreeIndex, 1);
+          nodes.splice(toTreeIndex, 1);
+
+          kst.push(rel);
+          
+          numTrees = numTrees + 1;
+          
+          rel = null;
+        }
+      }
+      
+    } while (numTrees < numNodes - 1);
+
+    return kst;
   },
 
   init() {
@@ -115,6 +256,8 @@ export default Ember.Component.extend(KeyboardControls, {
     );
     
     this.set('afterVideoListData', afterVideoListData);
+    
+    this.makeMapData();
   },
   didRender() {
     if (this.$().is(':focus') !== this.get('focus')) {

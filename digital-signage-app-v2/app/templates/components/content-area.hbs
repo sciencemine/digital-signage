@@ -59,4 +59,20 @@
   onClickCallback=(action 'videoSelected')
 }}
 
+{{!-- Map view stack-list --}}
+{{!stack-list
+  isFlex=false
+  onHoverCallback=(action 'doNothing')
+  onSelectedCallback=(action 'doNothing')
+  onCancelledCallback=(action 'doNothing')
+  onInputCallback=(action 'resetTimeout')
+  onStackChangeCallback=(action 'doNothing')
+  class="stack-list no-outline"
+  stackItemHighlight="blue-border"
+  data=mapData
+  stackItemClass="stack-list-item--flex"
+  keyboard=data.config.keyboard
+  modelIdentifier=config.modelIdentifier
+}}
+
 {{yield}}

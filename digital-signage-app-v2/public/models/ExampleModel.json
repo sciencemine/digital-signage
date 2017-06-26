@@ -77,6 +77,11 @@
                     "relatedId": "2",
                     "difficulty": -4,
                     "attributeId": "6"
+                },
+                {
+                    "relatedId": "3",
+                    "difficulty": 8,
+                    "attributeId": "6"
                 }
             ]
         },
@@ -99,6 +104,11 @@
                     "relatedId": "3",
                     "difficulty": -20,
                     "attributeId": "4"
+                },
+                {
+                    "relatedId": "1",
+                    "difficulty": 12,
+                    "attributeId": "6"
                 }
             ]
         },
@@ -120,6 +130,11 @@
                 {
                     "relatedId": "1",
                     "difficulty": 16,
+                    "attributeId": "6"
+                },
+                {
+                    "relatedId": "2",
+                    "difficulty": 4,
                     "attributeId": "6"
                 }
             ]
