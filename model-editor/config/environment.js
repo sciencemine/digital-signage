@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'model-editor',
     environment: environment,
-    rootURL: '',
-    locationType: 'hash',
+    rootURL: '/',
+    locationType: 'auto',
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -14,6 +14,15 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
+      },
+      contentSecurityPolicy: {
+        'default-src': ["'none'"],
+        'script-src':  ["'self'"],
+        'font-src':    ["'self'"],
+        'connect-src': ["'self'"],
+        'img-src':     ["'self'"],
+        'style-src':   ["'self'"],
+        'media-src':   ["'self'"]
       }
     },
 
@@ -23,11 +32,8 @@ module.exports = function(environment) {
     }
   };
   
+  //false by default
   ENV["ember-cli-mirage"] = {
-    enabled: false
-  };
-
-  ENV['ember-cli-mirage'] = {
     enabled: false
   };
 
@@ -54,19 +60,13 @@ module.exports = function(environment) {
     
   }
   
-  if (environment === 'demo') {
-    ENV["ember-cli-mirage"] = {
+  if (environment === 'port') {
+    ENV['ember-cli-mirage'] = {
       enabled: true
     };
     
-    ENV.APP.FEATURE_X = false;
-    ENV.APP.FEATURE_Y = true;  
-  }
-
-  if (environment === 'demo') {
-    ENV['ember-cli-mirage'] = {
-      enabled: true
-    }
+    ENV.rootURL = '';
+    ENV.locationType = 'hash';
   }
 
   return ENV;
