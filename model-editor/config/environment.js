@@ -4,8 +4,8 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'model-editor',
     environment: environment,
-    rootURL: '/',
-    locationType: 'auto',
+    rootURL: '',
+    locationType: (process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto'),
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -64,9 +64,6 @@ module.exports = function(environment) {
     ENV['ember-cli-mirage'] = {
       enabled: true
     };
-    
-    ENV.rootURL = '';
-    ENV.locationType = 'hash';
   }
 
   return ENV;

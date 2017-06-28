@@ -19,6 +19,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  saveFile: Ember.inject.service(),
   /* Parameters used for various things */
   newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
@@ -657,8 +658,7 @@ export default Ember.Component.extend({
      *  saveModel
      *
      * DESCRIPTION:
-     *  Saves the model. Will only save if validModel is true. Will prompt the
-     *  user for a filename.
+     *  Saves the model. Will only save if validModel is true.
      * 
      * AUTHOR:
      *  Michael Fryer
@@ -680,28 +680,24 @@ export default Ember.Component.extend({
       
       if (download) {
         let isScienceMine = confirm("Is this exhibit model for the Science Mine? (Cancel for no).");
-        let filename = prompt("Enter filename:") + ".json";
+        let modelData = this.get('newModel');
+
+        let a = document.createElement('a');
         
-        if (filename !== "null.json") {
-          let modelData = this.get('newModel');
-
-          let a = document.createElement('a');
+        if (isScienceMine) {
+          let modelIdentifier = modelData.config.modelIdentifier;
           
-          if (isScienceMine) {
-            let modelIdentifier = modelData.config.modelIdentifier;
-            
-            modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
-            modelIdentifier = 'http://10.10.2.159/' + modelIdentifier;
-            
-            modelData.config.modelIdentifier = modelIdentifier;
-          }//if
-
-          a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
-
-          a.setAttribute('download', filename);
-
-          a.click();
+          modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
+          modelIdentifier = 'http://10.10.2.159/' + modelIdentifier;
+          
+          modelData.config.modelIdentifier = modelIdentifier;
         }//if
+
+        a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
+
+        a.setAttribute('download', prettyName.replace(/\s/gi, '') + ".json");
+
+        a.click();
       }//if
     },
     /***************************************************************************
