@@ -19,7 +19,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  saveFile: Ember.inject.service(),
+  notify: Ember.inject.service(),
   /* Parameters used for various things */
   newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
@@ -75,11 +75,6 @@ export default Ember.Component.extend({
     let modelIdentifier;
     
     this.set('newModel', this.get('data.modelData'));
-    
-    modelIdentifier = this.get('newModel.config.modelIdentifier');
-    modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
-    
-    this.set('newModel.config.modelIdentifier', modelIdentifier);
   },
   actions: {
     /***************************************************************************
@@ -668,7 +663,10 @@ export default Ember.Component.extend({
      **************************************************************************/
     saveModel() {
       if (!this.get('validModel')) {
-        alert("Please verify information in the configuration section.");
+        this.get('notify').alert("Please verify information in the configuration section.", {
+          radius: true,
+          closeAfter: null
+        });
 
         return;
       }
@@ -679,19 +677,9 @@ export default Ember.Component.extend({
                               prettyName + "? (Cancel for no).");
       
       if (download) {
-        let isScienceMine = confirm("Is this exhibit model for the Science Mine? (Cancel for no).");
         let modelData = this.get('newModel');
 
         let a = document.createElement('a');
-        
-        if (isScienceMine) {
-          let modelIdentifier = modelData.config.modelIdentifier;
-          
-          modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
-          modelIdentifier = 'http://10.10.2.159/' + modelIdentifier;
-          
-          modelData.config.modelIdentifier = modelIdentifier;
-        }//if
 
         a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
 

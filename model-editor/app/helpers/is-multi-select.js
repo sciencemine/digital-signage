@@ -16,7 +16,6 @@
  ******************************************************************************/
 import Ember from 'ember';
 
-
 export function isMultiSelect([arg]) {
   return arg === "multi-select";
 }

@@ -29,6 +29,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  notify: Ember.inject.service(),
   isInline: false,
   showTitle: true,
   showTooltips: false,
@@ -239,7 +240,7 @@ export default Ember.Component.extend({
         this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
       }//if
       else {
-        alert("Please verify the contents of the form before submission");
+        this.get('notify').alert("Please verify the contents of the form before submission");
       }//else
 
       return false;
