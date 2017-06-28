@@ -4,7 +4,7 @@
  * DESCRIPTION:
  *  This is the highest level list to be inherited by all othe lists.
  *  use `import AbstractList from './abstract-list'` in your lists to import this
- *  library. Then use `export default AbstractList.extend({ /* code here /* });
+ *  library. Then use `export default AbstractList.extend({ code here });`
  *  to extend this object in your other lists.
  *
  * CALLBACKS
@@ -22,19 +22,13 @@
  *
  * @author Michael Fryer
  * @date 5/11/2017
- */
+ **/
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
-  selectedCallback: function(selected) {
-    this.get('onSelectedCallback')(this, selected);
-  },
-  overflowCallback: function() {
-    this.get('onOverflowCallback') (this);
-  },
-  underflowCallback: function() {
-    this.get('onUnderflowCallback') (this);
+  selectedCallback: function(selected, selectedPos) {
+    this.get('onSelectedCallback')(this, selected, selectedPos);
   },
   cancelCallback: function(selected) {
     this.get('onCancelledCallback') (this, selected);
@@ -42,17 +36,9 @@ export default Ember.Component.extend(KeyboardControls, {
   inputCallback: function() {
     this.get('onInputCallback') ();
   },
-  updateFocus: function(param) {
-    if (param) {
-      this.$().attr('tabindex', 1);
-      this.$().focus();
-    }//if
-    else {
-      this.$().attr('tabindex', -1);
-      this.$().blur();
-    }//else
-  },
-  init() {
-    this._super(...arguments);
+  didRender() {
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
+    }
   }
 });
