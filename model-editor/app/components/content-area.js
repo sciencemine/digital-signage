@@ -162,7 +162,7 @@ export default Ember.Component.extend({
       let obj = { };
       
       obj.relatedId = data.to;
-      obj.difficulty = data.value;
+      obj.difficulty = data.diff;
       obj.attributeId = attrId;
 
       this.send('pushData', obj, ".videos." + data.from + ".relations");

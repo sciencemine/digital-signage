@@ -382,6 +382,15 @@
                                             },
                                             "help": "Why the videos are related",
                                             "data": [ ]
+                                        },
+                                        "biDirectional": {
+                                            "displayName": "Bi-directional Relation",
+                                            "inputType": "checkbox",
+                                            "error": "",
+                                            "validation": {
+                                                "checked": true
+                                            },
+                                            "help": "Is the relation bi-directional?"
                                         }
                                     }
                                 }

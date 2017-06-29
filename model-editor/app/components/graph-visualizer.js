@@ -384,30 +384,48 @@ export default Ember.Component.extend({
       let attr = this.get('data.attributes')[data.attributeId];
       let diff = data.difficulty;
       let edgeObj = { };
-      
-      let color = this.createRGBcolor(diff);
 
       edgeObj.from = this.get('fromVid');
       edgeObj.to = this.get('toVid');
       edgeObj.value = Math.abs(diff);
+      edgeObj.diff = diff;
       edgeObj.pos = this.get('relationsLength');
       edgeObj.label = this.shortenName(attr.prettyName);
-      edgeObj.color = color;
+      edgeObj.color = this.createRGBcolor(diff);
       edgeObj.id = edgeObj.from + "_" + this.get('graphData.edges').length;
       edgeObj.title = attr.prettyName;
       edgeObj.attr = data.attributeId;
 
-      this.get('graphData.edges').add(edgeObj);
-
       if (Ember.$('#addRelationOverlay')) {
         Ember.$('#addRelationOverlay').modal('hide');
       }
+
+      this.get('graphData.edges').add(edgeObj);
       
       this.get('addRelationCallback') (edgeObj, data.attributeId);
 
       this.get('videoSelectedCallback', edgeObj.from);
       
       this.get('network').selectNodes([edgeObj.from]);
+      
+      if (data.biDirectional) {
+        let fromVid = edgeObj.from;
+        let component = this;
+        
+        edgeObj.from = edgeObj.to;
+        edgeObj.to = fromVid;
+        edgeObj.diff = -edgeObj.diff;
+        edgeObj.pos = this.get('relationsLength');
+        edgeObj.color = this.createRGBcolor(edgeObj.diff);
+
+        setTimeout(function() {
+          edgeObj.id = edgeObj.from + "_" + component.get('graphData.edges').length;
+          
+          component.get('graphData.edges').add(edgeObj);
+          
+          component.get('addRelationCallback') (edgeObj, edgeObj.attr);
+        });
+      }
     },
     doNothing() {
 
