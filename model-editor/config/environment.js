@@ -5,7 +5,7 @@ module.exports = function(environment) {
     modulePrefix: 'model-editor',
     environment: environment,
     rootURL: '',
-    locationType: 'hash',
+    locationType: (process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto'),
     EmberENV: {
       FEATURES: {
         // Here you can enable experimental features on an ember canary build
@@ -14,17 +14,12 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
-      }
-    },
+      }    },
 
     APP: {
       // Here you can pass flags/options to your application instance
       // when it is created
     }
-  };
-
-  ENV['ember-cli-mirage'] = {
-    enabled: false
   };
 
   if (environment === 'development') {
@@ -47,9 +42,7 @@ module.exports = function(environment) {
   }
 
   if (environment === 'production') {
-    ENV['ember-cli-mirage'] = {
-      enabled: true
-    }
+
   }
 
   return ENV;

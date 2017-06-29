@@ -140,6 +140,15 @@ export default Ember.Component.extend({
      **************************************************************************/
     doNothing() {
       
+    },
+    scrollDiv(elId) {
+      let container = this.$("#properties-panel");
+      let targetEl = this.$(elId);
+      let titleBottom = Ember.$("#content-area--header").height() +
+                      Ember.$("#content-area--header").offset().top +
+                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+      
+      container.scrollTop(targetEl.offset().top - titleBottom);
     }
   }
 });

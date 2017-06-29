@@ -142,6 +142,15 @@ export default Ember.Component.extend({
     toggleView() {
       this.set('expanded', !this.get('expanded'));
       this.get('attributesExpandedCallback') (this.get('expanded'));
+    },
+    scrollDiv(elId) {
+      let container = this.$("#attribute-panel");
+      let targetEl = this.$(elId);
+      let titleBottom = Ember.$("#content-area--header").height() +
+                      Ember.$("#content-area--header").offset().top +
+                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+      
+      container.scrollTop(targetEl.offset().top - titleBottom);
     }
   }
 });

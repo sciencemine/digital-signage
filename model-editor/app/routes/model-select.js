@@ -6,12 +6,12 @@ export default Ember.Route.extend({
   version: null,
 
   beforeModel() {
-    let route = this;
-
-    return Ember.$.getJSON('ModelInformation.json').then((data) => {
-      route.set('models', data.models);
-      route.set('version', data.version);
-    });
+    return(function(route) {
+      return Ember.$.getJSON('assets/ModelInformation.json').then((data) => {
+        route.set('models', data.models);
+        route.set('version', data.version);
+      });
+    })(this);
   },
   model() {
     let modelData = [];

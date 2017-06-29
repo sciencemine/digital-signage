@@ -19,6 +19,7 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  notify: Ember.inject.service(),
   /* Parameters used for various things */
   newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
@@ -74,11 +75,6 @@ export default Ember.Component.extend({
     let modelIdentifier;
     
     this.set('newModel', this.get('data.modelData'));
-    
-    modelIdentifier = this.get('newModel.config.modelIdentifier');
-    modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
-    
-    this.set('newModel.config.modelIdentifier', modelIdentifier);
   },
   actions: {
     /***************************************************************************
@@ -166,7 +162,7 @@ export default Ember.Component.extend({
       let obj = { };
       
       obj.relatedId = data.to;
-      obj.difficulty = data.value;
+      obj.difficulty = data.diff;
       obj.attributeId = attrId;
 
       this.send('pushData', obj, ".videos." + data.from + ".relations");
@@ -657,8 +653,7 @@ export default Ember.Component.extend({
      *  saveModel
      *
      * DESCRIPTION:
-     *  Saves the model. Will only save if validModel is true. Will prompt the
-     *  user for a filename.
+     *  Saves the model. Will only save if validModel is true.
      * 
      * AUTHOR:
      *  Michael Fryer
@@ -668,7 +663,10 @@ export default Ember.Component.extend({
      **************************************************************************/
     saveModel() {
       if (!this.get('validModel')) {
-        alert("Please verify information in the configuration section.");
+        this.get('notify').alert("Please verify information in the configuration section.", {
+          radius: true,
+          closeAfter: null
+        });
 
         return;
       }
@@ -679,29 +677,15 @@ export default Ember.Component.extend({
                               prettyName + "? (Cancel for no).");
       
       if (download) {
-        let isScienceMine = confirm("Is this exhibit model for the Science Mine? (Cancel for no).");
-        let filename = prompt("Enter filename:") + ".json";
-        
-        if (filename !== "null.json") {
-          let modelData = this.get('newModel');
+        let modelData = this.get('newModel');
 
-          let a = document.createElement('a');
-          
-          if (isScienceMine) {
-            let modelIdentifier = modelData.config.modelIdentifier;
-            
-            modelIdentifier = modelIdentifier.replace('http://10.10.2.159/', '');
-            modelIdentifier = 'http://10.10.2.159/' + modelIdentifier;
-            
-            modelData.config.modelIdentifier = modelIdentifier;
-          }//if
+        let a = document.createElement('a');
 
-          a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
+        a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));
 
-          a.setAttribute('download', filename);
+        a.setAttribute('download', prettyName.replace(/\s/gi, '') + ".json");
 
-          a.click();
-        }//if
+        a.click();
       }//if
     },
     /***************************************************************************

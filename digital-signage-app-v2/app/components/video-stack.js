@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
     selectedVidAPos: 0,
-    selectedVidBPos: 0,
+    selectedVidBPos: 1,
     selectedStackIndex: 0,
     stackStyle: '',
     playerSize: '',
@@ -37,28 +37,32 @@ export default Ember.Component.extend({
     }),
     actions: {
         stackClicked() {
-            this.get('onClickCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
-            
+            this.get('onSelectedCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
         },
         getNextVideoA() {
             let arrayLength = this.get('videos').length;
+            
             if (arrayLength === 1) {
                 return;
             }
+            
             let curArrayPos = parseInt(this.get('selectedVidAPos'));
+            
             this.set('selectedVidAPos', (curArrayPos + 2) % arrayLength);
             this.set('showVidA', false);        
         },
         getNextVideoB(){
             let arrayLength = this.get('videos').length;
+            
             if (arrayLength === 1) {
                 return;
             }
+            
             let curArrayPos = parseInt(this.get('selectedVidBPos'));
+            
             this.set('selectedVidBPos', (curArrayPos + 2) % arrayLength);
             this.set('showVidA', true);
         },
-
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));
         }

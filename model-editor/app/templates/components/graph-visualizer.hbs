@@ -12,11 +12,23 @@
     <span class="glyphicon glyphicon-plus"/> Add <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li {{action addVideoCallback}} data-toggle="modal" data-target="#formOverlay"><a href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
+      <li data-toggle="modal" data-target="#formOverlay">
+        {{#link-to "modelEdit" invokeAction=addVideoCallback}}
+          Video <span class="glyphicon glyphicon-facetime-video"/>
+        {{/link-to}}
+      </li>
       <li role="separator" class="divider"></li>
-      <li {{action addAttributeCallback}} data-toggle="modal" data-target="#formOverlay"><a href="#">Attribute <span class="glyphicon glyphicon-tag"/></a></li>
+      <li data-toggle="modal" data-target="#formOverlay">
+        {{#link-to "modelEdit" invokeAction=addAttributeCallback}}
+          Attribute <span class="glyphicon glyphicon-tag"/>
+        {{/link-to}}
+      </li>
       <li role="separator" class="divider"></li>
-      <li {{action 'addEdgeMode'}}><a href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'addEdgeMode')}}
+          Relation <span class="glyphicon glyphicon-link"/>
+        {{/link-to}}        
+      </li>
     </ul>
   </div>
   
@@ -26,9 +38,17 @@
     <span class="glyphicon glyphicon-minus"/> Remove <span class="caret"></span>
     </button>
     <ul class="dropdown-menu">
-      <li><a {{action 'deleteVideoMode'}} href="#">Video <span class="glyphicon glyphicon-facetime-video"/></a></li>
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'deleteVideoMode')}}
+          Video <span class="glyphicon glyphicon-facetime-video"/>
+        {{/link-to}}      
+      </li>
       <li role="separator" class="divider"></li>
-      <li><a {{action 'deleteEdgeMode'}} href="#">Relation <span class="glyphicon glyphicon-link"/></a></li>
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'deleteEdgeMode')}}
+          Relation <span class="glyphicon glyphicon-link"/>
+        {{/link-to}}
+      </li>
     </ul>
   </div>
 </div>

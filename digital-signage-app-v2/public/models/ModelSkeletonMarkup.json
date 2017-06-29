@@ -47,6 +47,7 @@
     "attributes": {
         "0": {
             "prettyName": "",
+            "glyphicon": "", glyphicon representation for attribute
             "description": "",
             "x": 0, x position on screen as percent from left
             "y": 0, x position on screen as percent from top
