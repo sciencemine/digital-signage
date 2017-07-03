@@ -1,24 +1,25 @@
+{{!-- Background video that is shown at all times --}}
 <div class="video-player__background--container">
   {{video-player
     muted=displayVideoSelect
-    class=(if displayVideo 'video-player__hidden' 'video-player__darken')
-    playing=(if displayVideo false true)
-    url=(make-local-url data.config.modelIdentifier backgroundVideoUrl)
+    class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
+    playing=(if displayMapView false (if displayVideo false true))
+    url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier bgVidData.full.fileIdentifier))
     onEndedCallback=(action 'cycleBackground')
   }}
 </div>
 
-
+{{!-- Video selction for when a stack from map view is selected --}}
 {{#if displayVideoSelect}}
     {{video-list
-      selectedVidPos=0
+      selectedVidPos=vidSelectPos
       class="video-list video-list--flex"
       listItemClass="video-list-item--flex"
       listItemSmall="video-list-item--flex__small"
       listItemSelected="video-list-item--selected"
       listItemHighlight="blue-border"
-      keyboard=data.config.keyboard
-      videos=selectionVideos
+      keyboard=keyboard
+      videos=vidSelectData
       modelIdentifier=data.config.modelIdentifier
       focus=displayVideoSelect
       onSelectedCallback=(action 'videoSelected')
@@ -28,7 +29,8 @@
     }}
 {{/if}}
 
-{{#if showAfterVideoList}}
+{{!-- View after video is completed --}}
+{{#if displayAfterVideoList}}
   {{after-video-list
     data=afterVideoListData
     config=data.config
@@ -37,16 +39,16 @@
   }}
 {{/if}}
 
+{{!-- Fullscreen video --}}
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
     {{video-player
       playing=videoPlaying
       muted=false
-      url=video
+      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
       onClickCallback=(action 'videoSelected' bubbles=false)
       onHoverCallback=(action 'doNothing')
       onEndedCallback=(action 'videoEnded')
-      videoPos=backgroundVideoPos
     }}
   </div>
 {{/if}}
@@ -60,19 +62,22 @@
 }}
 
 {{!-- Map view stack-list --}}
-{{!stack-list
-  isFlex=false
-  onHoverCallback=(action 'doNothing')
-  onSelectedCallback=(action 'doNothing')
-  onCancelledCallback=(action 'doNothing')
-  onInputCallback=(action 'resetTimeout')
-  onStackChangeCallback=(action 'doNothing')
-  class="stack-list no-outline"
-  stackItemHighlight="blue-border"
-  data=mapData
-  stackItemClass="stack-list-item--flex"
-  keyboard=data.config.keyboard
-  modelIdentifier=config.modelIdentifier
-}}
+{{#if displayMapView}}
+  <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
+  {{stack-list
+    isFlex=false
+    onHoverCallback=(action 'doNothing')
+    onSelectedCallback=(action 'stackSelected')
+    onCancelledCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
+    onStackChangeCallback=(action 'doNothing')
+    class="stack-list no-outline"
+    stackItemHighlight="blue-border"
+    data=mapData
+    stackItemClass="stack-list-item--flex"
+    keyboard=keyboard
+    modelIdentifier=config.modelIdentifier
+  }}
+{{/if}}
 
 {{yield}}

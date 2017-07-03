@@ -55,6 +55,10 @@ export default AbstractList.extend({
   stackItemClass: '',
   stackItemHighlight: '',
   
+  mouseMove() {
+    this.inputCallback();
+  },
+  
   select: function(event) {
     this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
     this.inputCallback();

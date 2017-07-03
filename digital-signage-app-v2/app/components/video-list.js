@@ -36,6 +36,10 @@ export default AbstractList.extend({
   popoverShowDelay: 0.25,
   muted: false,
   
+  mouseMove() {
+    this.inputCallback();
+  },
+  
   select: function(event) {
     this.selectedCallback(this.get('videos')[this.get('selectedVidPos')], this.get('selectedVidPos'));
 
