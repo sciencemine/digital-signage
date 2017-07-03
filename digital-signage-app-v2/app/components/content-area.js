@@ -22,6 +22,8 @@ export default Ember.Component.extend(KeyboardControls, {
   
   afterVideoListData: null,
   mapData: [ ],
+  
+  videoHistory: [ ],
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -52,6 +54,19 @@ export default Ember.Component.extend(KeyboardControls, {
     this.set('displayVideo', false);
 
     clearTimeout(this.get('idleTimeout'));
+  },
+  appendVideoHistory: function() {
+    this.get('videoHistory.videos').push(this.get('playingVidData'));
+    console.log(this.get('videoHistory'));
+  },
+  clearVideoHistory: function() {
+    this.set('videoHistory', {
+      prettyName: "History",
+      description: "",
+      x: 0,
+      y: 0,
+      videos: [ ]
+    });
   },
   pauseVideo: function() {
     this.set('videoPlaying', !this.get('videoPlaying'));
@@ -215,18 +230,17 @@ export default Ember.Component.extend(KeyboardControls, {
 
     return kst;
   },
-  
   bgVidData: Ember.computed('bgVidPos', function() {
       let backgroundId = this.get('data.config.backgroundVideos')[this.get('bgVidPos')];
       
       return this.get('data.videos')[backgroundId];
   }),
-
   init() {
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
     
     this.makeMapData();
+    this.clearVideoHistory();
     
     this.send('resetTimeout');
   },
@@ -235,7 +249,6 @@ export default Ember.Component.extend(KeyboardControls, {
       this.updateFocus(this.get('focus'));
     }
   },
-  
   click() {
     this.set('focus', false);
     
@@ -268,6 +281,8 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('focus', false);
       this.set('displayVideo', false);
       
+      this.appendVideoHistory();
+      
       this.showVideoSelect();
     },
     cycleBackground() {
@@ -293,6 +308,7 @@ export default Ember.Component.extend(KeyboardControls, {
                         component.hideVideoSelect();
                         component.hideMapView();
                         component.hideDisplayVideo();
+                        component.clearVideoHistory();
                         
                         component.set('focus', true);
                       }, component.get('data.config.ui.idle') * 1000);
