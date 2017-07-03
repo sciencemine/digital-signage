@@ -4,18 +4,28 @@ import toposort from 'npm:toposort';
 
 export default Ember.Component.extend(KeyboardControls, {
   displayVideoSelect: false,
-  displayVideoSelectTimeout: null,
+  idleTimeout: null,
   displayVideo: false,
-  video: null,
+  displayAfterVideoList: false,
+  displayMapView: true,
+  
   videoPlaying: false,
+  
   keyboard: null,
-  backgroundVideoPos: 0,
-  backgroundVideoUrl: null,
-  backgroundVideoKeys: null,
-  selectionVideos: [],
+
+  
+  playingVidData: null,
+  
+  bgVidPos: 0,
+  
+  vidSelectData: [],
+  vidSelectPos: 0,
+  
   afterVideoListData: null,
-  showAfterVideoList: false,
+
   mapData: [ ],
+  
+  videoHistory: [ ],
 
   showVideoSelect: function() {
     this.set('displayVideoSelect', true);
@@ -25,7 +35,40 @@ export default Ember.Component.extend(KeyboardControls, {
   hideVideoSelect: function() {
     this.set('displayVideoSelect', false);
 
-    clearTimeout(this.get('displayVideoSelectTimeout'));
+    clearTimeout(this.get('idleTimeout'));
+  },
+  showMapView: function() {
+    this.set('displayMapView', true);
+
+    this.send('resetTimeout');
+  },
+  hideMapView: function() {
+    this.set('displayMapView', false);
+
+    clearTimeout(this.get('idleTimeout'));
+  },
+  showDisplayVideo: function() {
+    this.set('displayVideo', true);
+
+    this.send('resetTimeout');
+  },
+  hideDisplayVideo: function() {
+    this.set('displayVideo', false);
+
+    clearTimeout(this.get('idleTimeout'));
+  },
+  appendVideoHistory: function() {
+    this.get('videoHistory.videos').push(this.get('playingVidData'));
+    console.log(this.get('videoHistory'));
+  },
+  clearVideoHistory: function() {
+    this.set('videoHistory', {
+      prettyName: "History",
+      description: "",
+      x: 0,
+      y: 0,
+      videos: [ ]
+    });
   },
   pauseVideo: function() {
     this.set('videoPlaying', !this.get('videoPlaying'));
@@ -35,7 +78,6 @@ export default Ember.Component.extend(KeyboardControls, {
   select: function() {
     this.set('videoPlaying', false);
     this.set('focus', false);
-    this.showVideoSelect();
 
     this.send('resetTimeout');
   },
@@ -218,110 +260,68 @@ export default Ember.Component.extend(KeyboardControls, {
 
     return kst;
   },
-
+  bgVidData: Ember.computed('bgVidPos', function() {
+      let backgroundId = this.get('data.config.backgroundVideos')[this.get('bgVidPos')];
+      
+      return this.get('data.videos')[backgroundId];
+  }),
   init() {
-    let backgroundId = this.get('data.config.backgroundVideos')[0];   
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
-    this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
-    this.set('backgroundVideoKeys', this.get('data.config.backgroundVideos'));
-    this.showVideoSelect();
-    this.set('selectionVideos', []);
-
-    for (let vid in this.get('data.videos')) {
-      this.get('selectionVideos').pushObject(this.get('data.videos')[vid]);
-    }
-
-    let afterVideoListData = [
-    ];
-
-    for (let key in this.get('data.attributes')){
-      let videos = [];
-
-      afterVideoListData.push(Ember.copy(this.get('data.attributes')[key]));
-
-      for (let i = 0; i < afterVideoListData[afterVideoListData.length - 1].videos.length; i++){
-        videos.push(this.get('data.videos')[afterVideoListData[afterVideoListData.length - 1].videos[i]]);
-      }
-
-      afterVideoListData[afterVideoListData.length - 1].videos = videos;
-    }
-
-    afterVideoListData.unshift(
-      {
-        prettyName: "History",
-        description: "",
-        x: 0,
-        y: 0,
-        videos: [
-          {
-            prettyName: "ioenasihoetna",
-            description: "oansionasnt",
-            attributes: [ ],
-            relations: [
-              {
-                relatedId: "",
-                difficulty: 1,
-                attributeId: ""
-              }
-            ],
-            full: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            },
-            teaser: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            }
-          }
-        ]
-      }
-    );
-    
-    this.set('afterVideoListData', afterVideoListData);
     
     this.makeMapData();
+    this.clearVideoHistory();
+    
+    this.send('resetTimeout');
   },
   didRender() {
     if (this.$().is(':focus') !== this.get('focus')) {
       this.updateFocus(this.get('focus'));
     }
   },
-  
   click() {
     this.set('focus', false);
-    this.showVideoSelect();
+    
+    this.showMapView();
   },
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-        var url = videoData.full.fileIdentifier;
-        //strips off media fragments fix by sending vid object data from model
-        this.set('video', this.get('data.config.modelIdentifier') + '/' + url);
+        this.set('playingVidData', videoData);
+        
         this.set('displayVideo', true);
         this.set('videoPlaying', true);
-        this.hideVideoSelect();
         this.set('focus', true);
+        
+        this.hideVideoSelect();
       }
       else {
         this.pauseVideo();
+        
+        this.send('resetTimeout');
       }
+    },
+    stackSelected(sender, vidArr) {
+      this.set('vidSelectData', vidArr);
+      
+      this.showVideoSelect();
+      this.hideMapView();
     },
     videoEnded() {
       this.set('focus', false);
-      this.showVideoSelect();
       this.set('displayVideo', false);
+      
+      this.appendVideoHistory();
+      
+      this.showVideoSelect();
     },
     cycleBackground() {
-      let backArrayLength = this.get('backgroundVideoKeys').length;
-      let curVidPos = this.get('backgroundVideoPos');
+      let bgVidKeys = this.get('data.config.backgroundVideos');
+      
+      let bgArrayLength = bgVidKeys.length;
+      let curBgVidPos = this.get('bgVidPos');
 
-      this.set('backgroundVideoPos', (curVidPos + 1) % backArrayLength);
-
-      let backgroundId = this.get('data.config.backgroundVideos')[this.get('backgroundVideoPos')];
-      this.set('backgroundVideoUrl', this.get('data.videos')[backgroundId].full.fileIdentifier);
+      this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);
     },
     doNothing(/*sender, selected*/) {
       //console.log(selected);
@@ -331,16 +331,20 @@ export default Ember.Component.extend(KeyboardControls, {
       this.cancel();
     },
     resetTimeout() {
-      let component = this;
+      clearTimeout(this.get('idleTimeout'));
 
-      clearTimeout(this.get('displayVideoSelectTimeout'));
+      let timeout = (function(component){
+                      return setTimeout(function() {
+                        component.hideVideoSelect();
+                        component.hideMapView();
+                        component.hideDisplayVideo();
+                        component.clearVideoHistory();
+                        
+                        component.set('focus', true);
+                      }, component.get('data.config.ui.idle') * 1000);
+                    }) (this);
 
-      let timeout = setTimeout(() => {
-                      component.hideVideoSelect();
-                      component.set('focus', true);
-                    }, this.get('data.config.ui.idle') * 1000);
-
-      this.set('displayVideoSelectTimeout', timeout);
+      this.set('idleTimeout', timeout);
     }
   }
 });
