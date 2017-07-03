@@ -11,7 +11,6 @@
 
 {{!-- Video selction for when a stack from map view is selected --}}
 {{#if displayVideoSelect}}
-
     {{video-list
       selectedVidPos=vidSelectPos
       class="video-list video-list--flex"
@@ -36,7 +35,7 @@
     data=afterVideoListData
     config=data.config
     onInputCallback=(action 'resetTimeout')
-    videoSelectedCallback=(action 'doNothing')
+    videoSelectedCallback=(action 'videoSelected' bubbles=false)
   }}
 {{/if}}
 
@@ -57,7 +56,7 @@
 {{menu-bar
   popoverShowDelay=data.config.ui.popoverShowDelay
   config=data.config
-  videos=selectionVideos
+  videos=data.videos
   attributes=data.attributes
   onClickCallback=(action 'videoSelected')
 }}

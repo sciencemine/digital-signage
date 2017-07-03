@@ -49,14 +49,14 @@ export default Ember.Component.extend({
   stackListFocus: true,
   stackListSelectedPos: 0,
   videoListSelectedPos: -1,
-
+  
+  mouseMove() {
+    this.get('onInputCallback');
+  },
   init() {
     this._super(...arguments);
 
     this.set('videoListData', this.get('data')[0].videos);
-  },
-  didRender() {
-
   },
   actions: {
     /* Stack List Controller */
