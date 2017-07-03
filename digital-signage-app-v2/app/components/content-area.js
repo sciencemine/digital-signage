@@ -15,7 +15,6 @@ export default Ember.Component.extend(KeyboardControls, {
   selectionVideos: [],
   afterVideoListData: null,
   showAfterVideoList: false,
-  
   mapData: [ ],
 
   showVideoSelect: function() {
@@ -55,6 +54,34 @@ export default Ember.Component.extend(KeyboardControls, {
 
     this.send('resetTimeout');
   },
+  function getRelatedVids(currentVid, difficulty, recursiveDepth) {
+
+    var relatedVids = [];
+
+    for (let relation = 0; relation < currentVid.relations.length; relation++) {
+      //need to check if it's already there, if so, don't push
+      if(relatedVids.find(function(video) { return videos.vidId === this; },
+      currentVid.relations[relatedVids].relatedId)){
+
+        relatedVids.push(this.get('videos')[currentVid.relations[relation].relatedId]);
+        relatedVids[relatedVids.length - 1].difficulty = difficulty + currentVid.relations[relation].difficulty;
+        relatedVids[relatedVids.length - 1].vidId = currentVid.relations[relation].relatedId;
+      }
+      
+    }//for
+
+    if (recursiveDepth > 0) {
+      for (let vidNdx = 0; vidNdx < relatedVids.length; vidNdx++) {
+        relatedVids.concat(getRelatedVids(relatedVids[vidNdx], 
+          difficulty + relatedVids[relatedVids.length - 1].difficulty, recursiveDepth - 1));
+      }//for
+    }//if
+
+    return relatedVids.sort(function(a, b) {
+      return a.difficulty > b.difficulty;
+    });
+  },
+
   makeMapData: function() {
     let mapData = [ ];
     

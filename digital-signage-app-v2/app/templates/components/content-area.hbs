@@ -10,7 +10,7 @@
 
 
 {{#if displayVideoSelect}}
-    {{video-list
+    {{!video-list
       selectedVidPos=0
       class="video-list video-list--flex"
       listItemClass="video-list-item--flex"
@@ -60,7 +60,7 @@
 }}
 
 {{!-- Map view stack-list --}}
-{{!stack-list
+{{stack-list
   isFlex=false
   onHoverCallback=(action 'doNothing')
   onSelectedCallback=(action 'doNothing')
@@ -70,6 +70,24 @@
   class="stack-list no-outline"
   stackItemHighlight="blue-border"
   data=mapData
+  focus=true
+  stackItemClass="stack-list-item--flex"
+  keyboard=data.config.keyboard
+  modelIdentifier=config.modelIdentifier
+}}
+
+{{!-- Flex view stack-list --}}
+{{!stack-list
+  isFlex=true
+  onHoverCallback=(action 'doNothing')
+  onSelectedCallback=(action 'doNothing')
+  onCancelledCallback=(action 'doNothing')
+  onInputCallback=(action 'resetTimeout')
+  onStackChangeCallback=(action 'doNothing')
+  class="stack-list no-outline"
+  stackItemHighlight="blue-border"
+  data=mapData
+  focus=true
   stackItemClass="stack-list-item--flex"
   keyboard=data.config.keyboard
   modelIdentifier=config.modelIdentifier
