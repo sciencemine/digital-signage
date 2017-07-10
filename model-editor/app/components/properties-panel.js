@@ -71,12 +71,6 @@ export default Ember.Component.extend({
         }
       });
     }
-
-    if (this.$('.panel-body').length !== 0) {
-      this.$('.panel-body').scrollspy({
-        target: '#propertiesNav'
-      });
-    }
     
     this.setStyle();
   },
@@ -95,7 +89,8 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     toggleView() {
-      this.set('expanded', !this.get('expanded'));
+      this.toggleProperty('expanded');
+      
       this.get('propertiesExpandedCallback') (this.get('expanded'));
     },
     /***************************************************************************

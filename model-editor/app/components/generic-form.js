@@ -183,20 +183,6 @@ export default Ember.Component.extend({
 
     return payload;
   },
-  
-  /*****************************************************************************
-   * EVENT:
-   *  didRender
-   *
-   * DESCRIPTION:
-   *  When the dom renders, turns on tooltips and validate form
-   * 
-   * AUTHOR:
-   *  Michael Fryer
-   *
-   * DATE:
-   *  June 5th, 2017
-   ****************************************************************************/
   didRender() {
     if (this.get('showTooltips')) {
       if (this.$('[data-toggle="tooltip"]')) {
@@ -221,19 +207,6 @@ export default Ember.Component.extend({
     }
   },
   actions: {
-    /***************************************************************************
-     * ACTION:
-     *  submitForm
-     *
-     * DESCRIPTION:
-     *  Callback for submitting a form
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     submitForm() {
       this.get('validationCallback') (this.get('validForm'));
 
@@ -242,58 +215,33 @@ export default Ember.Component.extend({
       
         this.get('notify').success("Form successfully submitted!", {
           radius: true,
-          closeAfter: null
+          closeAfter: 10 * 1000
         });
       }//if
       else {
         this.get('notify').alert("Please verify the contents of the form before submission.", {
           radius: true,
-          closeAfter: null
+          closeAfter: 10 * 1000
         });
       }//else
 
       return false;
     },
-    /***************************************************************************
-     * ACTION:
-     *  validateForm
-     *
-     * DESCRIPTION:
-     *  Validates the form
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     validateForm() {
       (function(component) {
         setTimeout(function() {
           let valid = true;
+          
           valid = component.validateInput() && valid;
           valid = component.validateTextarea() && valid;
           valid = component.validateSelect() && valid;
 
           component.set('validForm', valid);
         }, 10);
-      })(this);
+      }) (this);
     },
-    /***************************************************************************
-     * ACTION:
-     *  toggleHelp
-     *
-     * DESCRIPTION:
-     *  Toggles the help messages under the inputs on and off
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     toggleHelp() {
-      this.set('showHelp', !this.get('showHelp'));
+      this.toggleProperty('showHelp');
     }
   }
 });

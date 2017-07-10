@@ -264,7 +264,7 @@ export default Ember.Component.extend({
         if (data.from === data.to) {
           component.get('notify').warning("Warning! Trying to make a relation to the same video.", {
             radius: true,
-            closeAfter: null
+            closeAfter: 10 * 1000
           });
           
           return;
@@ -285,7 +285,7 @@ export default Ember.Component.extend({
         if (attributes.length === 0) {
           component.get('notify').warning("Warning! Trying to make a relation between two videos with no shared attributes.", {
             radius: true,
-            closeAfter: null
+            closeAfter: 10 * 1000
           });
           
           return;

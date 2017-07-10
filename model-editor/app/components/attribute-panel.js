@@ -69,20 +69,16 @@ export default Ember.Component.extend({
         }
       });
     }//if
-
-    if (this.$('.attribute-list').length !== 0) {
-      this.$('.attribute-list').scrollspy({
-        target: '#attributeNav'
-      });
-    }//if
     
     this.setStyle();
   },
   actions: {
     dragging(event) {
       if (event.clientX !== 0 && event.clientY !== 0) {
-        this.set('dragX', event.clientX);
-        this.set('dragY', event.clientY);
+        this.setProperties({
+          dragX: event.clientX,
+          dragY: event.clientY
+        });
       }//if
     },
     /***************************************************************************
@@ -123,8 +119,11 @@ export default Ember.Component.extend({
      **************************************************************************/
     attributeDrop(key) {
       this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), key);
-      this.set('dragX', null);
-      this.set('dragY', null);
+
+      this.setProperties({
+        dragX: null,
+        dragY: null
+      });
     },
     /***************************************************************************
      * ACTION:
@@ -140,7 +139,8 @@ export default Ember.Component.extend({
      *  June 5th, 2017
      **************************************************************************/
     toggleView() {
-      this.set('expanded', !this.get('expanded'));
+      this.toggleProperty('expanded');
+      
       this.get('attributesExpandedCallback') (this.get('expanded'));
     },
     scrollDiv(elId) {

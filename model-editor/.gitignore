@@ -13,7 +13,7 @@
 /connect.lock
 /coverage/*
 /libpeerconnection.log
+/electron-out
+/ember-electron
 npm-debug.log*
 testem.log
-
-electron-out/

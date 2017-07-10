@@ -3,7 +3,7 @@
 </div>
 
 {{properties-panel
-  onSubmitCallback=(action 'dataUpdate')
+  onSubmitCallback=(action 'updateData')
   propertiesExpandedCallback=(action 'setPropertiesExpanded')
   updateModalCallback=(action 'updateModalInfo')
   data=selectedVideo
@@ -14,7 +14,7 @@
 }}
 
 {{configuration-panel
-  onSubmitCallback=(action 'configUpdate')
+  onSubmitCallback=(action 'updateConfig')
   configurationExpandedCallback=(action 'setConfigurationExpanded')
   validationCallback=(action "validateConfig")
   class="content-area--configuration-section"
@@ -66,7 +66,7 @@
       <div class="modal-body content-area--modal__body">
         {{generic-form
           validationCallback=(action 'doNothing')
-          onSubmitCallback=(action 'dataUpdate')
+          onSubmitCallback=(action 'updateData')
           prefix=modalPrefix
           path=modalPath
           key=modalKey

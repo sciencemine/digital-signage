@@ -69,95 +69,44 @@ export default Ember.Component.extend({
     videoId: null,
     data: { }
   },
+  
+  makeFiveDigitId: function(obj) {
+    let text;
+
+    do {
+      text = "";
+      let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+
+      for(var i = 0; i < 5; i++) {
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+      }
+    } while (text in obj);
+
+    return text;
+  },
 
   init() {
     this._super(...arguments);
-    let modelIdentifier;
     
     this.set('newModel', this.get('data.modelData'));
   },
   actions: {
-    /***************************************************************************
-     * ACTION:
-     *  updateModalInfo
-     *
-     * DESCRIPTION:
-     *  Sets the modal information according to the parameters given
-     *
-     * PARAMETERS:
-     *  title - The title of the new modal that is to be displayed
-     *  config - A configuration object to format the modal
-     *  path - The path to where the submitted data is to be stored in newModel
-     *  key - Key at the path destination to store the data. Used for updates.
-     *    This is optional
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     updateModalInfo(title, config, path, key) {
-      this.set('modalTitle', title);
-      this.set('modalConfig', this.get('data.modelConfig' + config));
-      this.set('modalData', (path && key ? this.get('newModel' + path)[key] : null));
-      this.set('modalPrefix', title.replace(/\s*/gi, ''));
-      this.set('modalPath', path);
-      this.set('modalKey', key);
+      this.setProperties({
+        modalTitle: title,
+        modalConfig: this.get('data.modelConfig' + config),
+        modalData: (path && key ? this.get('newModel' + path)[key] : null),
+        modalPrefix: title.replace(/\s*/gi, ''),
+        modalPath: path,
+        modalKey: key
+      });
     },
-    /***************************************************************************
-     * ACTION:
-     *  updateModalAddVideo
-     *
-     * DESCRIPTION:
-     *  Sends to updateModalInfo the proper parameters for adding a video
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     updateModalAddVideo() {
       this.send('updateModalInfo', "Add Video", '.videos.data.video', '.videos');
     },
-    /***************************************************************************
-     * ACTION:
-     *  updateModalAddAttribute
-     *
-     * DESCRIPTION:
-     *  Sends to updateModalInfo the proper parameters for adding an attribute
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     updateModalAddAttribute() {
       this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
-    /***************************************************************************
-     * ACTION:
-     *  addRelation
-     *
-     * DESCRIPTION:
-     *  Adds a relation to a video
-     *
-     * PARAMETERS:
-     *  data - Data containing the following hash keys
-     *    from - The starting video in the relation
-     *    relatedId - The ending video in the relation
-     *    difficulty - The difficulty of the relation
-     *
-     *  attrId - The attribute on the relation
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     addRelation(data, attrId) {
       let obj = { };
       
@@ -169,42 +118,9 @@ export default Ember.Component.extend({
 
       this.send('setSelectedVideo', data.from);
     },
-    /***************************************************************************
-     * ACTION:
-     *  removeRelation
-     *
-     * DESCRIPTION:
-     *  Removes a relation from a video
-     *
-     * PARAMETERS:
-     *  vidId - The video from which the relation should be removed
-     *  pos - The position in the relations array that should be removed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     removeRelation(vidId, pos) {
       this.get('newModel.videos')[vidId].relations.removeAt(pos);
     },
-    /***************************************************************************
-     * ACTION:
-     *  removeVideo
-     *
-     * DESCRIPTION:
-     *  Removes a video from the model
-     *
-     * PARAMETERS:
-     *  vidId - The video to be removed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 9th, 2017
-     **************************************************************************/
     removeVideo(vidId) {
       let videos = this.get('newModel.videos');
       
@@ -277,99 +193,35 @@ export default Ember.Component.extend({
      **************************************************************************/
     addAttributeToVideo(videoId, attrId) {
       if (videoId) {
-        let component = this;
         
         this.get('newModel.videos')[videoId].attributes.pushObject(attrId);
         this.get('newModel.attributes')[attrId].videos.pushObject(videoId);
+        
         this.send('setSelectedVideo', videoId);
         
-        setTimeout(function() {
-          component.notifyPropertyChange('selectedVideo');
-        }, 10);
+        (function(component) {
+          setTimeout(function() {
+            component.notifyPropertyChange('selectedVideo');
+          }, 10);
+        }) (this);
       }
     },
-    /***************************************************************************
-     * ACTION:
-     *  removeAttributeFromVideo
-     *
-     * DESCRIPTION:
-     *  Removes an attribute from the video and removes the video to the list of videos
-     *    that has the attribute in attributes
-     *
-     * PARAMETERS:
-     *  videoId - The key of the video that is getting added
-     *  attrId - The attribute that is getting added
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 12th, 2017
-     **************************************************************************/
     removeAttributeFromVideo(videoId, attrId) {
-      let component = this;
-      
       this.get('newModel.videos')[videoId].attributes.removeObject(attrId);
       this.get('newModel.attributes')[attrId].videos.removeObject(videoId);
       
-      setTimeout(function() {
-        component.notifyPropertyChange('selectedVideo');
-      }, 10);
+      (function(component) {
+        setTimeout(function() {
+          component.notifyPropertyChange('selectedVideo');
+        }, 10);
+      }) (this);
     },
-    /***************************************************************************
-     * ACTION:
-     *  setAttributesExpanded
-     *
-     * DESCRIPTION:
-     *  Sets the attributesExpanded to the parameter given
-     *
-     * PARAMETERS:
-     *  param - Boolean for if the attributes panel is expanded or not
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     setAttributesExpanded(param) {
       this.set('attributesExpanded', param);
     },
-    /***************************************************************************
-     * ACTION:
-     *  setPropertiesExpanded
-     *
-     * DESCRIPTION:
-     *  Sets the propertiesExpanded to the parameter given
-     *
-     * PARAMETERS:
-     *  param - Boolean for if the properties panel is expanded or not
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     setPropertiesExpanded(param) {
       this.set('propertiesExpanded', param);
     },
-    /***************************************************************************
-     * ACTION:
-     *  setConfigurationExpanded
-     *
-     * DESCRIPTION:
-     *  Sets the configurationExpanded to the parameter given
-     *
-     * PARAMETERS:
-     *  param - Boolean for if the configuration panel is expanded or not
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     setConfigurationExpanded(param) {
       this.set('configurationExpanded', param);
     },
@@ -397,29 +249,19 @@ export default Ember.Component.extend({
 
       if (!param) {
         this.set('selectedVideo', null);
+        
         return;
       }
 
-      this.set('selectedVideo', Ember.copy(this.get('newModel.videos')[param]));
-      this.set('selectedVideoAttributes', Ember.copy(this.get('newModel.videos')[param].attributes));
-      this.set('selectedVideoRelations', Ember.copy(this.get('newModel.videos')[param].relations));
+      this.setProperties({
+        selectedVideo: Ember.copy(this.get('newModel.videos')[param]),
+        selectedVideoAttributes: Ember.copy(this.get('newModel.videos')[param].attributes),
+        selectedVideoRelations: Ember.copy(this.get('newModel.videos')[param].relations)
+      });
+      
       this.send('replaceVideoAttributes');
       this.send('replaceVideoRelations');
     },
-    /***************************************************************************
-     * ACTION:
-     *  replaceVideoAttributes
-     *
-     * DESCRIPTION:
-     *  Replaces the attributes of the currently selected video with nice
-     *    processed data that can be displayed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     replaceVideoAttributes() {
       let attributes = this.get('selectedVideo.attributes');
 
@@ -436,20 +278,6 @@ export default Ember.Component.extend({
         this.get('selectedVideo.attributes').push(data);
       }
     },
-    /***************************************************************************
-     * ACTION:
-     *  replaceVideoRelations
-     *
-     * DESCRIPTION:
-     *  Replaces the relations of the currently selected video with nice
-     *    processed data that can be displayed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     replaceVideoRelations() {
       let relations = this.get('selectedVideo.relations');
 
@@ -468,73 +296,20 @@ export default Ember.Component.extend({
         this.get('selectedVideo.relations').push(data);
       }
     },
-    /***************************************************************************
-     * ACTION:
-     *  validateConfig
-     *
-     * DESCRIPTION:
-     *  Sets validModel to be valid if the parameter is valid or if it were 
-     *    previously valid. Note that validModel is initially false. Also note
-     *    that once a model is valid, form validation prevents model from
-     *    entering into an invalid state
-     *
-     * PARAMETERS:
-     *  param - If the model is valid or not
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     validateConfig(param) {
       this.set('validModel', this.get('validModel') || param);
     },
-    /***************************************************************************
-     * ACTION:
-     *  configUpdate
-     *
-     * DESCRIPTION:
-     *  Handles updating the configuration data in the model with new content.
-     *
-     * PARAMETERS:
-     *  data - The data new configuration data that is going to be set.
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    configUpdate(data) {
+    updateConfig(data) {
       this.set('newModel.config', data);
     },
-    /***************************************************************************
-     * ACTION:
-     *  dataUpdate
-     *
-     * DESCRIPTION:
-     *  Handles updating data in the model that is not config data
-     *
-     * PARAMETERS:
-     *  data - The new data to be added
-     *  path - The path to the location to add the new data in newModel
-     *  key - The key to update. This is optional
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
-    dataUpdate(data, path, key) {
+    updateData(data, path, key) {
       let newKey;
       
       if (key) {
         path = path + "." + key;
       }
       else {
-        newKey = makeId(this.get('newModel' + path));
+        newKey = this.makeFiveDigitId(this.get('newModel' + path));
         path = path + "." + newKey;
       }
 
@@ -575,10 +350,12 @@ export default Ember.Component.extend({
         this.$('#formOverlay').modal('hide');
       }
 
-      this.set('modalTitle', null);
-      this.set('modalConfig', null);
-      this.set('modalData', null);
-      this.set('modalPrefix', null);
+      this.setProperties({
+        modalTitle: null,
+        modalConfig: null,
+        modalData: null,
+        modalPrefix: null
+      });
       
       (function(component) {
         setTimeout(function() {
@@ -586,43 +363,9 @@ export default Ember.Component.extend({
         }, 20);
       })(this);
     },
-    /***************************************************************************
-     * ACTION:
-     *  pushData
-     *
-     * DESCRIPTION:
-     *  Pushes data to an array in the model. This is for adding a new attribute
-     *    or relation
-     *
-     * PARAMETERS:
-     *  data - The data that is getting pushed
-     *  path - The path to where the data should be added
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     pushData(data, path) {
       this.get('newModel' + path).pushObject(data);
     },
-    /***************************************************************************
-     * ACTION:
-     *  deleteAttribute
-     *
-     * DESCRIPTION:
-     *  Deletes an attribute from the list of attributes
-     * 
-     * PARAMETERS:
-     *  attributeId - The id of the attribute that is to be removed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     deleteAttribute(attributeId) {
       let attributes = Ember.copy(this.get('newModel.attributes'));
 
@@ -642,25 +385,13 @@ export default Ember.Component.extend({
       }//for
       
       delete attributes[attributeId];
+      
       this.set('newModel.attributes', attributes);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
       }//if
     },
-    /***************************************************************************
-     * ACTION:
-     *  saveModel
-     *
-     * DESCRIPTION:
-     *  Saves the model. Will only save if validModel is true.
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     saveModel() {
       if (!this.get('validModel')) {
         this.get('notify').alert("Please verify information in the configuration section.", {
@@ -688,52 +419,8 @@ export default Ember.Component.extend({
         a.click();
       }//if
     },
-    /***************************************************************************
-     * ACTION:
-     *  doNothing
-     *
-     * DESCRIPTION:
-     *  This does nothing. Basically a null action
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     doNothing() {
 
     }
   }
 });
-
-/*******************************************************************************
- * FUNCTION:
- *  makeId
- *
- * DESCRIPTION:
- *  Creates a unique hash key in an object
- *
- * PARAMETERS:
- *  obj - The object to make a unique key in
- * 
- * AUTHOR:
- *  Michael Fryer
- *
- * DATE:
- *  June 5th, 2017
- ******************************************************************************/
-function makeId(obj) {
-  let text;
-
-  do {
-    text = "";
-    let possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-
-    for(var i = 0; i < 5; i++) {
-      text += possible.charAt(Math.floor(Math.random() * possible.length));
-    }
-  } while (text in obj);
-
-  return text;
-}

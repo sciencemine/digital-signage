@@ -28,8 +28,10 @@ export default Ember.Component.extend({
 
   drag(event) {
     if (event.clientX !== 0 && event.clientY !== 0) {
-      this.set('dragX', event.clientX);
-      this.set('dragY', event.clientY);
+      this.setProperties({
+        dragX: event.clientX,
+        dragY: event.clientY
+      });
     }//if
   },
   /*****************************************************************************
@@ -48,8 +50,11 @@ export default Ember.Component.extend({
    ****************************************************************************/
   dragEnd() {
     this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), this.get('key'));
-    this.set('dragX', null);
-    this.set('dragY', null);
+
+    this.setProperties({
+      dragX: null,
+      dragY: null
+    });
   },
   actions: {
     /***************************************************************************

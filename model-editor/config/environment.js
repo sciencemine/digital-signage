@@ -4,7 +4,7 @@ module.exports = function(environment) {
   var ENV = {
     modulePrefix: 'model-editor',
     environment: environment,
-    rootURL: '',
+    rootURL: (process.env.EMBER_CLI_ELECTRON ? '' : '/'),
     locationType: (process.env.EMBER_CLI_ELECTRON ? 'hash' : 'auto'),
     EmberENV: {
       FEATURES: {
@@ -14,15 +14,6 @@ module.exports = function(environment) {
       EXTEND_PROTOTYPES: {
         // Prevent Ember Data from overriding Date.parse.
         Date: false
-      },
-      contentSecurityPolicy: {
-        'default-src': ["'none'"],
-        'script-src':  ["'self'"],
-        'font-src':    ["'self'"],
-        'connect-src': ["'self'"],
-        'img-src':     ["'self'"],
-        'style-src':   ["'self'"],
-        'media-src':   ["'self'"]
       }
     },
 
@@ -31,18 +22,13 @@ module.exports = function(environment) {
       // when it is created
     }
   };
-  
-  //false by default
-  ENV["ember-cli-mirage"] = {
-    enabled: false
-  };
 
   if (environment === 'development') {
-    // ENV.APP.LOG_RESOLVER = true;
-    // ENV.APP.LOG_ACTIVE_GENERATION = true;
-    // ENV.APP.LOG_TRANSITIONS = true;
-    // ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
-    // ENV.APP.LOG_VIEW_LOOKUPS = true;
+    ENV.APP.LOG_RESOLVER = true;
+    ENV.APP.LOG_ACTIVE_GENERATION = true;
+    ENV.APP.LOG_TRANSITIONS = true;
+    ENV.APP.LOG_TRANSITIONS_INTERNAL = true;
+    ENV.APP.LOG_VIEW_LOOKUPS = true;
   }
 
   if (environment === 'test') {
@@ -58,12 +44,6 @@ module.exports = function(environment) {
 
   if (environment === 'production') {
     
-  }
-  
-  if (environment === 'port') {
-    ENV['ember-cli-mirage'] = {
-      enabled: true
-    };
   }
 
   return ENV;
