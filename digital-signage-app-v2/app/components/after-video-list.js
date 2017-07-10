@@ -61,17 +61,21 @@ export default Ember.Component.extend({
   actions: {
     /* Stack List Controller */
     stackListHover(videos) {
-      this.set('videoListData', videos);
-      this.set('videoListSelectedPos', -1);
-      this.set('stackListFocus', true);
+      this.setProperties({
+        videoListData: videos,
+        videoListSelectedPos: -1,
+        stackListFocus: true
+      });
     },
     stackListCancelled() {
       this.get('onCancelCallback');
     },
     stackListSelected(sender, videos) {
-      this.set('videoListData', videos);
-      this.set('videoListSelectedPos', 0);
-      this.set('stackListFocus', false);
+      this.setProperties({
+        videoListData: videos,
+        videoListSelectedPos: 0,
+        stackListFocus: false
+      });
     },
     stackListInput() {
       this.get('onInputCallback') ();
@@ -82,8 +86,10 @@ export default Ember.Component.extend({
 
     /* Video List Controller */
     videoListCancelled() {
-      this.set('stackListFocus', true);
-      this.set('videoListSelectedPos', -1);
+      this.setProperties({
+        stackListFocus: true,
+        videoListSelectedPos: -1
+      });
     },
     videoListSelected(sender, selected) {
       this.get('videoSelectedCallback') (sender, selected);
@@ -92,8 +98,10 @@ export default Ember.Component.extend({
       this.get('onInputCallback') ();
     },
     videoListHover(videoPos) {
-      this.set('videoListSelectedPos', videoPos);
-      this.set('stackListFocus', false);
+      this.setProperties({
+        videoListSelectedPos: videoPos,
+        stackListFocus: false
+      });
     }
   }
 });
