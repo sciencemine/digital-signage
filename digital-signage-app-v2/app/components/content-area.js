@@ -24,50 +24,18 @@ export default Ember.Component.extend(KeyboardControls, {
   
   videoHistory: [ ],
 
-  showVideoSelect: function() {
-    this.set('displayVideoSelect', true);
-
-    this.send('resetTimeout');
-  },
-  hideVideoSelect: function() {
-    this.set('displayVideoSelect', false);
-
-    clearTimeout(this.get('idleTimeout'));
-  },
-  showMapView: function() {
-    this.set('displayMapView', true);
-
-    this.send('resetTimeout');
-  },
-  hideMapView: function() {
-    this.set('displayMapView', false);
-
-    clearTimeout(this.get('idleTimeout'));
-  },
-  showDisplayVideo: function() {
-    this.set('displayVideo', true);
-
-    this.send('resetTimeout');
-  },
-  hideDisplayVideo: function() {
-    this.set('displayVideo', false);
-
-    clearTimeout(this.get('idleTimeout'));
-  },
-  showAfterVideoList: function() {
-    this.set('displayAfterVideoList', true);
-
-    this.send('resetTimeout');
-  },
-  hideAfterVideoList: function() {
-    this.set('displayAfterVideoList', false);
-
-    clearTimeout(this.get('idleTimeout'));
+  hideOverlays: function() {
+    this.setProperties({
+      displayVideoSelect: false,
+      displayVideo: false,
+      displayAfterVideoList: false,
+      displayMapView: false
+    });
   },
   appendVideoHistory: function() {
     this.get('videoHistory.videos').push(this.get('playingVidData'));
   },
-  clearVideoHistory: function() {
+  resetVideoHistory: function() {
     this.set('videoHistory', {
       prettyName: "History",
       description: "",
@@ -76,29 +44,28 @@ export default Ember.Component.extend(KeyboardControls, {
       videos: [ ]
     });
   },
-  pauseVideo: function() {
-    this.set('videoPlaying', !this.get('videoPlaying'));
-    this.set('displayVideoSelect', !this.get('videoPlaying'));
+  toggleVidPlayback: function() {
+    this.toggleProperty('videoPlaying');
+    
     this.set('focus', this.get('videoPlaying'));
   },
   select: function() {
-    this.set('videoPlaying', false);
+    this.setProperties({ videoPlaying: false, displayAfterVideoList: true });
+    
     this.set('focus', false);
-
-    this.send('resetTimeout');
   },
   cancel: function() {
-    this.pauseVideo();
+    this.toggleVidPlayback();
 
     this.send('resetTimeout');
   },
   goNext: function() {
-    this.pauseVideo();
+    this.toggleVidPlayback();
 
     this.send('resetTimeout');
   },
   goPrevious: function() {
-    this.pauseVideo();
+    this.toggleVidPlayback();
 
     this.send('resetTimeout');
   },
@@ -232,6 +199,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
     this.set('mapData', mapData);
   },
+  //move to service
   kruskals: function(nodes, edges) {
     let numTrees = 0;
     let kst = [ ];
@@ -295,56 +263,61 @@ export default Ember.Component.extend(KeyboardControls, {
     this.set('keyboard', this.get('data.config.keyboard'));
     
     this.makeMapData();
-    this.clearVideoHistory();
+    this.resetVideoHistory();
     
     this.send('resetTimeout');
   },
   didRender() {
-    if (this.$().is(':focus') !== this.get('focus')) {
-      this.updateFocus(this.get('focus'));
+    let focus = this.get('focus');
+    
+    if (this.$().is(':focus') !== focus) {
+      this.updateFocus(focus);
     }
   },
-  click() {
+  click() {console.log('click')
     if (!this.get('displayVideoSelect') &&
         !this.get('displayAfterVideoList') &&
         !this.get('displayMapView')) {
-      this.set('focus', false);
-      
-      this.showMapView();
+      this.setProperties({ displayMapView: true, focus: false });
     }//if
   },
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-        this.set('playingVidData', videoData);
+        this.hideOverlays();
         
-        this.set('displayVideo', true);
-        this.set('videoPlaying', true);
-        this.set('focus', true);
+        this.setProperties({
+          displayVideo: true,
+          playingVidData: videoData,
+          videoPlaying: true,
+          focus: true
+        });
         
-        this.hideVideoSelect();
+        clearTimeout(this.get('idleTimeout'));
       }
       else {
-        this.pauseVideo();
+        this.toggleVidPlayback();
         
         this.send('resetTimeout');
       }
     },
-    stackSelected(sender, vidArr) {
-      this.set('vidSelectData', vidArr);
-      
-      this.showVideoSelect();
-      this.hideMapView();
-    },
     videoEnded() {
-      this.set('focus', false);
-      this.set('displayVideo', false);
-      
       this.appendVideoHistory();
       
       this.makeAfterVideoList();
       
-      this.showAfterVideoList();
+      this.setProperties({
+        displayAfterVideoList: true,
+        focus: false,
+        displayVideo: false
+      });
+    },
+    stackSelected(sender, vidArr) {      
+      this.setProperties({
+        displayVideoSelect: true,
+        vidSelectData: vidArr,
+        displayMapView: false
+      });
     },
     cycleBackground() {
       let bgVidKeys = this.get('data.config.backgroundVideos');
@@ -365,12 +338,9 @@ export default Ember.Component.extend(KeyboardControls, {
 
       let timeout = (function(component){
                       return setTimeout(function() {
-                        component.hideVideoSelect();
-                        component.hideMapView();
-                        component.hideDisplayVideo();
-                        component.hideAfterVideoList();
+                        component.hideOverlays();
                         
-                        component.clearVideoHistory();
+                        component.resetVideoHistory();
                         
                         component.set('focus', true);
                       }, component.get('data.config.ui.idle') * 1000);

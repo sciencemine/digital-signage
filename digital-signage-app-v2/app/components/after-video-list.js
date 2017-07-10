@@ -51,7 +51,7 @@ export default Ember.Component.extend({
   videoListSelectedPos: -1,
   
   mouseMove() {
-    this.get('onInputCallback');
+    this.get('onInputCallback') ();
   },
   init() {
     this._super(...arguments);
@@ -74,7 +74,7 @@ export default Ember.Component.extend({
       this.set('stackListFocus', false);
     },
     stackListInput() {
-      this.get('onInputCallback');
+      this.get('onInputCallback') ();
     },
     stackListStackChanged(videos) {
       this.set('videoListData', videos);
@@ -89,7 +89,7 @@ export default Ember.Component.extend({
       this.get('videoSelectedCallback') (sender, selected);
     },
     videoListInput() {
-      this.get('onInputCallback');
+      this.get('onInputCallback') ();
     },
     videoListHover(videoPos) {
       this.set('videoListSelectedPos', videoPos);

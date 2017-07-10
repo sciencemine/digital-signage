@@ -9,6 +9,39 @@
   }}
 </div>
 
+{{!-- Fullscreen video --}}
+{{#if displayVideo}}
+  <div class="video-player__fullscreen">
+    {{video-player
+      playing=videoPlaying
+      muted=false
+      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
+      onClickCallback=(action 'videoSelected' bubbles=false)
+      onHoverCallback=(action 'doNothing')
+      onEndedCallback=(action 'videoEnded')
+    }}
+  </div>
+{{/if}}
+
+{{!-- Map view stack-list --}}
+{{#if displayMapView}}
+  <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
+  {{stack-list
+    isFlex=false
+    onHoverCallback=(action 'doNothing')
+    onSelectedCallback=(action 'stackSelected')
+    onCancelledCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
+    onStackChangeCallback=(action 'doNothing')
+    class="stack-list no-outline"
+    stackItemHighlight="blue-border"
+    data=mapData
+    stackItemClass="stack-list-item--flex"
+    keyboard=keyboard
+    modelIdentifier=config.modelIdentifier
+  }}
+{{/if}}
+
 {{!-- Video selction for when a stack from map view is selected --}}
 {{#if displayVideoSelect}}
     {{video-list
@@ -39,20 +72,7 @@
   }}
 {{/if}}
 
-{{!-- Fullscreen video --}}
-{{#if displayVideo}}
-  <div class="video-player__fullscreen">
-    {{video-player
-      playing=videoPlaying
-      muted=false
-      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
-      onClickCallback=(action 'videoSelected' bubbles=false)
-      onHoverCallback=(action 'doNothing')
-      onEndedCallback=(action 'videoEnded')
-    }}
-  </div>
-{{/if}}
-
+{{!-- Repositionable menubar --}}
 {{menu-bar
   popoverShowDelay=data.config.ui.popoverShowDelay
   config=data.config
@@ -60,24 +80,5 @@
   attributes=data.attributes
   onClickCallback=(action 'videoSelected')
 }}
-
-{{!-- Map view stack-list --}}
-{{#if displayMapView}}
-  <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
-  {{stack-list
-    isFlex=false
-    onHoverCallback=(action 'doNothing')
-    onSelectedCallback=(action 'stackSelected')
-    onCancelledCallback=(action 'doNothing')
-    onInputCallback=(action 'resetTimeout')
-    onStackChangeCallback=(action 'doNothing')
-    class="stack-list no-outline"
-    stackItemHighlight="blue-border"
-    data=mapData
-    stackItemClass="stack-list-item--flex"
-    keyboard=keyboard
-    modelIdentifier=config.modelIdentifier
-  }}
-{{/if}}
 
 {{yield}}
