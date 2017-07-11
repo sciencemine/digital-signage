@@ -48,24 +48,24 @@ export default Ember.Component.extend({
   },
 
   didRender() {
-    let component = this;
-	
     if (this.$('[data-toggle="popover"]').length !== 0){
-      component.$('[data-toggle="popover"]').popover({
-        trigger: 'hover focus',
-        delay: {
-          show: (component.get('popoverShowDelay') * 1000),
-          hide: '100'
-        }
-      }).on('shown.bs.popover', function () {  
-        let timeout = setTimeout(function () {
-          component.$('[data-toggle="popover"]').popover('hide');
-          component.send('hidePopovers');
-        }, component.get('config.ui.popoverDwell') * 1000);
-          
-        clearTimeout(component.get('popoverTimeout'));
-        component.set('popoverTimeout', timeout);
-      });	
+      (function(component) {
+        component.$('[data-toggle="popover"]').popover({
+          trigger: 'hover focus',
+          delay: {
+            show: (component.get('popoverShowDelay') * 1000),
+            hide: '100'
+          }
+        }).on('shown.bs.popover', function () {  
+          let timeout = setTimeout(function () {
+            component.$('[data-toggle="popover"]').popover('hide');
+            component.send('hidePopovers');
+          }, component.get('config.ui.popoverDwell') * 1000);
+            
+          clearTimeout(component.get('popoverTimeout'));
+          component.set('popoverTimeout', timeout);
+        });
+      }) (this);
     }
   },
 
@@ -76,12 +76,14 @@ export default Ember.Component.extend({
   },
 
   mouseLeave() {
-    var component = this;
-    let timeout = setTimeout(() => {
-      component.set('renderMenu', false);
-    }, this.get('config.ui.menuDwell') * 1000);
-
     clearTimeout(this.get('menuTimeout'));
+
+    let timeout = (function(component) {
+      return setTimeout(() => {
+        component.set('renderMenu', false);
+      }, component.get('config.ui.menuDwell') * 1000);
+    }) (this);
+
     this.set('menuTimeout', timeout);
   },
 
@@ -94,14 +96,16 @@ export default Ember.Component.extend({
         });
       }
       else {
-        let attributes = this.get('attributes.' + newAttributeID + '.videos');
+        let attr = this.get('attributes.' + newAttributeID);
+        let attrVideos = attr.videos;
+
         this.set('displayVideos', []);
 
-        for (var videoID = 0; videoID < attributes.length; videoID++) {
-          this.get('displayVideos').pushObject(this.get('videos')[attributes[videoID]]);
+        for (var videoID = 0; videoID < attrVideos.length; videoID++) {
+          this.get('displayVideos').pushObject(this.get('videos')[attrVideos[videoID]]);
         }
 
-        this.set('filterType', this.get('attributes.' + newAttributeID + '.prettyName'));
+        this.set('filterType', attr.prettyName);
       }
     },
     videoClicked(sender, videoData) {

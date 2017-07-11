@@ -21,9 +21,6 @@ export default Ember.Component.extend({
             case 3:
                 this.set('stackStyle', 'vid-shadows--3');
                 break;
-            case 4:
-                this.set('stackStyle', 'vid-shadows--4');
-                break;
             default:
                 this.set('stackStyle', 'vid-shadows--4');
                 break;

@@ -41,7 +41,9 @@ export default AbstractList.extend({
   },
   
   select: function(event) {
-    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')], this.get('selectedVidPos'));
+    let vidPos = this.get('selectedVidPos');
+
+    this.selectedCallback(this.get('videos')[vidPos], vidPos);
 
     this.inputCallback();
 
@@ -79,21 +81,23 @@ export default AbstractList.extend({
   },
   didRender() {
     if (this.get('displayPopovers')) {
-      let component = this;
-      
       if (this.$('[data-toggle="popover"]').length !== 0){
-        component.$('[data-toggle="popover"]').popover({
-          trigger: 'hover focus',
-          delay: {
-            show: (component.get('popoverShowDelay') * 1000),
-            hide: '100'
-          }
-        });	
+        (function(component) {
+          component.$('[data-toggle="popover"]').popover({
+            trigger: 'hover focus',
+            delay: {
+              show: (component.get('popoverShowDelay') * 1000),
+              hide: '100'
+            }
+          });
+        }) (this);
       }
     }
+
+    let focus = this.get('focus');
     
-    if (this.$().is(':focus') !== this.get('focus')) {
-      this.updateFocus(this.get('focus'));
+    if (this.$().is(':focus') !== focus) {
+      this.updateFocus(focus);
     }
   },
   actions: {

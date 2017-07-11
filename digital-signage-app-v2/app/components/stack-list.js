@@ -60,30 +60,36 @@ export default AbstractList.extend({
   },
   
   select: function(event) {
-    this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    let stackIndex = this.get('selectedStackIndex');
+
     this.inputCallback();
+    this.selectedCallback(this.get('data')[stackIndex].videos, stackIndex);
     
     event.stopPropagation();  
   },
   goPrevious: function(event) {
+    let stackIndex = this.get('selectedStackIndex');
+
     this.changeIndex(-1);
     this.inputCallback();
     
-    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
     
     event.stopPropagation();
   },
   cancel: function(event) {
-    this.cancelCallback();
     this.inputCallback();
+    this.cancelCallback();
     
     event.stopPropagation();
   },
   goNext: function(event) {
+    let stackIndex = this.get('selectedStackIndex');
+
     this.changeIndex(1);
     this.inputCallback();
     
-    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
+    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
     
     event.stopPropagation();
   },
