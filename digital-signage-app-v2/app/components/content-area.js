@@ -118,10 +118,11 @@ export default Ember.Component.extend(KeyboardControls, {
   },
   makeMapData: function() {
     let mapData = [ ];
+    let attributes = Ember.copy(this.get('data.attributes'), true);
     
-    for (let key in this.get('data.attributes')) {
+    for (let key in attributes) {
       
-      mapData.push(Ember.copy(this.get('data.attributes')[key]));
+      mapData.push(attributes[key]);
       mapData[mapData.length - 1].id = key;
       
       for (let i = 0; i < mapData[mapData.length - 1].videos.length; i++) {
@@ -261,7 +262,7 @@ export default Ember.Component.extend(KeyboardControls, {
   init() {
     this._super(...arguments);
     this.set('keyboard', this.get('data.config.keyboard'));
-    
+
     this.makeMapData();
     this.resetVideoHistory();
     
