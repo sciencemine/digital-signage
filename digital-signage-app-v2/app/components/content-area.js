@@ -286,6 +286,10 @@ export default Ember.Component.extend(KeyboardControls, {
     videoSelected(sender, videoData) {
       if (videoData) {
         this.hideOverlays();
+
+        this.appendVideoHistory();
+      
+        this.makeAfterVideoList();
         
         this.setProperties({
           displayVideo: true,
@@ -303,9 +307,7 @@ export default Ember.Component.extend(KeyboardControls, {
       }
     },
     videoEnded() {
-      this.appendVideoHistory();
       
-      this.makeAfterVideoList();
       
       this.setProperties({
         displayAfterVideoList: true,
