@@ -30,7 +30,7 @@ export default Ember.Component.extend({
   configModelData: null,
   
   replaceBackgroundVideos: function() {
-    let newData = this.get('data');
+    let newData = Ember.copy(this.get('data'), true);
     let bgVids = newData.config.backgroundVideos;
     let replacementBgVids = [];
     

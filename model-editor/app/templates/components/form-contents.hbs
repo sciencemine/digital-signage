@@ -30,6 +30,7 @@
         key=(create-id prefix "_" key)
         help=value.help
         data=value.data
+        selected=(if data (get-data data key))
         class="form-control input-sm"
       }}
       

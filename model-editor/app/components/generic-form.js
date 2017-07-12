@@ -121,12 +121,12 @@ export default Ember.Component.extend({
     this.$('#' + el.id + '_div').removeClass("has-warning has-success").addClass("has-error");
     this.$('#' + el.id + '_span').removeClass("glyphicon-warning-sign glyphicon-ok").addClass("glyphicon-remove");
   },
-  getValues: function(data, prefix, clearValues) {
+  getValues: function(data, prefix) {
     let payload = { };
 
     for (let key in data) {
       if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
-        payload[key] = this.getValues(data[key].data, prefix + "_" + key, clearValues);
+        payload[key] = this.getValues(data[key].data, prefix + "_" + key);
       }//if
       else if (Array.isArray(data[key].data)) {
         let el = Ember.$('#' + prefix + "_" + key);
@@ -150,30 +150,15 @@ export default Ember.Component.extend({
         if (el[0]) {
           if (el[0].type === 'checkbox') {
             value = el[0].checked;
-            if (clearValues) {
-              el[0].checked = false;
-            }//if
           }//if
           else if (el[0].type === 'textarea') {
             value = el.val();
-
-            if (clearValues) {
-              el[0].value = null;
-            }//if
           }//else if
           else if (el[0].type === 'number') {
             value = el[0].valueAsNumber;
-
-            if (clearValues) {
-              el[0].value = null;
-            }//if
           }//else if
           else {
             value = el[0].value;
-
-            if (clearValues) {
-              el[0].value = null;
-            }//if
           }//else
 
           payload[key] = value;
@@ -208,15 +193,21 @@ export default Ember.Component.extend({
   },
   actions: {
     submitForm() {
-      this.get('validationCallback') (this.get('validForm'));
+      let validForm = this.get('validForm');
+      
+      this.get('validationCallback') (validForm);
 
-      if (this.get('validForm')) {
-        this.get('onSubmitCallback') (this.getValues(this.get('config.data'), this.get('prefix'), this.get('clearValues')), this.get('path'), this.get('key'));
+      if (validForm) {
+        let prefix = this.get('prefix');
+        
+        this.get('onSubmitCallback') (this.getValues(this.get('config.data'), prefix), this.get('path'), this.get('key'));
       
         this.get('notify').success("Form successfully submitted!", {
           radius: true,
           closeAfter: 10 * 1000
         });
+        
+        this.$('#' + prefix + "_form")[0].reset();
       }//if
       else {
         this.get('notify').alert("Please verify the contents of the form before submission.", {

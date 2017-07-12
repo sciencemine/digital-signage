@@ -141,24 +141,6 @@ export default Ember.Component.extend({
       delete videos[vidId];
       this.set('newModel.videos', videos);
     },
-    /***************************************************************************
-     * ACTION:
-     *  updateAddAttrToVideoData
-     *
-     * DESCRIPTION:
-     *  Updates the addAttrToVideoData payload
-     *
-     * PARAMETERS:
-     *  x - The x position in the dom
-     *  y - The y position in the dom
-     *  attributeId - The attribute Id that is getting added
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     updateAddAttrToVideoData(x, y, attributeId) {
       let obj = {
         attributeId: attributeId,
@@ -173,37 +155,32 @@ export default Ember.Component.extend({
 
       this.set('addAttrToVideoData', obj, attributeId);
     },
-    /***************************************************************************
-     * ACTION:
-     *  addAttributeToVideo
-     *
-     * DESCRIPTION:
-     *  Adds an attribute to the video and adds the video to the list of videos
-     *    that has the attribute in attributes
-     *
-     * PARAMETERS:
-     *  videoId - The key of the video that is getting added
-     *  attrId - The attribute that is getting added
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     addAttributeToVideo(videoId, attrId) {
       if (videoId) {
+        let attributes = this.get('newModel.videos')[videoId].attributes;
         
-        this.get('newModel.videos')[videoId].attributes.pushObject(attrId);
-        this.get('newModel.attributes')[attrId].videos.pushObject(videoId);
-        
-        this.send('setSelectedVideo', videoId);
-        
-        (function(component) {
-          setTimeout(function() {
-            component.notifyPropertyChange('selectedVideo');
-          }, 10);
-        }) (this);
+        if (!attributes.find(function(attr) {
+          if (attr === attrId) {
+            return true;
+          }
+        })) {
+          attributes.pushObject(attrId);
+          this.get('newModel.attributes')[attrId].videos.pushObject(videoId);
+          
+          this.send('setSelectedVideo', videoId);
+          
+          (function(component) {
+            setTimeout(function() {
+              component.notifyPropertyChange('selectedVideo');
+            }, 10);
+          }) (this);
+        }
+        else {
+          this.get('notify').warning( "This attribute is already associated with this video.", {
+            radius: true,
+            closeAfter: 10 * 1000
+          });
+        }
       }
     },
     removeAttributeFromVideo(videoId, attrId) {
@@ -225,25 +202,6 @@ export default Ember.Component.extend({
     setConfigurationExpanded(param) {
       this.set('configurationExpanded', param);
     },
-    /***************************************************************************
-     * ACTION:
-     *    setSelectedVideo
-     *
-     * DESCRIPTION:
-     *  Sets the selected video to be the video at the given key location. 
-     *    Replaces the attributes and relations objects with pretty data for
-     *    display purposes. Saves the initial attributes and relations data 
-     *    objects for reconstruction later
-     *
-     * PARAMETERS:
-     *  param - The key of the video that is currently selected
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
 
@@ -362,6 +320,8 @@ export default Ember.Component.extend({
           component.notifyPropertyChange('newModel');
         }, 20);
       })(this);
+      
+      
     },
     pushData(data, path) {
       this.get('newModel' + path).pushObject(data);
@@ -396,7 +356,7 @@ export default Ember.Component.extend({
       if (!this.get('validModel')) {
         this.get('notify').alert("Please verify information in the configuration section.", {
           radius: true,
-          closeAfter: null
+          closeAfter: 10 * 1000
         });
 
         return;

@@ -27,7 +27,13 @@ export function formContentsSelectGlyphicons(params, hash) {
     let glyphicon = hash.data[i];
     let name = glyphicon.replace('glyphicon-', '').replace(/-/gi, ' ');
 
-    returnHTML = returnHTML + `<option value=${glyphicon}>${name}</option>`;
+    returnHTML = returnHTML + `<option value=${glyphicon}`;
+
+    if (hash.selected === glyphicon) {
+      returnHTML = returnHTML + ` selected="selected"`;
+    }
+    
+    returnHTML = returnHTML + `>${name}</option>`;
   }
 
   return Ember.String.htmlSafe(returnHTML + `</select>`);

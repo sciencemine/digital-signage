@@ -38,7 +38,7 @@ export function formContentsInput(params, hash) {
                  `oninvalid="setCustomValidity('${hash.data.error}');"`;
   }
 
-  if (hash.value) {
+  if (hash.value || hash.value === 0) {
      returnHTML = returnHTML + ` value="${hash.value}"`;
   }
 
