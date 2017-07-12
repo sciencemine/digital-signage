@@ -37,9 +37,10 @@ export default Ember.Component.extend({
 	playing: true,
 	muted: true,
 	highlightedStyle: '',
+  startingTime: 0,
 
 	click(event) {
-		this.get('onClickCallback') (this.get('videoPos'));
+		this.get('onClickCallback') (this.get('videoPos'), this.$('video')[0].currentTime);
 		event.stopPropagation();
 	},
 	mouseEnter() {
