@@ -196,6 +196,10 @@ export default Ember.Component.extend(KeyboardControls, {
       else {
         attribute.videos = nodes[0];
       }//else
+      
+      if (!attribute.videos) {
+        mapData.splice(mapData.indexOf(attribute), 1);
+      }
     }, this);
 
     this.set('mapData', mapData);
@@ -286,6 +290,10 @@ export default Ember.Component.extend(KeyboardControls, {
     videoSelected(sender, videoData) {
       if (videoData) {
         this.hideOverlays();
+
+        this.appendVideoHistory();
+      
+        this.makeAfterVideoList();
         
         this.setProperties({
           displayVideo: true,
@@ -303,9 +311,7 @@ export default Ember.Component.extend(KeyboardControls, {
       }
     },
     videoEnded() {
-      this.appendVideoHistory();
       
-      this.makeAfterVideoList();
       
       this.setProperties({
         displayAfterVideoList: true,
@@ -313,7 +319,7 @@ export default Ember.Component.extend(KeyboardControls, {
         displayVideo: false
       });
     },
-    stackSelected(sender, vidArr) {      
+    stackSelected(sender, vidArr) {
       this.setProperties({
         displayVideoSelect: true,
         vidSelectData: vidArr,
@@ -338,14 +344,14 @@ export default Ember.Component.extend(KeyboardControls, {
       clearTimeout(this.get('idleTimeout'));
 
       let timeout = (function(component){
-                      return setTimeout(function() {
-                        component.hideOverlays();
-                        
-                        component.resetVideoHistory();
-                        
-                        component.set('focus', true);
-                      }, component.get('data.config.ui.idle') * 1000);
-                    }) (this);
+        return setTimeout(function() {
+          component.hideOverlays();
+          
+          component.resetVideoHistory();
+          
+          component.set('focus', true);
+        }, component.get('data.config.ui.idle') * 1000);
+      }) (this);
 
       this.set('idleTimeout', timeout);
     }

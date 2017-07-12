@@ -9,7 +9,7 @@
   }}
 </div>
 
-{{!-- Fullscreen video --}}
+{{!-- Full screen video --}}
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
     {{video-player
@@ -28,11 +28,13 @@
   <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
   {{stack-list
     isFlex=false
+    focus=displayMapView
     onHoverCallback=(action 'doNothing')
     onSelectedCallback=(action 'stackSelected')
     onCancelledCallback=(action 'doNothing')
     onInputCallback=(action 'resetTimeout')
     onStackChangeCallback=(action 'doNothing')
+    focus=displayMapView
     class="stack-list no-outline"
     stackItemHighlight="blue-border"
     data=mapData
@@ -42,24 +44,24 @@
   }}
 {{/if}}
 
-{{!-- Video selction for when a stack from map view is selected --}}
+{{!-- Video selection for when a stack from map view is selected --}}
 {{#if displayVideoSelect}}
-    {{video-list
-      selectedVidPos=vidSelectPos
-      class="video-list video-list--flex"
-      listItemClass="video-list-item--flex"
-      listItemSmall="video-list-item--flex__small"
-      listItemSelected="video-list-item--selected"
-      listItemHighlight="blue-border"
-      keyboard=keyboard
-      videos=vidSelectData
-      modelIdentifier=data.config.modelIdentifier
-      focus=displayVideoSelect
-      onSelectedCallback=(action 'videoSelected')
-      onCancelledCallback=(action 'cancelPressed')
-      onHoverCallback=(action 'doNothing')
-      onInputCallback=(action 'resetTimeout')
-    }}
+  {{video-list
+    selectedVidPos=vidSelectPos
+    class="video-list video-list--flex"
+    listItemClass="video-list-item--flex"
+    listItemSmall="video-list-item--flex__small"
+    listItemSelected="video-list-item--selected"
+    listItemHighlight="blue-border"
+    keyboard=keyboard
+    videos=vidSelectData
+    modelIdentifier=data.config.modelIdentifier
+    focus=displayVideoSelect
+    onSelectedCallback=(action 'videoSelected')
+    onCancelledCallback=(action 'cancelPressed')
+    onHoverCallback=(action 'doNothing')
+    onInputCallback=(action 'resetTimeout')
+  }}
 {{/if}}
 
 {{!-- View after video is completed --}}
@@ -72,7 +74,7 @@
   }}
 {{/if}}
 
-{{!-- Repositionable menubar --}}
+{{!-- Re-positionable menu-bar --}}
 {{menu-bar
   popoverShowDelay=data.config.ui.popoverShowDelay
   config=data.config
