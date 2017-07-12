@@ -104,10 +104,11 @@ export default Ember.Component.extend(KeyboardControls, {
       let attributeId = vidAttributes[attributeIndex];
       
       localAfterVidData.push(this.get('data.attributes')[attributeId]);
-
-      localAfterVidData[localAfterVidData.length - 1].videos = this.getRelatedVids(this.get('playingVidData'), attributeId, 0, 2);
+      console.log(localAfterVidData);
+      let videos = localAfterVidData[localAfterVidData.length - 1].videos;
+      videos = this.getRelatedVids(this.get('playingVidData'), attributeId, 0, 2);
       
-      if (localAfterVidData[localAfterVidData.length - 1].videos.length === 0) {
+      if (videos && videos.length === 0) {
         localAfterVidData.pop();
       }//if
     }//for
@@ -285,19 +286,28 @@ export default Ember.Component.extend(KeyboardControls, {
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-        this.hideOverlays();
-
-        this.appendVideoHistory();
       
-        this.makeAfterVideoList();
-        
         this.setProperties({
           displayVideo: true,
-          playingVidData: videoData,
+          //playingVidData: videoData,
           videoPlaying: true,
           focus: true
         });
-        
+
+        let playingVidData = this.get('playingVidData');
+
+        if(!playingVidData || playingVidData.id !== videoData.id){
+
+          this.set('playingVidData', videoData);
+        }
+
+        this.hideOverlays();
+        this.appendVideoHistory();
+        this.makeAfterVideoList(); 
+
+        console.log(this.get('playingVidData'));
+        console.log(videoData);
+
         clearTimeout(this.get('idleTimeout'));
       }
       else {
@@ -307,14 +317,19 @@ export default Ember.Component.extend(KeyboardControls, {
       }
     },
     videoEnded() {
-      
-      
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,
         displayVideo: false
       });
     },
+
+    videoPaused(sender, currentTime){
+      this.toggleProperty('videoPlaying');
+      this.set('playingVidData.startingTime', currentTime);
+    },
+
+
     stackSelected(sender, vidArr) {      
       this.setProperties({
         displayVideoSelect: true,

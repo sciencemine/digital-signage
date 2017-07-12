@@ -16,7 +16,7 @@
       playing=videoPlaying
       muted=false
       url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
-      onClickCallback=(action 'videoSelected' bubbles=false)
+      onClickCallback=(action 'videoPaused' bubbles=false)
       onHoverCallback=(action 'doNothing')
       onEndedCallback=(action 'videoEnded')
     }}
@@ -27,7 +27,7 @@
 {{#if displayMapView}}
   <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
   {{stack-list
-    isFlex=false
+    isFlex=true
     focus=displayMapView
     onHoverCallback=(action 'doNothing')
     onSelectedCallback=(action 'stackSelected')
