@@ -28,6 +28,7 @@
   <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
   {{stack-list
     isFlex=false
+    focus=displayMapView
     onHoverCallback=(action 'doNothing')
     onSelectedCallback=(action 'stackSelected')
     onCancelledCallback=(action 'doNothing')
