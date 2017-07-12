@@ -22,6 +22,13 @@
         description="Creates a new exhibit to be added to the list"
         version=model.version
       }}
+      <li class="list-group-item model-select-element">
+          <h4 class="list-group-item-heading">Upload Existing Model</h4>
+          
+          <p class="list-group-item-text">Upload an existing model that is not listed to edit.</p>
+          
+          {{input type="file" id="fileUpload" onchange=(action 'fileUpload')}}
+      </li>
     </ul>
   </div>
 </div>
