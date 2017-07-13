@@ -73,14 +73,18 @@ export default Ember.Component.extend(KeyboardControls, {
     let relatedVids = [];
 
     for (let relation = 0; relation < currentVid.relations.length; relation++) {
-      if (currentVid.relations[relation].attributeId === attributeId) {
+      let vidRelation = currentVid.relations[relation];
+      
+      if (vidRelation.attributeId === attributeId) {
         if(relatedVids.find(function(video) {
             return video.vidId !== this;
-          }, currentVid.relations[relation].relatedId) === undefined) {
-          relatedVids.push(this.get('data.videos')[currentVid.relations[relation].relatedId]);
+          }, vidRelation.relatedId) === undefined) {
+          relatedVids.push(Ember.copy(this.get('data.videos')[vidRelation.relatedId], true));
           
-          relatedVids[relatedVids.length - 1].difficulty = difficulty + currentVid.relations[relation].difficulty;
-          relatedVids[relatedVids.length - 1].vidId = currentVid.relations[relation].relatedId;
+          let vid = relatedVids[relatedVids.length - 1];
+          
+          vid.difficulty = difficulty + vidRelation.difficulty;
+          vid.vidId = vidRelation.relatedId;
         }//if
       }//if
     }//for
@@ -98,10 +102,12 @@ export default Ember.Component.extend(KeyboardControls, {
   },
   makeAfterVideoList: function() {
     let localAfterVidData = [ ];
-    let vidAttributes = this.get('playingVidData.attributes');
+    let playingVidData = Ember.copy(this.get('playingVidData'), true);
+    let vidAttributes = playingVidData.attributes;
 
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
+      let attributeObj = Ember.copy(this.get('data.attributes')[attributeId], true);
       
       localAfterVidData.push(this.get('data.attributes')[attributeId]);
       console.log(localAfterVidData);
@@ -157,7 +163,7 @@ export default Ember.Component.extend(KeyboardControls, {
             edgeObj.from = node.id;
             edgeObj.diff = edgeData.difficulty;
             
-            edges.push(edgeObj);  
+            edges.push(edgeObj);
           }//if
         });
       });
@@ -197,6 +203,10 @@ export default Ember.Component.extend(KeyboardControls, {
       else {
         attribute.videos = nodes[0];
       }//else
+      
+      if (!attribute.videos) {
+        mapData.splice(mapData.indexOf(attribute), 1);
+      }
     }, this);
 
     this.set('mapData', mapData);
@@ -276,7 +286,7 @@ export default Ember.Component.extend(KeyboardControls, {
       this.updateFocus(focus);
     }
   },
-  click() {console.log('click')
+  click() {
     if (!this.get('displayVideoSelect') &&
         !this.get('displayAfterVideoList') &&
         !this.get('displayMapView')) {
@@ -286,7 +296,9 @@ export default Ember.Component.extend(KeyboardControls, {
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-      
+
+        this.hideOverlays();
+
         this.setProperties({
           displayVideo: true,
           //playingVidData: videoData,
@@ -309,6 +321,9 @@ export default Ember.Component.extend(KeyboardControls, {
         console.log(videoData);
 
         clearTimeout(this.get('idleTimeout'));
+      
+        this.appendVideoHistory();
+        this.makeAfterVideoList();
       }
       else {
         this.toggleVidPlayback();
@@ -355,14 +370,14 @@ export default Ember.Component.extend(KeyboardControls, {
       clearTimeout(this.get('idleTimeout'));
 
       let timeout = (function(component){
-                      return setTimeout(function() {
-                        component.hideOverlays();
-                        
-                        component.resetVideoHistory();
-                        
-                        component.set('focus', true);
-                      }, component.get('data.config.ui.idle') * 1000);
-                    }) (this);
+        return setTimeout(function() {
+          component.hideOverlays();
+          
+          component.resetVideoHistory();
+          
+          component.set('focus', true);
+        }, component.get('data.config.ui.idle') * 1000);
+      }) (this);
 
       this.set('idleTimeout', timeout);
     }
