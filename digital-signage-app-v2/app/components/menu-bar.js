@@ -10,6 +10,10 @@ export default Ember.Component.extend({
   menuTimeout: null,
   popoverTimeout: null,
   popoverShowDelay: 0.25,
+  
+  hidePopovers: function() {
+    this.$('[data-toggle="popover"]').popover('hide');
+  },
 
   init() {
     this._super(...arguments);
@@ -48,7 +52,7 @@ export default Ember.Component.extend({
   },
 
   didRender() {
-    if (this.$('[data-toggle="popover"]').length !== 0){
+    if (this.$('[data-toggle="popover"]').length !== 0) {
       (function(component) {
         component.$('[data-toggle="popover"]').popover({
           trigger: 'hover focus',
@@ -58,11 +62,11 @@ export default Ember.Component.extend({
           }
         }).on('shown.bs.popover', function () {  
           let timeout = setTimeout(function () {
-            component.$('[data-toggle="popover"]').popover('hide');
-            component.send('hidePopovers');
+            component.hidePopovers();
           }, component.get('config.ui.popoverDwell') * 1000);
             
           clearTimeout(component.get('popoverTimeout'));
+          
           component.set('popoverTimeout', timeout);
         });
       }) (this);
@@ -80,6 +84,7 @@ export default Ember.Component.extend({
 
     let timeout = (function(component) {
       return setTimeout(() => {
+        component.hidePopovers();
         component.set('renderMenu', false);
       }, component.get('config.ui.menuDwell') * 1000);
     }) (this);
@@ -106,16 +111,12 @@ export default Ember.Component.extend({
         }
 
         this.set('filterType', attr.prettyName);
+        this.hidePopovers();
       }
     },
     videoClicked(sender, videoData) {
-      this.set('renderMenu', false);
       this.get('onClickCallback') (this, videoData);
-      this.send('hidePopovers');
     },
-    doNothing() {},
-    hidePopovers() {
-      this.$('[data-toggle="popover"]').popover('hide');
-    }
+    doNothing() {}
   }
 });
