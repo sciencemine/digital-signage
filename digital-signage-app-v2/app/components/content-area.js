@@ -279,7 +279,7 @@ export default Ember.Component.extend(KeyboardControls, {
       this.updateFocus(focus);
     }
   },
-  click() {console.log('click')
+  click() {
     if (!this.get('displayVideoSelect') &&
         !this.get('displayAfterVideoList') &&
         !this.get('displayMapView')) {
@@ -310,8 +310,6 @@ export default Ember.Component.extend(KeyboardControls, {
       }
     },
     videoEnded() {
-      
-      
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,
