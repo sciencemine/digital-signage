@@ -13,21 +13,21 @@
           modelfile=value.fileName
           name=value.config.prettyName
           description=value.config.description
-          version=model.version
         }}
       {{/each-in}}
       {{model-select-element
-        modelfile="ModelSkeleton"
+        modelfile=(create-id "ModelSkeleton" model.modelInformation.newestVersion)
         name="Add Exhibit"
         description="Creates a new exhibit to be added to the list"
-        version=model.version
       }}
-      <li class="list-group-item model-select-element">
-          <h4 class="list-group-item-heading">Upload Existing Model</h4>
-          
-          <p class="list-group-item-text">Upload an existing model that is not listed to edit.</p>
-          
-          {{input type="file" id="fileUpload" onchange=(action 'fileUpload')}}
+      <li class="list-group-item model-select--element">
+        <h4 class="list-group-item-heading">Upload Existing Model</h4>
+
+        <p class="list-group-item-text">Upload an existing model that is not listed to edit.</p>
+
+        <form onchange={{action 'readModel'}}>
+          {{input type="file" id="fileUpload" accept=".json"}}
+        </form>
       </li>
     </ul>
   </div>

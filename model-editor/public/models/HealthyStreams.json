@@ -22,7 +22,8 @@
       "previous":"a",
       "cancel":"s",
       "next":"d"
-    }
+    },
+    "version":0.1
   },
   "videos":{
     "hV6VB":{
@@ -407,6 +408,5 @@
         "Nh8US"
       ]
     }
-  },
-  "version":0.1
+  }
 }

@@ -3,7 +3,6 @@ import Ember from 'ember';
 export default Ember.Route.extend({
   modelfile: null,
   modelData: null,
-  version: null,
   
   beforeModel(params) {
     let qp = params.queryParams;
@@ -11,8 +10,6 @@ export default Ember.Route.extend({
     if (!qp.modelfile) {
       this.replaceWith('modelSelect');
     }
-    
-    this.version = qp.version;
 
     return Ember.$.getJSON("models/" + qp.modelfile + ".json").then((res) => {
       if (qp.modelfile === "ModelSkeleton") {
@@ -25,14 +22,13 @@ export default Ember.Route.extend({
     });
   },
   model() {
-    let path = "models/ModelVersion" + (this.modelData.config.version ? this.modelData.config.version : this.version) + ".json";
+    let path = "models/ModelVersion" + this.modelData.config.version + ".json";
     let route = this;
     let data = {};
 
     data.modelData = this.modelData;
 
     return Ember.$.getJSON(path).then((modelConfig) => {
-      data.modelData.version = modelConfig.config.data.version.data;
       data.modelConfig = modelConfig;
       data.modelfile = this.modelfile;
 

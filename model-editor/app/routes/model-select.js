@@ -1,34 +1,30 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
-  models: [],
-  backgroundVideos: [],
-  version: null,
-
   beforeModel() {
     return(function(route) {
       return Ember.$.getJSON('assets/ModelInformation.json').then((data) => {
-        route.set('models', data.models);
-        route.set('version', data.version);
+        route.set('modelInformation', data);
       });
-    })(this);
+    }) (this);
   },
   model() {
     let modelData = [];
+    let modelInformation = this.get('modelInformation');
+    let models = modelInformation.models;
 
-    for (var i = 0; i < this.get('models').length; i++) {
-      modelData.push(Ember.$.getJSON('/models/' + this.get('models')[i] + '.json'));
+    for (var i = 0; i < models.length; i++) {
+      modelData.push(Ember.$.getJSON('/models/' + models[i] + '.json'));
     }
 
     return Ember.RSVP.Promise.all(modelData).then((res) => {
       let data = {
-        models: null,
-        version: null
+        models: null
       };
       
       
-      for (i = 0; i < this.get('models').length; i++) {
-        res[i].fileName = this.get('models')[i];
+      for (i = 0; i < models.length; i++) {
+        res[i].fileName = models[i];
         res[i].backgroundVideos = {};
 
         for (var j = 0; j < res[i].config.backgroundVideos.length; j++) {
@@ -38,8 +34,7 @@ export default Ember.Route.extend({
       }
       
       data.models = res;
-      
-      data.version = this.version;
+      data.modelInformation = modelInformation;
 
       return data;
     });
