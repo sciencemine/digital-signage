@@ -73,14 +73,18 @@ export default Ember.Component.extend(KeyboardControls, {
     let relatedVids = [];
 
     for (let relation = 0; relation < currentVid.relations.length; relation++) {
-      if (currentVid.relations[relation].attributeId === attributeId) {
+      let vidRelation = currentVid.relations[relation];
+      
+      if (vidRelation.attributeId === attributeId) {
         if(relatedVids.find(function(video) {
             return video.vidId !== this;
-          }, currentVid.relations[relation].relatedId) === undefined) {
-          relatedVids.push(this.get('data.videos')[currentVid.relations[relation].relatedId]);
+          }, vidRelation.relatedId) === undefined) {
+          relatedVids.push(Ember.copy(this.get('data.videos')[vidRelation.relatedId], true));
           
-          relatedVids[relatedVids.length - 1].difficulty = difficulty + currentVid.relations[relation].difficulty;
-          relatedVids[relatedVids.length - 1].vidId = currentVid.relations[relation].relatedId;
+          let vid = relatedVids[relatedVids.length - 1];
+          
+          vid.difficulty = difficulty + vidRelation.difficulty;
+          vid.vidId = vidRelation.relatedId;
         }//if
       }//if
     }//for
@@ -98,23 +102,23 @@ export default Ember.Component.extend(KeyboardControls, {
   },
   makeAfterVideoList: function() {
     let localAfterVidData = [ ];
-    let vidAttributes = this.get('playingVidData.attributes');
+    let playingVidData = Ember.copy(this.get('playingVidData'), true);
+    let vidAttributes = playingVidData.attributes;
 
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
+      let attributeObj = Ember.copy(this.get('data.attributes')[attributeId], true);
       
-      localAfterVidData.push(this.get('data.attributes')[attributeId]);
-
-      localAfterVidData[localAfterVidData.length - 1].videos = this.getRelatedVids(this.get('playingVidData'), attributeId, 0, 2);
+      attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
-      if (localAfterVidData[localAfterVidData.length - 1].videos.length === 0) {
-        localAfterVidData.pop();
+      if (attributeObj.videos.length !== 0) {
+        localAfterVidData.push(attributeObj);
       }//if
     }//for
     
     localAfterVidData.unshift(this.get('videoHistory'));
         
-    this.set('afterVideoListData', localAfterVidData);
+    this.set('afterVideoListData', localAfterVidData);console.log(localAfterVidData)
   },
   makeMapData: function() {
     let mapData = [ ];
@@ -156,7 +160,7 @@ export default Ember.Component.extend(KeyboardControls, {
             edgeObj.from = node.id;
             edgeObj.diff = edgeData.difficulty;
             
-            edges.push(edgeObj);  
+            edges.push(edgeObj);
           }//if
         });
       });
@@ -329,7 +333,7 @@ export default Ember.Component.extend(KeyboardControls, {
       let bgArrayLength = bgVidKeys.length;
       let curBgVidPos = this.get('bgVidPos');
 
-      this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);
+      this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);console.log((curBgVidPos + 1) % bgArrayLength)
     },
     doNothing(/*sender, selected*/) {
       //console.log(selected);
