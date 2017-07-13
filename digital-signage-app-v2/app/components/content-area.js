@@ -109,13 +109,10 @@ export default Ember.Component.extend(KeyboardControls, {
       let attributeId = vidAttributes[attributeIndex];
       let attributeObj = Ember.copy(this.get('data.attributes')[attributeId], true);
       
-      localAfterVidData.push(this.get('data.attributes')[attributeId]);
-      console.log(localAfterVidData);
-      let videos = localAfterVidData[localAfterVidData.length - 1].videos;
-      videos = this.getRelatedVids(this.get('playingVidData'), attributeId, 0, 2);
+      attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
-      if (videos && videos.length === 0) {
-        localAfterVidData.pop();
+      if (attributeObj.videos.length !== 0) {
+        localAfterVidData.push(attributeObj);
       }//if
     }//for
     
@@ -296,34 +293,36 @@ export default Ember.Component.extend(KeyboardControls, {
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-
         this.hideOverlays();
 
         this.setProperties({
           displayVideo: true,
-          //playingVidData: videoData,
           videoPlaying: true,
           focus: true
         });
 
         let playingVidData = this.get('playingVidData');
-
         if(!playingVidData || playingVidData.id !== videoData.id){
 
           this.set('playingVidData', videoData);
+
+        }else if(!playingVidData || playingVidData.id === videoData.id){
+
+          this.setProperties({
+            displayAfterVideoList: false,
+            displayVideo: true,
+            videoPlaying: true,
+            focus: true
+          });
         }
 
-        this.hideOverlays();
         this.appendVideoHistory();
         this.makeAfterVideoList(); 
 
-        console.log(this.get('playingVidData'));
-        console.log(videoData);
+        //console.log(this.get('playingVidData'));
+        //console.log(videoData);
 
         clearTimeout(this.get('idleTimeout'));
-      
-        this.appendVideoHistory();
-        this.makeAfterVideoList();
       }
       else {
         this.toggleVidPlayback();
@@ -337,11 +336,19 @@ export default Ember.Component.extend(KeyboardControls, {
         focus: false,
         displayVideo: false
       });
+      this.set('playingVidData.startingTime', 0);
     },
 
     videoPaused(sender, currentTime){
+      //console.log(currentTime);
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
+
+      this.setProperties({
+        displayAfterVideoList: true,
+        focus: false,
+        displayVideo: false
+      });
     },
 
 

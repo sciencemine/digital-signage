@@ -15,11 +15,13 @@
     {{video-player
       playing=videoPlaying
       muted=false
+      startingTime=playingVidData.startingTime
       url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
       onClickCallback=(action 'videoPaused' bubbles=false)
       onHoverCallback=(action 'doNothing')
       onEndedCallback=(action 'videoEnded')
     }}
+    {{log playingVidData.startingTime playingVidData}}
   </div>
 {{/if}}
 
