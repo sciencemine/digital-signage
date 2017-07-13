@@ -118,7 +118,7 @@ export default Ember.Component.extend(KeyboardControls, {
     
     localAfterVidData.unshift(this.get('videoHistory'));
         
-    this.set('afterVideoListData', localAfterVidData);console.log(localAfterVidData)
+    this.set('afterVideoListData', localAfterVidData);
   },
   makeMapData: function() {
     let mapData = [ ];
@@ -333,7 +333,7 @@ export default Ember.Component.extend(KeyboardControls, {
       let bgArrayLength = bgVidKeys.length;
       let curBgVidPos = this.get('bgVidPos');
 
-      this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);console.log((curBgVidPos + 1) % bgArrayLength)
+      this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);
     },
     doNothing(/*sender, selected*/) {
       //console.log(selected);
