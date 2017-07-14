@@ -50,10 +50,15 @@ export default Ember.Component.extend(KeyboardControls, {
     this.set('focus', this.get('videoPlaying'));
   },
   select: function() {
-    this.setProperties({
-      displayMapView: true,
-      focus: false
-    });
+    if (this.get('videoPlaying')) {
+      this.send('pauseVideo');
+    }
+    else {
+      this.setProperties({
+        displayMapView: true,
+        focus: false
+      });
+    }
 
     this.send('resetTimeout');
   },
@@ -64,7 +69,7 @@ export default Ember.Component.extend(KeyboardControls, {
   },
   goNext: function() {
     this.toggleVidPlayback();
-
+    
     this.send('resetTimeout');
   },
   goPrevious: function() {
@@ -79,7 +84,7 @@ export default Ember.Component.extend(KeyboardControls, {
       let vidRelation = currentVid.relations[relation];
       
       if (vidRelation.attributeId === attributeId) {
-        if(relatedVids.find(function(video) {
+        if (relatedVids.find(function(video) {
             return video.vidId !== this;
           }, vidRelation.relatedId) === undefined) {
           relatedVids.push(Ember.copy(this.get('data.videos')[vidRelation.relatedId], true));
@@ -338,7 +343,7 @@ export default Ember.Component.extend(KeyboardControls, {
       
       this.send('resetTimeout');
     },
-    videoPaused(sender, currentTime){
+    pauseVideo(sender, currentTime){
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
 
