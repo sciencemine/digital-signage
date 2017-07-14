@@ -3,6 +3,7 @@
   {{video-player
     muted=(if displayAfterVideoList true (if displayVideoSelect true false))
     class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
+    looping=(is-single-video data.config.backgroundVideos)
     playing=(if displayMapView false (if displayVideo false true))
     url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier bgVidData.full.fileIdentifier))
     onEndedCallback=(action 'cycleBackground')

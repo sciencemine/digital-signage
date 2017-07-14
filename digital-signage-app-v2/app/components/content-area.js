@@ -293,6 +293,8 @@ export default Ember.Component.extend(KeyboardControls, {
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
+        let playingVidData = this.get('playingVidData');
+        
         this.hideOverlays();
 
         this.setProperties({
@@ -300,28 +302,19 @@ export default Ember.Component.extend(KeyboardControls, {
           videoPlaying: true,
           focus: true
         });
-
-        let playingVidData = this.get('playingVidData');
-        if(!playingVidData || playingVidData.id !== videoData.id){
-
+        
+        if (!playingVidData || playingVidData.id !== videoData.id) {
           this.set('playingVidData', videoData);
-
-        }else if(!playingVidData || playingVidData.id === videoData.id){
-
+        }
+        else if (!playingVidData || playingVidData.id === videoData.id) {
           this.setProperties({
-            displayAfterVideoList: false,
-            displayVideo: true,
-            videoPlaying: true,
-            focus: true
+            displayAfterVideoList: false
           });
         }
 
         this.appendVideoHistory();
-        this.makeAfterVideoList(); 
-
-        //console.log(this.get('playingVidData'));
-        //console.log(videoData);
-
+        this.makeAfterVideoList();
+        
         clearTimeout(this.get('idleTimeout'));
       }
       else {
@@ -336,6 +329,7 @@ export default Ember.Component.extend(KeyboardControls, {
         focus: false,
         displayVideo: false
       });
+      
       this.set('playingVidData.startingTime', 0);
     },
 
