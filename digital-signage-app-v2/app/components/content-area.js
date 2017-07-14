@@ -44,12 +44,7 @@ export default Ember.Component.extend(KeyboardControls, {
       videos: [ ]
     });
   },
-  toggleVidPlayback: function() {
-    this.toggleProperty('videoPlaying');
-    
-    this.set('focus', this.get('videoPlaying'));
-  },
-  select: function() {
+  keyboardInput: function() {
     if (this.get('videoPlaying')) {
       this.send('pauseVideo');
     }
@@ -62,20 +57,17 @@ export default Ember.Component.extend(KeyboardControls, {
 
     this.send('resetTimeout');
   },
+  select: function() {
+    this.keyboardInput();
+  },
   cancel: function() {
-    this.toggleVidPlayback();
-
-    this.send('resetTimeout');
+    this.keyboardInput();
   },
   goNext: function() {
-    this.toggleVidPlayback();
-    
-    this.send('resetTimeout');
+    this.keyboardInput();
   },
   goPrevious: function() {
-    this.toggleVidPlayback();
-
-    this.send('resetTimeout');
+    this.keyboardInput();
   },
   getRelatedVids: function(currentVid, attributeId, difficulty, recursiveDepth) {
     let relatedVids = [];
