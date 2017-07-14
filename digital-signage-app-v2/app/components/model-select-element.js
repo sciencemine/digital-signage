@@ -5,6 +5,10 @@ export default Ember.Component.extend({
   classNames: [ "list-group-item" ],
   
   muted: true,
+  name: "",
+  description: "",
+  modelIdentifier: "",
+  videos: [ ],
   
   mouseEnter() {
     this.set('muted', false);
