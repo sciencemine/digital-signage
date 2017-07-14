@@ -61,9 +61,6 @@ export default Ember.Component.extend({
         videoElement.pause();
       }
     }
-    else {
-      console.log("No video element found!");
-    }
   }),
   actions: {
   	ended() {

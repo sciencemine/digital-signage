@@ -333,7 +333,6 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('playingVidData.startingTime', 0);
     },
     videoPaused(sender, currentTime){
-      //console.log(currentTime);
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
 
@@ -359,7 +358,7 @@ export default Ember.Component.extend(KeyboardControls, {
       this.set('bgVidPos', (curBgVidPos + 1) % bgArrayLength);
     },
     doNothing(/*sender, selected*/) {
-      //console.log(selected);
+      
     },
     cancelPressed() {
       this.cancel();
