@@ -14,7 +14,6 @@ export default Ember.Component.extend({
   hidePopovers: function() {
     this.$('[data-toggle="popover"]').popover('hide');
   },
-
   init() {
     this._super(...arguments);
     this.set('displayVideos', this.get('videos'));
@@ -50,7 +49,6 @@ export default Ember.Component.extend({
         break;
     }
   },
-
   didRender() {
     if (this.$('[data-toggle="popover"]').length !== 0) {
       (function(component) {
@@ -61,10 +59,10 @@ export default Ember.Component.extend({
             hide: '100'
           }
         }).on('shown.bs.popover', function () {  
-          let timeout = setTimeout(function () {
+          let timeout = setTimeout(() => {
             component.hidePopovers();
           }, component.get('config.ui.popoverDwell') * 1000);
-            
+          
           clearTimeout(component.get('popoverTimeout'));
           
           component.set('popoverTimeout', timeout);
@@ -72,13 +70,11 @@ export default Ember.Component.extend({
       }) (this);
     }
   },
-
   mouseEnter() {
     this.set('renderMenu', true);
     
     clearTimeout(this.get('menuTimeout'));
   },
-
   mouseLeave() {
     clearTimeout(this.get('menuTimeout'));
 
@@ -91,7 +87,6 @@ export default Ember.Component.extend({
 
     this.set('menuTimeout', timeout);
   },
-
   actions: {
     setMenuVideos(newAttributeID) {
       if (newAttributeID === -1) {

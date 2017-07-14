@@ -332,7 +332,6 @@ export default Ember.Component.extend(KeyboardControls, {
       
       this.set('playingVidData.startingTime', 0);
     },
-
     videoPaused(sender, currentTime){
       //console.log(currentTime);
       this.toggleProperty('videoPlaying');
@@ -344,8 +343,6 @@ export default Ember.Component.extend(KeyboardControls, {
         displayVideo: false
       });
     },
-
-
     stackSelected(sender, vidArr) {      
       this.setProperties({
         displayVideoSelect: true,
