@@ -102,7 +102,7 @@ export default AbstractList.extend({
   init() {
     this._super(...arguments);
   },
-  actions:{
+  actions: {
     stackSelected(videos, vidPos) {
       this.selectedCallback(videos, vidPos);
     },

@@ -30,13 +30,12 @@
   <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
   {{stack-list
     isFlex=false
-    focus=displayMapView
+    focus=true
     onHoverCallback=(action 'doNothing')
     onSelectedCallback=(action 'stackSelected')
     onCancelledCallback=(action 'doNothing')
     onInputCallback=(action 'resetTimeout')
     onStackChangeCallback=(action 'doNothing')
-    focus=displayMapView
     class="stack-list no-outline"
     stackItemHighlight="blue-border"
     data=mapData
@@ -58,7 +57,7 @@
     keyboard=keyboard
     videos=vidSelectData
     modelIdentifier=data.config.modelIdentifier
-    focus=displayVideoSelect
+    focus=true
     onSelectedCallback=(action 'videoSelected')
     onCancelledCallback=(action 'cancelPressed')
     onHoverCallback=(action 'doNothing')

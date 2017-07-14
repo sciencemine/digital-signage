@@ -50,7 +50,10 @@ export default Ember.Component.extend(KeyboardControls, {
     this.set('focus', this.get('videoPlaying'));
   },
   select: function() {
-    this.setProperties({ videoPlaying: false, displayAfterVideoList: true });
+    this.setProperties({
+      videoPlaying: false,
+      displayAfterVideoList: true
+    });
     
     this.set('focus', false);
   },
