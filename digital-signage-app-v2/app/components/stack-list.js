@@ -70,8 +70,8 @@ export default AbstractList.extend({
   goPrevious: function(event) {
     let stackIndex = this.get('selectedStackIndex');
 
-    this.changeIndex(-1);
     this.inputCallback();
+    this.changeIndex(-1);
     
     this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
     
@@ -86,8 +86,8 @@ export default AbstractList.extend({
   goNext: function(event) {
     let stackIndex = this.get('selectedStackIndex');
 
-    this.changeIndex(1);
     this.inputCallback();
+    this.changeIndex(1);
     
     this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
     

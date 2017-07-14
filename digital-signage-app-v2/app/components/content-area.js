@@ -335,6 +335,8 @@ export default Ember.Component.extend(KeyboardControls, {
       });
       
       this.set('playingVidData.startingTime', 0);
+      
+      this.send('resetTimeout');
     },
     videoPaused(sender, currentTime){
       this.toggleProperty('videoPlaying');
@@ -345,6 +347,8 @@ export default Ember.Component.extend(KeyboardControls, {
         focus: false,
         displayVideo: false
       });
+      
+      this.send('resetTimeout');
     },
     stackSelected(sender, vidArr) {      
       this.setProperties({

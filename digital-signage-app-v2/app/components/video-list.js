@@ -43,28 +43,26 @@ export default AbstractList.extend({
   select: function(event) {
     let vidPos = this.get('selectedVidPos');
 
-    this.selectedCallback(this.get('videos')[vidPos], vidPos);
-
     this.inputCallback();
+    this.selectedCallback(this.get('videos')[vidPos], vidPos);
 
     event.stopPropagation();
   },
   goPrevious: function(event) {
-    this.changeIndex(-1);
     this.inputCallback();
+    this.changeIndex(-1);
 
     event.stopPropagation();
   },
   cancel: function(event) {
-    this.cancelCallback();
-
     this.inputCallback();
+    this.cancelCallback();
 
     event.stopPropagation();
   },
   goNext: function(event) {
-    this.changeIndex(1);
     this.inputCallback();
+    this.changeIndex(1);
 
     event.stopPropagation();
   },
