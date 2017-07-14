@@ -335,7 +335,7 @@ export default Ember.Component.extend(KeyboardControls, {
       
       this.send('resetTimeout');
     },
-    pauseVideo(sender, currentTime){
+    pauseVideo(sender, currentTime) {
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
 
@@ -373,7 +373,7 @@ export default Ember.Component.extend(KeyboardControls, {
     resetTimeout() {
       clearTimeout(this.get('idleTimeout'));
 
-      let timeout = (function(component){
+      let timeout = (function(component) {
         return setTimeout(function() {
           component.hideOverlays();
           

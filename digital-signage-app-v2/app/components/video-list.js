@@ -79,7 +79,7 @@ export default AbstractList.extend({
   },
   didRender() {
     if (this.get('displayPopovers')) {
-      if (this.$('[data-toggle="popover"]').length !== 0){
+      if (this.$('[data-toggle="popover"]').length !== 0) {
         (function(component) {
           component.$('[data-toggle="popover"]').popover({
             trigger: 'hover focus',
