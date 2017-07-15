@@ -1,0 +1,557 @@
+{
+  "config":{
+    "prettyName":"Osu",
+    "description":"Circle clicking rhythm game",
+    "backgroundImage":"osu.png",
+    "modelIdentifier":"osu",
+    "backgroundVideos":[
+      "p7OHA"
+    ],
+    "ui":{
+      "idle":15,
+      "menuDwell":5,
+      "popoverShowDelay":0.25,
+      "popoverDwell":5,
+      "menuLocale":"top"
+    },
+    "keyboard":{
+      "select":"w",
+      "previous":"a",
+      "cancel":"s",
+      "next":"d"
+    }
+  },
+  "videos":{
+    "WjMYE":{
+      "prettyName":"Future Candy",
+      "description":"Candy from the future",
+      "full":{
+        "fileIdentifier":"Future Candy.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Future Candy-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "N4Usg",
+        "Yi6mT",
+        "a7g4M"
+      ],
+      "relations":[
+        {
+          "relatedId":"2A5F2",
+          "difficulty":-3,
+          "attributeId":"N4Usg"
+        },
+        {
+          "relatedId":"aft4f",
+          "difficulty":7,
+          "attributeId":"N4Usg"
+        }
+      ]
+    },
+    "5x4m8":{
+      "prettyName":"Paradisus Paradoxum",
+      "description":"Re:Zero intro song",
+      "full":{
+        "fileIdentifier":"Paradisus Paradoxum.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Paradisus Paradoxum-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "jZ6pk",
+        "ZjxTz",
+        "MZrPM",
+        "SB1uj",
+        "EQyNZ"
+      ],
+      "relations":[
+        {
+          "relatedId":"YyY57",
+          "difficulty":10,
+          "attributeId":"SB1uj"
+        },
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":7,
+          "attributeId":"jZ6pk"
+        },
+        {
+          "relatedId":"aft4f",
+          "difficulty":-14,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":7,
+          "attributeId":"MZrPM"
+        }
+      ]
+    },
+    "GZfiJ":{
+      "prettyName":"No Title",
+      "description":"This song has no title",
+      "full":{
+        "fileIdentifier":"No Title.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"No Title-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "jZ6pk",
+        "zuHY4",
+        "nuX2X",
+        "MZrPM"
+      ],
+      "relations":[
+        {
+          "relatedId":"HLfyf",
+          "difficulty":-10,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"5x4m8",
+          "difficulty":-7,
+          "attributeId":"jZ6pk"
+        },
+        {
+          "relatedId":"aft4f",
+          "difficulty":-20,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"63GVD",
+          "difficulty":-7,
+          "attributeId":"jZ6pk"
+        },
+        {
+          "relatedId":"63GVD",
+          "difficulty":2,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"YyY57",
+          "difficulty":4,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"5x4m8",
+          "difficulty":-7,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"2A5F2",
+          "difficulty":-20,
+          "attributeId":"MZrPM"
+        }
+      ]
+    },
+    "2A5F2":{
+      "prettyName":"Climber's High!",
+      "description":"This is the climber's high",
+      "full":{
+        "fileIdentifier":"Climber's High.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Climber's High-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "N4Usg",
+        "MZrPM",
+        "rkmcH",
+        "7IGNx"
+      ],
+      "relations":[
+        {
+          "relatedId":"WjMYE",
+          "difficulty":3,
+          "attributeId":"N4Usg"
+        },
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":20,
+          "attributeId":"MZrPM"
+        }
+      ]
+    },
+    "HLfyf":{
+      "prettyName":"Blade Dance",
+      "description":"This song has kneesocks",
+      "full":{
+        "fileIdentifier":"Blade Dance.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Blade Dance-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "jZ6pk",
+        "7UwgU",
+        "MZrPM",
+        "nuX2X"
+      ],
+      "relations":[
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":10,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"YyY57",
+          "difficulty":-3,
+          "attributeId":"jZ6pk"
+        },
+        {
+          "relatedId":"63GVD",
+          "difficulty":15,
+          "attributeId":"jZ6pk"
+        }
+      ]
+    },
+    "63GVD":{
+      "prettyName":"Ghost Rule",
+      "description":"This is the rule of ghosts",
+      "full":{
+        "fileIdentifier":"Ghost Rule.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Ghost Rule-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "jZ6pk",
+        "ootC4",
+        "a7g4M",
+        "MZrPM"
+      ],
+      "relations":[
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":7,
+          "attributeId":"jZ6pk"
+        },
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":-2,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"HLfyf",
+          "difficulty":-15,
+          "attributeId":"jZ6pk"
+        }
+      ]
+    },
+    "YyY57":{
+      "prettyName":"Asu no Yozora Shoukaihan",
+      "description":"This song has some long streams",
+      "full":{
+        "fileIdentifier":"Asu no Yozora Shoukaihan.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Asu no Yozora Shoukaihan-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "jZ6pk",
+        "SB1uj",
+        "MZrPM",
+        "EQyNZ",
+        "GjxTw"
+      ],
+      "relations":[
+        {
+          "relatedId":"5x4m8",
+          "difficulty":-10,
+          "attributeId":"SB1uj"
+        },
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":-4,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"HLfyf",
+          "difficulty":3,
+          "attributeId":"jZ6pk"
+        }
+      ]
+    },
+    "aft4f":{
+      "prettyName":"Blow Out",
+      "description":"Intro for Rokudenashi Majutsu Koushi to Akashic Records",
+      "full":{
+        "fileIdentifier":"Blow Out.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Blow Out-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+        "N4Usg",
+        "QgIMc",
+        "MZrPM",
+        "a7g4M"
+      ],
+      "relations":[
+        {
+          "relatedId":"GZfiJ",
+          "difficulty":20,
+          "attributeId":"MZrPM"
+        },
+        {
+          "relatedId":"WjMYE",
+          "difficulty":-7,
+          "attributeId":"N4Usg"
+        },
+        {
+          "relatedId":"5x4m8",
+          "difficulty":14,
+          "attributeId":"MZrPM"
+        }
+      ]
+    },
+    "p7OHA":{
+      "prettyName":"Background",
+      "description":"Osu start menu",
+      "full":{
+        "fileIdentifier":"Nekodex.mp4",
+        "isUrl":false,
+        "attribution":""
+      },
+      "teaser":{
+        "fileIdentifier":"Nekodex-short.webm",
+        "isUrl":false,
+        "attribution":""
+      },
+      "attributes":[
+
+      ],
+      "relations":[
+
+      ]
+    }
+  },
+  "attributes":{
+    "N4Usg":{
+      "prettyName":"5*",
+      "description":"This is a 5-star song",
+      "x":0,
+      "y":0,
+      "videos":[
+        "2A5F2",
+        "WjMYE",
+        "aft4f"
+      ],
+      "glyphicon":"glyphicon-star"
+    },
+    "jZ6pk":{
+      "prettyName":"6*",
+      "description":"This is a 6-star song",
+      "x":50,
+      "y":49,
+      "videos":[
+        "YyY57",
+        "63GVD",
+        "5x4m8",
+        "HLfyf",
+        "GZfiJ"
+      ],
+      "glyphicon":"glyphicon-star"
+    },
+    "zuHY4":{
+      "prettyName":"Reol",
+      "description":"Artist",
+      "x":10,
+      "y":10,
+      "videos":[
+        "GZfiJ"
+      ],
+      "glyphicon":"glyphicon-user",
+      "oldPrettyName":"Reol"
+    },
+    "Yi6mT":{
+      "prettyName":"YUC'e",
+      "description":"Artist",
+      "x":20,
+      "y":20,
+      "videos":[
+        "WjMYE"
+      ],
+      "glyphicon":"glyphicon-user"
+    },
+    "ZjxTz":{
+      "prettyName":"Myth & Roid",
+      "description":"Artist",
+      "x":30,
+      "y":30,
+      "videos":[
+        "5x4m8"
+      ],
+      "glyphicon":"glyphicon-user"
+    },
+    "7UwgU":{
+      "prettyName":"Ni Sokkususu",
+      "description":"Artist",
+      "x":40,
+      "y":39,
+      "videos":[
+        "HLfyf"
+      ],
+      "glyphicon":"glyphicon-user"
+    },
+    "ootC4":{
+      "prettyName":"DECO*27",
+      "description":"Artist",
+      "x":50,
+      "y":50,
+      "videos":[
+        "63GVD"
+      ],
+      "glyphicon":"glyphicon-user"
+    },
+    "QgIMc":{
+      "prettyName":"Suzuki Konomi",
+      "description":"Artist",
+      "x":60,
+      "y":60,
+      "videos":[
+        "aft4f"
+      ],
+      "glyphicon":"glyphicon-user",
+      "oldPrettyName":"Suzuki Konomi"
+    },
+    "GjxTw":{
+      "prettyName":"Yuaru",
+      "description":"Artist",
+      "x":70,
+      "y":70,
+      "videos":[
+        "YyY57"
+      ],
+      "glyphicon":"glyphicon-user"
+    },
+    "7IGNx":{
+      "prettyName":"Slider Break",
+      "description":"Following a slider outside of the tracking range",
+      "x":80,
+      "y":20,
+      "videos":[
+        "2A5F2"
+      ],
+      "glyphicon":"glyphicon-eye-close"
+    },
+    "MZrPM":{
+      "prettyName":"Jumps",
+      "description":"Large distances between circles",
+      "x":70,
+      "y":30,
+      "videos":[
+        "2A5F2",
+        "YyY57",
+        "5x4m8",
+        "HLfyf",
+        "GZfiJ",
+        "aft4f",
+        "63GVD"
+      ],
+      "glyphicon":"glyphicon-step-forward",
+      "oldPrettyName":"Jumps"
+    },
+    "SB1uj":{
+      "prettyName":"Streams",
+      "description":"A lot of notes close together",
+      "x":60,
+      "y":40,
+      "videos":[
+        "YyY57",
+        "5x4m8"
+      ],
+      "glyphicon":"glyphicon-fast-forward"
+    },
+    "rkmcH":{
+      "prettyName":"S",
+      "description":"I got an S",
+      "x":50,
+      "y":40,
+      "videos":[
+        "2A5F2"
+      ],
+      "glyphicon":"glyphicon-thumbs-up",
+      "oldPrettyName":"S"
+    },
+    "nuX2X":{
+      "prettyName":"A",
+      "description":"I got an A",
+      "x":40,
+      "y":50,
+      "videos":[
+        "HLfyf",
+        "GZfiJ"
+      ],
+      "glyphicon":"glyphicon-hand-right"
+    },
+    "a7g4M":{
+      "prettyName":"B",
+      "description":"I got a B",
+      "x":30,
+      "y":60,
+      "videos":[
+        "63GVD",
+        "WjMYE",
+        "aft4f"
+      ],
+      "glyphicon":"glyphicon-hand-down"
+    },
+    "EQyNZ":{
+      "prettyName":"C",
+      "description":"I got a C",
+      "x":20,
+      "y":70,
+      "videos":[
+        "YyY57",
+        "5x4m8"
+      ],
+      "glyphicon":"glyphicon-thumbs-down"
+    },
+    "hsbww":{
+      "prettyName":"FC",
+      "description":"I full combo'd the map",
+      "x":80,
+      "y":10,
+      "videos":[
+
+      ],
+      "glyphicon":"glyphicon-eye-open"
+    }
+  },
+  "version":0.1
+}
