@@ -1,37 +1,26 @@
 <div id="content-area--header" class="page-header content-area--title">
-  <h3>{{newModel.config.prettyName}} <small>{{newModel.config.description}}</small></h3>
+  <h3>{{modelService.modelData.config.prettyName}} <small>{{modelService.modelData.config.description}}</small></h3>
 </div>
 
 {{properties-panel
   onSubmitCallback=(action 'updateData')
-  propertiesExpandedCallback=(action 'setPropertiesExpanded')
   updateModalCallback=(action 'updateModalInfo')
   data=selectedVideo
   attributes=selectedVideoAttributes
   relations=selectedVideoRelations
-  config=data.modelConfig
   vidKey=selectedVideoKey
 }}
 
 {{configuration-panel
   onSubmitCallback=(action 'updateConfig')
-  configurationExpandedCallback=(action 'setConfigurationExpanded')
   validationCallback=(action "validateConfig")
   class="content-area--configuration-section"
-  attributesExpanded=attributesExpanded
-  propertiesExpanded=propertiesExpanded
-  data=newModel
-  config=data.modelConfig.config
 }}
 
 {{attribute-panel
   attributeDropCallback=(action 'updateAddAttrToVideoData')
-  attributesExpandedCallback=(action 'setAttributesExpanded')
   updateModalCallback=(action 'updateModalInfo')
   deleteAttributeCallback=(action 'deleteAttribute')
-  data=newModel.attributes
-  modelfile=data.modelfile
-  version=newModel.version
 }}
 
 {{graph-visualizer
@@ -44,15 +33,11 @@
   addRelationCallback=(action 'addRelation')
   removeRelationCallback=(action 'removeRelation')
   removeAttributeCallback=(action 'removeAttributeFromVideo')
-  relationsConfig=data.modelConfig.videos.data.video.data.relations.data.[0].relation
+  relationsConfig=modelService.modelConfig.videos.data.video.data.relations.data.[0].relation
   addAttrToVideoData=addAttrToVideoData
   editAttributeData=editAttributeData
   addVideoData=addVideoData
   editVideoData=editVideoData
-  attributesExpanded=attributesExpanded
-  propertiesExpanded=propertiesExpanded
-  configurationExpanded=configurationExpanded
-  data=newModel
 }}
 
 <div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">

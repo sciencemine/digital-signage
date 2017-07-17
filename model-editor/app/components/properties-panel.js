@@ -24,11 +24,15 @@
  ******************************************************************************/
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
+  panelStates: service(),
+  modelService: service(),
+  
   classNameBindings: ['expanded:content-area--properties-large:content-area--properties-small'],
   
   /* Properties for the properties panel to know */
-  expanded: true,
   prefix: "properties",
   path: ".videos",
   key: null,
@@ -44,8 +48,10 @@ export default Ember.Component.extend({
                       
     header.css('bottom', Ember.$(window).height() - titleBottom);
     
-    panel.css('top', (this.get('expanded') ? titleBottom : 0));
-    panel.css('height', (this.get('expanded') ? Ember.$(window).height() - titleBottom : 0));
+    let expanded = this.get('panelStates.propertiesExpanded')
+    
+    panel.css('top', (expanded ? titleBottom : 0));
+    panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
   },
   /*****************************************************************************
    * EVENT:
@@ -75,23 +81,8 @@ export default Ember.Component.extend({
     this.setStyle();
   },
   actions: {
-    /***************************************************************************
-     * ACTION:
-     *  toggleView
-     *
-     * DESCRIPTION:
-     *  Toggles if the properties panel should be expanded or not.
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     toggleView() {
-      this.toggleProperty('expanded');
-      
-      this.get('propertiesExpandedCallback') (this.get('expanded'));
+      this.get('panelStates').togglePropertiesExpanded();
     },
     /***************************************************************************
      * ACTION:

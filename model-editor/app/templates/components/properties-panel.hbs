@@ -1,9 +1,9 @@
 <div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info properties-panel--scrollable">
   <div id="properties-panel--header" {{action 'toggleView' on click}} class="properties-panel--header panel-heading unselectable">
-    <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if expanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if expanded 'up' 'down'}}" /></small></h4>
+    <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if panelStates.propertiesExpanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if panelStates.propertiesExpanded 'up' 'down'}}" /></small></h4>
   </div>
 
-  {{#if expanded}}
+  {{#if panelStates.propertiesExpanded}}
     {{#if data}}
       <div class="panel-body">
         <p>List of properties the video has.</p>
@@ -15,7 +15,7 @@
           <ul class="nav navbar-nav">
             {{#each-in data as |key value|}}
               {{#link-to "modelEdit" tagName="li" class="navbar-text nav-icon-link" invokeAction=(action 'scrollDiv' (create-id "#" prefix "_" key "_label"))}}
-                <span class="glyphicon glyphicon-picture" data-toggle="propertiesTooltip" title={{get-display-name config.videos.data.video.data key}} />
+                <span class="glyphicon glyphicon-picture" data-toggle="propertiesTooltip" title={{get-display-name modelService.modelConfig.videos.data.video.data key}} />
               {{/link-to}}
             {{/each-in}}
           </ul>
@@ -35,7 +35,7 @@
           showHelp=true
           showTitle=false
           data=data
-          config=config.videos.data.video
+          config=modelService.modelConfig.videos.data.video
         }}
       </div>
     {{else}}

@@ -22,15 +22,18 @@
  ******************************************************************************/
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
+  modelService: service(),
+  panelStates: service(),
+  
   /* Properties for the configuration panel to know */
-  expanded: true,
   prefix: "config",
   path: ".config",
-  configModelData: null,
   
-  replaceBackgroundVideos: function() {
-    let newData = Ember.copy(this.get('data'), true);
+  configModelData: Ember.computed('modelService.modelData', function() {
+    let newData = this.get('modelService.modelData');
     let bgVids = newData.config.backgroundVideos;
     let replacementBgVids = [];
     
@@ -46,45 +49,24 @@ export default Ember.Component.extend({
     
     newData.config.backgroundVideos = replacementBgVids;
 
-    this.set('configModelData', newData.config);
-    this.notifyPropertyChange('configModelData');
-  },
+    return newData.config;
+  }),
+  styleObserver: Ember.observer('panelStates.attributesExpanded', 'panelStates.propertiesExpanded', function() {
+    this.setStyle();
+  }),
   setStyle: function() {
     let el = Ember.$("#" + this.elementId);
+    let panelStates = this.get('panelStates');
 
-    el.css('right', (this.get('propertiesExpanded') ? Ember.$(window).width() - Ember.$("#properties-panel").offset().left : 0));
-    el.css('left', (this.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
-  },
-  init() {
-    this._super(...arguments);
-    
-    this.replaceBackgroundVideos();
+    el.css('right', (panelStates.get('propertiesExpanded') ? Ember.$(window).width() - Ember.$("#properties-panel").offset().left : 0));
+    el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
   },
   didRender() {
     this.setStyle();
   },
-  didUpdateAttrs() {
-    this.replaceBackgroundVideos();
-  },
   actions: {
-    /***************************************************************************
-     * ACTION:
-     *  toggleView
-     *
-     * DESCRIPTION:
-     *  Toggles if the configuration panel should be expanded or not.
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     toggleView() {
-      this.set('expanded', !this.get('expanded'));
-      this.setStyle();
-
-      this.get('configurationExpandedCallback') (this.get('expanded'));
+      this.get('panelStates').toggleConfigExpanded();
     }
   }
 });

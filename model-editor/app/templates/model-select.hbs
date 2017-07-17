@@ -10,13 +10,13 @@
     <ul class="list-group">
       {{#each-in model.models as |key value|}}
         {{model-select-element
-          modelfile=value.fileName
+          onClickCallback=(action 'transition' value)
           name=value.config.prettyName
           description=value.config.description
         }}
       {{/each-in}}
       {{model-select-element
-        modelfile=(create-id "ModelSkeleton" model.modelInformation.newestVersion)
+        onClickCallback=(action 'newExhibit')
         name="Add Exhibit"
         description="Creates a new exhibit to be added to the list"
       }}

@@ -1,9 +1,9 @@
 {
     "config": {
         "version": 0.1,
-        "prettyName": "",
+        "prettyName": "New Exhibit",
         "modelIdentifier": "",
-        "description" : "",
+        "description" : "Creating a new exhibit!",
         "backgroundImage": "",
         "backgroundVideos": [ ],
         "ui": {

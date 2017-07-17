@@ -18,8 +18,12 @@
  ******************************************************************************/
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
-  notify: Ember.inject.service(),
+  notify: service(),
+  modelService: service(),
+  
   /* Parameters used for various things */
   newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
@@ -84,18 +88,14 @@ export default Ember.Component.extend({
 
     return text;
   },
-
-  init() {
-    this._super(...arguments);
-    
-    this.set('newModel', this.get('data.modelData'));
-  },
   actions: {
     updateModalInfo(title, config, path, key) {
+      let modelService = this.get('modelService');
+      
       this.setProperties({
         modalTitle: title,
-        modalConfig: this.get('data.modelConfig' + config),
-        modalData: (path && key ? this.get('newModel' + path)[key] : null),
+        modalConfig: modelService.get('modelConfig' + config),
+        modalData: (path && key ? modelService.get('modelData' + path)[key] : null),
         modalPrefix: title.replace(/\s*/gi, ''),
         modalPath: path,
         modalKey: key
@@ -114,19 +114,21 @@ export default Ember.Component.extend({
       obj.difficulty = data.diff;
       obj.attributeId = attrId;
 
-      this.send('pushData', obj, ".videos." + data.from + ".relations");
+      // this.get('modelService').update("modelData.videos." + data.from + ".relations", obj);
 
-      this.send('setSelectedVideo', data.from);
+      // this.send('setSelectedVideo', data.from);
     },
     removeRelation(vidId, pos) {
-      this.get('newModel.videos')[vidId].relations.removeAt(pos);
+      this.get('modelService.modelData.videos')[vidId].relations.removeAt(pos);
     },
     removeVideo(vidId) {
-      let videos = this.get('newModel.videos');
+      let modelData = this.get('modelService.modelData');
       
-      for (var attribute in this.get('newModel.attributes')) {
-        this.get('newModel.attributes')[attribute].videos.removeObject(vidId);
+      for (var attribute in modelData.attributes) {
+        modelData.attributes[attribute].videos.removeObject(vidId);
       }//for
+      
+      let videos = modelData.videos;
       
       for (var video in videos) {
         let videoObj = videos[video];
@@ -139,7 +141,9 @@ export default Ember.Component.extend({
       }//for
       
       delete videos[vidId];
-      this.set('newModel.videos', videos);
+      this.get('modelService').update('modelData.videos', videos);
+      
+      this.send('setSelectedVideo', null);
     },
     updateAddAttrToVideoData(x, y, attributeId) {
       let obj = {
@@ -157,7 +161,8 @@ export default Ember.Component.extend({
     },
     addAttributeToVideo(videoId, attrId) {
       if (videoId) {
-        let attributes = this.get('newModel.videos')[videoId].attributes;
+        let modelService = this.get('modelService');
+        let attributes = modelService.get('modelData.videos')[videoId].attributes;
         
         if (!attributes.find(function(attr) {
           if (attr === attrId) {
@@ -165,7 +170,7 @@ export default Ember.Component.extend({
           }
         })) {
           attributes.pushObject(attrId);
-          this.get('newModel.attributes')[attrId].videos.pushObject(videoId);
+          this.get('modelService').update('modelData.attributes.' + attrId + '.videos', videoId);
           
           this.send('setSelectedVideo', videoId);
           
@@ -184,23 +189,16 @@ export default Ember.Component.extend({
       }
     },
     removeAttributeFromVideo(videoId, attrId) {
-      this.get('newModel.videos')[videoId].attributes.removeObject(attrId);
-      this.get('newModel.attributes')[attrId].videos.removeObject(videoId);
+      let modelService = this.get('modelService');
+      
+      modelService.remove('modelData.videos.' + videoId + '.attributes', attrId);
+      modelService.remove('modelData.attributes.' + attrId +  '.videos', videoId);
       
       (function(component) {
         setTimeout(function() {
           component.notifyPropertyChange('selectedVideo');
         }, 10);
       }) (this);
-    },
-    setAttributesExpanded(param) {
-      this.set('attributesExpanded', param);
-    },
-    setPropertiesExpanded(param) {
-      this.set('propertiesExpanded', param);
-    },
-    setConfigurationExpanded(param) {
-      this.set('configurationExpanded', param);
     },
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
@@ -210,11 +208,13 @@ export default Ember.Component.extend({
         
         return;
       }
+      
+      let modelData = this.get('modelService.modelData');
 
       this.setProperties({
-        selectedVideo: Ember.copy(this.get('newModel.videos')[param]),
-        selectedVideoAttributes: Ember.copy(this.get('newModel.videos')[param].attributes),
-        selectedVideoRelations: Ember.copy(this.get('newModel.videos')[param].relations)
+        selectedVideo: Ember.copy(modelData.videos[param]),
+        selectedVideoAttributes: Ember.copy(modelData.videos[param].attributes),
+        selectedVideoRelations: Ember.copy(modelData.videos[param].relations)
       });
       
       this.send('replaceVideoAttributes');
@@ -226,7 +226,7 @@ export default Ember.Component.extend({
       this.set('selectedVideo.attributes', [ ]);
 
       for (var attribute = 0; attribute < attributes.length; attribute++) {
-        let attributeData = Ember.copy(this.get('newModel.attributes')[attributes[attribute]]);
+        let attributeData = Ember.copy(this.get('modelService.modelData.attributes')[attributes[attribute]]);
         let data = { };
 
         data.name = attributeData.prettyName;
@@ -238,17 +238,18 @@ export default Ember.Component.extend({
     },
     replaceVideoRelations() {
       let relations = this.get('selectedVideo.relations');
+      let modelData = this.get('modelService.modelData');
 
       this.set('selectedVideo.relations', [ ]);
 
       for (var relation = 0; relation < relations.length; relation++) {
         let data = { };
-        let relatedVid = Ember.copy(this.get('newModel.videos')[relations[relation].relatedId]);
+        let relatedVid = Ember.copy(modelData.videos[relations[relation].relatedId]);
 
         data.name = relatedVid.prettyName;
         data.description = relatedVid.description;
         data.difficulty = relations[relation].difficulty;
-        data.attribute = Ember.copy(this.get('newModel.attributes')[relations[relation].attributeId].prettyName);
+        data.attribute = Ember.copy(modelData.attributes[relations[relation].attributeId].prettyName);
         data.key = relation;
 
         this.get('selectedVideo.relations').push(data);
@@ -258,16 +259,17 @@ export default Ember.Component.extend({
       this.set('validModel', this.get('validModel') || param);
     },
     updateConfig(data) {
-      this.set('newModel.config', data);
+      this.get('modelService').update('modelData.config', data);
     },
     updateData(data, path, key) {
+      let modelService = this.get('modelService');
       let newKey;
       
       if (key) {
         path = path + "." + key;
       }
       else {
-        newKey = this.makeFiveDigitId(this.get('newModel' + path));
+        newKey = this.makeFiveDigitId(modelService.get('modelData' + path));
         path = path + "." + newKey;
       }
 
@@ -292,13 +294,13 @@ export default Ember.Component.extend({
         obj.data = data;
         
         if (key) {
-          data.videos = Ember.copy(this.get('newModel.attributes')[key].videos);
-          obj.data.oldPrettyName = Ember.copy(this.get('newModel.attributes')[key].prettyName);
+          data.videos = Ember.copy(modelService.get('modelData.attributes')[key].videos);
+          obj.data.oldPrettyName = Ember.copy(modelService.get('modelData.attributes')[key].prettyName);
           this.set('editAttributeData', obj);
         }//if
       }//if
 
-      this.set('newModel' + path, data);
+      modelService.update('modelData' + path, data);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
@@ -314,24 +316,14 @@ export default Ember.Component.extend({
         modalData: null,
         modalPrefix: null
       });
-      
-      (function(component) {
-        setTimeout(function() {
-          component.notifyPropertyChange('newModel');
-        }, 20);
-      })(this);
-      
-      
-    },
-    pushData(data, path) {
-      this.get('newModel' + path).pushObject(data);
     },
     deleteAttribute(attributeId) {
-      let attributes = Ember.copy(this.get('newModel.attributes'));
+      let modelService = this.get('modelService');
+      let attributes = Ember.copy(modelService.get('modelData.attributes'));
 
-      for (var i = 0; i < this.get('newModel.attributes')[attributeId].videos.length; i++) {
-        let vidId = this.get('newModel.attributes')[attributeId].videos[i];
-        let vid = this.get('newModel.videos')[vidId];
+      for (var i = 0; i < attributes[attributeId].videos.length; i++) {
+        let vidId = attributes[attributeId].videos[i];
+        let vid = modelService.get('modelData').videos[vidId];
 
         vid.attributes.removeObject(attributeId);
 
@@ -346,7 +338,7 @@ export default Ember.Component.extend({
       
       delete attributes[attributeId];
       
-      this.set('newModel.attributes', attributes);
+      modelService.update('modelData.attributes', attributes);
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
@@ -362,14 +354,12 @@ export default Ember.Component.extend({
         return;
       }
 
-      let prettyName = this.get('newModel.config.prettyName');
-
+      let modelData = this.get('modelService.modelData');
+      let prettyName = modelData.config.prettyName;
       let download = confirm("Do you want to download the exhibit model for " +
                               prettyName + "? (Cancel for no).");
       
       if (download) {
-        let modelData = this.get('newModel');
-
         let a = document.createElement('a');
 
         a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData)));

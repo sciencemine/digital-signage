@@ -15,5 +15,10 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   tagName: 'li',
-  classNames: ["list-group-item model-select--element"]
+  classNames: [ "list-group-item", "model-select--element", "unselectable", "pointer" ],
+  data: null,
+  
+  click() {
+    this.get('onClickCallback') (this.get('data'));
+  }
 });

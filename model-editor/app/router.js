@@ -8,11 +8,10 @@ const Router = Ember.Router.extend({
 
 Router.map(function() {
   this.route('modelSelect', {
-    path: "model-selection"
+    path: "exhibit-selection"
   });
   this.route('modelEdit', {
-    path: "exhibit-editor",
-    queryParams: ['modelfile', 'version']
+    path: "exhibit-editor"
   });
 });
 

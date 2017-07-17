@@ -1,16 +1,34 @@
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Route.extend({
+  modelService: service(),
+  notify: service(),
+  
   beforeModel() {
-    return(function(route) {
+    return (function(route) {
       return Ember.$.getJSON('assets/ModelInformation.json').then((data) => {
-        route.set('modelInformation', data);
+        route.get('modelService').loadModelInformation(data);
+        
+        return (function() {
+          let path = "models/ModelVersion" + data.newestVersion + ".json";
+        
+          return Ember.$.getJSON(path).then((modelConfig) => {
+            route.get('modelService').loadModelConfig(modelConfig);
+          }).fail(() => {
+            route.get('notify').alert("Failed to get model configuration.", {
+              radius: true,
+              closeAfter: 10 * 1000
+            });
+          });
+        }) ();
       });
     }) (this);
   },
   model() {
-    let modelData = [];
-    let modelInformation = this.get('modelInformation');
+    let modelData = [ ];
+    let modelInformation = this.get('modelService.modelInformation');
     let models = modelInformation.models;
 
     for (var i = 0; i < models.length; i++) {
@@ -21,17 +39,6 @@ export default Ember.Route.extend({
       let data = {
         models: null
       };
-      
-      
-      for (i = 0; i < models.length; i++) {
-        res[i].fileName = models[i];
-        res[i].backgroundVideos = {};
-
-        for (var j = 0; j < res[i].config.backgroundVideos.length; j++) {
-          var vidKey = res[i].config.backgroundVideos[j];
-          res[i].backgroundVideos[vidKey] = res[i].videos[vidKey];
-        }
-      }
       
       data.models = res;
       data.modelInformation = modelInformation;

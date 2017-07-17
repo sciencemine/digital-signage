@@ -60,28 +60,6 @@
   </div>
 </div>
 
-<div class="canvas-popover unselectable cursor--default" class="hidden">
-  <h4>{{popoverTitle}}</h4>
-  <h6>Attributes:</h6>
-  <p>
-  <ul class="list-group">
-    {{#each-in popoverContent.attributes as |key value|}}
-      <li class="list-group-item">
-        <div class="media">
-          <div class="media-left">
-            <span class="glyphicon {{value.glyphicon}}"/>
-          </div>
-          <div class="media-body">
-            <h5 class="media-heading">{{value.prettyName}}</h5>
-            <button type="button" class="btn btn-xs btn-danger" {{action 'removeAttribute' popoverContent.videoId value.id}}>Remove</button>
-          </div>
-        </div>
-      </li>
-    {{/each-in}}
-  </ul>
-  </p>
-</div>
-
 <div id="modal-container">
   <div class="modal fade" id="addRelationOverlay" tabindex="-2" role="dialog" aria-labelledby="modalAddRelationOverlay">
     <div class="modal-dialog" role="document">
