@@ -37,10 +37,8 @@ export default Ember.Component.extend(KeyboardControls, {
     this.get('onInputCallback') ();
   },
   didRender() {
-    let focus = this.get('focus');
-
-    if (this.$().is(':focus') !== focus) {
-      this.updateFocus(focus);
+    if (this.$().is(':focus') !== this.get('focus')) {
+      this.updateFocus(this.get('focus'));
     }
   }
 });

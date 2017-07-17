@@ -21,6 +21,9 @@ export default Ember.Component.extend({
             case 3:
                 this.set('stackStyle', 'vid-shadows--3');
                 break;
+            case 4:
+                this.set('stackStyle', 'vid-shadows--4');
+                break;
             default:
                 this.set('stackStyle', 'vid-shadows--4');
                 break;
@@ -44,11 +47,9 @@ export default Ember.Component.extend({
             }
             
             let curArrayPos = parseInt(this.get('selectedVidAPos'));
-
-            this.setProperties({
-                selectedVidAPos: (curArrayPos + 2) % arrayLength,
-                showVidA: false
-            });
+            
+            this.set('selectedVidAPos', (curArrayPos + 2) % arrayLength);
+            this.set('showVidA', false);        
         },
         getNextVideoB(){
             let arrayLength = this.get('videos').length;
@@ -58,11 +59,9 @@ export default Ember.Component.extend({
             }
             
             let curArrayPos = parseInt(this.get('selectedVidBPos'));
-
-            this.setProperties({
-                selectedVidBPos: (curArrayPos + 2) % arrayLength,
-                showVidA: true
-            });
+            
+            this.set('selectedVidBPos', (curArrayPos + 2) % arrayLength);
+            this.set('showVidA', true);
         },
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));

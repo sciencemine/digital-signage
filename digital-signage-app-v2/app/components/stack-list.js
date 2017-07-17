@@ -55,41 +55,31 @@ export default AbstractList.extend({
   stackItemClass: '',
   stackItemHighlight: '',
   
-  mouseMove() {
-    this.inputCallback();
-  },
-  
   select: function(event) {
-    let stackIndex = this.get('selectedStackIndex');
-
+    this.selectedCallback(this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
     this.inputCallback();
-    this.selectedCallback(this.get('data')[stackIndex].videos, stackIndex);
     
     event.stopPropagation();  
   },
   goPrevious: function(event) {
-    let stackIndex = this.get('selectedStackIndex');
-
-    this.inputCallback();
     this.changeIndex(-1);
+    this.inputCallback();
     
-    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
+    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
     
     event.stopPropagation();
   },
   cancel: function(event) {
-    this.inputCallback();
     this.cancelCallback();
+    this.inputCallback();
     
     event.stopPropagation();
   },
   goNext: function(event) {
-    let stackIndex = this.get('selectedStackIndex');
-
-    this.inputCallback();
     this.changeIndex(1);
+    this.inputCallback();
     
-    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
+    this.get('onStackChangeCallback') (this.get('data')[this.get('selectedStackIndex')].videos, this.get('selectedStackIndex'));
     
     event.stopPropagation();
   },
@@ -102,7 +92,7 @@ export default AbstractList.extend({
   init() {
     this._super(...arguments);
   },
-  actions: {
+  actions:{
     stackSelected(videos, vidPos) {
       this.selectedCallback(videos, vidPos);
     },
