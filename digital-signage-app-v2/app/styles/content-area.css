@@ -1,6 +1,5 @@
 .content-area {
   position: absolute;
-  
   top: 0px;
   right: 0px;
   bottom: 0px;
@@ -9,15 +8,4 @@
 
 .content-area:focus {
   outline: 0;
-}
-
-.bg-image {
-  position: absolute;
-  
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-  
-  z-index: -100;
 }
