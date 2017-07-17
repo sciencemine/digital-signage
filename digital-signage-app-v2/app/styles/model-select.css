@@ -20,6 +20,10 @@
   left: 20%;
 }
 
+.model-select--element {
+  text-decoration: none;
+}
+
 .model-select--element:focus {
   outline: 0;
 }

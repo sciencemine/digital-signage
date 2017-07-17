@@ -40,6 +40,7 @@ export default Ember.Route.extend({
 
       //after promises on blobs has been resolved
       return Ember.RSVP.Promise.all(uniqueVids.blobData).then((data) => {
+
         //make url of the blob and hash the uniqueVid to the url
         for (var i = 0;  i < uniqueVids.vids.length; i++) {
           uniqueVids[uniqueVids.vids[i]] = URL.createObjectURL(data[i]);
