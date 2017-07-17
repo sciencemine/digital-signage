@@ -36,29 +36,33 @@ export default AbstractList.extend({
   popoverShowDelay: 0.25,
   muted: false,
   
+  mouseMove() {
+    this.inputCallback();
+  },
+  
   select: function(event) {
-    this.selectedCallback(this.get('videos')[this.get('selectedVidPos')], this.get('selectedVidPos'));
+    let vidPos = this.get('selectedVidPos');
 
     this.inputCallback();
+    this.selectedCallback(this.get('videos')[vidPos], vidPos);
 
     event.stopPropagation();
   },
   goPrevious: function(event) {
-    this.changeIndex(-1);
     this.inputCallback();
+    this.changeIndex(-1);
 
     event.stopPropagation();
   },
   cancel: function(event) {
-    this.cancelCallback();
-
     this.inputCallback();
+    this.cancelCallback();
 
     event.stopPropagation();
   },
   goNext: function(event) {
-    this.changeIndex(1);
     this.inputCallback();
+    this.changeIndex(1);
 
     event.stopPropagation();
   },
@@ -75,21 +79,23 @@ export default AbstractList.extend({
   },
   didRender() {
     if (this.get('displayPopovers')) {
-      let component = this;
-      
-      if (this.$('[data-toggle="popover"]').length !== 0){
-        component.$('[data-toggle="popover"]').popover({
-          trigger: 'hover focus',
-          delay: {
-            show: (component.get('popoverShowDelay') * 1000),
-            hide: '100'
-          }
-        });	
+      if (this.$('[data-toggle="popover"]').length !== 0) {
+        (function(component) {
+          component.$('[data-toggle="popover"]').popover({
+            trigger: 'hover focus',
+            delay: {
+              show: (component.get('popoverShowDelay') * 1000),
+              hide: '100'
+            }
+          });
+        }) (this);
       }
     }
+
+    let focus = this.get('focus');
     
-    if (this.$().is(':focus') !== this.get('focus')) {
-      this.updateFocus(this.get('focus'));
+    if (this.$().is(':focus') !== focus) {
+      this.updateFocus(focus);
     }
   },
   actions: {
