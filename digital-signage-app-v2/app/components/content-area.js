@@ -13,22 +13,35 @@ export default Ember.Component.extend(KeyboardControls, {
   backgroundVideoKeys: null,
   selectionVideos: [],
   afterVideoListData: null,
-  showAfterVideoList: false,
-
-  showVideoSelect: function() {
-    this.set('displayVideoSelect', true);
-
-    this.send('resetTimeout');
+  mapData: [ ],
+  videoHistory: [ ],
+ 
+  hideOverlays: function() {
+    this.setProperties({
+      displayVideoSelect: false,
+      displayVideo: false,
+      displayAfterVideoList: false,
+      displayMapView: false
+    });
   },
-  hideVideoSelect: function() {
-    this.set('displayVideoSelect', false);
+  appendVideoHistory: function() {
+    let videoHist = this.get('videoHistory.videos');
+    let playingVid = this.get('playingVidData');
 
-    clearTimeout(this.get('displayVideoSelectTimeout'));
+    if(videoHist.length === 0 || videoHist[videoHist.length - 1].id !== playingVid.id){
+      videoHist.push(playingVid);
+    }
   },
-  pauseVideo: function() {
-    this.set('videoPlaying', !this.get('videoPlaying'));
-    this.set('displayVideoSelect', !this.get('videoPlaying'));
-    this.set('focus', this.get('videoPlaying'));
+
+  resetVideoHistory: function() {
+    this.set('videoHistory', {
+      prettyName: "History",
+      description: "",
+      x: 0,
+      y: 0,
+      videos: [ ]
+    });
+
   },
   select: function() {
     this.set('videoPlaying', false);
@@ -38,9 +51,10 @@ export default Ember.Component.extend(KeyboardControls, {
     this.send('resetTimeout');
   },
   cancel: function() {
-    this.pauseVideo();
-
-    this.send('resetTimeout');
+    this.setProperties({
+      displayVideoSelect: false,
+    });
+    this.keyboardInput();
   },
   goNext: function() {
     this.pauseVideo();
@@ -129,22 +143,65 @@ export default Ember.Component.extend(KeyboardControls, {
   actions: {
     videoSelected(sender, videoData) {
       if (videoData) {
-        var url = videoData.full.fileIdentifier;
-        //strips off media fragments fix by sending vid object data from model
-        this.set('video', this.get('data.config.modelIdentifier') + '/' + url);
-        this.set('displayVideo', true);
-        this.set('videoPlaying', true);
-        this.hideVideoSelect();
-        this.set('focus', true);
+        let playingVidData = this.get('playingVidData');
+
+        clearTimeout(this.get('idleTimeout'));
+        
+        this.hideOverlays();
+
+        this.setProperties({
+          displayVideo: true,
+          videoPlaying: true,
+          focus: true
+        });
+        
+        if (!playingVidData || playingVidData.id !== videoData.id) {
+          this.set('playingVidData', videoData);
+        }
+        else if (!playingVidData || playingVidData.id === videoData.id) {
+          this.set('displayAfterVideoList', false);
+        }
+
+        this.appendVideoHistory();
+        this.makeAfterVideoList();
+        
       }
       else {
-        this.pauseVideo();
+        this.toggleVidPlayback();
+        this.send('resetTimeout');
       }
     },
     videoEnded() {
-      this.set('focus', false);
-      this.showVideoSelect();
-      this.set('displayVideo', false);
+      this.setProperties({
+        displayAfterVideoList: true,
+        focus: false,
+        displayVideo: false
+      });
+      
+      this.set('playingVidData.startingTime', 0);      
+      this.send('resetTimeout');
+    },
+    pauseVideo(sender, currentTime) {
+      this.toggleProperty('videoPlaying');
+      this.set('playingVidData.startingTime', currentTime);
+
+      this.setProperties({
+        displayAfterVideoList: true,
+        focus: false,
+        displayVideo: true
+      });
+      
+      this.send('resetTimeout');
+    },
+    stackSelected(sender, vidArr) {      
+      this.setProperties({
+        displayVideoSelect: true,
+        vidSelectData: vidArr,
+        displayMapView: false
+      });
+      
+      this.send('resetTimeout');
+
     },
     cycleBackground() {
       let backArrayLength = this.get('backgroundVideoKeys').length;
