@@ -21,12 +21,6 @@ export default Ember.Component.extend(KeyboardControls, {
   vidSelectData: [],
   afterVideoListData: null,
   mapData: [ ],
-  
-  userPath: {
-    nodes: [ ],
-    edges: [ ]
-  },
-  
   videoHistory: [ ],
  
   hideOverlays: function() {
@@ -351,7 +345,6 @@ export default Ember.Component.extend(KeyboardControls, {
     pauseVideo(sender, currentTime) {
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
-      this.set('timeWatched', currentTime);
 
       this.setProperties({
         displayAfterVideoList: true,
