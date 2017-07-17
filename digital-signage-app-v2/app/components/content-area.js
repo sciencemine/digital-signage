@@ -351,7 +351,6 @@ export default Ember.Component.extend(KeyboardControls, {
     pauseVideo(sender, currentTime) {
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
-      this.set('timeWatched', currentTime);
 
       this.setProperties({
         displayAfterVideoList: true,
