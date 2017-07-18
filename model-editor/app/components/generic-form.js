@@ -219,17 +219,13 @@ export default Ember.Component.extend({
       return false;
     },
     validateForm() {
-      (function(component) {
-        setTimeout(function() {
-          let valid = true;
-          
-          valid = component.validateInput() && valid;
-          valid = component.validateTextarea() && valid;
-          valid = component.validateSelect() && valid;
+      let valid = true;
+      
+      valid = this.validateInput() && valid;
+      valid = this.validateTextarea() && valid;
+      valid = this.validateSelect() && valid;
 
-          component.set('validForm', valid);
-        }, 10);
-      }) (this);
+      this.set('validForm', valid);
     },
     toggleHelp() {
       this.toggleProperty('showHelp');

@@ -23,6 +23,7 @@ const { inject: { service } } = Ember;
 export default Ember.Component.extend({
   notify: service(),
   modelService: service(),
+  visData: service(),
   
   /* Parameters used for various things */
   newModel: null,                 //A copy of the model to edit
@@ -42,11 +43,6 @@ export default Ember.Component.extend({
   modalPath: "",
   modalKey: "",
 
-  /* Booleans for detecting if any of the panels are open or closed */
-  attributesExpanded: true,
-  propertiesExpanded: true,
-  configurationExpanded: true,
-
   /* Payload data for adding an attribute to a video */
   addAttrToVideoData: {
     attributeId: null,
@@ -54,24 +50,6 @@ export default Ember.Component.extend({
       x: null,
       y: null
     }
-  },
-  
-  /* Payload data for editing an existing attribute */
-  editAttributeData: {
-    attributeId: null,
-    data: { }
-  },
-  
-  /* Payload data for adding a new video */
-  addVideoData: {
-    videoId: null,
-    data: { }
-  },
-  
-  /* Payload data for editing an existing video */
-  editVideoData: {
-    videoId: null,
-    data: { }
   },
   
   makeFiveDigitId: function(obj) {
@@ -107,22 +85,9 @@ export default Ember.Component.extend({
     updateModalAddAttribute() {
       this.send('updateModalInfo', "Add Attribute", ".attributes.data.attribute", ".attributes");
     },
-    addRelation(data, attrId) {
-      let obj = { };
-      
-      obj.relatedId = data.to;
-      obj.difficulty = data.diff;
-      obj.attributeId = attrId;
-
-      // this.get('modelService').update("modelData.videos." + data.from + ".relations", obj);
-
-      // this.send('setSelectedVideo', data.from);
-    },
-    removeRelation(vidId, pos) {
-      this.get('modelService.modelData.videos')[vidId].relations.removeAt(pos);
-    },
     removeVideo(vidId) {
-      let modelData = this.get('modelService.modelData');
+      let modelService = this.get('modelService');
+      let modelData = modelService.get('modelData');
       
       for (var attribute in modelData.attributes) {
         modelData.attributes[attribute].videos.removeObject(vidId);
@@ -141,7 +106,7 @@ export default Ember.Component.extend({
       }//for
       
       delete videos[vidId];
-      this.get('modelService').update('modelData.videos', videos);
+      modelService.update('modelData.videos', videos);
       
       this.send('setSelectedVideo', null);
     },
@@ -187,18 +152,6 @@ export default Ember.Component.extend({
           });
         }
       }
-    },
-    removeAttributeFromVideo(videoId, attrId) {
-      let modelService = this.get('modelService');
-      
-      modelService.remove('modelData.videos.' + videoId + '.attributes', attrId);
-      modelService.remove('modelData.attributes.' + attrId +  '.videos', videoId);
-      
-      (function(component) {
-        setTimeout(function() {
-          component.notifyPropertyChange('selectedVideo');
-        }, 10);
-      }) (this);
     },
     setSelectedVideo(param) {
       this.set('selectedVideoKey', param);
@@ -274,29 +227,37 @@ export default Ember.Component.extend({
       }
 
       if (path.indexOf(".videos") !== -1) {
-        let obj = { data: { } };
-        
-        obj.videoId = key ? key : newKey;
-        obj.data = data;
+        let id = (key ? key : newKey);
         
         if (key) {
-          this.set('editVideoData', obj);
+          this.get('visData').updateNode({ id: id, label: data.prettyName });
         }//if
         else {
-          this.set('addVideoData', obj);
+          this.get('visData').createNode(id, data.prettyName);
         }//else
       }//if
 
       if (path.indexOf(".attributes") !== -1) {
         let obj = { data: { } };
+        let attrId = (key ? key : newKey);
         
-        obj.attributeId = key ? key : newKey;
+        obj.attributeId = (key ? key : newKey);
         obj.data = data;
         
         if (key) {
+          let visData = this.get('visData');
+          
           data.videos = Ember.copy(modelService.get('modelData.attributes')[key].videos);
-          obj.data.oldPrettyName = Ember.copy(modelService.get('modelData.attributes')[key].prettyName);
-          this.set('editAttributeData', obj);
+          
+          visData.get('edges').forEach(function(edge) {
+            if (edge.id.substr(edge.id.lastIndexOf('_') + 1) === attrId) {
+              let newEdge = edge;
+          
+              newEdge.label = data.prettyName;
+              
+              visData.updateEdge(newEdge);
+            }
+          });
         }//if
       }//if
 

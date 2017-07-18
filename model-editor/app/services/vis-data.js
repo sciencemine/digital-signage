@@ -35,6 +35,10 @@ export default Ember.Service.extend({
           align: 'bottom',
           size: 15
         }
+      },
+      physics: {
+        enabled: true,
+        solver: 'forceAtlas2Based'
       }
     };
     
@@ -52,6 +56,43 @@ export default Ember.Service.extend({
   },
   clear() {
     return { nodes: this.clearNodes(), edges: this.clearEdges() };
+  },
+  createNode(id, label, options = { }) {
+    let nodeObj = Ember.merge({ id: id, label: this.shortenName(label) }, options);
+    
+    this.loadNodes(nodeObj);
+  },
+  createEdge(from, to, value, pos, label, attr, options = { }) {
+    let edgeObj = Ember.merge({
+      from: from,
+      to: to,
+      value: value,
+      pos: pos,
+      label: label,
+      attr: attr
+    }, options);
+    
+    if (typeof(edgeObj.value) === "number") {
+      edgeObj.color = this.createRGBColor(edgeObj.value);
+      edgeObj.value = Math.abs(edgeObj.value);
+    }
+    if (typeof(edgeObj.label) === "string") {
+      edgeObj.label = this.shortenName(edgeObj.label);
+    }
+    
+    edgeObj.id = edgeObj.from + "_" + edgeObj.pos + "_" + edgeObj.attr;
+    
+    return this.loadEdges(edgeObj);
+  },
+  createRGBColor(diff) {
+    let red = diff > 0 ? 10 * diff : 0;
+    let green = diff < 0 ? -10 * diff : 0;
+    let blue = 127 - ((red + green) / 2);
+
+    return "rgb(" + red + "," + green + "," + blue + ")";
+  },
+  shortenName(name) {
+    return name.length > 15 ? name.substr(0, 11) + " ..." : name;
   },
   loadNodes(nodes) {
     return this.get('nodes').add(nodes);

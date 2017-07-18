@@ -35,8 +35,13 @@ export default Ember.Service.extend({
     
     this.notifyPropertyChange(path.substr(0, path.indexOf('.')));
   },
-  remove(path, data) {    
+  remove(path, data) {
     this.get(path).removeObject(data);
+    
+    this.notifyPropertyChange(path.substr(0, path.indexOf('.')));
+  },
+  removeAt(path, pos) {
+    this.get(path).removeAt(pos);
     
     this.notifyPropertyChange(path.substr(0, path.indexOf('.')));
   }

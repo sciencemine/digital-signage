@@ -33,9 +33,9 @@ export default Ember.Component.extend({
   path: ".config",
   
   configModelData: Ember.computed('modelService.modelData', function() {
-    let newData = this.get('modelService.modelData');
+    let newData = Ember.copy(this.get('modelService.modelData'), true);
     let bgVids = newData.config.backgroundVideos;
-    let replacementBgVids = [];
+    let replacementBgVids = [ ];
     
     for (var video in newData.videos) {
       let obj = {};
@@ -48,7 +48,7 @@ export default Ember.Component.extend({
     }//for
     
     newData.config.backgroundVideos = replacementBgVids;
-
+    
     return newData.config;
   }),
   styleObserver: Ember.observer('panelStates.attributesExpanded', 'panelStates.propertiesExpanded', function() {
