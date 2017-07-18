@@ -2,6 +2,7 @@
 
 {{#each-in videos as |key value|}}
   <div class="{{listItemClass}} {{if (video-selected key selectedVidPos)listItemSelected listItemSmall}}" data-container="body" data-toggle="popover" data-placement="auto top" data-title={{value.prettyName}} data-content={{value.description}}>
+  
     {{video-player
       onClickCallback=(action 'videoSelected')
       onHoverCallback=(action 'videoHovered')
