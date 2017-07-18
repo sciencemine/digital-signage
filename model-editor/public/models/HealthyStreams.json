@@ -22,12 +22,11 @@
       "previous":"a",
       "cancel":"s",
       "next":"d"
-    },
-    "version":0.1
+    }
   },
   "videos":{
     "hV6VB":{
-      "prettyName":"What are “the Five Cs”?",
+      "prettyName":"What are \"the Five Cs\"?",
       "description":"The 5Cs",
       "full":{
         "fileIdentifier":"SM-HSt-5C-1s.mp4",
@@ -35,7 +34,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-5C-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-5C-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -55,7 +54,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Beavr-s1-tz.mp4",
+        "fileIdentifier":"SM-HSt-Beavr-s1.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -76,7 +75,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-BioIn-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-BioIn-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -88,7 +87,7 @@
       ]
     },
     "mswgy":{
-      "prettyName":"What’s a Complex stream?",
+      "prettyName":"What's a Complex stream?",
       "description":"Complexity",
       "full":{
         "fileIdentifier":"SM-HSt-Cmplx-1s.mp4",
@@ -96,7 +95,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Cmplx-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-Cmplx-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -108,7 +107,7 @@
       ]
     },
     "KjZqa":{
-      "prettyName":"What’s a Connected stream?",
+      "prettyName":"What's a Connected stream?",
       "description":"Connected",
       "full":{
         "fileIdentifier":"SM-HSt-Conec-1s.mp4",
@@ -116,7 +115,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Conec-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-Conec-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -136,7 +135,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-CpxI-1-tz.mp4",
+        "fileIdentifier":"SM-HSt-CpxI-1.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -157,7 +156,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Crit2-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-Crit2-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -177,7 +176,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Critr-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-Critr-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -197,7 +196,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Critr-2-tz.mp4",
+        "fileIdentifier":"SM-HSt-Critr-2.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -217,7 +216,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-H20-1-tz.mp4",
+        "fileIdentifier":"SM-HSt-H20-1.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -229,7 +228,7 @@
       ]
     },
     "Pz5Uy":{
-      "prettyName":"What’s Riparian?",
+      "prettyName":"What's Riparian?",
       "description":"Riparian habitats pt. 1",
       "full":{
         "fileIdentifier":"SM-HSt-Ripar-1s.mp4",
@@ -237,7 +236,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-Ripar-1s-tz.mp4",
+        "fileIdentifier":"SM-HSt-Ripar-1s.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -250,7 +249,7 @@
       ]
     },
     "w5bGy":{
-      "prettyName":"What’s in the Riparian Zone?",
+      "prettyName":"What's in the Riparian Zone?",
       "description":"Riparian habitats pt. 2",
       "full":{
         "fileIdentifier":"SM-HSt-ripar-2.mp4",
@@ -258,7 +257,7 @@
         "attribution":""
       },
       "teaser":{
-        "fileIdentifier":"SM-HSt-ripar-2-tz.mp4",
+        "fileIdentifier":"SM-HSt-ripar-2.webm",
         "isUrl":false,
         "attribution":""
       },
@@ -354,6 +353,7 @@
   "attributes":{
     "dRGuH":{
       "prettyName":"Raparian Habitats",
+      "glyphicon": "glyphicon-tag",
       "description":"Raparian Habitats",
       "x":0,
       "y":0,
@@ -366,6 +366,7 @@
     },
     "zFN8z":{
       "prettyName":"Critters",
+      "glyphicon": "glyphicon-tag",
       "description":"Critters",
       "x":0,
       "y":0,
@@ -378,6 +379,7 @@
     },
     "N57vQ":{
       "prettyName":"The 5Cs",
+      "glyphicon": "glyphicon-tag",
       "description":"Cold, Clear, Clean, Complex, and Connected",
       "x":0,
       "y":0,
@@ -391,6 +393,7 @@
     },
     "yiG8M":{
       "prettyName":"Plants",
+      "glyphicon": "glyphicon-tag",
       "description":"Plants",
       "x":0,
       "y":0,
@@ -401,6 +404,7 @@
     },
     "PykEi":{
       "prettyName":"Beavers",
+      "glyphicon": "glyphicon-tag",
       "description":"Beavers",
       "x":0,
       "y":0,
@@ -408,5 +412,6 @@
         "Nh8US"
       ]
     }
-  }
+  },
+  "version":0.1
 }

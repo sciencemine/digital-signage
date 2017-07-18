@@ -48,7 +48,7 @@ export default Ember.Component.extend({
                       
     header.css('bottom', Ember.$(window).height() - titleBottom);
     
-    let expanded = this.get('panelStates.propertiesExpanded')
+    let expanded = this.get('panelStates.propertiesExpanded');
     
     panel.css('top', (expanded ? titleBottom : 0));
     panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
