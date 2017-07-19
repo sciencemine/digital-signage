@@ -67,8 +67,6 @@ export default Ember.Component.extend({
       setTimeout(function() {
         el.css('bottom', configHeight);
       }, 10);
-      
-      this.$("#video-attributes").css('top', titleBottom);
     }
   },
   updateVideoAttributes: function() {
