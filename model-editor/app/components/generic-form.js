@@ -153,10 +153,10 @@ export default Ember.Component.extend({
           }
           else if (el[0].type === 'textarea') {
             value = el.val();
-          } if
+          }
           else if (el[0].type === 'number') {
             value = el[0].valueAsNumber;
-          } if
+          }
           else {
             value = el[0].value;
           }
