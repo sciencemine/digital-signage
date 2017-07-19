@@ -102,14 +102,14 @@ export default Ember.Component.extend({
             let diff = vid.relations[i].difficulty;
 
             visData.createEdge(video, vid.relations[i].relatedId, diff, i, attr.prettyName, attrId);
-          }//for
-      }//for
+          }
+      }
     }
   },
   didRender() {
     if (this.get('network') === null) {
       this.send('drawGraph');
-    }//if
+    }
   },
   addAttributeObserver: Ember.observer('addAttrToVideoData', function() {
     let addAttrData = this.get('addAttrToVideoData');
@@ -119,7 +119,7 @@ export default Ember.Component.extend({
       let domPos = addAttrData.domPos;
       
       this.get('getVideoCallback') (network.getNodeAt(domPos), addAttrData.attributeId);
-    }//if
+    }
   }),
   panelObservers: Ember.observer('panelStates.attributesExpanded', 'panelStates.propertiesExpanded', 'panelStates.configExpanded', function() {
     this.setStyle();
@@ -150,7 +150,7 @@ export default Ember.Component.extend({
         visData.get('edges').forEach(function (edge) {
           if ((edge.from === videoId || edge.to === videoId) && edge.attr === attributeId) {
             visData.removeEdge(edge);
-          }//if
+          }
         });
         
         modelService.remove('modelData.videos.' + videoId + '.attributes', attributeId);
@@ -194,8 +194,8 @@ export default Ember.Component.extend({
             attr.id = fromVid.attributes[fromAttr];
 
             attributes.push(attr);
-          }//if
-        }//for
+          }
+        }
         
         if (attributes.length === 0) {
           component.get('notify').warning("Warning! Trying to make a relation between two videos with no shared attributes.", {
@@ -204,7 +204,7 @@ export default Ember.Component.extend({
           });
           
           return;
-        }//if
+        }
 
         component.set('relationsConfig.data.attributeId.data', attributes);
 
@@ -262,8 +262,8 @@ export default Ember.Component.extend({
             component.set('removeEdgeMode', false);
             
             component.get('modelService').removeAt('modelData.videos.' + edge.from + '.relations', edge.pos);
-          }//if
-        }//if
+          }
+        }
         
         if (param.nodes.length === 1 && component.get('removeVideoMode')) {
           if (confirm("Are you sure you want to remove the video \"" + modelData.videos[param.nodes[0]].prettyName + "\"?")) {
@@ -273,25 +273,25 @@ export default Ember.Component.extend({
             edges.forEach(function(edge) {
               if (edge.from === vidId || edge.to === vidId) {
                 visData.removeEdge(edge);
-              }//if
+              }
             });
             
             visData.removeNode(vidId);
             component.get('removeVideoCallback') (vidId);
-          }//if
+          }
           
           component.set('removeVideoMode', false);
-        }//if
+        }
         
         if (param.nodes.length === 0) {
           component.setProperties({
             deleteVideoMode: false,
             deleteEdgeMode: false
           });
-        }//if
+        }
         else if (param.nodes.length === 1) {
           component.get('videoSelectedCallback') (param.nodes[0]);
-        }//else if
+        }
       });
 
       this.set('network', network);

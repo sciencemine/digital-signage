@@ -49,7 +49,7 @@ export default Ember.Component.extend({
       let el = this.$('input')[i];
 
       inputValid = this.validateElement(el) && inputValid;
-    }//for
+    }
 
     return inputValid;
   },
@@ -60,7 +60,7 @@ export default Ember.Component.extend({
       let el = this.$('textarea')[i];
 
       textareaValid = this.validateElement(el) && textareaValid;
-    }//for
+    }
 
     return textareaValid;
   },
@@ -78,19 +78,19 @@ export default Ember.Component.extend({
           this.makeWarning(el);
 
           selectValid = false && selectValid;
-        }//if
+        }
         else {
           this.makeSuccess(el);
 
           selectValid = true && selectValid;
-        }//else
-      }//if
+        }
+      }
       else {
         this.makeSuccess(el);
 
         selectValid = true && selectValid;
-      }//else
-    }//for
+      }
+    }
 
     return selectValid;
   },
@@ -99,13 +99,13 @@ export default Ember.Component.extend({
         this.makeSuccess(el);
 
         return true;
-      }//if
+      }
       else if (!el.value && !el.validity.valid) {
         this.makeWarning(el);
-      }//else if
+      }
       else if (!el.validity.valid) {
         this.makeError(el);
-      }//else if
+      }
 
       return false;
   },
@@ -127,7 +127,7 @@ export default Ember.Component.extend({
     for (let key in data) {
       if (typeof(data[key].data) === 'object' && !Array.isArray(data[key].data)) {
         payload[key] = this.getValues(data[key].data, prefix + "_" + key);
-      }//if
+      }
       else if (Array.isArray(data[key].data)) {
         let el = Ember.$('#' + prefix + "_" + key);
         payload[key] = [ ];
@@ -136,13 +136,13 @@ export default Ember.Component.extend({
           if (el[0].multiple) {
             for (var i = 0; i < el.val().length; i++) {
               payload[key].push(el.val()[i]);
-            }//for
-          }//if
+            }
+          }
           else if (el[0]) {
             payload[key] = el[0].value;
-          }//if
-        }//if
-      }//else if
+          }
+        }
+      }
       else {
         let el = Ember.$('#' + prefix + "_" + key);
         let value;
@@ -150,21 +150,21 @@ export default Ember.Component.extend({
         if (el[0]) {
           if (el[0].type === 'checkbox') {
             value = el[0].checked;
-          }//if
+          }
           else if (el[0].type === 'textarea') {
             value = el.val();
-          }//else if
+          } if
           else if (el[0].type === 'number') {
             value = el[0].valueAsNumber;
-          }//else if
+          } if
           else {
             value = el[0].value;
-          }//else
+          }
 
           payload[key] = value;
-        }//if
-      }//else
-    }//for
+        }
+      }
+    }
 
     return payload;
   },
@@ -179,8 +179,8 @@ export default Ember.Component.extend({
           },
           html: true
         });
-      }//if
-    }//if
+      }
+    }
 
     this.send('validateForm');
     this.get('validationCallback') (this.get('validForm'));
@@ -208,13 +208,13 @@ export default Ember.Component.extend({
         });
         
         this.$('#' + prefix + "_form")[0].reset();
-      }//if
+      }
       else {
         this.get('notify').alert("Please verify the contents of the form before submission.", {
           radius: true,
           closeAfter: 10 * 1000
         });
-      }//else
+      }
 
       return false;
     },

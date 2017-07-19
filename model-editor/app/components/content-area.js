@@ -91,7 +91,7 @@ export default Ember.Component.extend({
       
       for (var attribute in modelData.attributes) {
         modelData.attributes[attribute].videos.removeObject(vidId);
-      }//for
+      }
       
       let videos = modelData.videos;
       
@@ -101,9 +101,9 @@ export default Ember.Component.extend({
         for (var i = 0; i < videoObj.relations.length; i++) {
           if (videoObj.relations[i].relatedId === vidId) {
             videoObj.relations.removeAt(i);
-          }//if
-        }//for
-      }//for
+          }
+        }
+      }
       
       delete videos[vidId];
       modelService.update('modelData.videos', videos);
@@ -231,11 +231,11 @@ export default Ember.Component.extend({
         
         if (key) {
           this.get('visData').updateNode({ id: id, label: data.prettyName });
-        }//if
+        }
         else {
           this.get('visData').createNode(id, data.prettyName);
         }//else
-      }//if
+      }
 
       if (path.indexOf(".attributes") !== -1) {
         let obj = { data: { } };
@@ -258,8 +258,8 @@ export default Ember.Component.extend({
               visData.updateEdge(newEdge);
             }
           });
-        }//if
-      }//if
+        }
+      }
 
       modelService.update('modelData' + path, data);
 
@@ -293,9 +293,9 @@ export default Ember.Component.extend({
 
           if (relation.attributeId === attributeId) {
             vid.relations.removeObject(relation);
-          }//if
-        }//for
-      }//for
+          }
+        }
+      }
       
       delete attributes[attributeId];
       
@@ -303,7 +303,7 @@ export default Ember.Component.extend({
 
       if (this.get('selectedVideoKey')) {
         this.send('setSelectedVideo', this.get('selectedVideoKey'));
-      }//if
+      }
     },
     saveModel() {
       if (!this.get('validModel')) {
@@ -328,7 +328,7 @@ export default Ember.Component.extend({
         a.setAttribute('download', prettyName.replace(/\s/gi, '') + ".json");
 
         a.click();
-      }//if
+      }
     },
     doNothing() {
 

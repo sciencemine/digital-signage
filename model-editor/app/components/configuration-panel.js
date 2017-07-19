@@ -47,7 +47,7 @@ export default Ember.Component.extend({
         obj.selected = (bgVids.indexOf(video) === -1 ? false : true);
         
         replacementBgVids.push(obj);
-      }//for
+      }
       
       newData.config.backgroundVideos = replacementBgVids;
       
