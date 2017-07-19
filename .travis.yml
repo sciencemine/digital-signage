@@ -10,18 +10,8 @@ node_js:
   
 env:
   - TEST_DIR=digital-signage-app-v2
-  matrix:
-    - EMBER_VERSION=default
-    - EMBER_VERSION=release
-    - EMBER_VERSION=beta
-    - EMBER_VERSION=canary
   - TEST_DIR=model-editor
-  matrix:
-    - EMBER_VERSION=default
-    - EMBER_VERSION=release
-    - EMBER_VERSION=beta
-    - EMBER_VERSION=canary
-
+  
 allowed_failures:
   - env: EMBER_VERSION=beta
   - env: EMBER_VERSION=canary
