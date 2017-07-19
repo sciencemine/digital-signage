@@ -1,4 +1,3 @@
-// jshint ignore: start
 import Ember from 'ember';
 import vis from 'npm:vis';
 
@@ -142,7 +141,7 @@ export default Ember.Component.extend({
       let modelData = this.get('modelService.modelData');
       let visData = this.get('visData');
 
-      visData.set('options.manipulation.addEdge', function(data, callback) {
+      visData.set('options.manipulation.addEdge', function(data, callback) { // jshint ignore:line
         let fromVid = modelData.videos[data.from];
         let toVid = modelData.videos[data.to];
         let attributes = [ ];
