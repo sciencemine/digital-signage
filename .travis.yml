@@ -10,5 +10,5 @@ env:
   - TEST_DIR=digital-signage-app-v2
   - TEST_DIR=model-editor
 
-script: cd $TEST_DIR && npm install -g bower && npm install && bower install && npm test
+script: cd $TEST_DIR &&  npm install -g bower phantomjs-prebuilt && npm install && bower install && npm test
     
