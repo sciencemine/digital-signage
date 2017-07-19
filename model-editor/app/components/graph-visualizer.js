@@ -29,6 +29,12 @@ export default Ember.Component.extend({
   removeEdgeMode: false,
   removeVideoMode: false,
   usePhysics: true,
+  
+  /* Video Attributes Information */
+  videoAttributesId: null,
+  videoAttributesHeading: null,
+  videoAttributes: null,
+  videoAttributesExpanded: true,
 
   shortenName: function(name) {
     return name.length > 15 ? name.substr(0, 11) + " ..." : name;
@@ -51,15 +57,18 @@ export default Ember.Component.extend({
       let titleBottom = pageHeader.height() +
                    pageHeader.offset().top +
                    parseInt(pageHeader.css('paddingBottom'));
+      let configHeight = Ember.$("#configuration-panel").height();
       
       el.css('top', titleBottom);
       el.css('right', (panelStates.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
       el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
-      el.css('bottom', Ember.$("#configuration-panel").height());
+      el.css('bottom', configHeight);
       
       setTimeout(function() {
-        el.css('bottom', Ember.$("#configuration-panel").height());
+        el.css('bottom', configHeight);
       }, 10);
+      
+      this.$("#video-attributes").css('top', titleBottom);
     }
   },
   init() {
@@ -108,10 +117,13 @@ export default Ember.Component.extend({
       this.get('network').addEdgeMode();
     },
     deleteEdgeMode() {
-      this.set('removeEdgeMode', !this.get('removeEdgeMode'));
+      this.toggleProperty('removeEdgeMode');
     },
     deleteVideoMode() {
-      this.set('removeVideoMode', !this.get('removeVideoMode'));
+      this.toggleProperty('removeVideoMode');
+    },
+    toggleVideoAttributes() {
+      this.toggleProperty('videoAttributesExpanded');
     },
     removeAttribute(videoId, attributeId) {
       let modelService = this.get('modelService');
@@ -211,14 +223,27 @@ export default Ember.Component.extend({
           component.get('videoSelectedCallback') (null);
         }
       })
+      .on("hoverNode", function (param) {
+        let vidData = modelData.videos[param.node];
+        
+        component.setProperties({
+          videoAttributesHeading: vidData.prettyName,
+          videoAttributesId: param.node,
+          videoAttributes: [ ]
+        });
+        
+        vidData.attributes.forEach(function(attrId) {
+          let attribute = modelData.attributes[attrId];
+          
+          component.get('videoAttributes').pushObject({
+            name: attribute.prettyName,
+            description: attribute.description,
+            id: attrId,
+            glyphicon: attribute.glyphicon
+          });
+        });
+      })
       .on("click", function (param) {
-        if (param.nodes.length === 0) {
-          this.disableEditMode();
-        }//if
-        else if (param.nodes.length === 1) {
-          component.get('videoSelectedCallback') (param.nodes[0]);
-        }//else if
-
         if (param.edges.length === 1 && component.get('removeEdgeMode')) {
           let edges = visData.get('edges');
           let edge = edges.get(param.edges[0]);
@@ -253,6 +278,16 @@ export default Ember.Component.extend({
           
           component.set('removeVideoMode', false);
         }//if
+        
+        if (param.nodes.length === 0) {
+          component.setProperties({
+            deleteVideoMode: false,
+            deleteEdgeMode: false
+          });
+        }//if
+        else if (param.nodes.length === 1) {
+          component.get('videoSelectedCallback') (param.nodes[0]);
+        }//else if
       });
 
       this.set('network', network);

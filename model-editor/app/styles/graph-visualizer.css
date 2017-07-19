@@ -37,16 +37,20 @@
   z-index: 
 }
 
-.canvas-popover {
-  position: absolute;
+.video-attributes {
+  position: fixed;
+  
+  width: 200px;
+  
+  right: calc(100px + 5%);
+  
+  margin: 3px;
+}
 
-  background-color: #ddd;
-  border-radius: 10px;
-
-  padding: 7px;
-
-  min-width: 50px;
-  max-width: 200px;
-
-  overflow-x: wrap;
+.video-attributes-scrollable {
+  max-height: 300px;
+  
+  position: relative;
+  
+  overflow-y: scroll;
 }

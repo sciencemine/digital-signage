@@ -66,6 +66,7 @@
   </div>
 </div>
 
+{{! The actual grap }}
 <div class="graph-container">
   <div class="vis-network canvas-wrapper" tabindex="900">
     <canvas class="graph-canvas">
@@ -73,6 +74,7 @@
   </div>
 </div>
 
+{{! Modal for adding a relation}}
 <div id="modal-container">
   <div class="modal fade" id="addRelationOverlay" tabindex="-2" role="dialog" aria-labelledby="modalAddRelationOverlay">
     <div class="modal-dialog" role="document">
@@ -96,4 +98,44 @@
       </div>
     </div>
   </div>
+</div>
+
+{{! Div for displaying attributes on a video }}
+<div id="video-attributes" class="panel panel-info video-attributes unselectable pointer" {{action 'toggleVideoAttributes'}}>
+  <div class="panel-heading">
+    <h4>{{if videoAttributesHeading videoAttributesHeading "Hover a video"}}</h4>
+  </div>
+  
+  {{#if videoAttributesExpanded}}
+    <div class="panel-body">
+      Attributes on this video.
+    </div>
+    
+    {{#if videoAttributes}}
+      <ul id="video-attributes-scrollable" class="list-group video-attributes-scrollable no-scrollbar" data-spy="scroll">
+        {{#each-in videoAttributes as |key value|}}
+          <li class="list-group-item">
+            <div class="media">
+              <div class="media-left">
+                <span class="media-object glyphicon {{if value.glyphicon value.glyphicon 'glyphicon-tag'}}"/>
+              </div>
+              
+              <div class="media-body">
+                <h4 class="media-heading">{{value.name}}</h4>
+
+                {{#if value.description}}
+                  {{value.description}}
+                {{else}}
+                  <i>No description available</i>
+                {{/if}}
+                <br>
+                
+                <button {{action 'removeAttribute' videoAttributesId value.id}} type="button" class="btn btn-danger btn-xs">Remove</button>
+              </div>
+            </div>
+          </li>
+        {{/each-in}}
+      </ul>
+    {{/if}}
+  {{/if}}
 </div>

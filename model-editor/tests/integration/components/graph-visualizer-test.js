@@ -19,5 +19,5 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Exhibit Selection Save Exhibit ' + 
     'Refresh Graph Disable Physics Physics Model Barnes Hut Repulsion Hierarchical Repulsion ' +
     'Force Atlas 2 Based Add Video Attribute Relation Remove Video Relation Edit × Add a Relation ' +
-    'Turn help off Submit Reset');
+    'Turn help off Submit Reset Hover a video Attributes on this video.');
 });

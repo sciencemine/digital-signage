@@ -15,6 +15,10 @@
   -ms-user-select: none; /* IE10+ */
 }
 
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
 .pointer:hover {
   cursor: pointer;
 }
