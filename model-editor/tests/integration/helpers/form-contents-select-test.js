@@ -13,6 +13,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{form-contents-select data=data key="hehe" class="myClass"}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), '');
+  assert.equal(this.$().text().trim(), '');
 });
-

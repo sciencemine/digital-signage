@@ -7,11 +7,19 @@ moduleForComponent('is-glyphicons', 'helper:is-glyphicons', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('glyphicons', function(assert) {
+  this.set('inputValue', 'glyphicons');
 
   this.render(hbs`{{is-glyphicons inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('not-glyphicons', function(assert) {
+  this.set('inputValue', 'not-glyphicons');
+
+  this.render(hbs`{{is-glyphicons inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
 });
 

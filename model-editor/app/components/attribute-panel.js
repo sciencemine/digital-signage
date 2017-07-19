@@ -37,32 +37,23 @@ export default Ember.Component.extend({
   dragY: null,
   
   setStyle: function() {
-    let header = this.$("#attribute-panel--header");
-    let panel = this.$("#attribute-panel");
-    let titleBottom = Ember.$("#content-area--header").height() +
-                      Ember.$("#content-area--header").offset().top +
-                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
-                      
-    header.css('bottom', Ember.$(window).height() - titleBottom);
+    let pageHeader = Ember.$("#content-area--header");
     
-    let expanded = this.get('panelStates.attributesExpanded');
-    
-    panel.css('top', (expanded ? titleBottom : 0));
-    panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
+    if (pageHeader[0]) {
+      let header = this.$("#attribute-panel--header");
+      let panel = this.$("#attribute-panel");
+      let titleBottom = pageHeader.height() +
+                        pageHeader.offset().top +
+                        parseInt(pageHeader.css('paddingBottom'));
+                        
+      header.css('bottom', Ember.$(window).height() - titleBottom);
+      
+      let expanded = this.get('panelStates.attributesExpanded');
+      
+      panel.css('top', (expanded ? titleBottom : 0));
+      panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
+    }
   },
-  /*****************************************************************************
-   * EVENT:
-   *  didRender
-   *
-   * DESCRIPTION:
-   *  When the dom renders, turns on tooltips and the scrollspy
-   * 
-   * AUTHOR:
-   *  Michael Fryer
-   *
-   * DATE:
-   *  June 5th, 2017
-   ****************************************************************************/
   didRender() {
     if (this.$('[data-toggle="attributeTooltip"]').length !== 0) {
       this.$('[data-toggle="attributeTooltip"]').tooltip({

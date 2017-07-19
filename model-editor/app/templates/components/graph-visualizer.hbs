@@ -3,13 +3,11 @@
   {{#link-to 'modelSelect' tagName='button' type="button" class="btn btn-warning"}}
     <span class="white"><span class="glyphicon glyphicon-home"/> Exhibit Selection</span>
   {{/link-to}}
-  <button {{action saveModelCallback}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"/> Save Exhibit</button>
+  <button {{action 'saveModel'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"/> Save Exhibit</button>
   <button {{action 'drawGraph'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"/> Refresh Graph</button>
   <button {{action 'togglePhysics'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-flash"/> {{if usePhysics "Disable" "Enable"}} Physics</button>
   <div class="btn-group" role="group">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-      Physics Model <span class="caret"></span>
-    </button>
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-fire"/> Physics Model <span class="caret"></span></button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
       <li {{action 'setPhysics' 'barnesHut'}}><a href="#">Barnes Hut</a></li>
       <li role="separator" class="divider"></li>

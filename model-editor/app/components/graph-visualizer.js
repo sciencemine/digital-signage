@@ -1,3 +1,4 @@
+// jshint ignore: start
 import Ember from 'ember';
 import vis from 'npm:vis';
 
@@ -42,21 +43,25 @@ export default Ember.Component.extend({
     return "rgb(" + red + "," + green + "," + blue + ")";
   },
   setStyle: function() {
-    let panelStates = this.get('panelStates');
-    let el = Ember.$("#" + this.elementId);
-    let width = Ember.$(window).width();
-    let titleBottom = Ember.$("#content-area--header").height() +
-                 Ember.$("#content-area--header").offset().top +
-                 parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+    let pageHeader = Ember.$("#content-area--header");
     
-    el.css('top', titleBottom);
-    el.css('right', (panelStates.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
-    el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
-    el.css('bottom', Ember.$("#configuration-panel").height());
-    
-    setTimeout(function() {
+    if (pageHeader[0]) {
+      let panelStates = this.get('panelStates');
+      let el = Ember.$("#" + this.elementId);
+      let width = Ember.$(window).width();
+      let titleBottom = pageHeader.height() +
+                   pageHeader.offset().top +
+                   parseInt(pageHeader.css('paddingBottom'));
+      
+      el.css('top', titleBottom);
+      el.css('right', (panelStates.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
+      el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
       el.css('bottom', Ember.$("#configuration-panel").height());
-    }, 10);
+      
+      setTimeout(function() {
+        el.css('bottom', Ember.$("#configuration-panel").height());
+      }, 10);
+    }
   },
   init() {
     this._super(...arguments);
@@ -64,20 +69,22 @@ export default Ember.Component.extend({
     let data = this.get('modelService.modelData');
     let visData = this.get('visData');
 
-    /* Creates the initial graph */
-    for (let video in data.videos) {
-      let vid = data.videos[video];
-      
-      visData.createNode(video, vid.prettyName);
+    if (data) {
+      /* Creates the initial graph */
+      for (let video in data.videos) {
+        let vid = data.videos[video];
+        
+        visData.createNode(video, vid.prettyName);
 
-        for (let i = 0; i < vid.relations.length; i++) {
-          let attr = data.attributes[vid.relations[i].attributeId];
-          let attrId = vid.relations[i].attributeId;
-          let diff = vid.relations[i].difficulty;
+          for (let i = 0; i < vid.relations.length; i++) {
+            let attr = data.attributes[vid.relations[i].attributeId];
+            let attrId = vid.relations[i].attributeId;
+            let diff = vid.relations[i].difficulty;
 
-          visData.createEdge(video, vid.relations[i].relatedId, diff, i, attr.prettyName, attrId);
-        }//for
-    }//for
+            visData.createEdge(video, vid.relations[i].relatedId, diff, i, attr.prettyName, attrId);
+          }//for
+      }//for
+    }
   },
   didRender() {
     if (this.get('network') === null) {
@@ -296,6 +303,9 @@ export default Ember.Component.extend({
       this.get('visData').set('options.physics.solver', solver);
       
       this.send('drawGraph');
+    },
+    saveModel() {
+      this.get('saveModelCallback') ();
     },
     doNothing() {
       

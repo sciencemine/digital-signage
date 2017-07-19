@@ -2,7 +2,11 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('graph-visualizer', 'Integration | Component | graph visualizer', {
-  integration: true
+  integration: true,
+  
+  beforeEach: function() {
+    this.inject.service('modelService', { as: 'modelService' });
+  }
 });
 
 test('it renders', function(assert) {
@@ -12,14 +16,8 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{graph-visualizer}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#graph-visualizer}}
-      template block text
-    {{/graph-visualizer}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Exhibit Selection Save Exhibit ' + 
+    'Refresh Graph Disable Physics Physics Model Barnes Hut Repulsion Hierarchical Repulsion ' +
+    'Force Atlas 2 Based Add Video Attribute Relation Remove Video Relation Edit × Add a Relation ' +
+    'Turn help off Submit Reset');
 });

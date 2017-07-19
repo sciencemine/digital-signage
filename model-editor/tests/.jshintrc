@@ -24,7 +24,7 @@
     "currentPath",
     "currentRouteName"
   ],
-  "node": false,
+  "node": true,
   "browser": false,
   "boss": true,
   "curly": true,

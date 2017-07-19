@@ -5,21 +5,22 @@ moduleForComponent('form-contents-list', 'Integration | Component | form content
   integration: true
 });
 
-test('it renders', function(assert) {
+test('no data', function(assert) {
 
   // Set any properties with this.set('myProperty', 'value');
   // Handle any actions with this.on('myAction', function(val) { ... });
 
   this.render(hbs`{{form-contents-list}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'No data present.');
+});
 
-  // Template block usage:
-  this.render(hbs`
-    {{#form-contents-list}}
-      template block text
-    {{/form-contents-list}}
-  `);
+test('data', function(assert) {
 
-  assert.equal(this.$().text().trim(), 'template block text');
+  this.set('arr', [{ name: 'baba', description: 'apples', difficulty: 1, attribute: 'Max'}]);
+
+  this.render(hbs`{{form-contents-list data=arr}}`);
+
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Name: baba Description: ' + 
+    'apples Difficulty: 1 Attribute: Max');
 });

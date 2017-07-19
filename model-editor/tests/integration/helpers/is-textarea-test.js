@@ -7,11 +7,19 @@ moduleForComponent('is-textarea', 'helper:is-textarea', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('textarea', function(assert) {
+  this.set('inputValue', 'textarea');
 
   this.render(hbs`{{is-textarea inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('not-textarea', function(assert) {
+  this.set('inputValue', 'not-textarea');
+
+  this.render(hbs`{{is-textarea inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
 });
 

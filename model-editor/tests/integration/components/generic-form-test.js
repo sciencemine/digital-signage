@@ -6,11 +6,11 @@ moduleForComponent('generic-form', 'Integration | Component | generic form', {
 });
 
 test('it renders', function(assert) {
+  this.set('callback', (actual) => {
+    assert.ok(actual);
+  });
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.render(hbs`{{generic-form validationCallback=callback}}`);
 
-  this.render(hbs`{{generic-form}}`);
-
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'Submit');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Turn help on Submit Reset');
 });

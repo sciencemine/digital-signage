@@ -7,11 +7,43 @@ moduleForComponent('is-valid-input-type', 'helper:is-valid-input-type', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('text', function(assert) {
+  this.set('inputValue', 'text');
 
   this.render(hbs`{{is-valid-input-type inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('dropdown', function(assert) {
+  this.set('inputValue', 'dropdown');
+
+  this.render(hbs`{{is-valid-input-type inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('number', function(assert) {
+  this.set('inputValue', 'number');
+
+  this.render(hbs`{{is-valid-input-type inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('checkbox', function(assert) {
+  this.set('inputValue', 'checkbox');
+
+  this.render(hbs`{{is-valid-input-type inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('other', function(assert) {
+  this.set('inputValue', 'other');
+
+  this.render(hbs`{{is-valid-input-type inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
 });
 

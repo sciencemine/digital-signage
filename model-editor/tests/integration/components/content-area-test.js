@@ -2,7 +2,11 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('content-area', 'Integration | Component | content area', {
-  integration: true
+  integration: true,
+  
+  beforeEach: function() {
+    this.inject.service('modelService', { as: 'modelService' });
+  }
 });
 
 test('it renders', function(assert) {
@@ -12,14 +16,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{content-area}}`);
 
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#content-area}}
-      template block text
-    {{/content-area}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.ok(this.$().text().trim().replace(/\s+/gi, ' '));
 });

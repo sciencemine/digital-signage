@@ -2,24 +2,19 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 
 moduleForComponent('configuration-panel', 'Integration | Component | configuration panel', {
-  integration: true
+  integration: true,
+  
+  beforeEach: function() {
+    this.inject.service('modelService', { as: 'modelService' });
+  }
 });
 
 test('it renders', function(assert) {
+  this.set('callback', (actual) => {
+    assert.ok(actual);
+  });
 
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
+  this.render(hbs`{{configuration-panel validationCallback=callback}}`);
 
-  this.render(hbs`{{configuration-panel}}`);
-
-  assert.equal(this.$().text().trim(), '');
-
-  // Template block usage:
-  this.render(hbs`
-    {{#configuration-panel}}
-      template block text
-    {{/configuration-panel}}
-  `);
-
-  assert.equal(this.$().text().trim(), 'template block text');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Click to hide Turn help on Submit Reset');
 });

@@ -7,11 +7,18 @@ moduleForComponent('is-list', 'helper:is-list', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('list', function(assert) {
+  this.set('inputValue', 'list');
 
   this.render(hbs`{{is-list inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
 });
 
+test('not-list', function(assert) {
+  this.set('inputValue', 'not-list');
+
+  this.render(hbs`{{is-list inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
+});

@@ -7,11 +7,18 @@ moduleForComponent('is-multi-select', 'helper:is-multi-select', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('multi-select', function(assert) {
+  this.set('inputValue', 'multi-select');
 
   this.render(hbs`{{is-multi-select inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
 });
 
+test('not-multi-select', function(assert) {
+  this.set('inputValue', 'not-multi-select');
+
+  this.render(hbs`{{is-multi-select inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
+});

@@ -2,7 +2,7 @@ import { moduleFor, test } from 'ember-qunit';
 
 moduleFor('route:model-edit', 'Unit | Route | model edit', {
   // Specify the other units that are required for this test.
-  // needs: ['controller:foo']
+  needs: ['service:visData', 'service:modelService']
 });
 
 test('it exists', function(assert) {

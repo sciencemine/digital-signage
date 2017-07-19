@@ -7,11 +7,19 @@ moduleForComponent('textarea-css', 'helper:textarea-css', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('true', function(assert) {
+  this.set('inputValue', true);
 
   this.render(hbs`{{textarea-css inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'form-control input-sm resize-horizontal');
+});
+
+test('false', function(assert) {
+  this.set('inputValue', false);
+
+  this.render(hbs`{{textarea-css inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'form-control input-sm resize-vertical');
 });
 

@@ -7,11 +7,19 @@ moduleForComponent('is-checkbox', 'helper:is-checkbox', {
 });
 
 // Replace this with your real tests.
-test('it renders', function(assert) {
-  this.set('inputValue', '1234');
+test('checkbox', function(assert) {
+  this.set('inputValue', 'checkbox');
 
   this.render(hbs`{{is-checkbox inputValue}}`);
 
-  assert.equal(this.$().text().trim(), '1234');
+  assert.equal(this.$().text().trim(), 'true');
+});
+
+test('not-checkbox', function(assert) {
+  this.set('inputValue', 'not-checkbox');
+
+  this.render(hbs`{{is-checkbox inputValue}}`);
+
+  assert.equal(this.$().text().trim(), 'false');
 });
 

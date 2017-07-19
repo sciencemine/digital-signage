@@ -12,5 +12,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{attribute-list-item}}`);
 
-  assert.equal(this.$().text().trim(), '');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'No description available Edit Remove');
 });

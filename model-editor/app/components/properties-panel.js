@@ -40,32 +40,23 @@ export default Ember.Component.extend({
   relations: null,
 
   setStyle: function() {
-    let header = this.$("#properties-panel--header");
-    let panel = this.$("#properties-panel");
-    let titleBottom = Ember.$("#content-area--header").height() +
-                      Ember.$("#content-area--header").offset().top +
-                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
-                      
-    header.css('bottom', Ember.$(window).height() - titleBottom);
+    let pageHeader = Ember.$("#content-area--header");
     
-    let expanded = this.get('panelStates.propertiesExpanded');
-    
-    panel.css('top', (expanded ? titleBottom : 0));
-    panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
+    if (pageHeader[0]) {
+      let header = this.$("#properties-panel--header");
+      let panel = this.$("#properties-panel");
+      let titleBottom = pageHeader.height() +
+                        pageHeader.offset().top +
+                        parseInt(pageHeader.css('paddingBottom'));
+                        
+      header.css('bottom', Ember.$(window).height() - titleBottom);
+      
+      let expanded = this.get('panelStates.propertiesExpanded');
+      
+      panel.css('top', (expanded ? titleBottom : 0));
+      panel.css('height', (expanded ? Ember.$(window).height() - titleBottom : 0));
+    }
   },
-  /*****************************************************************************
-   * EVENT:
-   *  didRender
-   *
-   * DESCRIPTION:
-   *  When the dom renders, turns on tooltips and the scrollspy
-   * 
-   * AUTHOR:
-   *  Michael Fryer
-   *
-   * DATE:
-   *  June 5th, 2017
-   ****************************************************************************/
   didRender() {
     if (this.$('[data-toggle="propertiesTooltip"]').length !== 0) {
       this.$('[data-toggle="propertiesTooltip"]').tooltip({
@@ -84,25 +75,6 @@ export default Ember.Component.extend({
     toggleView() {
       this.get('panelStates').togglePropertiesExpanded();
     },
-    /***************************************************************************
-     * ACTION:
-     *  submitForm
-     *
-     * DESCRIPTION:
-     *  Replaces the pretty attributes and relations information with the
-     *    original data before sending back up to container
-     *
-     * PARAMETERS:
-     *  data - The data that is getting sent back up
-     *  path - The path for where the data is going
-     *  key - The key for what is being changed
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     submitForm(data, path, key) {
       let newData = data;
       
@@ -111,30 +83,21 @@ export default Ember.Component.extend({
       
       this.get('onSubmitCallback') (newData, this.get('path'), key);
     },
-    /***************************************************************************
-     * ACTION:
-     *  doNothing
-     *
-     * DESCRIPTION:
-     *  This does nothing. Basically a null action
-     * 
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     doNothing() {
       
     },
     scrollDiv(elId) {
-      let container = this.$("#properties-panel");
-      let targetEl = this.$(elId);
-      let titleBottom = Ember.$("#content-area--header").height() +
-                      Ember.$("#content-area--header").offset().top +
-                      parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+      let pageHeader = Ember.$("#content-area--header");
       
-      container.scrollTop(targetEl.offset().top - titleBottom);
+      if (pageHeader[0]) {
+        let container = this.$("#properties-panel");
+        let targetEl = this.$(elId);
+        let titleBottom = Ember.$("#content-area--header").height() +
+                        Ember.$("#content-area--header").offset().top +
+                        parseInt(Ember.$("#content-area--header").css('paddingBottom'));
+        
+        container.scrollTop(targetEl.offset().top - titleBottom);
+      }
     }
   }
 });

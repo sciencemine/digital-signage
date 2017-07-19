@@ -8,5 +8,5 @@ moduleForComponent('attribute-panel', 'Integration | Component | attribute panel
 test('it renders', function(assert) {
   this.render(hbs`{{attribute-panel}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Attributes Scroll me List of attributes in the exhibit. Drag an attribute onto a video to add it or select "Add Attribute" at the bottom to create a new attribute. Add Attribute');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Attributes Scroll meClick to hide List of attributes in the exhibit. Drag an attribute onto a video to add it or select the "Add Attribute" button to the right to add a new one. Click icons to navigate to specific attributes');
 });
