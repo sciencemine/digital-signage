@@ -71,6 +71,21 @@ export default Ember.Component.extend({
       this.$("#video-attributes").css('top', titleBottom);
     }
   },
+  updateVideoAttributes: function() {
+    let modelData = this.get('modelService.modelData');
+    this.set('videoAttributes', [ ]);
+    
+    modelData.videos[this.get('videoAttributesId')].attributes.forEach(function(attrId) {
+      let attribute = modelData.attributes[attrId];
+      
+      this.get('videoAttributes').pushObject({
+        name: attribute.prettyName,
+        description: attribute.description,
+        id: attrId,
+        glyphicon: attribute.glyphicon
+      });
+    }, this);
+  },
   init() {
     this._super(...arguments);
     
@@ -143,6 +158,8 @@ export default Ember.Component.extend({
         
         modelService.remove('modelData.videos.' + videoId + '.attributes', attributeId);
         modelService.remove('modelData.attributes.' + attributeId +  '.videos', videoId);
+        
+        this.updateVideoAttributes();
       }
     },
     drawGraph() {
@@ -228,20 +245,10 @@ export default Ember.Component.extend({
         
         component.setProperties({
           videoAttributesHeading: vidData.prettyName,
-          videoAttributesId: param.node,
-          videoAttributes: [ ]
+          videoAttributesId: param.node
         });
         
-        vidData.attributes.forEach(function(attrId) {
-          let attribute = modelData.attributes[attrId];
-          
-          component.get('videoAttributes').pushObject({
-            name: attribute.prettyName,
-            description: attribute.description,
-            id: attrId,
-            glyphicon: attribute.glyphicon
-          });
-        });
+        component.updateVideoAttributes();
       })
       .on("click", function (param) {
         if (param.edges.length === 1 && component.get('removeEdgeMode')) {

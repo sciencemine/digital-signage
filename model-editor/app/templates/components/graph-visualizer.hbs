@@ -101,8 +101,8 @@
 </div>
 
 {{! Div for displaying attributes on a video }}
-<div id="video-attributes" class="panel panel-info video-attributes unselectable pointer" {{action 'toggleVideoAttributes'}}>
-  <div class="panel-heading">
+<div id="video-attributes" class="panel panel-info video-attributes unselectable pointer">
+  <div class="panel-heading" {{action 'toggleVideoAttributes'}}>
     <h4>{{if videoAttributesHeading videoAttributesHeading "Hover a video"}}</h4>
   </div>
   
