@@ -57,16 +57,15 @@ export default Ember.Component.extend({
       let titleBottom = pageHeader.height() +
                    pageHeader.offset().top +
                    parseInt(pageHeader.css('paddingBottom'));
-      let configHeight = Ember.$("#configuration-panel").height();
+      let configEl = Ember.$("#configuration-panel");
       
       el.css('top', titleBottom);
       el.css('right', (panelStates.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
       el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
-      el.css('bottom', configHeight);
       
-      setTimeout(function() {
-        el.css('bottom', configHeight);
-      }, 10);
+      configEl.ready(function() {
+        el.css('bottom', configEl.height());
+      });
     }
   },
   updateVideoAttributes: function() {
