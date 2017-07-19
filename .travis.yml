@@ -24,16 +24,16 @@ cache:
     - node_modules
     - bower_components
 
-# before_install:
-#   - cd digital-signage-app-v2
-#   - npm config set spin false
-#   - npm install -g bower
-#   - bower --version
+before_install:
+  - cd $TEST_DIR
+  - npm config set spin false
+  - npm install -g bower
+  - bower --version
 
-# install:
-#   - npm install
-#   - bower install
+install:
+  - npm install
+  - bower install
 
 script:
-  - cd $TEST_DIR && npm instal -g bower && npm install && bower install && ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test --reporter dot
+  - ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test --reporter dot
     
