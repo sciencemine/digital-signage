@@ -18,6 +18,7 @@ module.exports = function(defaults) {
   
   //order matters
   app.import('vendor/bootstrap/tooltip.js');
+  app.import('vendor/bootstrap/popover.js');
   
   app.import('vendor/bootstrap/scrollspy.js');
   app.import('vendor/bootstrap/tab.js');

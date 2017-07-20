@@ -64,7 +64,7 @@ export default Ember.Component.extend({
           hide: '100'
         }
       });
-    }//if
+    }
     
     this.setStyle();
   },
@@ -75,44 +75,11 @@ export default Ember.Component.extend({
           dragX: event.clientX,
           dragY: event.clientY
         });
-      }//if
+      }
     },
-    /***************************************************************************
-     * ACTION:
-     *  editAttribute
-     *
-     * DESCRIPTION:
-     *  Callback for editing an attribute. Sends the proper data back to the
-     *    container
-     *
-     * PARAMETERS:
-     *  key - They key for which object is going to be edited
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     editAttribute(key) {
       this.get('updateModalCallback') ("Edit Attribute", ".attributes.data.attribute", this.get('path'), key);
     },
-    /***************************************************************************
-     * ACTION:
-     *  attributeDrop
-     *
-     * DESCRIPTION:
-     *  Callback for adding an attribute to a video
-     *
-     * PARAMETERS:
-     *  key - They key for which object is going to be edited
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     attributeDrop(key) {
       this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), key);
 
@@ -121,19 +88,6 @@ export default Ember.Component.extend({
         dragY: null
       });
     },
-    /***************************************************************************
-     * ACTION:
-     *  toggleView
-     *
-     * DESCRIPTION:
-     *  Toggles if the attributes panel should be expanded or not.
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     toggleView() {
       this.get('panelStates').toggleAttributesExpanded();
     },

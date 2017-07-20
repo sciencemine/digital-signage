@@ -44,7 +44,7 @@ export function formContentsSelect(params, hash) {
       
       if (value.selected) {
         returnHTML = returnHTML + `selected="selected"`;
-      }//if
+      }
       
       returnHTML = returnHTML + `>`;
       

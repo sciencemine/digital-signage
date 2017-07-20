@@ -32,22 +32,8 @@ export default Ember.Component.extend({
         dragX: event.clientX,
         dragY: event.clientY
       });
-    }//if
+    }
   },
-  /*****************************************************************************
-   * EVENT:
-   *  dragEnd
-   *
-   * DESCRIPTION:
-   *  When the drag ends, send the cursor position back to the container along
-   *    with the key for the attribute
-   * 
-   * AUTHOR:
-   *  Michael Fryer
-   *
-   * DATE:
-   *  June 5th, 2017
-   ****************************************************************************/
   dragEnd() {
     this.get('attributeDropCallback') (this.get('dragX'), this.get('dragY'), this.get('key'));
 
@@ -57,40 +43,13 @@ export default Ember.Component.extend({
     });
   },
   actions: {
-    /***************************************************************************
-     * ACTION:
-     *  updateModal
-     *
-     * DESCRIPTION:
-     *  Callback for editing an attribute. Sends the key
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     updateModal() {
       this.get('updateModalCallback') (this.get('key'));
     },
-    /***************************************************************************
-     * ACTION:
-     *  deleteAttribute
-     *
-     * DESCRIPTION:
-     *  Callback for deleting an attribute. Sends the proper data back to the
-     *    container
-     *
-     * AUTHOR:
-     *  Michael Fryer
-     *
-     * DATE:
-     *  June 5th, 2017
-     **************************************************************************/
     deleteAttribute() {
       if (confirm("Are you sure you want to delete " + this.get('data.prettyName') + "?")) {
         this.get('deleteAttributeCallback') (this.get('key'));
-      }//if
+      }
     }
   }
 });
