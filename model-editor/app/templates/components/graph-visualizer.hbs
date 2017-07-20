@@ -9,13 +9,13 @@
   <div class="btn-group" role="group">
     <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-fire"/> Physics Model <span class="caret"></span></button>
     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-      <li {{action 'setPhysics' 'barnesHut'}}><a href="#">Barnes Hut</a></li>
+      <li {{action 'setPhysics' 'barnesHut'}} data-toggle="popover" title="Barnes Hut" data-content="BarnesHut is a quadtree based gravity model. This is the fastest, default and recommended solver for non-hierarchical layouts."><a href="#">Barnes Hut</a></li>
       <li role="separator" class="divider"></li>
-      <li {{action 'setPhysics' 'repulsion'}}><a href="#">Repulsion</a></li>
+      <li {{action 'setPhysics' 'repulsion'}} data-toggle="popover" title="Repulsion" data-content="The repulsion model assumes nodes have a simplified repulsion field around them. It's force linearly decreases from 1 (at 0.5*nodeDistance and smaller) to 0 (at 2*nodeDistance)."><a href="#">Repulsion</a></li>
       <li role="separator" class="divider"></li>
-      <li {{action 'setPhysics' 'hierarchicalRepulsion'}}><a href="#">Hierarchical Repulsion</a></li>
+      <li {{action 'setPhysics' 'hierarchicalRepulsion'}} data-toggle="popover" title="Hierarchical Repulsion" data-content="This model is based on the repulsion solver but the levels are taken into account and the forces are normalized."><a href="#">Hierarchical Repulsion</a></li>
       <li role="separator" class="divider"></li>
-      <li {{action 'setPhysics' 'forceAtlas2Based'}}><a href="#">Force Atlas 2 Based</a></li>
+      <li {{action 'setPhysics' 'forceAtlas2Based'}} data-toggle="popover" title="Force Atlas 2 Based" data-content="Force Atlas 2 has been developed by <a href='http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679' target='_blank'>Jacomi <i>et al</i> (2014)</a> for use with Gephi. The forceAtlas2Based solver makes use of some of the equations provided by them and makes use of the barnesHut implementation in vis. The main differences are the central gravity model, which is here distance independent, and the repulsion being linear instead of quadratic. Finally, all node masses have a multiplier based on the amount of connected edges plus one."><a href="#">Force Atlas 2 Based</a></li>
     </ul>
   </div>
   

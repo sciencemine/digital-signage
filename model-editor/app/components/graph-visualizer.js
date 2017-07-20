@@ -110,6 +110,20 @@ export default Ember.Component.extend({
     if (this.get('network') === null) {
       this.send('drawGraph');
     }
+    
+    let popovers = this.$('[data-toggle="popover"]');
+
+    if (popovers.length !== 0) {
+      popovers.popover({
+        trigger: 'hover focus',
+        placement: 'right auto',
+        delay: {
+          show: 750,
+          hide: 500
+        },
+        html: true
+      });
+    }
   },
   addAttributeObserver: Ember.observer('addAttrToVideoData', function() {
     let addAttrData = this.get('addAttrToVideoData');
