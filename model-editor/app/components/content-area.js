@@ -21,7 +21,6 @@ export default Ember.Component.extend({
   visData: service(),
   
   /* Parameters used for various things */
-  newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
   selectedVideoKey: null,         //Hash key to the selected video 
   selectedVideo: null,            //The selected video object (with replaced
