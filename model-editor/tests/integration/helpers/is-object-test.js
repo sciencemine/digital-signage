@@ -16,3 +16,26 @@ test('it renders', function(assert) {
   assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'true');
 });
 
+test('it renders', function(assert) {
+  this.set('data', { "baba": "bobo" });
+
+  this.render(hbs`{{is-object data}}`);
+
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'true');
+});
+
+test('it renders', function(assert) {
+  this.set('data', Ember.A([ "baba", "bobo" ]));
+
+  this.render(hbs`{{is-object data}}`);
+
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'false');
+});
+
+test('it renders', function(assert) {
+  this.set('data', [ "baba", "bobo" ]);
+
+  this.render(hbs`{{is-object data}}`);
+
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'false');
+});

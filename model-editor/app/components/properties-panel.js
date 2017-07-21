@@ -7,8 +7,6 @@
  * 
  * PARAMETERS:
  *  onSubmitCallback - Callback for form submission
- *  propertiesExpandedCallback - Callback for when the properties panel is
- *    collapsed or expanded
  *  updateModalCallback - Callback for updating the modal information
  *  data - The selected video
  *  attributes - The original attributes from the video

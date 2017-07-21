@@ -39,7 +39,7 @@ export function formContentsSelect(params, hash) {
   for (var i= 0; i < hash.data.length; i++) {
     let value = hash.data[i];
 
-    if (typeof(value) === 'object' && !Array.isArray(value)) {
+    if (Ember.typeOf(value) === 'object' || Ember.typeOf(value) === 'instance') {
       returnHTML = returnHTML + `<option value=${value.id} `;
       
       if (value.selected) {

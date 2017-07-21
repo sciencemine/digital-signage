@@ -47,6 +47,7 @@ export default Ember.Controller.extend({
     },
     newExhibit() {
       let modelService = this.get('modelService');
+      
       (function(controller) {
         Ember.$.getJSON('models/ModelSkeleton' + modelService.get('modelInformation').newestVersion + '.json').then(function(data) {
           modelService.loadModelData(data);
