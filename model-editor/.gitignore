@@ -5,15 +5,14 @@
 /tmp
 
 # dependencies
-/node_modules
-/bower_components
+/node_modules/
+/bower_components/*
+electron-out/
 
 # misc
 /.sass-cache
 /connect.lock
 /coverage/*
 /libpeerconnection.log
-/electron-out
-/ember-electron
 npm-debug.log*
 testem.log

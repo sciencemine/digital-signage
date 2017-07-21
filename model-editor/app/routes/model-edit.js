@@ -27,7 +27,7 @@ export default Ember.Route.extend({
         route.get('notify').warning("Could not pull data to update model. Using old version.", {
           radius: true,
           closeAfter: 10 * 1000
-        })
+        });
       });
     }) (this);
   }
