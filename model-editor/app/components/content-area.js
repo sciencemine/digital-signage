@@ -4,11 +4,6 @@
  *
  * DESCRIPTION:
  *  Container for all of the model editor content
- * 
- * PARAMETERS:
- *  data - A data object with the following properties
- *    modelConfig - The configuration model for the current version
- *    modelData - The valid model for the current version
  *
  * AUTHOR:
  *  Michael Fryer
@@ -26,7 +21,6 @@ export default Ember.Component.extend({
   visData: service(),
   
   /* Parameters used for various things */
-  newModel: null,                 //A copy of the model to edit
   validModel: false,              //Boolean if the model is valid or not
   selectedVideoKey: null,         //Hash key to the selected video 
   selectedVideo: null,            //The selected video object (with replaced
