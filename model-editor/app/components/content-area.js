@@ -4,11 +4,6 @@
  *
  * DESCRIPTION:
  *  Container for all of the model editor content
- * 
- * PARAMETERS:
- *  data - A data object with the following properties
- *    modelConfig - The configuration model for the current version
- *    modelData - The valid model for the current version
  *
  * AUTHOR:
  *  Michael Fryer
