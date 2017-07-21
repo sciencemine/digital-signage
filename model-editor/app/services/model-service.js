@@ -10,6 +10,8 @@ export default Ember.Service.extend({
     this.updateConfig();
     this.updateVideos();
     this.updateAttributes();
+    
+    this.set('modelData.config.version', this.get('modelInformation.newestVersion'));
   },
   updateConfig() {
     this.insertKeys('.config');
