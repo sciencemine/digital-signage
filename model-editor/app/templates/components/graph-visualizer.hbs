@@ -1,0 +1,141 @@
+<div class="btn-group button__group" role="group" aria-label="Toolbar with button grpups">
+{{! Editor things}}
+  {{#link-to 'modelSelect' tagName='button' type="button" class="btn btn-warning"}}
+    <span class="white"><span class="glyphicon glyphicon-home"/> Exhibit Selection</span>
+  {{/link-to}}
+  <button {{action 'saveModel'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-floppy-disk"/> Save Exhibit</button>
+  <button {{action 'drawGraph'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-refresh"/> Refresh Graph</button>
+  <button {{action 'togglePhysics'}} type="button" class="btn btn-primary"><span class="glyphicon glyphicon-flash"/> {{if usePhysics "Disable" "Enable"}} Physics</button>
+  <div class="btn-group" role="group">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><span class="glyphicon glyphicon-fire"/> Physics Model <span class="caret"></span></button>
+    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+      <li {{action 'setPhysics' 'barnesHut'}} data-toggle="popover" title="Barnes Hut" data-content="BarnesHut is a quadtree based gravity model. This is the fastest, default and recommended solver for non-hierarchical layouts."><a href="#">Barnes Hut</a></li>
+      <li role="separator" class="divider"></li>
+      <li {{action 'setPhysics' 'repulsion'}} data-toggle="popover" title="Repulsion" data-content="The repulsion model assumes nodes have a simplified repulsion field around them. It's force linearly decreases from 1 (at 0.5*nodeDistance and smaller) to 0 (at 2*nodeDistance)."><a href="#">Repulsion</a></li>
+      <li role="separator" class="divider"></li>
+      <li {{action 'setPhysics' 'hierarchicalRepulsion'}} data-toggle="popover" title="Hierarchical Repulsion" data-content="This model is based on the repulsion solver but the levels are taken into account and the forces are normalized."><a href="#">Hierarchical Repulsion</a></li>
+      <li role="separator" class="divider"></li>
+      <li {{action 'setPhysics' 'forceAtlas2Based'}} data-toggle="popover" title="Force Atlas 2 Based" data-content="Force Atlas 2 has been developed by <a href='http://journals.plos.org/plosone/article?id=10.1371/journal.pone.0098679' target='_blank'>Jacomi <i>et al</i> (2014)</a> for use with Gephi. The forceAtlas2Based solver makes use of some of the equations provided by them and makes use of the barnesHut implementation in vis. The main differences are the central gravity model, which is here distance independent, and the repulsion being linear instead of quadratic. Finally, all node masses have a multiplier based on the amount of connected edges plus one."><a href="#">Force Atlas 2 Based</a></li>
+    </ul>
+  </div>
+  
+{{! Add things}}
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="glyphicon glyphicon-plus"/> Add <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li data-toggle="modal" data-target="#formOverlay">
+        {{#link-to "modelEdit" invokeAction=addVideoCallback}}
+          Video <span class="glyphicon glyphicon-facetime-video"/>
+        {{/link-to}}
+      </li>
+      <li role="separator" class="divider"></li>
+      <li data-toggle="modal" data-target="#formOverlay">
+        {{#link-to "modelEdit" invokeAction=addAttributeCallback}}
+          Attribute <span class="glyphicon glyphicon-tag"/>
+        {{/link-to}}
+      </li>
+      <li role="separator" class="divider"></li>
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'addEdgeMode')}}
+          Relation <span class="glyphicon glyphicon-link"/>
+        {{/link-to}}        
+      </li>
+    </ul>
+  </div>
+  
+{{! Removing things}}
+  <div class="btn-group">
+    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <span class="glyphicon glyphicon-minus"/> Remove <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'deleteVideoMode')}}
+          Video <span class="glyphicon glyphicon-facetime-video"/>
+        {{/link-to}}      
+      </li>
+      <li role="separator" class="divider"></li>
+      <li>
+        {{#link-to "modelEdit" invokeAction=(action 'deleteEdgeMode')}}
+          Relation <span class="glyphicon glyphicon-link"/>
+        {{/link-to}}
+      </li>
+    </ul>
+  </div>
+</div>
+
+{{! The actual grap }}
+<div class="graph-container">
+  <div class="vis-network canvas-wrapper" tabindex="900">
+    <canvas class="graph-canvas">
+    </canvas>
+  </div>
+</div>
+
+{{! Modal for adding a relation}}
+<div id="modal-container">
+  <div class="modal fade" id="addRelationOverlay" tabindex="-2" role="dialog" aria-labelledby="modalAddRelationOverlay">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <h4 class="modal-title" id="modalAddRelationOverlay">Add a Relation</h4>
+        </div>
+
+        <div class="modal-body content-area--modal__body">
+          {{generic-form
+            onSubmitCallback=(action 'createEdge')
+            validationCallback=(action 'doNothing')
+            prefix="relation"
+            showHelp=true
+            showTitle=false
+            config=relationsConfig
+            clearValues=true
+          }}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{{! Div for displaying attributes on a video }}
+<div id="video-attributes" class="panel panel-info video-attributes unselectable pointer">
+  <div class="panel-heading" {{action 'toggleVideoAttributes'}}>
+    <h4>{{if videoAttributesHeading videoAttributesHeading "Hover a video"}}</h4>
+  </div>
+  
+  {{#if videoAttributesExpanded}}
+    <div class="panel-body">
+      Attributes on this video.
+    </div>
+    
+    {{#if videoAttributes}}
+      <ul id="video-attributes-scrollable" class="list-group video-attributes-scrollable no-scrollbar" data-spy="scroll">
+        {{#each-in videoAttributes as |key value|}}
+          <li class="list-group-item">
+            <div class="media">
+              <div class="media-left">
+                <span class="media-object glyphicon {{if value.glyphicon value.glyphicon 'glyphicon-tag'}}"/>
+              </div>
+              
+              <div class="media-body">
+                <h4 class="media-heading">{{value.name}}</h4>
+
+                {{#if value.description}}
+                  {{value.description}}
+                {{else}}
+                  <i>No description available</i>
+                {{/if}}
+                <br>
+                
+                <button {{action 'removeAttribute' videoAttributesId value.id}} type="button" class="btn btn-danger btn-xs">Remove</button>
+              </div>
+            </div>
+          </li>
+        {{/each-in}}
+      </ul>
+    {{/if}}
+  {{/if}}
+</div>

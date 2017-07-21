@@ -1,0 +1,27 @@
+{
+    "config": {
+        "version": 0.1,
+        "prettyName": "New Exhibit",
+        "modelIdentifier": "",
+        "description" : "Creating a new exhibit!",
+        "backgroundImage": "",
+        "backgroundVideos": [ ],
+        "ui": {
+            "idle": 0,
+            "menuDwell": 0,
+            "popoverDwell": 0.0,
+            "menuLocale": "",
+            "popoverShowDelay": 0.0
+        },
+        "keyboard": {
+            "select": "",
+            "previous": "",
+            "cancel": "",
+            "next": ""
+        }
+    },
+    "videos": {
+    },
+    "attributes": {
+    }
+}

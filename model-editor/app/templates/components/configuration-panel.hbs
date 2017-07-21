@@ -1,0 +1,21 @@
+<div id="configuration-panel" class="panel panel-primary configuration-panel">
+  <div {{action 'toggleView' on click}} class="panel-heading pointer unselectable">
+    <h4 class="panel-title">{{modelService.modelConfig.config.displayName}} <small>{{modelService.modelConfig.config.help}}<span class="pull-right">Click to {{if panelStates.configExpanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if panelStates.configExpanded 'down' 'up'}}" /></span></small></h4>
+  </div>
+
+  {{#if panelStates.configExpanded}}
+    <div class="panel-body">
+      {{generic-form
+        validationCallback=validationCallback
+        path=path
+        prefix=prefix
+        onSubmitCallback=onSubmitCallback
+        showTooltips=true
+        showTitle=false
+        isInline=true
+        data=configModelData
+        config=modelService.modelConfig.config
+      }}
+    </div>
+  {{/if}}
+</div>

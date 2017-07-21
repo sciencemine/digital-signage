@@ -1,0 +1,393 @@
+{
+  "config": {
+    "version": 0.2,
+    "prettyName": "Healthy Streams",
+    "modelIdentifier": "http://10.10.2.159/smds",
+    "description": "What makes a stream healthy?",
+    "backgroundImage": "map.png",
+    "backgroundVideos": [
+      "eyVxK",
+      "3ePOi",
+      "kwudO",
+      "G3CP8"
+    ],
+    "ui": {
+      "idle": 15,
+      "menuDwell": 5,
+      "popoverDwell": 5,
+      "menuLocale": "top",
+      "popoverShowDelay": 1
+    },
+    "keyboard": {
+      "select": "w",
+      "previous": "a",
+      "cancel": "s",
+      "next": "d"
+    }
+  },
+  "videos": {
+    "hV6VB": {
+      "prettyName": "What are \"the Five Cs\"?",
+      "description": "The 5Cs",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-5C-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-5C-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "N57vQ"
+      ],
+      "relations": []
+    },
+    "Nh8US": {
+      "prettyName": "Why Beavers in a stream?",
+      "description": "Beaver",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Beavr-s1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Beavr-s1.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "PykEi",
+        "dRGuH"
+      ],
+      "relations": []
+    },
+    "aIgCh": {
+      "prettyName": "What are Biological Indicators?",
+      "description": "Biological indicators",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-BioIn-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-BioIn-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "zFN8z"
+      ],
+      "relations": []
+    },
+    "mswgy": {
+      "prettyName": "What's a Complex stream?",
+      "description": "Complexity",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Cmplx-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Cmplx-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "N57vQ"
+      ],
+      "relations": []
+    },
+    "KjZqa": {
+      "prettyName": "What's a Connected stream?",
+      "description": "Connected",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Conec-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Conec-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "N57vQ"
+      ],
+      "relations": []
+    },
+    "M3WkH": {
+      "prettyName": "Characteristics of a healthy stream?",
+      "description": "Complexity",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-CpxI-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-CpxI-1.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "N57vQ",
+        "dRGuH"
+      ],
+      "relations": []
+    },
+    "emSw2": {
+      "prettyName": "More critters?",
+      "description": "Critters pt. 2 easy",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Crit2-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Crit2-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "zFN8z"
+      ],
+      "relations": []
+    },
+    "XJQpq": {
+      "prettyName": "Critters in a stream?",
+      "description": "Critters pt. 1",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Critr-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Critr-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "zFN8z"
+      ],
+      "relations": []
+    },
+    "JqrL9": {
+      "prettyName": "Critters and stream health.",
+      "description": "Critters pt. 2 advanced",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Critr-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Critr-2.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "zFN8z"
+      ],
+      "relations": []
+    },
+    "1797h": {
+      "prettyName": "Is it Cold, Clear, and Clean?",
+      "description": "Water",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-H20-1.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-H20-1.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "N57vQ"
+      ],
+      "relations": []
+    },
+    "Pz5Uy": {
+      "prettyName": "What's Riparian?",
+      "description": "Riparian habitats pt. 1",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-Ripar-1s.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-Ripar-1s.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "yiG8M",
+        "dRGuH"
+      ],
+      "relations": []
+    },
+    "w5bGy": {
+      "prettyName": "What's in the Riparian Zone?",
+      "description": "Riparian habitats pt. 2",
+      "isHidden": false,
+      "full": {
+        "fileIdentifier": "SM-HSt-ripar-2.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SM-HSt-ripar-2.webm",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [
+        "yiG8M",
+        "dRGuH"
+      ],
+      "relations": []
+    },
+    "eyVxK": {
+      "prettyName": "Silverbow 1",
+      "description": "Silverbow Creek",
+      "isHidden": true,
+      "full": {
+        "fileIdentifier": "SILVERBOW-01.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SILVERBOW-01-tz.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [],
+      "relations": []
+    },
+    "3ePOi": {
+      "prettyName": "Silverbow 2",
+      "description": "Silverbow creek",
+      "isHidden": true,
+      "full": {
+        "fileIdentifier": "SILVERBOW-02.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SILVERBOW-02-tz.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [],
+      "relations": []
+    },
+    "kwudO": {
+      "prettyName": "Silverbow 3",
+      "description": "Silverbow creek",
+      "isHidden": true,
+      "full": {
+        "fileIdentifier": "SILVERBOW-03.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SILVERBOW-03-tz.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [],
+      "relations": []
+    },
+    "G3CP8": {
+      "prettyName": "Silverbow 4",
+      "description": "Silverbow creek",
+      "isHidden": true,
+      "full": {
+        "fileIdentifier": "SILVERBOW-04.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "teaser": {
+        "fileIdentifier": "SILVERBOW-04-tz.mp4",
+        "isUrl": false,
+        "attribution": ""
+      },
+      "attributes": [],
+      "relations": []
+    }
+  },
+  "attributes": {
+    "dRGuH": {
+      "prettyName": "Raparian Habitats",
+      "description": "Raparian Habitats",
+      "x": 0,
+      "y": 0,
+      "videos": [
+        "Nh8US",
+        "M3WkH",
+        "w5bGy",
+        "Pz5Uy"
+      ],
+      "glyphicon": "glyphicon-tag"
+    },
+    "zFN8z": {
+      "prettyName": "Critters",
+      "description": "Critters",
+      "x": 0,
+      "y": 0,
+      "videos": [
+        "JqrL9",
+        "XJQpq",
+        "emSw2",
+        "aIgCh"
+      ],
+      "glyphicon": "glyphicon-tag"
+    },
+    "N57vQ": {
+      "prettyName": "The 5Cs",
+      "description": "Cold, Clear, Clean, Complex, and Connected",
+      "x": 0,
+      "y": 0,
+      "videos": [
+        "mswgy",
+        "KjZqa",
+        "M3WkH",
+        "1797h",
+        "hV6VB"
+      ],
+      "glyphicon": "glyphicon-tag"
+    },
+    "yiG8M": {
+      "prettyName": "Plants",
+      "description": "Plants",
+      "x": 0,
+      "y": 0,
+      "videos": [
+        "Pz5Uy",
+        "w5bGy"
+      ],
+      "glyphicon": "glyphicon-tag"
+    },
+    "PykEi": {
+      "prettyName": "Beavers",
+      "description": "Beavers",
+      "x": 0,
+      "y": 0,
+      "videos": [
+        "Nh8US"
+      ],
+      "glyphicon": "glyphicon-tag"
+    }
+  }
+}

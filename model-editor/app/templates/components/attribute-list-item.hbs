@@ -1,0 +1,23 @@
+<li draggable="true" class="list-group-item container-fluid grab">
+  <div class="media">
+    <div class="media-left">
+      <span class="media-object glyphicon {{if data.glyphicon data.glyphicon 'glyphicon-tag'}}"/>
+    </div>
+
+    <div class="media-body">
+      <h4 class="media-heading">{{data.prettyName}}</h4>
+
+      {{#if data.description}}
+        {{data.description}}
+      {{else}}
+        <i>No description available</i>
+      {{/if}}
+      <br>
+
+      <div class="btn-group-vertical" role="group" aria-label="...">
+        <button {{action 'updateModal'}} data-toggle="modal" data-target="#formOverlay" type="button" class="btn btn-warning btn-xs">Edit</button>
+        <button {{action 'deleteAttribute'}} type="button" class="btn btn-danger btn-xs">Remove</button>
+      </div>
+    </div>
+  </div>
+</li>

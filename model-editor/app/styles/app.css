@@ -1,0 +1,63 @@
+/* Route Styles */
+@import 'model-select.css';
+
+/* Component Styles */
+@import 'properties-panel.css';
+@import 'configuration-panel.css';
+@import 'attribute-panel.css';
+@import 'content-area.css';
+@import 'graph-visualizer.css';
+
+/* Global Styles */
+.unselectable {
+  -webkit-user-select: none; /* Chrome/Safari */        
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+ */
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+.pointer:hover {
+  cursor: pointer;
+}
+
+.grab:hover {
+  cursor: -webkit-grab;
+  cursor: -moz-grab;
+}
+
+.cursor--default:hover {
+  cursor: default;
+}
+
+.section-title {
+  padding: 5px;
+
+  border-radius: 3px;
+}
+
+.form-margin {
+  margin: 5px 0px;
+}
+
+.resize-horizontal {
+  resize: horizontal;
+}
+
+.resize-vertical {
+  resize: vertical;
+}
+
+.white {
+  color: white!important;
+}
+
+.nav-icon-link {
+  color: #428bca;
+}
+
+.nav-icon-link:hover {
+  cursor: pointer;
+}

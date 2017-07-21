@@ -1,0 +1,63 @@
+<div id="content-area--header" class="page-header content-area--title">
+  <h3>{{modelService.modelData.config.prettyName}} <small>{{modelService.modelData.config.description}}</small></h3>
+</div>
+
+{{properties-panel
+  onSubmitCallback=(action 'updateData')
+  updateModalCallback=(action 'updateModalInfo')
+  data=selectedVideo
+  attributes=selectedVideoAttributes
+  relations=selectedVideoRelations
+  vidKey=selectedVideoKey
+}}
+
+{{configuration-panel
+  onSubmitCallback=(action 'updateConfig')
+  validationCallback=(action "validateConfig")
+  class="content-area--configuration-section"
+}}
+
+{{attribute-panel
+  attributeDropCallback=(action 'updateAddAttrToVideoData')
+  updateModalCallback=(action 'updateModalInfo')
+  deleteAttributeCallback=(action 'deleteAttribute')
+}}
+
+{{graph-visualizer
+  getVideoCallback=(action 'addAttributeToVideo')
+  videoSelectedCallback=(action 'setSelectedVideo')
+  saveModelCallback=(action 'saveModel')
+  addVideoCallback=(action 'updateModalAddVideo')
+  removeVideoCallback=(action 'removeVideo')
+  addAttributeCallback=(action 'updateModalAddAttribute')
+  addAttrToVideoData=addAttrToVideoData
+  editAttributeData=editAttributeData
+  relationsConfig=modelService.modelConfig.videos.data.video.data.relations.data.[0].relation
+}}
+
+<div class="modal fade" id="formOverlay" tabindex="-1" role="dialog" aria-labelledby="modalFormOverlay">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="modalFormOverlay">{{modalTitle}}</h4>
+      </div>
+
+      <div class="modal-body content-area--modal__body">
+        {{generic-form
+          validationCallback=(action 'doNothing')
+          onSubmitCallback=(action 'updateData')
+          prefix=modalPrefix
+          path=modalPath
+          key=modalKey
+          showHelp=true
+          showTitle=false
+          data=modalData
+          config=modalConfig
+          showTooltips=true
+        }}
+      </div>
+    </div>
+  </div>
+</div>
+

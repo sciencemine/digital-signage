@@ -1,0 +1,22 @@
+{{#unless data}}
+  <li class="list-group-item">
+    No data present.
+  </li>
+{{/unless}}
+
+{{#each-in data as |key value|}}
+  <li class="list-group-item">
+    <strong>Name: </strong>{{value.name}}<br>
+
+    <strong>Description: </strong>{{value.description}}<br>
+
+    {{#if value.difficulty}}
+      <strong>Difficulty: </strong>{{value.difficulty}}<br>
+    {{/if}}
+
+    {{#if value.attribute}}
+      <strong>Attribute: </strong>{{value.attribute}}<br>
+    {{/if}}
+  </li>
+{{/each-in}}
+  

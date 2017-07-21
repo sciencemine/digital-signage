@@ -1,0 +1,24 @@
+.properties-panel--header {
+  position: fixed;
+
+  top: 0px;
+  right: 0px;
+
+  width: calc(100px + 5%);
+
+  z-index: 100;
+
+  cursor: pointer;
+}
+
+.properties-panel--scrollable {
+  position: relative;
+
+  overflow-y: scroll;
+
+  padding: 5% 5%;
+}
+
+.properties-panel--scrollable::-webkit-scrollbar {
+  display: none;
+}

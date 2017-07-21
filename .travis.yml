@@ -1,38 +1,18 @@
 ---
-sudo: required
+sudo: true
 dist: trusty
 
 language: node_js
 node_js:
   - "6"
+  
 env:
-  matrix:
-    - EMBER_VERSION=default
-    - EMBER_VERSION=release
-    - EMBER_VERSION=beta
-    - EMBER_VERSION=canary
-matrix:
-  fast_finish: true
-  allow_failures:
-    - env: EMBER_VERSION=release
-    - env: EMBER_VERSION=beta
-    - env: EMBER_VERSION=canary
-    
-cache:
-  directories:
-    - node_modules
-    - bower_components
+  - TEST_DIR=digital-signage-app-v2
+  - TEST_DIR=model-editor
+  
+allowed_failures:
+  - env: EMBER_VERSION=beta
+  - env: EMBER_VERSION=canary
 
-before_install:
-  - cd digital-signage-app-v2
-  - npm config set spin false
-  - npm install -g bower
-  - bower --version
-
-install:
-  - npm install
-  - bower install
-
-script:
-  - ember try:one $EMBER_VERSION --skip-cleanup=true --- ember test --reporter dot
+script: cd $TEST_DIR && npm install -g bower phantomjs-prebuilt && npm install && bower install && npm test
     

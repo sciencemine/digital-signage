@@ -1,0 +1,54 @@
+.graph-container, .canvas-wrapper, .graph-canvas {
+  top: 0px;
+
+  height: 100%;
+  width: 100%;
+}
+
+.graph-container {
+  position: absolute;
+}
+
+.canvas-wrapper, .graph-canvas {
+  position: relative;
+
+  overflow: hidden;
+
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.canvas-wrapper {
+  touch-action: pan-y;
+}
+
+.graph-canvas {
+  touch-action: none;
+}
+
+.button__group {
+  z-index: 100;
+  
+  margin: 3px;
+}
+
+#addRelationOverlay {
+  z-index: 
+}
+
+.video-attributes {
+  position: fixed;
+  
+  width: 200px;
+  
+  margin: 3px;
+}
+
+.video-attributes-scrollable {
+  max-height: 300px;
+  
+  position: relative;
+  
+  overflow-y: scroll;
+}

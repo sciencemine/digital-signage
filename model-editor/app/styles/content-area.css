@@ -1,0 +1,49 @@
+.content-area--title {
+  text-align: center;
+}
+
+.content-area--properties-large, .content-area--properties-small {
+  position: fixed;
+
+  top: 0px;
+  right: 0px;
+  
+  width: calc(100px + 5%);
+}
+
+.content-area--properties-large {
+  bottom: 0px;
+
+  height: 100%;
+}
+
+.content-area--configuration-section {
+  position: fixed;
+
+  bottom: 0px;
+}
+
+.content-area--attribute-large, .content-area--attribute-small {
+  position: fixed;
+
+  top: 0px;
+  left: 0px;
+
+  width: calc(100px + 5%);
+}
+
+.content-area--attribute-large {
+  height: 100%;
+
+  bottom: 0px;
+}
+
+.content-area--modal__body {
+  margin: 0% 5%;
+}
+
+.graph-area {
+  position: absolute;
+
+  z-index: -10;
+}

@@ -1,0 +1,58 @@
+{
+    "config": {
+        "version": 0.2,
+        "prettyName": "New Exhibit",
+        "modelIdentifier": "",
+        "description" : "Creating a new exhibit!",
+        "backgroundImage": "",
+        "backgroundVideos": [ ],
+        "ui": {
+            "idle": 0,
+            "menuDwell": 0,
+            "popoverDwell": 0.0,
+            "menuLocale": "",
+            "popoverShowDelay": 0.0
+        },
+        "keyboard": {
+            "select": "",
+            "previous": "",
+            "cancel": "",
+            "next": ""
+        }
+    },
+    "videos": {
+        "default": {
+            "prettyName":"",
+            "description":"",
+            "isHidden":false,
+            "full":{
+                "fileIdentifier":"",
+                "isUrl":false,
+                "attribution":""
+            },
+            "teaser":{
+                "fileIdentifier":"",
+                "isUrl":false,
+                "attribution":""
+            },
+            "attributes":[ ],
+            "relations":[
+                {
+                  "relatedId":"",
+                  "difficulty":0,
+                  "attributeId":""
+                }
+            ]
+        }
+    },
+    "attributes": {
+        "default": {
+            "prettyName":"",
+            "description":"",
+            "x":0,
+            "y":0,
+            "videos":[ ],
+            "glyphicon":"glyphicon-tag"
+        }
+    }
+}

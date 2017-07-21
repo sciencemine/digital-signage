@@ -1,0 +1,9 @@
+{
+  "newestVersion": 0.2,
+  "versions": [ 0.1, 0.2 ],
+  "models": [
+    "ExampleModel",
+    "HealthyStreams",
+    "Osu"
+  ]
+}

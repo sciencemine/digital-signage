@@ -1,0 +1,222 @@
+{
+   "config": {
+      "version": 0.2,
+      "prettyName": "Kenny",
+      "modelIdentifier": "kenny",
+      "description": "Kenny: Starting life in another world",
+      "backgroundImage": "testMap.png",
+      "backgroundVideos": [
+         "2",
+         "3"
+      ],
+      "ui": {
+         "idle": 15,
+         "menuDwell": 3,
+         "popoverDwell": 5,
+         "menuLocale": "top",
+         "popoverShowDelay": 0.25
+      },
+      "keyboard": {
+         "select": "w",
+         "previous": "a",
+         "cancel": "s",
+         "next": "d"
+      }
+   },
+   "videos": {
+      "0": {
+         "prettyName": "Kenny with a Rubber Band: Episode X-II - A New Hope",
+         "description": "Kenny shoots a rubber band... You won't believe what happens next!",
+         "isHidden": false,
+         "full": {
+            "fileIdentifier": "kenny_band_1.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "teaser": {
+            "fileIdentifier": "kenny_band_1.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "attributes": [
+            "0",
+            "6"
+         ],
+         "relations": [
+            {
+               "relatedId": "1",
+               "difficulty": 5,
+               "attributeId": "0"
+            },
+            {
+               "relatedId": "2",
+               "difficulty": -10,
+               "attributeId": "6"
+            },
+            {
+               "relatedId": "3",
+               "difficulty": 25,
+               "attributeId": "6"
+            }
+         ]
+      },
+      "1": {
+         "prettyName": "Kenny with a Rubber Band: Episode IIII - Return of the New Hope",
+         "description": "The phantom menace strikes back at the return of the revenge of the clones.",
+         "isHidden": false,
+         "full": {
+            "fileIdentifier": "kenny_band_2.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "teaser": {
+            "fileIdentifier": "kenny_band_2.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "attributes": [
+            "0",
+            "6"
+         ],
+         "relations": [
+            {
+               "relatedId": "0",
+               "difficulty": -14,
+               "attributeId": "0"
+            },
+            {
+               "relatedId": "2",
+               "difficulty": -4,
+               "attributeId": "6"
+            }
+         ]
+      },
+      "2": {
+         "prettyName": "3 flappy 5 me",
+         "description": "Our hero is sitting in the museum lab one day when Michael decides he needs a video to test stuff. The story unfolds as Kenny decides to make a video based on the lost footage from Josh.",
+         "isHidden": false,
+         "full": {
+            "fileIdentifier": "kenny_flap.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "teaser": {
+            "fileIdentifier": "kenny_flap.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "attributes": [
+            "4",
+            "5",
+            "6"
+         ],
+         "relations": [
+            {
+               "relatedId": "3",
+               "difficulty": -20,
+               "attributeId": "4"
+            },
+            {
+               "relatedId": "3",
+               "difficulty": 1,
+               "attributeId": "6"
+            }
+         ]
+      },
+      "3": {
+         "prettyName": "Kenny: Sticks - Electric Boogaloo",
+         "description": "Ever wonder what would happen when a talentless nerd decides to begin a career in air-drumming? Find out in this zany action adventure horror comedy drama starring Kendall Schmit as Kenny, the hapless air-drummer wannabe as his loyal friends and family help him on his tough road to stardom.",
+         "isHidden": false,
+         "full": {
+            "fileIdentifier": "kenny_sticks.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "teaser": {
+            "fileIdentifier": "kenny_sticks.mp4",
+            "isUrl": false,
+            "attribution": "Kenny"
+         },
+         "attributes": [
+            "1",
+            "3",
+            "4",
+            "6"
+         ],
+         "relations": [
+            {
+               "relatedId": "1",
+               "difficulty": 16,
+               "attributeId": "6"
+            }
+         ]
+      }
+   },
+   "attributes": {
+      "0": {
+         "prettyName": "Rubber Band",
+         "description": "Rubber bands are fun but they can be treacherous and have been known to turn on even the best rubber banders when they detect weakness.",
+         "x": 50,
+         "y": 50,
+         "videos": [
+            "0",
+            "1"
+         ],
+         "glyphicon": "glyphicon-tag"
+      },
+      "1": {
+         "prettyName": "Promark 747B",
+         "description": "Promark Neil Peart Signature 747Bs are the ONLY way to play.",
+         "x": 80,
+         "y": 80,
+         "videos": [
+            "3"
+         ],
+         "glyphicon": "glyphicon-tag"
+      },
+      "3": {
+         "prettyName": "Drum Sticks",
+         "description": "I wanted to quit drumming, but my family said to STICK to it. Glad I did.",
+         "x": 20,
+         "y": 20,
+         "videos": [
+            "3"
+         ],
+         "glyphicon": "glyphicon-tag"
+      },
+      "4": {
+         "prettyName": "Interpretive Dance",
+         "description": "Like dancing, but more interpretive.",
+         "x": 20,
+         "y": 80,
+         "videos": [
+            "2",
+            "3"
+         ],
+         "glyphicon": "glyphicon-tag"
+      },
+      "5": {
+         "prettyName": "Birds",
+         "description": "Birds can usually fly.",
+         "x": 80,
+         "y": 20,
+         "videos": [
+            "2"
+         ],
+         "glyphicon": "glyphicon-tag"
+      },
+      "6": {
+         "prettyName": "Needs a Haircut",
+         "description": "Looks like someone needs a haircut.",
+         "x": 50,
+         "y": 20,
+         "videos": [
+            "0",
+            "1",
+            "2",
+            "3"
+         ],
+         "glyphicon": "glyphicon-tag"
+      }
+   }
+}

@@ -1,0 +1,37 @@
+<div id="attribute-panel" data-spy="scroll" data-target="#attributeNav" class="panel panel-info attribute-panel--scrollable">
+  <div id="attribute-panel--header" {{action 'toggleView' on click}} class="attribute-panel--header panel-heading unselectable">
+    <h4 class="panel-title">Attributes <small>Scroll me<br>Click to {{if panelStates.attributesExpanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if panelStates.attributesExpanded 'up' 'down'}}" /></small></h4>
+  </div>
+
+  {{#if panelStates.attributesExpanded}}
+    <div class="panel-body">
+      <p>List of attributes in the exhibit. Drag an attribute onto a video to add it or select the "Add Attribute" button to the right to add a new one.</p>
+    </div>
+
+    <nav class="attribute-navbar navbar">
+      <p class="navbar-text">Click icons to navigate to specific attributes</p>
+      <div class="collapse navbar-collapse" id="attributeNav">
+        <ul class="nav navbar-nav">
+          {{#each-in modelService.modelData.attributes as |key value|}}
+            {{#link-to "modelEdit" tagName="li" class="navbar-text nav-icon-link" invokeAction=(action 'scrollDiv' (create-id "#" prefix "_" key))}}
+              <span draggable="true" ondrag={{action 'dragging'}} ondragend={{action 'attributeDrop' key}} class="glyphicon {{if value.glyphicon value.glyphicon 'glyphicon-tag'}}" data-toggle="attributeTooltip" title={{value.prettyName}} />
+            {{/link-to}}
+          {{/each-in}}
+        </ul>
+      </div>
+    </nav>
+
+    <ul class="list-group">
+      {{#each-in modelService.modelData.attributes as |key value|}}
+        {{attribute-list-item
+          attributeDropCallback=attributeDropCallback
+          deleteAttributeCallback=deleteAttributeCallback
+          updateModalCallback=(action 'editAttribute')
+          id=(create-id prefix "_" key)
+          key=key
+          data=value
+        }}
+      {{/each-in}}
+    </ul>
+  {{/if}}
+</div>

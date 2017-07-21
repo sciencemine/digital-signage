@@ -1,0 +1,47 @@
+<div id="properties-panel" data-spy="scroll" data-target="#propertiesNav" class="panel panel-info properties-panel--scrollable">
+  <div id="properties-panel--header" {{action 'toggleView' on click}} class="properties-panel--header panel-heading unselectable">
+    <h4 class="panel-title">Properties <small>Scroll me<br>Click to {{if panelStates.propertiesExpanded "hide" "show"}} <span class="glyphicon glyphicon-chevron-{{if panelStates.propertiesExpanded 'up' 'down'}}" /></small></h4>
+  </div>
+
+  {{#if panelStates.propertiesExpanded}}
+    {{#if data}}
+      <div class="panel-body">
+        <p>List of properties the video has.</p>
+      </div>
+
+      <nav class="properties-navbar navbar">
+        <p class="navbar-text">Click icons to navigate to specific properties</p>
+        <div class="collapse navbar-collapse" id="propertiesNav">
+          <ul class="nav navbar-nav">
+            {{#each-in data as |key value|}}
+              {{#link-to "modelEdit" tagName="li" class="navbar-text nav-icon-link" invokeAction=(action 'scrollDiv' (create-id "#" prefix "_" key "_label"))}}
+                <span class="glyphicon glyphicon-picture" data-toggle="propertiesTooltip" title={{get-display-name modelService.modelConfig.videos.data.video.data key}} />
+              {{/link-to}}
+            {{/each-in}}
+          </ul>
+        </div>
+      </nav>
+
+      <div class="panel-body">
+        {{generic-form
+          validationCallback=(action 'doNothing')
+          updateModalCallback=updateModalCallback
+          onSubmitCallback=(action 'submitForm')
+          class="properties-panel__form"
+          prefix=prefix
+          path=path
+          key=vidKey
+          showList=true
+          showHelp=true
+          showTitle=false
+          data=data
+          config=modelService.modelConfig.videos.data.video
+        }}
+      </div>
+    {{else}}
+      <div class="panel-body">
+        <p>No video selected. Select a video from the middle of the screen to see information about it.</p>
+      </div>
+    {{/if}}
+  {{/if}}
+</div>

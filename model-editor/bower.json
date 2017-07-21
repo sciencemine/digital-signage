@@ -1,0 +1,6 @@
+{
+  "name": "model-editor",
+  "dependencies": {
+    "vis": "^4.16.0"
+  }
+}

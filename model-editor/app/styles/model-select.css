@@ -1,0 +1,35 @@
+.model-select {
+  background-color: #fefefe;
+
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
+
+.model-select--title {
+  position: static;
+  text-align: center;
+}
+
+.model-select--panel {
+  position: absolute;
+
+  right: 20%;
+  left: 20%;
+}
+
+.model-select--element {
+  border-bottom: 1px solid black;
+}
+
+.model-select--element:focus {
+  outline: 0;
+}
+
+.model-select--btn__edit {
+  position: absolute;
+
+  bottom: 25px;
+}

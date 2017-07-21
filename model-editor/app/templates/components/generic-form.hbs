@@ -1,0 +1,25 @@
+{{#if showTitle}}
+  <h3>{{config.displayName}}<small> {{config.help}}</small></h3>
+{{/if}}
+
+<form id="{{prefix}}_form" class="form-{{if isInline 'inline' 'horizontal'}}" onsubmit={{action 'submitForm'}} oninput={{action 'validateForm'}} onreset={{action 'validateForm'}}>
+  <button {{action 'toggleHelp'}} type="button" class="btn btn-info btn-sm">Turn help {{if showHelp "off" "on"}}</button><br>
+
+  {{#unless isInline}}<br>{{/unless}}
+
+  {{form-contents
+    prefix=prefix
+    isInLine=isInline
+    showHelp=showHelp
+    showList=showList
+    data=data
+    config=config
+  }}
+
+  {{#if isInline}}<br><br>{{/if}}
+
+  <div class="btn-group" role="group" aria-label="...">
+    <button type="submit" class="btn btn-success btn-sm">Submit {{title}}</button>
+    <button type="reset" class="btn btn-warning btn-sm">Reset {{title}}</button>
+  </div>
+</form>
