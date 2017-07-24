@@ -3,6 +3,8 @@ import KeyboardControls from '../mixins/keyboard-controls';
 import toposort from 'npm:toposort';
 
 export default Ember.Component.extend(KeyboardControls, {
+  metadata: Ember.inject.service(),
+  
   keyboard: null,
   
   idleTimeout: null,
@@ -317,6 +319,21 @@ export default Ember.Component.extend(KeyboardControls, {
 
         this.appendVideoHistory();
         this.makeAfterVideoList();
+        
+        let metadata = {
+          id: videoData.id,
+          prettyName: videoData.prettyName,
+          attributes: [ ]
+        };
+        
+        videoData.attributes.forEach((attributeKey) => {
+          metadata.attributes.push({
+            id: attributeKey,
+            prettyName: this.get(`data.attributes.${attributeKey}.prettyName`)
+          });
+        }, this);
+        
+        this.get('metadata').addNode(metadata);
       }
       else {
         this.toggleVidPlayback();
@@ -324,7 +341,7 @@ export default Ember.Component.extend(KeyboardControls, {
         this.send('resetTimeout');
       }
     },
-    videoEnded() {
+    videoEnded(videoPos, length) { // TODO add jshint ignore
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,
@@ -333,11 +350,21 @@ export default Ember.Component.extend(KeyboardControls, {
       
       this.set('playingVidData.startingTime', 0);
       
+      this.get('metadata').editNode(this.get('playingVidData.id'), {
+        length: length ? length : null,
+        timeWatched: length ? length : null
+      });
+      
       this.send('resetTimeout');
     },
-    pauseVideo(sender, currentTime) {
+    pauseVideo(sender, currentTime, length) {
       this.toggleProperty('videoPlaying');
       this.set('playingVidData.startingTime', currentTime);
+      
+      this.get('metadata').editNode(this.get('playingVidData.id'), {
+        length: length ? length : null,
+        timeWatched: currentTime ? currentTime : null 
+      });
 
       this.setProperties({
         displayAfterVideoList: true,
@@ -380,6 +407,8 @@ export default Ember.Component.extend(KeyboardControls, {
           component.resetVideoHistory();
           
           component.set('focus', true);
+          
+          component.get('metadata').logData();
         }, component.get('data.config.ui.idle') * 1000);
       }) (this);
 

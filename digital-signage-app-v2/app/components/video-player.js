@@ -32,23 +32,24 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+  metadata: Ember.inject.service(),
+  
 	url: null,
 	looping: false,
 	playing: true,
 	muted: true,
 	highlightedStyle: '',
   startingTime: 0,
+  tagId: '',
 
 	click(event) {
-		this.get('onClickCallback') (this.get('videoPos'), this.$('video')[0].currentTime);
+    let vid = this.$('video')[0];
+		this.get('onClickCallback') (this.get('videoPos'), vid.currentTime, vid.duration);
 		event.stopPropagation();
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
 	},
-  willClearRender() {
-    this.set('playingObserver', null);
-  },
 	playingObserver: Ember.observer('playing', function() {
     let p = this.get("playing");
     let videoElement = this.$('video')[0];
@@ -73,7 +74,7 @@ export default Ember.Component.extend({
           }
         }
         else {
-          this.get('onEndedCallback') (this.get('videoPos'));
+          this.get('onEndedCallback') (this.get('videoPos'), this.$('video')[0].duration);
         }
       }
   	},
