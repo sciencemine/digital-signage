@@ -111,6 +111,7 @@ export default Ember.Component.extend(KeyboardControls, {
       let attributeId = vidAttributes[attributeIndex];
       let attributeObj = Ember.copy(this.get('data.attributes')[attributeId], true);
       
+      attributeObj.id = attributeId;
       attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
       if (attributeObj.videos.length !== 0) {
@@ -296,7 +297,7 @@ export default Ember.Component.extend(KeyboardControls, {
     }//if
   },
   actions: {
-    videoSelected(sender, videoData) {
+    videoSelected(sender, videoData, selectedPos, attributeId) {
       if (videoData) {
         let playingVidData = this.get('playingVidData');
         
@@ -320,20 +321,31 @@ export default Ember.Component.extend(KeyboardControls, {
         this.appendVideoHistory();
         this.makeAfterVideoList();
         
-        let metadata = {
+        let nodeMetadata = {
           id: videoData.id,
           prettyName: videoData.prettyName,
           attributes: [ ]
         };
         
         videoData.attributes.forEach((attributeKey) => {
-          metadata.attributes.push({
+          nodeMetadata.attributes.push({
             id: attributeKey,
             prettyName: this.get(`data.attributes.${attributeKey}.prettyName`)
           });
         }, this);
         
-        this.get('metadata').addNode(metadata);
+        let metadata = this.get('metadata');
+        
+        metadata.addNode(nodeMetadata);
+        
+        if (attributeId) {
+          metadata.addEdge({
+            fromVideo: playingVidData.id,
+            toVideo: videoData.id,
+            attribute: attributeId,
+            difficulty: videoData.difficulty
+          });
+        }
       }
       else {
         this.toggleVidPlayback();

@@ -32,7 +32,7 @@ export default Ember.Service.extend({
     }, this);
   },
   addEdge(edge = { }) {
-    this.get('edge').pushObject({
+    this.get('edges').pushObject({
       fromVideo: edge.fromVideo ? edge.fromVideo : null,
       toVideo: edge.toVideo ? edge.toVideo : null,
       attribute: edge.attribute ? edge.attribute : null,
@@ -43,10 +43,13 @@ export default Ember.Service.extend({
     // TODO
     // Ajax call to server endpoint
     // dumps data as { nodes, edges }
-    console.log({
-      nodes: this.get('nodes'),
-      edges: this.get('edges')
-    });
+    
+    if (Ember.isPresent(this.get('nodes')) || Ember.isPresent(this.get('edges'))) {
+      console.log({
+        nodes: this.get('nodes'),
+        edges: this.get('edges')
+      });
+    }
     
     this.clearData();
   },
