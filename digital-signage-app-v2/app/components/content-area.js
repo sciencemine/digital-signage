@@ -1,6 +1,5 @@
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
-import toposort from 'npm:toposort';
 
 export default Ember.Component.extend(KeyboardControls, {
   modelData: Ember.inject.service(),
@@ -131,6 +130,7 @@ export default Ember.Component.extend(KeyboardControls, {
   }),
   init() {
     this._super(...arguments);
+    
     this.set('keyboard', this.get('modelData.keyboard'));
 
     this.resetVideoHistory();
