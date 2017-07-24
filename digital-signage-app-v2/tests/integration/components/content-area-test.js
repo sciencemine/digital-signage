@@ -3,7 +3,8 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 moduleForComponent('content-area', 'Integration | Component | content area', {
-  integration: true
+  integration: true,
+  needs: [ 'service:metadata' ]
 });
 
 test('it renders', function(assert) {
@@ -78,7 +79,7 @@ test('it renders', function(assert) {
             }
         }
     },
-    "attribute": {
+    "attributes": {
         "0": {
             "name": "Rubber Band",
             "description": "Rubber bands are fun but they can be treacherous and have been known to turn on even the best rubber banders when they detect weakness.",
@@ -120,20 +121,6 @@ test('it renders', function(assert) {
             "x": 0.5,
             "y": 0.2,
             "videos": [ "0", "1", "2", "3" ]
-        }
-    },
-    "relation": {
-        "0": {
-            "videoId": "0",
-            "relatedId": "1",
-            "difficulty": "1",
-            "attributeId": "0"
-        },
-        "1": {
-            "videoId": "1",
-            "relatedId": "0",
-            "difficulty": "-1",
-            "attributeId": "0"
         }
     }
 });

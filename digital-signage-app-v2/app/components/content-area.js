@@ -297,7 +297,7 @@ export default Ember.Component.extend(KeyboardControls, {
     }//if
   },
   actions: {
-    videoSelected(sender, videoData, selectedPos, attributeId) {
+    videoSelected(sender, videoData, selectedPos, attributeId) { // jshint ignore:line
       if (videoData) {
         let playingVidData = this.get('playingVidData');
         
@@ -353,7 +353,7 @@ export default Ember.Component.extend(KeyboardControls, {
         this.send('resetTimeout');
       }
     },
-    videoEnded(videoPos, length) { // TODO add jshint ignore
+    videoEnded(videoPos, length) { // jshint ignore:line
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,

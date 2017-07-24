@@ -32,8 +32,6 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  metadata: Ember.inject.service(),
-  
 	url: null,
 	looping: false,
 	playing: true,
