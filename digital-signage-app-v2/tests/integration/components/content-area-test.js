@@ -3,8 +3,7 @@ import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
 moduleForComponent('content-area', 'Integration | Component | content area', {
-  integration: true,
-  needs: [ 'service:metadata' ]
+  integration: true
 });
 
 test('it renders', function(assert) {
