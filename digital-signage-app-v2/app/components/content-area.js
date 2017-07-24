@@ -155,17 +155,19 @@ export default Ember.Component.extend(KeyboardControls, {
       nodes.forEach(function(node, index) {
       nodes[index] = [ node ];
         
-        node.relations.forEach(function(edgeData) {
-          let edgeObj = { };
-          
-          if (edgeData.difficulty >= 0 && edgeData.attributeId === attribute.id) {
-            edgeObj.to = edgeData.relatedId;
-            edgeObj.from = node.id;
-            edgeObj.diff = edgeData.difficulty;
+        if (Ember.isArray(node.relations)) {
+          node.relations.forEach(function(edgeData) {
+            let edgeObj = { };
             
-            edges.push(edgeObj);
-          }//if
-        });
+            if (edgeData.difficulty >= 0 && edgeData.attributeId === attribute.id) {
+              edgeObj.to = edgeData.relatedId;
+              edgeObj.from = node.id;
+              edgeObj.diff = edgeData.difficulty;
+              
+              edges.push(edgeObj);
+            }//if
+          });
+        }
       });
       
       edges.sort(function(a, b) {
