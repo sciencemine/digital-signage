@@ -81,7 +81,7 @@ export default Ember.Component.extend(KeyboardControls, {
         if (relatedVids.find(function(video) {
             return video.vidId !== this;
           }, vidRelation.relatedId) === undefined) {
-          relatedVids.push(Ember.copy(this.get('data.videos')[vidRelation.relatedId], true));
+          relatedVids.push(Ember.copy(this.get('modelData.videos')[vidRelation.relatedId], true));
           
           let vid = relatedVids[relatedVids.length - 1];
           
@@ -109,7 +109,7 @@ export default Ember.Component.extend(KeyboardControls, {
 
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
-      let attributeObj = Ember.copy(this.get('data.attributes')[attributeId], true);
+      let attributeObj = Ember.copy(this.get(`modelData.attributes.${attributeId}`), true);
       
       attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
@@ -122,158 +122,17 @@ export default Ember.Component.extend(KeyboardControls, {
         
     this.set('afterVideoListData', localAfterVidData);
   },
-  makeMapData: function() {
-    let mapData = [ ];
-    let attributes = Ember.copy(this.get('data.attributes'), true);
-    
-    for (let key in attributes) {
-      
-      mapData.push(attributes[key]);
-      mapData[mapData.length - 1].id = key;
-      
-      for (let i = 0; i < mapData[mapData.length - 1].videos.length; i++) {
-        let vidId = mapData[mapData.length - 1].videos[i];
-        let video =  this.get('data.videos')[vidId];
-        
-        video.id = vidId;
-        
-        mapData[mapData.length - 1].videos[i] = video;
-      }//for
-    }//for
-    
-    mapData.sort(function(a, b) {
-      return (a.y - b.y) || (a.x - b.x);
-    });
-    
-    mapData.forEach(function(attribute) {
-      let nodes = [ ];
-      let edges = [ ];
-      
-      nodes = attribute.videos;
-      
-      nodes.forEach(function(node, index) {
-      nodes[index] = [ node ];
-        
-        node.relations.forEach(function(edgeData) {
-          let edgeObj = { };
-          
-          if (edgeData.difficulty >= 0 && edgeData.attributeId === attribute.id) {
-            edgeObj.to = edgeData.relatedId;
-            edgeObj.from = node.id;
-            edgeObj.diff = edgeData.difficulty;
-            
-            edges.push(edgeObj);
-          }//if
-        });
-      });
-      
-      edges.sort(function(a, b) {
-        return a.diff - b.diff;
-      });
-      
-      if (edges.length) {
-        let topoEdges = [ ];
-
-        this.kruskals(nodes, edges).forEach(function(edge) {
-          let arr = [ ];
-          
-          arr[0] = edge.from;
-          arr[1] = edge.to;
-          
-          topoEdges.push(arr);
-        });
-        
-        topoEdges = toposort(topoEdges);
-        
-        for (let videoIndex = 0; videoIndex < topoEdges.length; videoIndex++) {
-          let videoId;
-          
-          if (videoIndex > 4) {
-            break;
-          }//if
-          
-          videoId = topoEdges[videoIndex];
-          
-          topoEdges[videoIndex] = this.get('data.videos')[videoId];
-        }//for
-        
-        attribute.videos = topoEdges;
-      }//if
-      else {
-        attribute.videos = nodes[0];
-      }//else
-      
-      if (!attribute.videos) {
-        mapData.splice(mapData.indexOf(attribute), 1);
-      }
-    }, this);
-
-    this.set('mapData', mapData);
-  },
-  //move to service
-  kruskals: function(nodes, edges) {
-    let numTrees = 0;
-    let kst = [ ];
-    let numNodes = nodes.length;
-
-    do {
-      let rel = edges.shift();
-      let fromTreeIndex;
-      let toTreeIndex;
-
-      if (!rel) {
-        break;
-      }//if
-      
-      for (let treeIndex = 0; treeIndex < nodes.length; treeIndex++) {
-        let tree = nodes[treeIndex];
-        
-        for (let nodeIndex = 0; nodeIndex < tree.length; nodeIndex++) {
-          let node = tree[nodeIndex];
-          
-          if (node.id.toString() === rel.from) {
-            fromTreeIndex = treeIndex;
-          }//if
-          else if (node.id.toString() === rel.to) {
-            toTreeIndex = treeIndex;
-          }//else if
-        }//for
-        
-        if (fromTreeIndex === undefined || toTreeIndex === undefined) {
-          continue;
-        }//if
-        
-        if (fromTreeIndex !== toTreeIndex) {
-          let newTree = nodes[fromTreeIndex].concat(nodes[toTreeIndex]);
-          nodes.push(newTree);
-          
-          nodes.splice(fromTreeIndex, 1);
-          nodes.splice(toTreeIndex, 1);
-
-          kst.push(rel);
-          
-          numTrees = numTrees + 1;
-          
-          rel = null;
-          
-          break;
-        }//if
-      }//for
-      
-    } while (numTrees < numNodes - 1);
-
-    return kst;
-  },
   bgVidData: Ember.computed('bgVidPos', function() {
-      let backgroundId = this.get('data.config.backgroundVideos')[this.get('bgVidPos')];
+    let modelData = this.get('modelData');
+    
+    let backgroundId = modelData.get(`config.backgroundVideos.${this.get('bgVidPos')}`);
       
-      return this.get('data.videos')[backgroundId];
+    return modelData.get(`videos.${backgroundId}`);
   }),
   init() {
     this._super(...arguments);
-    this.set('keyboard', this.get('data.config.keyboard'));
+    this.set('keyboard', this.get('modelData.keyboard'));
 
-    this.makeMapData();
     this.resetVideoHistory();
     
     this.send('resetTimeout');
@@ -359,7 +218,7 @@ export default Ember.Component.extend(KeyboardControls, {
       this.send('resetTimeout');
     },
     cycleBackground() {
-      let bgVidKeys = this.get('data.config.backgroundVideos');
+      let bgVidKeys = this.get('modelData.config.backgroundVideos');
       
       let bgArrayLength = bgVidKeys.length;
       let curBgVidPos = this.get('bgVidPos');
@@ -382,7 +241,7 @@ export default Ember.Component.extend(KeyboardControls, {
           component.resetVideoHistory();
           
           component.set('focus', true);
-        }, component.get('data.config.ui.idle') * 1000);
+        }, component.get('modelData.ui.idle') * 1000);
       }) (this);
 
       this.set('idleTimeout', timeout);

@@ -4,15 +4,13 @@ import toposort from 'npm:toposort';
 export default Ember.Service.extend({
   data: null,
   mapData: null,
-  backgroundVideos: null,
   
   init() {
     this._super(...arguments);
     
     this.setProperties({
       data: null,
-      mapData: null,
-      backgroundVideos: null
+      mapData: null
     });
   },
   _makeMapData() {
