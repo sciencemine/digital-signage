@@ -1,7 +1,32 @@
 import Ember from 'ember';
 
 export default Ember.Route.extend({
+  modelData: Ember.inject.service(),
+  
   modelFile: null,
+  
+  preloadData: function(modelIdentifier, fileIdentifier) {
+    return new Ember.RSVP.Promise(function(resolve, reject) {
+      let xhr = new XMLHttpRequest();
+      let url = modelIdentifier + '/' + fileIdentifier;
+
+      xhr.open('GET', url, true);
+      xhr.responseType = 'blob';
+      xhr.onreadystatechange = handler;
+      xhr.send();
+
+      function handler() {
+        if (this.readyState === this.DONE) {
+          if (this.status === 200) {
+            resolve(this.response);
+          }
+          else {
+            reject('preloadData: `' + url + '` failed with status: [' + this.status + ']');
+          }
+        }
+      }
+    });
+  },
 
   beforeModel(params) {
     let qp = params.queryParams;
@@ -34,7 +59,7 @@ export default Ember.Route.extend({
         if (!(res.videos[video].teaser.fileIdentifier in uniqueVids) && !res.videos[video].teaser.isUrl) {
           uniqueVids.vids.push(res.videos[video].teaser.fileIdentifier);
           uniqueVids[res.videos[video].teaser.fileIdentifier] = null;
-          uniqueVids.blobData.push(preloadData(modelIdentifier, res.videos[video].teaser.fileIdentifier));
+          uniqueVids.blobData.push(route.preloadData(modelIdentifier, res.videos[video].teaser.fileIdentifier));
         }
       }
 
@@ -52,6 +77,9 @@ export default Ember.Route.extend({
             res.videos[video].teaser.isUrl = true;
           }
         }
+        
+        route.get('modelData').load(res);
+        
         return res;
       });
     }).fail(() => {
@@ -59,27 +87,3 @@ export default Ember.Route.extend({
     });
   }
 });
-
-/* Creates a promise while a blob is generated */
-function preloadData(modelIdentifier, fileIdentifier) {
-  return new Ember.RSVP.Promise(function(resolve, reject) {
-    let xhr = new XMLHttpRequest();
-    let url = modelIdentifier + '/' + fileIdentifier;
-
-    xhr.open('GET', url, true);
-    xhr.responseType = 'blob';
-    xhr.onreadystatechange = handler;
-    xhr.send();
-
-    function handler() {
-      if (this.readyState === this.DONE) {
-        if (this.status === 200) {
-          resolve(this.response);
-        }
-        else {
-          reject('preloadData: `' + url + '` failed with status: [' + this.status + ']');
-        }
-      }
-    }
-  });
-}

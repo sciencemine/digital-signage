@@ -38,9 +38,9 @@
     onStackChangeCallback=(action 'doNothing')
     class="stack-list no-outline"
     stackItemHighlight="blue-border"
-    data=mapData
+    data=modelData.mapData
     stackItemClass="stack-list-item--flex"
-    keyboard=keyboard
+    keyboard=modelData.keyboard
     modelIdentifier=config.modelIdentifier
   }}
 {{/if}}
@@ -77,10 +77,6 @@
 
 {{!-- Re-positionable menu-bar --}}
 {{menu-bar
-  popoverShowDelay=data.config.ui.popoverShowDelay
-  config=data.config
-  videos=data.videos
-  attributes=data.attributes
   onClickCallback=(action 'videoSelected')
 }}
 

@@ -12,6 +12,7 @@
 import Ember from 'ember';
 
 export default Ember.Mixin.create({
+  keyboard: null,
   focus: false,
   /**
    * Called from keyPress event when the select button is pressed

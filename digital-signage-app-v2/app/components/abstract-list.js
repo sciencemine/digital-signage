@@ -27,6 +27,8 @@ import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
+  modelData: Ember.inject.service(),
+  
   selectedCallback: function(selected, selectedPos) {
     this.get('onSelectedCallback')(this, selected, selectedPos);
   },

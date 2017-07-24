@@ -3,6 +3,8 @@ import KeyboardControls from '../mixins/keyboard-controls';
 import toposort from 'npm:toposort';
 
 export default Ember.Component.extend(KeyboardControls, {
+  modelData: Ember.inject.service(),
+  
   keyboard: null,
   
   idleTimeout: null,
