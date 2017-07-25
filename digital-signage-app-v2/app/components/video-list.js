@@ -39,11 +39,10 @@ export default AbstractList.extend({
   mouseMove() {
     this.inputCallback();
   },
-  
   select: function(event) {
-    let vidId = this.get('selectedVidPos');
+    let vidPos = this.get('selectedVidPos');
 
-    this.selectedCallback(vidId);
+    this.selectedCallback(this.get(`videos.${vidPos}`));
 
     event.stopPropagation();
   },
@@ -98,8 +97,10 @@ export default AbstractList.extend({
       this.selectedCallback(vidId);
     },
     videoHovered(videoPos) {
-      this.set('selectedVidPos', videoPos);   
+      this.set('selectedVidPos', videoPos);
+       
       this.get('onHoverCallback') (videoPos);
+      
       this.inputCallback();
     }
   }

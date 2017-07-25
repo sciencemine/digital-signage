@@ -10,13 +10,13 @@
   }}
 </div>
 
-{{!-- Full screen video --}}
+{{!-- Full screen video --}}{{log playingVidStartTime}}
 {{#if displayVideo}}
   <div class="video-player__fullscreen">
     {{video-player
       playing=videoPlaying
       muted=false
-      startingTime=playingVidData.startingTime
+      startingTime=playingVidStartTime
       url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
       onClickCallback=(action 'pauseVideo' bubbles=false)
       onHoverCallback=(action 'doNothing')

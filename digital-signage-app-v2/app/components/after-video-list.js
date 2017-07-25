@@ -80,8 +80,8 @@ export default Ember.Component.extend({
     stackListInput() {
       this.get('onInputCallback') ();
     },
-    stackListStackChanged(videos) {
-      this.set('videoListData', videos);
+    stackListStackChanged(stackId) {
+      this.set('videoListData', this.get(`data.${stackId}.videos`));
     },
 
     /* Video List Controller */
