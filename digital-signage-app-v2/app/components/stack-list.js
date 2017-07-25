@@ -58,22 +58,20 @@ export default AbstractList.extend({
   mouseMove() {
     this.inputCallback();
   },
-  
   select: function(event) {
     let stackIndex = this.get('selectedStackIndex');
-
-    this.inputCallback();
-    this.selectedCallback(this.get('data')[stackIndex].videos, stackIndex);
+    
+    this.selectedCallback(stackIndex);
     
     event.stopPropagation();  
   },
   goPrevious: function(event) {
-    let stackIndex = this.get('selectedStackIndex');
-
     this.inputCallback();
     this.changeIndex(-1);
     
-    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
+    let stackIndex = this.get('selectedStackIndex');
+
+    this.get('onStackChangeCallback') (stackIndex);
     
     event.stopPropagation();
   },
@@ -84,12 +82,12 @@ export default AbstractList.extend({
     event.stopPropagation();
   },
   goNext: function(event) {
-    let stackIndex = this.get('selectedStackIndex');
-
     this.inputCallback();
     this.changeIndex(1);
     
-    this.get('onStackChangeCallback') (this.get('data')[stackIndex].videos, stackIndex);
+    let stackIndex = this.get('selectedStackIndex');
+
+    this.get('onStackChangeCallback') (stackIndex);
     
     event.stopPropagation();
   },
@@ -108,8 +106,11 @@ export default AbstractList.extend({
     },
     stackHovered(videos, stackKey) {
       this.set('selectedStackIndex', stackKey);
+      
       this.get('onHoverCallback') (videos, stackKey);
+      
       this.inputCallback();
+      
     }
   }
 });

@@ -1,16 +1,17 @@
 <div class={{playerSize}}>
 	{{!A}}
 	{{video-player 
-	class=(unless showVidA "hidden")
-	playing=showVidA
-	highlightedStyle=(string-append stackStyle borderStyle) 
-	looping=(is-single-video videos) 
-	videoPos=selectedVidAPos 
-	muted=isMuted
-	url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
-	onClickCallback=(action 'stackClicked') 
-	onHoverCallback=(action 'stackHovered') 
-	onEndedCallback=(action 'getNextVideoA')
+		class=(unless showVidA "hidden")
+		playing=showVidA
+		highlightedStyle=(string-append stackStyle borderStyle) 
+		looping=(is-single-video videos) 
+		videoPos=selectedVidAPos 
+		videoId=videoAid
+		muted=isMuted
+		url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
+		onClickCallback=(action 'stackClicked') 
+		onHoverCallback=(action 'stackHovered') 
+		onEndedCallback=(action 'getNextVideoA')
 	}}
 
 	{{!B}}
@@ -21,6 +22,7 @@
 		highlightedStyle=(string-append stackStyle borderStyle) 
 		looping=(is-single-video videos) 
 		videoPos=selectedVidBPos 
+		videoId=videoBid
 		muted=isMuted
 		url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
 		onClickCallback=(action 'stackClicked') 

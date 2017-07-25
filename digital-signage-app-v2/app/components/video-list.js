@@ -41,10 +41,9 @@ export default AbstractList.extend({
   },
   
   select: function(event) {
-    let vidPos = this.get('selectedVidPos');
+    let vidId = this.get('selectedVidPos');
 
-    this.inputCallback();
-    this.selectedCallback(this.get('videos')[vidPos], vidPos);
+    this.selectedCallback(vidId);
 
     event.stopPropagation();
   },
@@ -73,10 +72,6 @@ export default AbstractList.extend({
 
     this.set('selectedVidPos', (curVidPos + param) % vidArrayLength);
   },
-  
-  init() {
-    this._super(...arguments);
-  },
   didRender() {
     if (this.get('displayPopovers')) {
       if (this.$('[data-toggle="popover"]').length !== 0) {
@@ -99,8 +94,8 @@ export default AbstractList.extend({
     }
   },
   actions: {
-    videoSelected(videoPos) {
-      this.selectedCallback(this.get('videos')[videoPos], videoPos);
+    videoSelected(vidId) {
+      this.selectedCallback(vidId);
     },
     videoHovered(videoPos) {
       this.set('selectedVidPos', videoPos);   

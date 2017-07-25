@@ -3,7 +3,7 @@ import Ember from 'ember';
 export default Ember.Component.extend({
   modelData: Ember.inject.service(),
   
-  displayVideos: [],
+  displayVideos: [ ],
   menuListStyle: "",
   menuBarStyle: "",
   filterType: "All",
@@ -21,7 +21,7 @@ export default Ember.Component.extend({
     
     let modelData = this.get('modelData');
     
-    this.set('displayVideos', modelData.get('videos'));
+    this.set('displayVideos', Object.keys(modelData.get('videos')));
 
     let listStyle = "video-list__menu video-list--flex__menu";
     let barStyle = "menu-bar";
@@ -101,28 +101,23 @@ export default Ember.Component.extend({
       
       if (newAttributeID === -1) {
         this.setProperties({
-          displayVideos: modelData.get('videos'),
+          displayVideos: Object.keys(modelData.get('videos')),
           filterType: "All"
         });
       }
       else {
         let attr = modelData.get(`attributes.${newAttributeID}`);
-        let attrVideos = attr.videos;
-        let displayVideos = [ ];
 
-        for (let i = 0; i < attrVideos.length; i++) {
-          let vidId = attrVideos[i];
-          
-          displayVideos.push(modelData.get(`videos.${vidId}`));
-        }
-
-        this.set('displayVideos', displayVideos);
-        this.set('filterType', attr.prettyName);
+        this.setProperties({
+          displayVideos: attr.videos,
+          filterType: attr.prettyName
+        });
+        
         this.hidePopovers();
       }
     },
-    videoClicked(sender, videoData) {
-      this.get('onClickCallback') (this, videoData);
+    videoClicked(videoId) {
+      this.get('onClickCallback') (videoId);
     },
     doNothing() {}
   }

@@ -1,6 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    modelData: Ember.inject.service(),
+    
     selectedVidAPos: 0,
     selectedVidBPos: 1,
     selectedStackIndex: 0,
@@ -8,6 +10,7 @@ export default Ember.Component.extend({
     playerSize: '',
     isMuted: true,
     showVidA: true,
+    isTeaser: true,
     
     init() {
         this._super(...arguments);
@@ -26,15 +29,21 @@ export default Ember.Component.extend({
                 break;
         }
     },
-    videoA: Ember.computed('videos', 'selectedVidAPos', function () {
-        return this.get('videos')[this.get('selectedVidAPos')];
+    vidAid: Ember.computed('videos', 'selectedVidAPos', function() {
+        return this.get(`videos.${this.get('selectedVidAPos')}`);
     }),
-    videoB: Ember.computed('videos', 'selectedVidBPos', function () {
-        return this.get('videos')[this.get('selectedVidBPos')];
+    videoA: Ember.computed('videos', 'selectedVidAPos', function() {
+        return this.get(`modelData.videos.${this.get('vidAid')}`);
+    }),
+    vidBid: Ember.computed('videos', 'selectedVidBPos', function() {
+        return this.get(`videos.${this.get('selectedVidBPos')}`);
+    }),
+    videoB: Ember.computed('videos', 'selectedVidBPos', function() {
+        return this.get(`modelData.videos.${this.get('vidBid')}`);
     }),
     actions: {
         stackClicked() {
-            this.get('onSelectedCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
+            this.get('onSelectedCallback') (this.get('selectedStackIndex'));
         },
         getNextVideoA() {
             let arrayLength = this.get('videos').length;

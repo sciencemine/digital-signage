@@ -2,4 +2,13 @@
 
 <p class="list-group-item-text">{{description}}</p>
 
-{{video-stack videos=videos modelIdentifier=modelIdentifier playerSize="player-container" onHoverCallback=(action 'doNothing') onClickCallback=(action 'doNothing') isMuted=muted}}
+<div class="player-container">
+  {{video-player
+    isMuted=muted
+    onClickCallback=(action 'doNothing')
+    onHoverCallback=(action 'doNothing')
+    onEndedCallback=(action 'cycleVideo')
+    url=(concat modelIdentifier "/" playingVid.teaser.fileIdentifier)
+    looping=(is-single-video videos)
+  }}
+</div>

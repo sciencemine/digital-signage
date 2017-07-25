@@ -38,10 +38,13 @@ export default Ember.Component.extend({
 	muted: true,
 	highlightedStyle: '',
   startingTime: 0,
+  videoPos: null,
+  videoId: null,
 
 	click(event) {
-		this.get('onClickCallback') (this.get('videoPos'), this.$('video')[0].currentTime);
-		event.stopPropagation();
+		this.get('onClickCallback') (this.get('videoId'), this.$('video')[0].currentTime);
+		
+    event.stopPropagation();
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
@@ -73,7 +76,7 @@ export default Ember.Component.extend({
           }
         }
         else {
-          this.get('onEndedCallback') (this.get('videoPos'));
+          this.get('onEndedCallback') (this.get('videoId'));
         }
       }
   	},

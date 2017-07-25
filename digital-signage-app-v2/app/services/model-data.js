@@ -2,72 +2,65 @@ import Ember from 'ember';
 import toposort from 'npm:toposort';
 
 export default Ember.Service.extend({
-  data: null,
-  mapData: null,
+  _data: null,
+  _mapData: null,
   
   init() {
     this._super(...arguments);
     
     this.setProperties({
-      data: null,
-      mapData: null
+      _data: null,
+      _mapData: null
     });
   },
   _makeMapData() {
-    if (!this.get('data')) {
+    if (Ember.isNone(this.get('_data'))) {
       return;
     }
     
     let mapData = [ ];
     let attributes = Ember.copy(this.get('attributes'), true);
-    let videos = Ember.copy(this.get('videos'), true);
     
     for (let key in attributes) {
+      let attrObj = attributes[key];
+      attrObj.id = key;
       
-      mapData.push(attributes[key]);
-      mapData[mapData.length - 1].id = key;
-      
-      for (let i = 0; i < mapData[mapData.length - 1].videos.length; i++) {
-        let vidId = mapData[mapData.length - 1].videos[i];
-        let video =  videos[vidId];
-        
-        video.id = vidId;
-        
-        mapData[mapData.length - 1].videos[i] = video;
-      }//for
+      mapData.push(attrObj);
     }//for
+    
     
     mapData.sort(function(a, b) {
       return (a.y - b.y) || (a.x - b.x);
     });
     
     mapData.forEach(function(attribute) {
+      let videos = Ember.copy(attribute.videos, true);
       let nodes = [ ];
       let edges = [ ];
       
       nodes = attribute.videos;
       
       nodes.forEach(function(node, index) {
-      nodes[index] = [ node ];
+        nodes[index] = [ node ];
         
-        node.relations.forEach(function(edgeData) {
+        this.get(`videos.${node}.relations`).forEach(function(edgeData) {
           let edgeObj = { };
           
           if (edgeData.difficulty >= 0 && edgeData.attributeId === attribute.id) {
             edgeObj.to = edgeData.relatedId;
-            edgeObj.from = node.id;
+            edgeObj.from = node;
             edgeObj.diff = edgeData.difficulty;
             
             edges.push(edgeObj);
           }//if
-        });
-      });
+        }, this);
+      }, this);
       
       edges.sort(function(a, b) {
         return a.diff - b.diff;
       });
       
-      if (edges.length) {
+      if (Ember.isPresent(edges)) {
         let topoEdges = [ ];
 
         this._kruskals(nodes, edges).forEach(function(edge) {
@@ -81,30 +74,18 @@ export default Ember.Service.extend({
         
         topoEdges = toposort(topoEdges);
         
-        for (let videoIndex = 0; videoIndex < topoEdges.length; videoIndex++) {
-          let videoId;
-          
-          if (videoIndex > 4) {
-            break;
-          }//if
-          
-          videoId = topoEdges[videoIndex];
-          
-          topoEdges[videoIndex] = videos[videoId];
-        }//for
-        
         attribute.videos = topoEdges;
-      }//if
+      }
       else {
-        attribute.videos = nodes[0];
-      }//else
+        attribute.videos = videos;
+      }
       
-      if (!attribute.videos) {
+      if (Ember.isNone(attribute.videos)) {
         mapData.splice(mapData.indexOf(attribute), 1);
       }
     }, this);
 
-    this.set('mapData', mapData);
+    this.set('_mapData', mapData);
   },
   _kruskals(nodes, edges) {
     let numTrees = 0;
@@ -126,10 +107,10 @@ export default Ember.Service.extend({
         for (let nodeIndex = 0; nodeIndex < tree.length; nodeIndex++) {
           let node = tree[nodeIndex];
           
-          if (node.id.toString() === rel.from) {
+          if (node === rel.from) {
             fromTreeIndex = treeIndex;
           }//if
-          else if (node.id.toString() === rel.to) {
+          else if (node === rel.to) {
             toTreeIndex = treeIndex;
           }//else if
         }//for
@@ -160,38 +141,41 @@ export default Ember.Service.extend({
     return kst;
   },
   load(data) {
-    this.set('data', data);
+    this.set('_data', data);
     
     this._makeMapData();
   },
-  config: Ember.computed('data', function() {
-    let data = this.get('data');
-    
-    return data ? data.config : null;
+  mapData: Ember.computed('_mapData', function() {
+    return this.get('_mapData');
   }),
-  modelIdentifier: Ember.computed('data', function() {
-    let data = this.get('data');
+  config: Ember.computed('_data', function() {
+    let data = this.get('_data');
     
-    return data ? data.config.modelIdentifier : null;
+    return data ? Ember.copy(data.config, true) : null;
   }),
-  ui: Ember.computed('data', function() {
-    let data = this.get('data');
+  modelIdentifier: Ember.computed('_data', function() {
+    let data = this.get('_data');
     
-    return data ? data.config.ui : null;
+    return data ? Ember.copy(data.config.modelIdentifier, true) : null;
   }),
-  keyboard: Ember.computed('data', function() {
-    let data = this.get('data');
+  ui: Ember.computed('_data', function() {
+    let data = this.get('_data');
     
-    return data ? data.config.keyboard : null;
+    return data ? Ember.copy(data.config.ui, true) : null;
   }),
-  videos: Ember.computed('data', function() {
-    let data = this.get('data');
+  keyboard: Ember.computed('_data', function() {
+    let data = this.get('_data');
     
-    return data ? data.videos : null;
+    return data ? Ember.copy(data.config.keyboard, true) : null;
   }),
-  attributes: Ember.computed('data', function() {
-    let data = this.get('data');
+  videos: Ember.computed('_data', function() {
+    let data = this.get('_data');
     
-    return data ? data.attributes : null;
+    return data ? Ember.copy(data.videos, true) : null;
+  }),
+  attributes: Ember.computed('_data', function() {
+    let data = this.get('_data');
+    
+    return data ? Ember.copy(data.attributes, true) : null;
   })
 });

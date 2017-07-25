@@ -56,7 +56,7 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
 
-    this.set('videoListData', this.get('data')[0].videos);
+    this.set('videoListData', this.get(`data.${0}.videos`));
   },
   actions: {
     /* Stack List Controller */
@@ -70,9 +70,9 @@ export default Ember.Component.extend({
     stackListCancelled() {
       this.get('onCancelCallback');
     },
-    stackListSelected(sender, videos) {
+    stackListSelected(stackId) {
       this.setProperties({
-        videoListData: videos,
+        videoListData: this.get(`data.${stackId}.videos`),
         videoListSelectedPos: 0,
         stackListFocus: false
       });
@@ -91,8 +91,8 @@ export default Ember.Component.extend({
         videoListSelectedPos: -1
       });
     },
-    videoListSelected(sender, selected) {
-      this.get('videoSelectedCallback') (sender, selected);
+    videoListSelected(vidId) {
+      this.get('videoSelectedCallback') (vidId);
     },
     videoListInput() {
       this.get('onInputCallback') ();
