@@ -8,7 +8,7 @@
 		videoPos=selectedVidAPos 
 		videoId=videoAid
 		muted=isMuted
-		url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
+		url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelData.modelIdentifier videoA.teaser.fileIdentifier)) 
 		onClickCallback=(action 'stackClicked') 
 		onHoverCallback=(action 'stackHovered') 
 		onEndedCallback=(action 'getNextVideoA')
@@ -24,7 +24,7 @@
 		videoPos=selectedVidBPos 
 		videoId=videoBid
 		muted=isMuted
-		url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
+		url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelData.modelIdentifier videoB.teaser.fileIdentifier)) 
 		onClickCallback=(action 'stackClicked') 
 		onHoverCallback=(action 'stackHovered') 
 		onEndedCallback=(action 'getNextVideoB')

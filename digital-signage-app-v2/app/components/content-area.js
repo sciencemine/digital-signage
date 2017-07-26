@@ -11,7 +11,7 @@ export default Ember.Component.extend(KeyboardControls, {
   displayVideoSelect: false,
   displayVideo: false,
   displayAfterVideoList: false,
-  displayMapView: true,
+  displayMapView: false, // TODO
   
   videoPlaying: false,
   
@@ -189,7 +189,6 @@ export default Ember.Component.extend(KeyboardControls, {
           displayVideoSelect: false,
           displayAfterVideoList: false
         });
-        
         
         if (vidId !== this.get('playingVidId')) {
           this.set('playingVidId', vidId);

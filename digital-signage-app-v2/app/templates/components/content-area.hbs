@@ -3,9 +3,9 @@
   {{video-player
     muted=(if displayAfterVideoList true (if displayVideoSelect true false))
     class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
-    looping=(is-single-video data.config.backgroundVideos)
+    looping=(is-single-video modelData.config.backgroundVideos)
     playing=(if displayMapView false (if displayVideo false true))
-    url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier bgVidData.full.fileIdentifier))
+    url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url modelData.modelIdentifier bgVidData.full.fileIdentifier))
     onEndedCallback=(action 'cycleBackground')
   }}
 </div>
@@ -17,7 +17,7 @@
       playing=videoPlaying
       muted=false
       startingTime=playingVidData.startTime
-      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url data.config.modelIdentifier playingVidData.full.fileIdentifier))
+      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url modelData.modelIdentifier playingVidData.full.fileIdentifier))
       onClickCallback=(action 'pauseVideo' bubbles=false)
       onHoverCallback=(action 'doNothing')
       onEndedCallback=(action 'videoEnded')
@@ -27,7 +27,7 @@
 
 {{!-- Map view stack-list --}}
 {{#if displayMapView}}
-  <img class="bg-image" src={{make-local-url data.config.modelIdentifier data.config.backgroundImage}}>
+  <img class="bg-image" src={{make-local-url modelData.modelIdentifier modelData.config.backgroundImage}}>
   {{stack-list
     isFlex=false
     focus=true
@@ -40,8 +40,6 @@
     stackItemHighlight="blue-border"
     data=modelData.mapData
     stackItemClass="stack-list-item--flex"
-    keyboard=modelData.keyboard
-    modelIdentifier=config.modelIdentifier
   }}
 {{/if}}
 
@@ -67,9 +65,9 @@
 {{#if displayAfterVideoList}}
   {{after-video-list
     data=afterVideoListData
-    config=data.config
     onInputCallback=(action 'resetTimeout')
     videoSelectedCallback=(action 'videoSelected' bubbles=false)
+    onCancelCallback=(action 'videoSelected' playingVidId)
   }}
 {{/if}}
 

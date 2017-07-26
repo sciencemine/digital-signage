@@ -26,7 +26,7 @@ export default Ember.Service.extend({
       attrObj.id = key;
       
       mapData.push(attrObj);
-    }//for
+    }
     
     
     mapData.sort(function(a, b) {
@@ -52,7 +52,7 @@ export default Ember.Service.extend({
             edgeObj.diff = edgeData.difficulty;
             
             edges.push(edgeObj);
-          }//if
+          }
         }, this);
       }, this);
       
@@ -148,31 +148,31 @@ export default Ember.Service.extend({
   config: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.config, true) : null;
+    return data ? data.config : null;
   }),
   modelIdentifier: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.config.modelIdentifier, true) : null;
+    return data ? data.config.modelIdentifier : null;
   }),
   ui: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.config.ui, true) : null;
+    return data ? data.config.ui : null;
   }),
   keyboard: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.config.keyboard, true) : null;
+    return data ? data.config.keyboard : null;
   }),
   videos: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.videos, true) : null;
+    return data ? data.videos : null;
   }),
   attributes: Ember.computed('_data', function() {
     let data = this.get('_data');
     
-    return data ? Ember.copy(data.attributes, true) : null;
+    return data ? data.attributes : null;
   })
 });

@@ -27,7 +27,6 @@ export default Ember.Route.extend({
       }
     });
   },
-
   beforeModel(params) {
     let qp = params.queryParams;
 
@@ -40,7 +39,7 @@ export default Ember.Route.extend({
   },
   model() {
     /**
-     *  blobDaba for promisises returend is array as cannont `Promise.all` on a hash
+     *  blobDaba for promises returned is array as cannot `Promise.all` on a hash
      *  uniqueVids for unique vids blobData and uniqueVids are 1-1 as a promise
      *   is returned and it is not waiting to be resolved first
      */
@@ -78,9 +77,7 @@ export default Ember.Route.extend({
           }
         }
         
-        route.get('modelData').load(res);
-        
-        return res;
+        return route.get('modelData').load(res);
       });
     }).fail(() => {
       route.transitionTo('modelSelect');

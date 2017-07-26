@@ -68,7 +68,7 @@ export default Ember.Component.extend({
       });
     },
     stackListCancelled() {
-      this.get('onCancelCallback');
+      this.get('onCancelCallback') ();
     },
     stackListSelected(stackId) {
       this.setProperties({
