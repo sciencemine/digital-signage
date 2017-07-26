@@ -20,9 +20,9 @@ export default Ember.Component.extend(KeyboardControls, {
   
   playingVidId: null,
   playingVidStartTime: 0,
+  
   vidSelectData: [ ],
   afterVideoListData: null,
-  mapData: [ ],
   
   videoHistory: [ ],
 

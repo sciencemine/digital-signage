@@ -97,30 +97,28 @@ export default Ember.Service.extend({
       let fromTreeIndex;
       let toTreeIndex;
 
-      if (!rel) {
+      if (Ember.isBlank(rel)) {
         break;
-      }//if
-      
+      }
+
+      // Not forEach so that the loops can be broken
       for (let treeIndex = 0; treeIndex < nodes.length; treeIndex++) {
         let tree = nodes[treeIndex];
         
-        for (let nodeIndex = 0; nodeIndex < tree.length; nodeIndex++) {
-          let node = tree[nodeIndex];
-          
-          if (node === rel.from) {
+        tree.forEach(function(node) { // jshint ignore:line
+          if (Ember.isEqual(node, rel.from)) {
             fromTreeIndex = treeIndex;
-          }//if
-          else if (node === rel.to) {
+          }
+          else if (Ember.isEqual(node, rel.to)) {
             toTreeIndex = treeIndex;
-          }//else if
-        }//for
+          }
+        });
         
-        if (fromTreeIndex === undefined || toTreeIndex === undefined) {
-          continue;
-        }//if
-        
-        if (fromTreeIndex !== toTreeIndex) {
+        if (Ember.isPresent(fromTreeIndex) &&
+            Ember.isPresent(toTreeIndex) &&
+            !Ember.isEqual(fromTreeIndex, toTreeIndex)) {
           let newTree = nodes[fromTreeIndex].concat(nodes[toTreeIndex]);
+        
           nodes.push(newTree);
           
           nodes.splice(fromTreeIndex, 1);
@@ -133,9 +131,8 @@ export default Ember.Service.extend({
           rel = null;
           
           break;
-        }//if
-      }//for
-      
+        }
+      }
     } while (numTrees < numNodes - 1);
 
     return kst;
