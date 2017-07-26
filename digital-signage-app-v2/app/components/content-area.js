@@ -39,7 +39,7 @@ export default Ember.Component.extend(KeyboardControls, {
     let history = this.get('videoHistory');
     
     if (history.videos[0] !== playingVidId) {
-      history.videos.push(playingVidId);
+      history.videos.unshift(playingVidId);
     }
   },
   resetVideoHistory: function() {
@@ -139,10 +139,16 @@ export default Ember.Component.extend(KeyboardControls, {
       
     return modelData.get(`videos.${backgroundId}`);
   }),
-  playingVidData: Ember.computed('playingVidId', function() {
+  playingVidData: Ember.computed('playingVidId', 'playingVidStartTime', function() {
     let vidId = this.get('playingVidId');
+    let obj = null;
     
-    return vidId ? this.get(`modelData.videos.${vidId}`) : null;
+    if (vidId) {
+      obj = this.get(`modelData.videos.${vidId}`);
+      obj.startingTime = this.get('playingVidStartTime');
+    }
+    
+    return obj;
   }),
   init() {
     this._super(...arguments);
@@ -184,7 +190,7 @@ export default Ember.Component.extend(KeyboardControls, {
           displayAfterVideoList: false
         });
         
-        console.log(vidId, this.get('playingVidId'))
+        
         if (vidId !== this.get('playingVidId')) {
           this.set('playingVidId', vidId);
           
@@ -217,7 +223,8 @@ export default Ember.Component.extend(KeyboardControls, {
 
       this.setProperties({
         displayAfterVideoList: true,
-        focus: false
+        focus: false,
+        videoPlaying: false
       });
       
       this.send('resetTimeout');

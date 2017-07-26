@@ -80,7 +80,7 @@ export default Ember.Service.extend({
         attribute.videos = videos;
       }
       
-      if (Ember.isNone(attribute.videos)) {
+      if (Ember.isBlank(attribute.videos)) {
         mapData.splice(mapData.indexOf(attribute), 1);
       }
     }, this);
