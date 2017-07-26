@@ -47,8 +47,6 @@ Run tests locally with:
 
 ### Deploying
 
-* `cd digital-signage-app-v2`
-* `ember build --prod`
 
 ## Further Reading / Useful Links
 
