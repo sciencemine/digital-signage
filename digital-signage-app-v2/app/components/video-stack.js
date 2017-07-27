@@ -29,11 +29,16 @@ export default Ember.Component.extend({
                 break;
         }
     },
-    vidAid: Ember.computed('videos', 'selectedVidAPos', function() {
+    vidA: Ember.computed('videos', 'selectedVidAPos', function() {
         return this.get(`videos.${this.get('selectedVidAPos')}`);
     }),
-    vidBid: Ember.computed('videos', 'selectedVidBPos', function() {
+    vidB: Ember.computed('videos', 'selectedVidBPos', function() {
         return this.get(`videos.${this.get('selectedVidBPos')}`);
+    }),
+    modelIdentifier: Ember.computed('modelData.modelIdentifier', function() {
+       let modelData = this.get('modelData');
+       
+       return modelData ? modelData.modelIdentifier : ''; 
     }),
     actions: {
         stackClicked() {

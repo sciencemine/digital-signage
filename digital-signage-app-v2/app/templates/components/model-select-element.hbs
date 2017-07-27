@@ -3,12 +3,10 @@
 <p class="list-group-item-text">{{description}}</p>
 
 <div class="player-container">
-  {{video-player
-    isMuted=muted
-    onClickCallback=(action 'doNothing')
+  {{video-stack
+    videos=videos
     onHoverCallback=(action 'doNothing')
-    onEndedCallback=(action 'cycleVideo')
-    url=(concat modelIdentifier "/" playingVid.teaser.fileIdentifier)
-    looping=(is-single-video videos)
+    onSelectedCallback=(action 'doNothing')
+    modelIdentifier=modelIdentifier
   }}
 </div>
