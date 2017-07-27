@@ -11,7 +11,7 @@ export default Ember.Component.extend(KeyboardControls, {
   displayVideoSelect: false,
   displayVideo: false,
   displayAfterVideoList: false,
-  displayMapView: false, // TODO
+  displayMapView: true,
   
   videoPlaying: false,
   
