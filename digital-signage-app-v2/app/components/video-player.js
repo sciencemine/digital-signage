@@ -60,6 +60,10 @@ export default Ember.Component.extend({
     
     let video = this.get(`modelData.videos.${this.get('videoId')}`);
     
+    if (Ember.isNone(video)) {
+      return '';
+    }
+    
     return (this.get('isTeaser') ? this._makeUrl(video.teaser) : this._makeUrl(video.full));
   }),
 	click(event) {

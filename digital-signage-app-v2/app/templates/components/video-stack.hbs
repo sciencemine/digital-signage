@@ -3,7 +3,7 @@
 	{{video-player 
 		class=(unless showVidA "hidden")
 		playing=showVidA
-		highlightedStyle=(string-append stackStyle borderStyle) 
+		highlightedStyle=(concat stackStyle " " borderStyle) 
 		looping=(is-single-video videos) 
 		videoPos=selectedVidAPos 
 		videoId=vidAid
@@ -18,7 +18,7 @@
 		{{video-player 
 		class=(if showVidA "hidden")
 		playing=(unless showVidA true)
-		highlightedStyle=(string-append stackStyle borderStyle) 
+		highlightedStyle=(concat stackStyle " " borderStyle) 
 		looping=false
 		videoPos=selectedVidBPos 
 		videoId=vidBid
