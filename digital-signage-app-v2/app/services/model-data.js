@@ -165,6 +165,16 @@ export default Ember.Service.extend({
     
     return data ? data.config.keyboard : null;
   }),
+  backgroundVideos: Ember.computed('_data', function() {
+    let data = this.get('_data');
+    
+    return data ? data.config.backgroundVideos : null;
+  }),
+  backgroundImage: Ember.computed('_data', function() {
+    let data = this.get('_data');
+    
+    return data ? data.config.backgroundImage : null;
+  }),
   videos: Ember.computed('_data', function() {
     let data = this.get('_data');
     

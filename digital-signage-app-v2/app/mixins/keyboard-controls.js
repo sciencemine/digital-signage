@@ -28,6 +28,10 @@ export default Ember.Mixin.create({
     console.log('goNext() needs to be implemented in subcomponent', event);
   },
   updateFocus: function(param) {
+    if (Ember.isNone(this.$())) {
+      return;
+    }
+    
     if (param) {
       this.$().attr('tabindex', 10);
       this.$().focus();

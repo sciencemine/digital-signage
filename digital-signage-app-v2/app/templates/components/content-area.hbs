@@ -3,7 +3,7 @@
   {{video-player
     muted=(if displayAfterVideoList true (if displayVideoSelect true false))
     class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
-    looping=(is-single-video modelData.config.backgroundVideos)
+    looping=(is-single-video modelData.backgroundVideos)
     playing=(if displayMapView false (if displayVideo false true))
     url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url modelData.modelIdentifier bgVidData.full.fileIdentifier))
     onEndedCallback=(action 'cycleBackground')
@@ -27,7 +27,7 @@
 
 {{!-- Map view stack-list --}}
 {{#if displayMapView}}
-  <img class="bg-image" src={{make-local-url modelData.modelIdentifier modelData.config.backgroundImage}}>
+  <img class="bg-image" src={{make-local-url modelData.modelIdentifier modelData.backgroundImage}}>
   {{stack-list
     isFlex=false
     focus=true
