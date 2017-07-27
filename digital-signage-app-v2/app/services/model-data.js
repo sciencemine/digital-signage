@@ -142,6 +142,9 @@ export default Ember.Service.extend({
     
     this._makeMapData();
   },
+  data: Ember.computed('_data', function() {
+    return this.get('_data');
+  }),
   mapData: Ember.computed('_mapData', function() {
     return this.get('_mapData');
   }),

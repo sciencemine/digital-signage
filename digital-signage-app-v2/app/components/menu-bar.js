@@ -21,6 +21,10 @@ export default Ember.Component.extend({
     
     let modelData = this.get('modelData');
     
+    if (Ember.isNone(modelData.get('data'))) {
+      return;
+    }
+    
     this.set('displayVideos', Object.keys(modelData.get('videos')));
 
     let listStyle = "video-list__menu video-list--flex__menu";
