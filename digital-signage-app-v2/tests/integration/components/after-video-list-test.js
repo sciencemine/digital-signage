@@ -2,8 +2,17 @@ import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import Ember from 'ember';
 
+const modelDataStub = Ember.Service.extend({
+    _data: null
+});
+
 moduleForComponent('after-video-list', 'Integration | Component | after video list', {
-  integration: true
+  integration: true,
+  
+  beforeEach() {
+    this.register('service:model-data', modelDataStub);
+    this.inject.service('model-data', { as: 'modelData' });
+  }
 });
 
 test('it renders', function(assert) {
@@ -15,50 +24,6 @@ test('it renders', function(assert) {
         x: 0,
         y: 0,
         videos: [
-          {
-            prettyName: "ioenasihoetna",
-            description: "oansionasnt",
-            attributes: [ ],
-            relations: [
-              {
-                relatedId: "",
-                difficulty: 1,
-                attributeId: ""
-              }
-            ],
-            full: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            },
-            teaser: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            }
-          },
-          {
-            prettyName: "ioenasihoetna",
-            description: "oansionasnt",
-            attributes: [ ],
-            relations: [
-              {
-                relatedId: "",
-                difficulty: 1,
-                attributeId: ""
-              }
-            ],
-            full: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            },
-            teaser: {
-              fileIdentifier: "kenny_band_1.mp4",
-              isUrl: false,
-              attribution: ""
-            }
-          }
         ]
       }
     ]

@@ -3,13 +3,7 @@ import Ember from 'ember';
 import hbs from 'htmlbars-inline-precompile';
 
 const modelDataStub = Ember.Service.extend({
-    _data: null,
-    
-    keyboard: Ember.computed('_data', function() {
-        let data = this.get('_data');
-        
-        return data ? data.keyboard : null;
-    })
+    _data: null
 });
 
 moduleForComponent('menu-bar', 'Integration | Component | menu bar', {

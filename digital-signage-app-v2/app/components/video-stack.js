@@ -5,12 +5,12 @@ export default Ember.Component.extend({
     
     selectedVidAPos: 0,
     selectedVidBPos: 1,
-    selectedStackIndex: 0,
     stackStyle: '',
     playerSize: '',
     isMuted: true,
     showVidA: true,
     isTeaser: true,
+    videos: null,
     
     init() {
         this._super(...arguments);
@@ -32,46 +32,36 @@ export default Ember.Component.extend({
     vidAid: Ember.computed('videos', 'selectedVidAPos', function() {
         return this.get(`videos.${this.get('selectedVidAPos')}`);
     }),
-    videoA: Ember.computed('videos', 'selectedVidAPos', function() {
-        return this.get(`modelData.videos.${this.get('vidAid')}`);
-    }),
     vidBid: Ember.computed('videos', 'selectedVidBPos', function() {
         return this.get(`videos.${this.get('selectedVidBPos')}`);
     }),
-    videoB: Ember.computed('videos', 'selectedVidBPos', function() {
-        return this.get(`modelData.videos.${this.get('vidBid')}`);
-    }),
     actions: {
         stackClicked() {
-            this.get('onSelectedCallback') (this.get('selectedStackIndex'));
+            this.get('onSelectedCallback') ();
         },
         getNextVideoA() {
-            let arrayLength = this.get('videos').length;
+            let videos = this.get('videos');
             
-            if (arrayLength === 1) {
-                return;
-            }
-            
-            let curArrayPos = parseInt(this.get('selectedVidAPos'));
+            if (Ember.isPresent(videos)) {
+                let curArrayPos = parseInt(this.get('selectedVidAPos'));
 
-            this.setProperties({
-                selectedVidAPos: (curArrayPos + 2) % arrayLength,
-                showVidA: false
-            });
+                this.setProperties({
+                    selectedVidAPos: (curArrayPos + 2) % videos.length,
+                    showVidA: false
+                });
+            }
         },
         getNextVideoB(){
-            let arrayLength = this.get('videos').length;
+            let videos = this.get('videos');
             
-            if (arrayLength === 1) {
-                return;
-            }
-            
-            let curArrayPos = parseInt(this.get('selectedVidBPos'));
+            if (Ember.isPresent(videos)) {
+                let curArrayPos = parseInt(this.get('selectedVidBPos'));
 
-            this.setProperties({
-                selectedVidBPos: (curArrayPos + 2) % arrayLength,
-                showVidA: true
-            });
+                this.setProperties({
+                    selectedVidBPos: (curArrayPos + 2) % videos.length,
+                    showVidA: true
+                });
+            }
         },
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));

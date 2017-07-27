@@ -32,7 +32,8 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	url: null,
+  modelData: Ember.inject.service(),
+  
 	looping: false,
 	playing: true,
 	muted: true,
@@ -40,7 +41,27 @@ export default Ember.Component.extend({
   startingTime: 0,
   videoPos: null,
   videoId: null,
+  isTeaser: true,
 
+  _makeUrl(obj) {
+    let url;
+    
+    url = (obj.isUrl ? '' : this.get('modelData.modelIdentifier') + '/');
+    url = url + obj.fileIdentifier;
+    
+    return url;
+  },
+  url: Ember.computed('videoId', 'isTeaser', function() {
+    let vidId = this.get('videoId');
+    
+    if (Ember.isBlank(vidId)) {
+      return '';
+    }
+    
+    let video = this.get(`modelData.videos.${this.get('videoId')}`);
+    
+    return (this.get('isTeaser') ? this._makeUrl(video.teaser) : this._makeUrl(video.full));
+  }),
 	click(event) {
 		this.get('onClickCallback') (this.get('videoId'), this.$('video')[0].currentTime);
 		
@@ -53,7 +74,7 @@ export default Ember.Component.extend({
     this.set('playingObserver', null);
   },
 	playingObserver: Ember.observer('playing', function() {
-    let p = this.get("playing");
+    let p = this.get('playing');
     let videoElement = this.$('video')[0];
 
     if (videoElement) {

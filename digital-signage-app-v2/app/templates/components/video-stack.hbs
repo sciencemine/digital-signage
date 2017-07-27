@@ -6,9 +6,8 @@
 		highlightedStyle=(string-append stackStyle borderStyle) 
 		looping=(is-single-video videos) 
 		videoPos=selectedVidAPos 
-		videoId=videoAid
+		videoId=vidAid
 		muted=isMuted
-		url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelData.modelIdentifier videoA.teaser.fileIdentifier)) 
 		onClickCallback=(action 'stackClicked') 
 		onHoverCallback=(action 'stackHovered') 
 		onEndedCallback=(action 'getNextVideoA')
@@ -18,13 +17,12 @@
 	{{#unless (is-single-video videos)}}
 		{{video-player 
 		class=(if showVidA "hidden")
-		playing=(if showVidA false true)
+		playing=(unless showVidA true)
 		highlightedStyle=(string-append stackStyle borderStyle) 
-		looping=(is-single-video videos) 
+		looping=false
 		videoPos=selectedVidBPos 
-		videoId=videoBid
+		videoId=vidBid
 		muted=isMuted
-		url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelData.modelIdentifier videoB.teaser.fileIdentifier)) 
 		onClickCallback=(action 'stackClicked') 
 		onHoverCallback=(action 'stackHovered') 
 		onEndedCallback=(action 'getNextVideoB')

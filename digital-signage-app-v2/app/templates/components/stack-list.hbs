@@ -6,8 +6,7 @@
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
-            onSelectedCallback=(action 'stackSelected')
-            selectedStackIndex=key
+            onSelectedCallback=(action 'stackSelected' key)
             isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
         </div>
@@ -21,8 +20,7 @@
             videos=value.videos
             borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
-            onSelectedCallback=(action 'stackSelected')
-            selectedStackIndex=key
+            onSelectedCallback=(action 'stackSelected' key)
             isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
       </div>

@@ -5,7 +5,8 @@
     class=(if displayMapView 'video-player__hidden' (if displayVideo 'video-player__hidden' 'video-player__darken'))
     looping=(is-single-video modelData.backgroundVideos)
     playing=(if displayMapView false (if displayVideo false true))
-    url=(if bgVidData.full.isUrl bgVidData.full.fileIdentifier (make-local-url modelData.modelIdentifier bgVidData.full.fileIdentifier))
+    videoId=bgVidId
+    isTeaser=false
     onEndedCallback=(action 'cycleBackground')
   }}
 </div>
@@ -16,8 +17,9 @@
     {{video-player
       playing=videoPlaying
       muted=false
-      startingTime=playingVidData.startTime
-      url=(if playingVidData.full.isUrl playingVidData.full.fileIdentifier (make-local-url modelData.modelIdentifier playingVidData.full.fileIdentifier))
+      startingTime=playingVidStartTime
+      isTeaser=false
+      videoId=playingVidId
       onClickCallback=(action 'pauseVideo' bubbles=false)
       onHoverCallback=(action 'doNothing')
       onEndedCallback=(action 'videoEnded')

@@ -2,13 +2,12 @@
 
 {{#each-in videos as |key value|}}
   <div class="{{listItemClass}} {{if (video-selected key selectedVidPos)listItemSelected listItemSmall}}" data-container="body" data-toggle="popover" data-placement="auto top" data-title={{get modelData.videos (concat value ".prettyName")}} data-content={{get modelData.videos (concat value ".description")}}>
-
+    
     {{video-player
       onClickCallback=(action 'videoSelected')
       onHoverCallback=(action 'videoHovered')
       highlightedStyle=(if (video-selected key selectedVidPos) listItemHighlight)
       muted=(if (video-selected key selectedVidPos) muted true)
-      url=(get modelData.videos (concat value ".teaser.fileIdentifier"))
       videoPos=key
       videoId=value
       looping=true

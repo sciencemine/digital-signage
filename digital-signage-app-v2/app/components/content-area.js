@@ -110,13 +110,14 @@ export default Ember.Component.extend(KeyboardControls, {
     });
   },
   makeAfterVideoList: function() {
+    let modelData = this.get('modelData');
     let localAfterVidData = [ ];
-    let playingVidData = Ember.copy(this.get('playingVidData'), true);
+    let playingVidData = Ember.copy(modelData.get(`videos.${this.get('playingVidId')}`), true);
     let vidAttributes = playingVidData.attributes;
 
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
-      let attributeObj = Ember.copy(this.get(`modelData.attributes.${attributeId}`), true);
+      let attributeObj = Ember.copy(modelData.get(`attributes.${attributeId}`), true);
       let vids = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
       vids.forEach(function(video, index) { // jshint ignore:line 
@@ -132,23 +133,8 @@ export default Ember.Component.extend(KeyboardControls, {
     
     this.set('afterVideoListData', localAfterVidData);
   },
-  bgVidData: Ember.computed('bgVidPos', function() {
-    let modelData = this.get('modelData');
-    
-    let backgroundId = modelData.get(`config.backgroundVideos.${this.get('bgVidPos')}`);
-      
-    return modelData.get(`videos.${backgroundId}`);
-  }),
-  playingVidData: Ember.computed('playingVidId', 'playingVidStartTime', function() {
-    let vidId = this.get('playingVidId');
-    let obj = null;
-    
-    if (vidId) {
-      obj = this.get(`modelData.videos.${vidId}`);
-      obj.startingTime = this.get('playingVidStartTime');
-    }
-    
-    return obj;
+  bgVidId: Ember.computed('bgVidPos', function() {
+    return this.get(`modelData.backgroundVideos.${this.get('bgVidPos')}`);
   }),
   init() {
     this._super(...arguments);
