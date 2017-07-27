@@ -251,7 +251,8 @@ export default Ember.Component.extend(KeyboardControls, {
           component.setProperties({
             focus: true,
             playingVidId: null,
-            playingVidStartTime: 0
+            playingVidStartTime: 0,
+            videoPlaying: false
           });
         }, component.get('modelData.ui.idle') * 1000);
       }) (this);
