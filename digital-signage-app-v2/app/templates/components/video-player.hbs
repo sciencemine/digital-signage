@@ -1,1 +1,3 @@
-<video id={{tagId}} oncanplay={{action 'play'}} onended={{action 'ended'}} src={{url}} class="video-player__video {{highlightedStyle}} {{unless playing 'video-player__darken'}}" muted={{muted}} currentTime="{{startingTime}}"/>
+{{#if url}}
+  <video oncanplay={{action 'play'}} onended={{action 'ended'}} src={{url}} class="video-player__video {{highlightedStyle}} {{unless playing 'video-player__darken'}}" muted={{muted}} currentTime={{startingTime}} />
+{{/if}}

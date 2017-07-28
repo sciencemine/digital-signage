@@ -32,24 +32,52 @@ Callbacks:
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-	url: null,
+  modelData: Ember.inject.service(),
+  
 	looping: false,
 	playing: true,
 	muted: true,
 	highlightedStyle: '',
   startingTime: 0,
-  tagId: '',
+  videoPos: null,
+  videoId: null,
+  isTeaser: true,
 
+  _makeUrl(obj) {
+    let url;
+    
+    url = (obj.isUrl ? '' : this.get('modelData.modelIdentifier') + '/');
+    url = url + obj.fileIdentifier;
+    
+    return url;
+  },
+  url: Ember.computed('videoId', 'isTeaser', function() {
+    let vidId = this.get('videoId');
+    
+    if (Ember.isBlank(vidId)) {
+      return '';
+    }
+    
+    let video = this.get(`modelData.videos.${this.get('videoId')}`);
+    
+    if (Ember.isNone(video)) {
+      return '';
+    }
+    
+    return (this.get('isTeaser') ? this._makeUrl(video.teaser) : this._makeUrl(video.full));
+  }),
 	click(event) {
     let vid = this.$('video')[0];
-		this.get('onClickCallback') (this.get('videoPos'), vid.currentTime, vid.duration);
+    
+		this.get('onClickCallback') (this.get('videoId'), vid.currentTime, vid.duration);
+    
 		event.stopPropagation();
 	},
 	mouseEnter() {
 		this.get('onHoverCallback') (this.get('videoPos'));
 	},
 	playingObserver: Ember.observer('playing', function() {
-    let p = this.get("playing");
+    let p = this.get('playing');
     let videoElement = this.$('video')[0];
 
     if (videoElement) {
@@ -72,7 +100,7 @@ export default Ember.Component.extend({
           }
         }
         else {
-          this.get('onEndedCallback') (this.get('videoPos'), this.$('video')[0].duration);
+          this.get('onEndedCallback') (this.get('videoId'), this.$('video')[0].duration);
         }
       }
   	},

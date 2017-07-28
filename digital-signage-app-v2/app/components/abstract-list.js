@@ -27,14 +27,21 @@ import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
 export default Ember.Component.extend(KeyboardControls, {
-  selectedCallback: function(selected, selectedPos) {
-    this.get('onSelectedCallback')(this, selected, selectedPos);
+  modelData: Ember.inject.service(),
+  
+  selectedCallback: function(selectedId) {
+    this.get('onSelectedCallback') (selectedId);
   },
   cancelCallback: function(selected) {
-    this.get('onCancelledCallback') (this, selected);
+    this.get('onCancelledCallback') (selected);
   },
   inputCallback: function() {
     this.get('onInputCallback') ();
+  },
+  init() {
+    this._super(...arguments);
+    
+    this.set('keyboard', this.get('modelData.keyboard'));
   },
   didRender() {
     let focus = this.get('focus');
