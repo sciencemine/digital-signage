@@ -1,38 +1,10 @@
-/*
-COMPONENT: video-player
-
-Parameters:
-  url
-	If startUrl is passed in, load the video at that url
-	immediately. Otherwise, leave video blank until setUrl()
-	is called.
-
-  looping
-	Should the video loop when it completes playback
-	default: false
-	
-  playing
-	Should the video play
-	default: true
-
-  muted
-	Mute the video
-	default: true
-
-Callbacks:
-  onEndedCallback(sender)
-	This is an action that will be passed in as a parameter.
-	Call this action using this.get('onCompletedCallback')()
-	when the video has played to completion and and looping is
-	disabled.
-  onClickCallback
-  onHoverCallback
-*/
-
 import Ember from 'ember';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend({
-  modelData: Ember.inject.service(),
+  metadata: service(),
+  modelData: service(),
   
 	looping: false,
 	playing: true,

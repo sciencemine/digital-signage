@@ -18,16 +18,16 @@ export default Ember.Service.extend({
       attributes: Ember.isArray(node.attributes) ? node.attributes : [ ]
     });
   },
-  editNode(id, newData = { }) {
+  editNode(id, newData = { }) { // TODO Make not loop
     this.get('_nodes').forEach((node, index) => {
       if (node.id === id) {
         let newDataKeys = Object.keys(newData);
         
-        for (let i = 0; i < newDataKeys.length; i++) {
-          if (newDataKeys[i] in this.get(`nodes.${index}`)) {
-            this.set(`nodes.${index}.${newDataKeys[i]}`, newData[newDataKeys[i]]);
+        newDataKeys.forEach(function(key) {
+          if (key in this.get(`_nodes.${index}`)) {
+            this.set(`_nodes.${index}.${key}`, newData[key]);
           }
-        }
+        }, this);
       }
     }, this);
   },
