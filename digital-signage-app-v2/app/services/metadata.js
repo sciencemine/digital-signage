@@ -10,7 +10,7 @@ export default Ember.Service.extend({
     this.clearData();
   },
   addNode(node = { }) {
-    this.get('_nodes').pushObject({
+    this.get('_nodes').push({
       id: node.id ? node.id : null,
       prettyName: node.prettyName ? node.prettyName : null,
       length: node.length ? node.length : null,
@@ -18,21 +18,17 @@ export default Ember.Service.extend({
       attributes: Ember.isArray(node.attributes) ? node.attributes : [ ]
     });
   },
-  editNode(id, newData = { }) { // TODO Make not loop
-    this.get('_nodes').forEach((node, index) => {
-      if (node.id === id) {
-        let newDataKeys = Object.keys(newData);
-        
-        newDataKeys.forEach(function(key) {
-          if (key in this.get(`_nodes.${index}`)) {
-            this.set(`_nodes.${index}.${key}`, newData[key]);
-          }
-        }, this);
+  editNode(index, newData = { }) {
+    let newDataKeys = Object.keys(newData);
+
+    newDataKeys.forEach(function(key) {
+      if (key in this.get(`_nodes.${index}`)) {
+        this.set(`_nodes.${index}.${key}`, newData[key]);
       }
     }, this);
   },
   addEdge(edge = { }) {
-    this.get('_edges').pushObject({
+    this.get('_edges').push({
       fromVideo: edge.fromVideo ? edge.fromVideo : null,
       toVideo: edge.toVideo ? edge.toVideo : null,
       attribute: edge.attribute ? edge.attribute : null,

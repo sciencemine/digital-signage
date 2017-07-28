@@ -3,7 +3,6 @@ import Ember from 'ember';
 const { inject: { service } } = Ember;
 
 export default Ember.Component.extend({
-  metadata: service(),
   modelData: service(),
   
 	looping: false,
