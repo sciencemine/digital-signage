@@ -1,11 +1,8 @@
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
-const { inject: { service } } = Ember;
-
 export default Ember.Component.extend(KeyboardControls, {
-  metadata: service(),
-  modelData: service(),
+  modelData: Ember.inject.service(),
   
   keyboard: null,
   
@@ -91,7 +88,7 @@ export default Ember.Component.extend(KeyboardControls, {
         if (relatedVids.find(function(video) {
             return video.vidId !== this;
           }, vidRelation.relatedId) === undefined) {
-          relatedVids.push(Ember.copy(this.get('modelData.videos')[vidRelation.relatedId], true));
+          relatedVids.push(Ember.copy(this.get(`modelData.videos.${vidRelation.relatedId}`), true));
           
           let vid = relatedVids[relatedVids.length - 1];
           
@@ -121,9 +118,11 @@ export default Ember.Component.extend(KeyboardControls, {
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
       let attributeObj = Ember.copy(modelData.get(`attributes.${attributeId}`), true);
-
-      attributeObj.id = attributeId;
-      attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
+      let vids = this.getRelatedVids(playingVidData, attributeId, 0, 1);
+      
+      vids.forEach(function(video, index) { // jshint ignore:line 
+        vids[index] = video.vidId;
+      });
       
       if (attributeObj.videos.length !== 0) {
         localAfterVidData.push(attributeObj);
@@ -131,7 +130,7 @@ export default Ember.Component.extend(KeyboardControls, {
     }//for
     
     localAfterVidData.unshift(this.get('videoHistory'));
-
+    
     this.set('afterVideoListData', localAfterVidData);
   },
   bgVidId: Ember.computed('bgVidPos', function() {
@@ -188,38 +187,12 @@ export default Ember.Component.extend(KeyboardControls, {
 
         this.appendVideoHistory();
         this.makeAfterVideoList();
-        
-        let nodeMetadata = {
-          id: videoData.id,
-          prettyName: videoData.prettyName,
-          attributes: [ ]
-        };
-        
-        videoData.attributes.forEach((attributeKey) => {
-          nodeMetadata.attributes.push({
-            id: attributeKey,
-            prettyName: this.get(`data.attributes.${attributeKey}.prettyName`)
-          });
-        }, this);
-        
-        let metadata = this.get('metadata');
-        
-        metadata.addNode(nodeMetadata);
-        
-        if (attributeId) {
-          metadata.addEdge({
-            fromVideo: playingVidData.id,
-            toVideo: videoData.id,
-            attribute: attributeId,
-            difficulty: videoData.difficulty
-          });
-        }
       }
       else {
         this.send('resetTimeout');
       }
     },
-    videoEnded(videoPos, length) { // jshint ignore:line
+    videoEnded() {
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,
@@ -228,23 +201,10 @@ export default Ember.Component.extend(KeyboardControls, {
         playingVidStartTime: 0
       });
       
-      this.set('playingVidData.startingTime', 0);
-      
-      this.get('metadata').editNode(this.get('playingVidData.id'), {
-        length: length ? length : null,
-        timeWatched: length ? length : null
-      });
-      
       this.send('resetTimeout');
     },
-    pauseVideo(sender, currentTime, length) {
-      this.toggleProperty('videoPlaying');
+    pauseVideo(vidId, currentTime) {
       this.set('playingVidStartTime', currentTime);
-      
-      this.get('metadata').editNode(this.get('playingVidData.id'), {
-        length: length ? length : null,
-        timeWatched: currentTime ? currentTime : null 
-      });
 
       this.setProperties({
         displayAfterVideoList: true,
@@ -287,8 +247,6 @@ export default Ember.Component.extend(KeyboardControls, {
           component.hideOverlays();
           
           component.resetVideoHistory();
-          
-          component.get('metadata').logData();
           
           component.setProperties({
             focus: true,

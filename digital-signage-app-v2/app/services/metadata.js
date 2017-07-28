@@ -1,8 +1,8 @@
 import Ember from 'ember';
 
 export default Ember.Service.extend({
-  nodes: null,
-  edges: null,
+  _nodes: null,
+  _edges: null,
   
   init() {
     this._super(...arguments);
@@ -10,7 +10,7 @@ export default Ember.Service.extend({
     this.clearData();
   },
   addNode(node = { }) {
-    this.get('nodes').pushObject({
+    this.get('_nodes').pushObject({
       id: node.id ? node.id : null,
       prettyName: node.prettyName ? node.prettyName : null,
       length: node.length ? node.length : null,
@@ -19,7 +19,7 @@ export default Ember.Service.extend({
     });
   },
   editNode(id, newData = { }) {
-    this.get('nodes').forEach((node, index) => {
+    this.get('_nodes').forEach((node, index) => {
       if (node.id === id) {
         let newDataKeys = Object.keys(newData);
         
@@ -32,7 +32,7 @@ export default Ember.Service.extend({
     }, this);
   },
   addEdge(edge = { }) {
-    this.get('edges').pushObject({
+    this.get('_edges').pushObject({
       fromVideo: edge.fromVideo ? edge.fromVideo : null,
       toVideo: edge.toVideo ? edge.toVideo : null,
       attribute: edge.attribute ? edge.attribute : null,
@@ -44,10 +44,10 @@ export default Ember.Service.extend({
     // Ajax call to server endpoint
     // dumps data as { nodes, edges }
     
-    if (Ember.isPresent(this.get('nodes')) || Ember.isPresent(this.get('edges'))) {
+    if (Ember.isPresent(this.get('_nodes')) || Ember.isPresent(this.get('_edges'))) {
       console.log({
-        nodes: this.get('nodes'),
-        edges: this.get('edges')
+        nodes: this.get('_nodes'),
+        edges: this.get('_edges')
       });
     }
     
@@ -55,8 +55,8 @@ export default Ember.Service.extend({
   },
   clearData() {
     this.setProperties({
-      nodes: [ ],
-      edges: [ ]
+      _nodes: [ ],
+      _edges: [ ]
     });
   }
 });
