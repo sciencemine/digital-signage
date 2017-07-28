@@ -1,10 +1,11 @@
 import Ember from 'ember';
 import KeyboardControls from '../mixins/keyboard-controls';
 
+const { inject: { service } } = Ember;
+
 export default Ember.Component.extend(KeyboardControls, {
-  modelData: Ember.inject.service(),
-  
-  keyboard: null,
+  metadata: service(),
+  modelData: service(),
   
   idleTimeout: null,
   
@@ -85,23 +86,27 @@ export default Ember.Component.extend(KeyboardControls, {
       let vidRelation = currentVid.relations[relation];
       
       if (vidRelation.attributeId === attributeId) {
-        if (relatedVids.find(function(video) {
-            return video.vidId !== this;
-          }, vidRelation.relatedId) === undefined) {
-          relatedVids.push(Ember.copy(this.get(`modelData.videos.${vidRelation.relatedId}`), true));
-          
-          let vid = relatedVids[relatedVids.length - 1];
+        let relatedId = vidRelation.relatedId;
+        
+        if (relatedVids.indexOf(relatedId) === -1) {
+          let vid = Ember.copy(this.get(`modelData.videos.${relatedId}`), true);
           
           vid.difficulty = difficulty + vidRelation.difficulty;
-          vid.vidId = vidRelation.relatedId;
+          vid.vidId = relatedId;
+          
+          relatedVids.push(vid);
         }//if
       }//if
     }//for
 
     if (recursiveDepth > 0) {
       for (let vidNdx = 0; vidNdx < relatedVids.length; vidNdx++) {
-        relatedVids.concat(this.getRelatedVids(relatedVids[vidNdx], attributeId,
-          difficulty + relatedVids[relatedVids.length - 1].difficulty, recursiveDepth - 1));
+        let diff = difficulty + relatedVids[relatedVids.length - 1].difficulty;
+        
+        relatedVids.concat(this.getRelatedVids(relatedVids[vidNdx],
+                                               attributeId,
+                                               diff,
+                                               recursiveDepth - 1));
       }//for
     }//if
 
@@ -118,13 +123,14 @@ export default Ember.Component.extend(KeyboardControls, {
     for (let attributeIndex = 0; attributeIndex < vidAttributes.length; attributeIndex++) {
       let attributeId = vidAttributes[attributeIndex];
       let attributeObj = Ember.copy(modelData.get(`attributes.${attributeId}`), true);
-      let vids = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
-      vids.forEach(function(video, index) { // jshint ignore:line 
-        vids[index] = video.vidId;
-      });
+      attributeObj.videos = this.getRelatedVids(playingVidData, attributeId, 0, 1);
       
       if (attributeObj.videos.length !== 0) {
+        attributeObj.videos.forEach(function(video, index) { // jshint ignore:line
+          attributeObj.videos[index] = video.vidId;
+        });
+        
         localAfterVidData.push(attributeObj);
       }//if
     }//for
@@ -163,7 +169,7 @@ export default Ember.Component.extend(KeyboardControls, {
     }//if
   },
   actions: {
-    videoSelected(vidId) {
+    videoSelected(vidId /* , attributeId */) {
       if (vidId) {
         clearTimeout(this.get('idleTimeout'));
         
@@ -192,7 +198,7 @@ export default Ember.Component.extend(KeyboardControls, {
         this.send('resetTimeout');
       }
     },
-    videoEnded() {
+    videoEnded(/* vidId, duration */) {
       this.setProperties({
         displayAfterVideoList: true,
         focus: false,
@@ -203,7 +209,7 @@ export default Ember.Component.extend(KeyboardControls, {
       
       this.send('resetTimeout');
     },
-    pauseVideo(vidId, currentTime) {
+    pauseVideo(vidId, currentTime/* , duration */) {
       this.set('playingVidStartTime', currentTime);
 
       this.setProperties({
