@@ -40,7 +40,7 @@ export default Ember.Component.extend({
 	click(event) {
     let vid = this.$('video')[0];
     
-		this.get('onClickCallback') (this.get('videoId'), vid.currentTime, vid.duration);
+		this.get('onClickCallback') (this.get('videoId'), vid ? vid.currentTime : null, vid ? vid.duration : null);
     
 		event.stopPropagation();
 	},
@@ -63,15 +63,15 @@ export default Ember.Component.extend({
   actions: {
   	ended() {
       if (this.$('video')) {
-        if (this.get('looping')) {
-          let videoElement = this.$('video')[0];
+        let videoElement = this.$('video')[0];
           
+        if (this.get('looping')) {
           if (videoElement) {
             videoElement.play();
           }
         }
         else {
-          this.get('onEndedCallback') (this.get('videoId'), this.$('video')[0].duration);
+          this.get('onEndedCallback') (this.get('videoId'), videoElement ? videoElement.duration : null);
         }
       }
   	},
