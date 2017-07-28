@@ -50,8 +50,8 @@ export default Ember.Service.extend({
     
     if (Ember.isPresent(this.get('_nodes')) || Ember.isPresent(this.get('_edges'))) {
       console.log({
-        nodes: this.get('_nodes'),
-        edges: this.get('_edges')
+        nodes: this.get('_nodes').reverse(),
+        edges: this.get('_edges').reverse()
       });
     }
     
