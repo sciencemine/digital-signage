@@ -10,7 +10,7 @@ export default Ember.Service.extend({
     this.clearData();
   },
   addNode(node = { }) {
-    this.get('_nodes').push({
+    this.get('_nodes').unshift({
       id: node.id ? node.id : null,
       prettyName: node.prettyName ? node.prettyName : null,
       length: node.length ? node.length : null,
@@ -18,17 +18,25 @@ export default Ember.Service.extend({
       attributes: Ember.isArray(node.attributes) ? node.attributes : [ ]
     });
   },
-  editNode(index, newData = { }) {
-    let newDataKeys = Object.keys(newData);
+  editNode(vidId, newData = { }, index = null) {
+    if (Ember.isBlank(index)) {
+      index = this.get('_nodes').findIndex((node) => {
+        return vidId === node.id;
+      });
+    }
+    
+    if (index !== -1) {
+      let newDataKeys = Object.keys(newData);
 
-    newDataKeys.forEach(function(key) {
-      if (key in this.get(`_nodes.${index}`)) {
-        this.set(`_nodes.${index}.${key}`, newData[key]);
-      }
-    }, this);
+      newDataKeys.forEach(function(key) {
+        if (key in this.get(`_nodes.${index}`)) {
+          this.set(`_nodes.${index}.${key}`, newData[key]);
+        }
+      }, this);
+    }
   },
   addEdge(edge = { }) {
-    this.get('_edges').push({
+    this.get('_edges').unshift({
       fromVideo: edge.fromVideo ? edge.fromVideo : null,
       toVideo: edge.toVideo ? edge.toVideo : null,
       attribute: edge.attribute ? edge.attribute : null,

@@ -217,7 +217,6 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     videoEnded(vidId, duration ) {
       let metadata = this.get('metadata');
-      let nodesLength = metadata.get('_nodes.length');
       
       this.setProperties({
         displayAfterVideoList: true,
@@ -227,7 +226,7 @@ export default Ember.Component.extend(KeyboardControls, {
         playingVidStartTime: 0
       });
       
-      metadata.editNode(nodesLength - 1, {
+      metadata.editNode(vidId, {
         length: duration,
         timeWatched: duration
       });
@@ -236,7 +235,6 @@ export default Ember.Component.extend(KeyboardControls, {
     },
     pauseVideo(vidId, currentTime, duration) {
       let metadata = this.get('metadata');
-      let nodesLength = metadata.get('_nodes.length');
       
       this.set('playingVidStartTime', currentTime);
 
@@ -246,7 +244,7 @@ export default Ember.Component.extend(KeyboardControls, {
         videoPlaying: false
       });
       
-      metadata.editNode(nodesLength - 1, {
+      metadata.editNode(vidId, {
         length: duration,
         timeWatched: currentTime
       });
