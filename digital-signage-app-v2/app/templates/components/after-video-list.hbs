@@ -11,8 +11,6 @@
   isFlex=true
   data=data
   stackItemClass="stack-list-item--flex"
-  keyboard=config.keyboard
-  modelIdentifier=config.modelIdentifier
 }}
 
 {{video-list
@@ -26,8 +24,6 @@
   listItemSmall="video-list-item--flex__small"
   listItemSelected="video-list-item--selected"
   listItemHighlight=(unless stackListFocus "blue-border")
-  keyboard=config.keyboard
   videos=videoListData
-  modelIdentifier=config.modelIdentifier
   focus=(if stackListFocus false true)
  }}

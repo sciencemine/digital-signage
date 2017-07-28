@@ -3,12 +3,11 @@
     {{#each-in data as |key value|}}
         <div class="{{stackItemClass}}">
           {{video-stack
-            modelIdentifier=modelIdentifier
             videos=value.videos
+            selectedStackIndex=key
             borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
-            onSelectedCallback=(action 'stackSelected')
-            selectedStackIndex=key
+            onSelectedCallback=(action 'stackSelected' key)
             isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
         </div>
@@ -19,12 +18,11 @@
     {{#each-in data as |key value|}}
         <div style={{make-stack-style value.x value.y}} class="non-flex-list-item">
           {{video-stack
-            modelIdentifier=modelIdentifier
             videos=value.videos
+            selectedStackIndex=key
             borderStyle=(if (video-selected key selectedStackIndex) stackItemHighlight)
             onHoverCallback=(action 'stackHovered')
-            onSelectedCallback=(action 'stackSelected')
-            selectedStackIndex=key
+            onSelectedCallback=(action 'stackSelected' key)
             isMuted=(if focus (if (video-selected key selectedStackIndex) false true) true)
           }}
       </div>

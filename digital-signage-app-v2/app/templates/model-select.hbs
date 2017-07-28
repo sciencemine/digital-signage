@@ -10,7 +10,12 @@
     <div class="list-group">
       {{#each-in model as |key value|}}
           {{#link-to "main" (query-params modelfile=value.fileName)}}
-            {{model-select-element name=value.config.prettyName description=value.config.description modelIdentifier=value.config.modelIdentifier videos=value.backgroundVideos}}
+            {{model-select-element
+              name=value.config.prettyName
+              description=value.config.description
+              modelIdentifier=value.config.modelIdentifier
+              videos=value.backgroundVideos
+            }}
           {{/link-to}}
       {{/each-in}}
     </div>
