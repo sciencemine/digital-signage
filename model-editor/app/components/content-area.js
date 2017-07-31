@@ -309,28 +309,7 @@ export default Ember.Component.extend({
         return;
       }
       
-      let replacer = function(key, value) { // jshint ignore:line
-        if (Ember.typeOf(value) === 'string') {
-          return value.replace(/(“)|(”)/gi, '\"').replace(/(‘)|(’)/gi, '\'');
-        }
-        
-        return value;
-      };
-
-      let modelData = this.get('modelService.modelData');
-      let prettyName = modelData.config.prettyName;
-      let download = confirm("Do you want to download the exhibit model for " +
-                              prettyName + "? (Cancel for no).");
-      
-      if (download) {
-        let a = document.createElement('a');
-
-        a.setAttribute('href', 'data:text/plain;charset=utf-u,' + encodeURIComponent(JSON.stringify(modelData, replacer, '\t')));
-
-        a.setAttribute('download', prettyName.replace(/\s/gi, '') + ".json");
-
-        a.click();
-      }
+      this.get('modelService').saveModel();
     },
     doNothing() {
 

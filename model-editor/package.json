@@ -22,7 +22,7 @@
     "broccoli-asset-rev": "^2.4.5",
     "browserify": "^14.4.0",
     "devtron": "^1.4.0",
-    "electron-prebuilt-compile": "1.6.11",
+    "electron-prebuilt-compile": "^1.6.11",
     "ember-ajax": "^2.4.1",
     "ember-bootstrap": "1.0.0-beta.2",
     "ember-browserify": "1.1.13",
