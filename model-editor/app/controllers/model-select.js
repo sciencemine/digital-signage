@@ -7,7 +7,7 @@ export default Ember.Controller.extend({
   modelService: service(),
 
   checkVersion: function(inputVersion) {
-    return this.get('modelService.modelInformation').versions.indexOf(version) === inputVersion;
+    return this.get('modelService.modelInformation').versions.indexOf(inputVersion) !== -1;
   },
   actions: {
     readModel() {
