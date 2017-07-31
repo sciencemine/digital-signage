@@ -1,32 +1,64 @@
 <div class={{playerSize}}>
 	{{!A}}
-	{{video-player 
-	class=(unless showVidA "hidden")
-	playing=showVidA
-	highlightedStyle=(string-append stackStyle borderStyle) 
-	looping=(is-single-video videos) 
-	videoPos=selectedVidAPos 
-	muted=isMuted
-	url=(if videoA.teaser.isUrl videoA.teaser.fileIdentifier (make-local-url modelIdentifier videoA.teaser.fileIdentifier)) 
-	onClickCallback=(action 'stackClicked') 
-	onHoverCallback=(action 'stackHovered') 
-	onEndedCallback=(action 'getNextVideoA')
-	}}
+	{{#if (is-object vidA)}}
+		{{video-player 
+			class=(unless showVidA "hidden")
+			playing=showVidA
+			highlightedStyle=(concat stackStyle " " borderStyle) 
+			looping=(is-single-video videos) 
+			videoPos=selectedVidAPos 
+			videoId=vidA.id
+			url=(concat modelIdentifier "/" vidA.teaser.fileIdentifier)
+			muted=isMuted
+			onClickCallback=(action 'stackClicked') 
+			onHoverCallback=(action 'stackHovered') 
+			onEndedCallback=(action 'getNextVideoA')
+		}}
+	{{else}}
+		{{video-player 
+			class=(unless showVidA "hidden")
+			playing=showVidA
+			highlightedStyle=(concat stackStyle " " borderStyle) 
+			looping=(is-single-video videos) 
+			videoPos=selectedVidAPos 
+			videoId=vidA
+			muted=isMuted
+			onClickCallback=(action 'stackClicked') 
+			onHoverCallback=(action 'stackHovered') 
+			onEndedCallback=(action 'getNextVideoA')
+		}}
+	{{/if}}
 
 	{{!B}}
 	{{#unless (is-single-video videos)}}
-		{{video-player 
-		class=(if showVidA "hidden")
-		playing=(if showVidA false true)
-		highlightedStyle=(string-append stackStyle borderStyle) 
-		looping=(is-single-video videos) 
-		videoPos=selectedVidBPos 
-		muted=isMuted
-		url=(if videoB.teaser.isUrl videoB.teaser.fileIdentifier (make-local-url modelIdentifier videoB.teaser.fileIdentifier)) 
-		onClickCallback=(action 'stackClicked') 
-		onHoverCallback=(action 'stackHovered') 
-		onEndedCallback=(action 'getNextVideoB')
-		}}
+		{{#if (is-object vidB)}}
+			{{video-player 
+				class=(if showVidA "hidden")
+				playing=(unless showVidA true)
+				highlightedStyle=(concat stackStyle " " borderStyle) 
+				looping=false
+				videoPos=selectedVidBPos 
+				videoId=vidB.id
+				url=(concat modelIdentifier "/" vidB.teaser.fileIdentifier)
+				muted=isMuted
+				onClickCallback=(action 'stackClicked') 
+				onHoverCallback=(action 'stackHovered') 
+				onEndedCallback=(action 'getNextVideoB')
+			}}
+		{{else}}
+			{{video-player 
+				class=(if showVidA "hidden")
+				playing=(unless showVidA true)
+				highlightedStyle=(concat stackStyle " " borderStyle) 
+				looping=false
+				videoPos=selectedVidBPos 
+				videoId=vidB
+				muted=isMuted
+				onClickCallback=(action 'stackClicked') 
+				onHoverCallback=(action 'stackHovered') 
+				onEndedCallback=(action 'getNextVideoB')
+			}}
+		{{/if}}
 	{{/unless}}	
 </div>
 

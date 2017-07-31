@@ -1,13 +1,16 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
+    modelData: Ember.inject.service(),
+    
     selectedVidAPos: 0,
     selectedVidBPos: 1,
-    selectedStackIndex: 0,
     stackStyle: '',
     playerSize: '',
     isMuted: true,
     showVidA: true,
+    isTeaser: true,
+    videos: null,
     
     init() {
         this._super(...arguments);
@@ -26,43 +29,44 @@ export default Ember.Component.extend({
                 break;
         }
     },
-    videoA: Ember.computed('videos', 'selectedVidAPos', function () {
-        return this.get('videos')[this.get('selectedVidAPos')];
+    vidA: Ember.computed('videos', 'selectedVidAPos', function() {
+        return this.get(`videos.${this.get('selectedVidAPos')}`);
     }),
-    videoB: Ember.computed('videos', 'selectedVidBPos', function () {
-        return this.get('videos')[this.get('selectedVidBPos')];
+    vidB: Ember.computed('videos', 'selectedVidBPos', function() {
+        return this.get(`videos.${this.get('selectedVidBPos')}`);
+    }),
+    modelIdentifier: Ember.computed('modelData.modelIdentifier', function() {
+       let modelData = this.get('modelData');
+       
+       return modelData ? modelData.modelIdentifier : ''; 
     }),
     actions: {
         stackClicked() {
-            this.get('onSelectedCallback') (this.get('videos'), (this.get('showVidA') ? this.get('selectedVidAPos') : this.get('selectedVidBPos')));
+            this.get('onSelectedCallback') ();
         },
         getNextVideoA() {
-            let arrayLength = this.get('videos').length;
+            let videos = this.get('videos');
             
-            if (arrayLength === 1) {
-                return;
-            }
-            
-            let curArrayPos = parseInt(this.get('selectedVidAPos'));
+            if (Ember.isPresent(videos)) {
+                let curArrayPos = parseInt(this.get('selectedVidAPos'));
 
-            this.setProperties({
-                selectedVidAPos: (curArrayPos + 2) % arrayLength,
-                showVidA: false
-            });
+                this.setProperties({
+                    selectedVidAPos: (curArrayPos + 2) % videos.length,
+                    showVidA: false
+                });
+            }
         },
         getNextVideoB(){
-            let arrayLength = this.get('videos').length;
+            let videos = this.get('videos');
             
-            if (arrayLength === 1) {
-                return;
-            }
-            
-            let curArrayPos = parseInt(this.get('selectedVidBPos'));
+            if (Ember.isPresent(videos)) {
+                let curArrayPos = parseInt(this.get('selectedVidBPos'));
 
-            this.setProperties({
-                selectedVidBPos: (curArrayPos + 2) % arrayLength,
-                showVidA: true
-            });
+                this.setProperties({
+                    selectedVidBPos: (curArrayPos + 2) % videos.length,
+                    showVidA: true
+                });
+            }
         },
         stackHovered() {
             this.get('onHoverCallback') (this.get('videos'), this.get('selectedStackIndex'));

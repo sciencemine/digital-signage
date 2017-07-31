@@ -2,4 +2,11 @@
 
 <p class="list-group-item-text">{{description}}</p>
 
-{{video-stack videos=videos modelIdentifier=modelIdentifier playerSize="player-container" onHoverCallback=(action 'doNothing') onClickCallback=(action 'doNothing') isMuted=muted}}
+<div class="player-container">
+  {{video-stack
+    videos=videos
+    onHoverCallback=(action 'doNothing')
+    onSelectedCallback=(action 'doNothing')
+    modelIdentifier=modelIdentifier
+  }}
+</div>

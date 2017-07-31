@@ -47,7 +47,6 @@ Run tests locally with:
 
 ### Deploying
 
-Specify what it takes to deploy your app.
 
 ## Further Reading / Useful Links
 

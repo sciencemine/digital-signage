@@ -1,7 +1,9 @@
 import Ember from 'ember';
 
 export default Ember.Component.extend({
-  displayVideos: [],
+  modelData: Ember.inject.service(),
+  
+  displayVideos: [ ],
   menuListStyle: "",
   menuBarStyle: "",
   filterType: "All",
@@ -16,12 +18,19 @@ export default Ember.Component.extend({
   },
   init() {
     this._super(...arguments);
-    this.set('displayVideos', this.get('videos'));
+    
+    let modelData = this.get('modelData');
+    
+    if (Ember.isNone(modelData.get('data'))) {
+      return;
+    }
+    
+    this.set('displayVideos', Object.keys(modelData.get('videos')));
 
     let listStyle = "video-list__menu video-list--flex__menu";
     let barStyle = "menu-bar";
 
-    switch (this.get('config.ui.menuLocale')) {
+    switch (modelData.get('ui.menuLocale')) {
       case "right":
         this.setProperties({
           menuListStyle: listStyle + " video-list__right__menu video-list--flex--verticle__menu",
@@ -51,17 +60,19 @@ export default Ember.Component.extend({
   },
   didRender() {
     if (this.$('[data-toggle="popover"]').length !== 0) {
+      let modelData = this.get('modelData');
+      
       (function(component) {
         component.$('[data-toggle="popover"]').popover({
           trigger: 'hover focus',
           delay: {
-            show: (component.get('popoverShowDelay') * 1000),
+            show: (modelData.get('ui.popoverShowDelay') * 1000),
             hide: '100'
           }
         }).on('shown.bs.popover', function () {  
           let timeout = setTimeout(() => {
             component.hidePopovers();
-          }, component.get('config.ui.popoverDwell') * 1000);
+          }, modelData.get('ui.popoverDwell') * 1000);
           
           clearTimeout(component.get('popoverTimeout'));
           
@@ -81,36 +92,36 @@ export default Ember.Component.extend({
     let timeout = (function(component) {
       return setTimeout(() => {
         component.hidePopovers();
+        
         component.set('renderMenu', false);
-      }, component.get('config.ui.menuDwell') * 1000);
+      }, component.get('modelData.ui.menuDwell') * 1000);
     }) (this);
 
     this.set('menuTimeout', timeout);
   },
   actions: {
     setMenuVideos(newAttributeID) {
+      let modelData = this.get('modelData');
+      
       if (newAttributeID === -1) {
         this.setProperties({
-          displayVideos: this.get('videos'),
+          displayVideos: Object.keys(modelData.get('videos')),
           filterType: "All"
         });
       }
       else {
-        let attr = this.get('attributes.' + newAttributeID);
-        let attrVideos = attr.videos;
+        let attr = modelData.get(`attributes.${newAttributeID}`);
 
-        this.set('displayVideos', []);
-
-        for (var videoID = 0; videoID < attrVideos.length; videoID++) {
-          this.get('displayVideos').pushObject(this.get('videos')[attrVideos[videoID]]);
-        }
-
-        this.set('filterType', attr.prettyName);
+        this.setProperties({
+          displayVideos: attr.videos,
+          filterType: attr.prettyName
+        });
+        
         this.hidePopovers();
       }
     },
-    videoClicked(sender, videoData) {
-      this.get('onClickCallback') (this, videoData);
+    videoClicked(videoId) {
+      this.get('onClickCallback') (videoId);
     },
     doNothing() {}
   }
