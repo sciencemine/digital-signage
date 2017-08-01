@@ -58,22 +58,24 @@ export default Ember.Component.extend({
   init() {
     this._super(...arguments);
     
-    let data = Ember.copy(this.get('data'), true);
+    let data = this.get('data');
     
-    data.forEach((attr, attrIndex) => {
-      attr.videos.forEach((vid, vidIndex) => {
-        if (vid.id) {
-          attr.videos[vidIndex] = vid.id;
-        }
+    if (Ember.isArray(data)) {
+      data.forEach((attr, attrIndex) => {
+        attr.videos.forEach((vid, vidIndex) => {
+          if (vid.id) {
+            attr.videos[vidIndex] = vid.id;
+          }
+        });
+        
+        data[attrIndex] = attr;
       });
-      
-      data[attrIndex] = attr;
-    });
 
-    this.setProperties({
-      stackListData: data,
-      videoListData: data[0].videos
-    });
+      this.setProperties({
+        stackListData: data,
+        videoListData: data[0].videos
+      });
+    }
   },
   actions: {
     /* Stack List Controller */
