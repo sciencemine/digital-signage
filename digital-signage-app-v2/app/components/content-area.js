@@ -128,7 +128,7 @@ export default Ember.Component.extend(KeyboardControls, {
       
       if (attributeObj.videos.length !== 0) {
         attributeObj.videos.forEach(function(video, index) { // jshint ignore:line
-          attributeObj.videos[index] = video.vidId;
+          attributeObj.videos[index] = { id: video.vidId, diff: video.difficulty };
         });
         
         localAfterVidData.push(attributeObj);
@@ -169,7 +169,7 @@ export default Ember.Component.extend(KeyboardControls, {
     }//if
   },
   actions: {
-    videoSelected(vidId, attributeId) {
+    videoSelected(vidId, attributeId, diff) {
       if (vidId) {
         let playingVidId = this.get('playingVidId');
         
@@ -199,7 +199,8 @@ export default Ember.Component.extend(KeyboardControls, {
             metadata.addEdge({
               fromVideo: playingVidId,
               toVideo: vidId,
-              attribute: attributeId
+              attribute: attributeId,
+              difficulty: diff
             });
           }
           

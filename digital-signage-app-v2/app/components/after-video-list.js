@@ -50,13 +50,32 @@ export default Ember.Component.extend({
   stackListSelectedPos: 0,
   videoListSelectedPos: -1,
   
+  stackListData: null,
+    
   mouseMove() {
     this.get('onInputCallback') ();
   },
   init() {
     this._super(...arguments);
+    
+    let data = this.get('data');
+    
+    if (Ember.isArray(data)) {
+      data.forEach((attr, attrIndex) => {
+        attr.videos.forEach((vid, vidIndex) => {
+          if (vid.id) {
+            attr.videos[vidIndex] = vid.id;
+          }
+        });
+        
+        data[attrIndex] = attr;
+      });
 
-    this.set('videoListData', this.get(`data.${0}.videos`));
+      this.setProperties({
+        stackListData: data,
+        videoListData: data[0].videos
+      });
+    }
   },
   actions: {
     /* Stack List Controller */
@@ -72,7 +91,7 @@ export default Ember.Component.extend({
     },
     stackListSelected(stackIndex) {
       this.setProperties({
-        videoListData: this.get(`data.${stackIndex}.videos`),
+        videoListData: this.get(`stackListData.${stackIndex}.videos`),
         videoListSelectedPos: 0,
         stackListFocus: false
       });
@@ -81,7 +100,7 @@ export default Ember.Component.extend({
       this.get('onInputCallback') ();
     },
     stackListStackChanged(stackIndex) {
-      this.set('videoListData', this.get(`data.${stackIndex}.videos`));
+      this.set('videoListData', this.get(`stackListData.${stackIndex}.videos`));
     },
 
     /* Video List Controller */
@@ -92,7 +111,27 @@ export default Ember.Component.extend({
       });
     },
     videoListSelected(vidId) {
-      this.get('videoSelectedCallback') (vidId, this.get(`data.${this.get('stackListSelectedPos')}`));
+      let attr = this.get(`data.${this.get('stackListSelectedPos')}`);
+      let vidDiff = null;
+      
+      for (let i = 0; i < attr.videos.length; i++) {
+        let element = attr.videos[i];
+        
+        if (Ember.typeOf(element) === 'object') {
+          if (element.id === vidId) {
+            vidDiff = element.diff;
+            
+            break;
+          }
+        }
+        else {
+          if (element === vidId) {
+            break;
+          }
+        }
+      }
+      
+      this.get('videoSelectedCallback') (vidId, this.get(`stackListData.${this.get('stackListSelectedPos')}`),  vidDiff);
     },
     videoListInput() {
       this.get('onInputCallback') ();
