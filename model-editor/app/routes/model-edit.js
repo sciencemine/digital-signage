@@ -17,8 +17,7 @@ export default Ember.Route.extend({
       this.get('visData').clear();
     }
     
-    let path = "models/ModelDefaults" +
-                modelService.get('modelInformation.newestVersion') + ".json";
+    let path = `models/ModelDefaults${modelService.get('modelInformation.newestVersion')}.json`;
     
     return (function(route) {
       return Ember.$.getJSON(path).then((data) => {

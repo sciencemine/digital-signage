@@ -10,15 +10,17 @@
     <ul class="list-group">
       {{#each-in model.models as |key value|}}
         {{model-select-element
-          onClickCallback=(action 'transition' value)
+          onSelectCallback=(action 'transition' value)
+          onUpdateCallback=(action 'updateModel' value)
           name=value.config.prettyName
           description=value.config.description
         }}
       {{/each-in}}
       {{model-select-element
-        onClickCallback=(action 'newExhibit')
+        onSelectCallback=(action 'newExhibit')
         name="Add Exhibit"
         description="Creates a new exhibit to be added to the list"
+        showUpdate=false
       }}
       <li class="list-group-item model-select--element">
         <h4 class="list-group-item-heading">Upload Existing Model</h4>

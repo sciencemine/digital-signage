@@ -12,5 +12,5 @@ test('it renders', function(assert) {
 
   this.render(hbs`{{model-select-element}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), '');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'Update');
 });

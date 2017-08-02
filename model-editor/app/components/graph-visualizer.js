@@ -61,10 +61,10 @@ export default Ember.Component.extend({
       
       el.css('top', titleBottom);
       el.css('right', (panelStates.get('propertiesExpanded') ? width - Ember.$("#properties-panel").offset().left : 0));
-      el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").width() : 0));
+      el.css('left', (panelStates.get('attributesExpanded') ? Ember.$("#attribute-panel").outerWidth() : 0));
       
       configEl.ready(function() {
-        el.css('bottom', configEl.height());
+        el.css('bottom', configEl.outerHeight());
       });
     }
   },

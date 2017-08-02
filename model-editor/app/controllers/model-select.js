@@ -7,9 +7,7 @@ export default Ember.Controller.extend({
   modelService: service(),
 
   checkVersion: function(inputVersion) {
-    return this.get('modelService.modelInformation').versions.find(function(version) {
-      return inputVersion === version;
-    });
+    return this.get('modelService.modelInformation').versions.indexOf(inputVersion) !== -1;
   },
   actions: {
     readModel() {
@@ -53,6 +51,25 @@ export default Ember.Controller.extend({
           modelService.loadModelData(data);
           
           controller.transitionToRoute('modelEdit');
+        });
+      }) (this);
+    },
+    updateModel(data) {
+      let modelService = this.get('modelService');
+      let path = `models/ModelDefaults${modelService.get('modelInformation.newestVersion')}.json`;
+      
+      modelService.loadModelData(data);
+    
+      (function(route) {
+        Ember.$.getJSON(path).then((data) => {
+          modelService.loadDefaultValues(data);
+          
+          modelService.saveModel();
+        }).fail(() => {
+          route.get('notify').warning("Could not pull data to update model. Using old version.", {
+            radius: true,
+            closeAfter: 10 * 1000
+          });
         });
       }) (this);
     }

@@ -1,3 +1,9 @@
-<h4 class="list-group-item-heading">{{name}}</h4>
+<div class="pointer" {{action 'selectExhibit'}}>
+  <h4 class="list-group-item-heading">{{name}}</h4>
 
-<p class="list-group-item-text">{{description}}</p>
+  <p class="list-group-item-text">{{description}}</p>
+</div>
+
+{{#if showUpdate}}
+  <button class="btn btn-default" {{action 'updateExhibit'}}>Update</button>
+{{/if}}
