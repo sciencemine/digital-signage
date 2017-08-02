@@ -14,6 +14,7 @@
           onUpdateCallback=(action 'updateModel' value)
           name=value.config.prettyName
           description=value.config.description
+          showUpdate=(newer-version old=value.config.version new=modelService.modelInformation.newestVersion)
         }}
       {{/each-in}}
       {{model-select-element
@@ -22,7 +23,7 @@
         description="Creates a new exhibit to be added to the list"
         showUpdate=false
       }}
-      <li class="list-group-item model-select--element">
+      <li class="list-group-item model-select--element unselectable cursor--default">
         <h4 class="list-group-item-heading">Upload Existing Model</h4>
 
         <p class="list-group-item-text">Upload an existing model that is not listed to edit.</p>
