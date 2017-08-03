@@ -6,11 +6,7 @@ moduleForComponent('model-select-element', 'Integration | Component | model sele
 });
 
 test('it renders', function(assert) {
-
-  // Set any properties with this.set('myProperty', 'value');
-  // Handle any actions with this.on('myAction', function(val) { ... });
-
   this.render(hbs`{{model-select-element}}`);
 
-  assert.equal(this.$().text().trim().replace(/\s+/gi, ''), 'Update');
+  assert.equal(this.$().text().trim().replace(/\s+/gi, ' '), 'Update to new version');
 });

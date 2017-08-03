@@ -1,9 +1,9 @@
-<div class="pointer" {{action 'selectExhibit'}}>
+<div class="pointer underline" {{action 'selectExhibit'}}>
   <h4 class="list-group-item-heading">{{name}}</h4>
 
   <p class="list-group-item-text">{{description}}</p>
 </div>
 
 {{#if showUpdate}}
-  <button class="btn btn-default" {{action 'updateExhibit'}}>Update</button>
+  <button class="btn btn-default" {{action 'updateExhibit'}}>Update to new version</button>
 {{/if}}

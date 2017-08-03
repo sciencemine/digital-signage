@@ -61,3 +61,7 @@
 .nav-icon-link:hover {
   cursor: pointer;
 }
+
+.underline:hover {
+  text-decoration: underline;
+}
