@@ -1,9 +1,7 @@
 /* Route CSS Files */
-@import 'main.scss';
 @import 'model-select.scss';
 
 /* Component CSS Files */
-@import 'after-video-list.scss';
 @import 'stack-list.scss';
 @import 'video-list.scss';
 @import 'video-player.scss';
@@ -11,6 +9,7 @@
 @import 'content-area.scss';
 @import 'menu-bar.scss';
 @import 'model-select-element.scss';
+@import 'menu-overlay.scss';
 
 /* Global Styles */
 .blue-border {

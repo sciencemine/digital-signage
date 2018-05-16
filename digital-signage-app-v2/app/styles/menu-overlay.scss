@@ -1,0 +1,87 @@
+.menu-overlay {
+    position: absolute;
+
+    top: 0px;
+    left: 0px;
+
+    height: 100vh;
+    width: 100vw;
+
+    display: grid;
+
+    grid-template-columns: [left] auto [center] 1fr [right] auto;
+    grid-template-rows: [top] auto [center] 1fr [bottom] auto;
+}
+
+@mixin menu-bar() {
+    background-color: #aaa;
+
+    display: flex;
+
+    & > .controls {
+        background-color: blue;
+    }
+
+    & > .items {
+        display: flex;
+        overflow: auto;
+        justify-content: flex-start;
+
+        & > * {
+            flex: 0 0 auto;
+            margin: 1em;
+
+            // testing stuff
+            height: 100px;
+            width: 100px;
+            background-color: red;
+            border: 3px solid black;
+        }
+    }
+}
+
+.menu-top {
+    @include menu-bar();
+
+    // necessary because firefox is dumb
+    width: inherit;
+
+    grid-column: left / span 3;
+    grid-row-start: top;
+}
+
+.menu-right {
+    @include menu-bar();
+
+    flex-direction: column;
+
+    grid-column-start: right;
+    grid-row: top / span 3;
+
+    & > .items {
+        flex-direction: column;
+    }
+}
+
+.menu-bottom {
+    @include menu-bar();
+
+    // necessary because firefox is dumb
+    width: inherit;
+
+    grid-column: left / span 3;
+    grid-row-start: bottom;
+}
+
+.menu-left {
+    @include menu-bar();
+
+    flex-direction: column;
+
+    grid-column-start: left;
+    grid-row: top / span 3;
+
+    & > .items {
+        flex-direction: column;
+    }
+}
