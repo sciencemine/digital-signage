@@ -2,7 +2,7 @@ import Ember from 'ember';
 
 export default Ember.Component.extend({
   modelData: Ember.inject.service(),
-  
+
   displayVideos: [ ],
   menuListStyle: "",
   menuBarStyle: "",
@@ -12,56 +12,44 @@ export default Ember.Component.extend({
   menuTimeout: null,
   popoverTimeout: null,
   popoverShowDelay: 0.25,
-  
+  classNames: [ 'menu-overlay' ],
+
   hidePopovers: function() {
     this.$('[data-toggle="popover"]').popover('hide');
   },
   init() {
     this._super(...arguments);
-    
+
     let modelData = this.get('modelData');
-    
+
     if (Ember.isNone(modelData.get('data'))) {
       return;
     }
-    
-    this.set('displayVideos', Object.keys(modelData.get('videos')));
 
-    let listStyle = "video-list__menu video-list--flex__menu";
-    let barStyle = "menu-bar";
+    this.set('displayVideos', Object.keys(modelData.get('videos')));
 
     switch (modelData.get('ui.menuLocale')) {
       case "right":
-        this.setProperties({
-          menuListStyle: listStyle + " video-list__right__menu video-list--flex--verticle__menu",
-          menuBarStyle: barStyle + " menu-bar__right"
-        });
+        this.set('menuBarStyle', 'menu-right');
         break;
       case "bottom":
         this.setProperties({
-          menuListStyle: listStyle + " video-list__bottom__menu video-list--flex--horizontal__menu",
-          menuBarStyle: barStyle + " menu-bar__bottom",
+          menuBarStyle: "menu-bottom",
           useDropUp: true
         });
         break;
       case "left":
-        this.setProperties({
-          menuListStyle: listStyle + " video-list__left__menu video-list--flex--verticle__menu",
-          menuBarStyle: barStyle + " menu-bar__left"
-        });
+        this.set('menuBarStyle', 'menu-left');
         break;
       default:
-        this.setProperties({
-          menuListStyle: listStyle + " video-list__top__menu video-list--flex--horizontal__menu",
-          menuBarStyle: barStyle + " menu-bar__top"
-        });
+        this.set('menuBarStyle', 'menu-top');
         break;
     }
   },
   didRender() {
     if (this.$('[data-toggle="popover"]').length !== 0) {
       let modelData = this.get('modelData');
-      
+
       (function(component) {
         component.$('[data-toggle="popover"]').popover({
           trigger: 'hover focus',
@@ -69,13 +57,13 @@ export default Ember.Component.extend({
             show: (modelData.get('ui.popoverShowDelay') * 1000),
             hide: '100'
           }
-        }).on('shown.bs.popover', function () {  
+        }).on('shown.bs.popover', function () {
           let timeout = setTimeout(() => {
             component.hidePopovers();
           }, modelData.get('ui.popoverDwell') * 1000);
-          
+
           clearTimeout(component.get('popoverTimeout'));
-          
+
           component.set('popoverTimeout', timeout);
         });
       }) (this);
@@ -83,7 +71,7 @@ export default Ember.Component.extend({
   },
   mouseEnter() {
     this.set('renderMenu', true);
-    
+
     clearTimeout(this.get('menuTimeout'));
   },
   mouseLeave() {
@@ -92,7 +80,7 @@ export default Ember.Component.extend({
     let timeout = (function(component) {
       return setTimeout(() => {
         component.hidePopovers();
-        
+
         component.set('renderMenu', false);
       }, component.get('modelData.ui.menuDwell') * 1000);
     }) (this);
@@ -102,7 +90,7 @@ export default Ember.Component.extend({
   actions: {
     setMenuVideos(newAttributeID) {
       let modelData = this.get('modelData');
-      
+
       if (newAttributeID === -1) {
         this.setProperties({
           displayVideos: Object.keys(modelData.get('videos')),
@@ -116,7 +104,7 @@ export default Ember.Component.extend({
           displayVideos: attr.videos,
           filterType: attr.prettyName
         });
-        
+
         this.hidePopovers();
       }
     },

@@ -1,47 +1,43 @@
-<div class="{{menuBarStyle}}">
-  {{#if renderMenu}}
-    {{#video-list
-      onSelectedCallback=(action 'videoClicked')
-      onInputCallback=(action 'doNothing')
-      onHoverCallback=(action 'doNothing')
-      class=menuListStyle 
-      istItemClass="video-list-item--flex__menu"
-      listItemSmall="video-list-item--flex__small__menu"
-      listItemSelected="video-list-item--selected__menu"
-      listItemHighlight="blue-border"
-      muted=true
-      videos=displayVideos
-    }}
-      <div>
-        <span class="filter-label">
-          {{filterType}}
-        </span>
-        <br>
-        <div class="btn-group {{if useDropUp "dropup"}} menu-bar--dropdown">
-          <button {{action 'setMenuVideos' -1 bubbles="false"}} type="button" class="btn btn-sm btn-info">All</button>
-          <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <span class="caret"></span>
-            <span class="sr-only">Toggle Dropdown</span>
-          </button>
+<div class="{{menuBarStyle}} {{if renderMenu 'expand-horizontal' 'collapse-horizontal'}}">
+  <div class="controls">
+    <span class="filter-label">
+      {{filterType}}
+    </span>
+    <br>
+    <div class="btn-group {{if useDropUp "dropup"}} menu-bar--dropdown">
+      <button {{action 'setMenuVideos' -1 bubbles="false"}} type="button" class="btn btn-sm btn-info">All</button>
+      <button type="button" class="btn btn-sm btn-info dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
 
-          <ul class="dropdown-menu">
-            <li class="glyphicon glyphicon-filter" class="dropdown-header menu-bar--list--element--border">FilterVideos</li>
-            {{#each-in modelData.attributes as |key value|}}
-              <li data-container="body" data-toggle="popover" data-placement="auto right" data-title={{value.prettyName}} data-content={{value.description}} {{action 'setMenuVideos' key}} class="menu-bar--list--element menu-bar--list--element--border">
-                <div class="media">
-                  <div class="media-left">
-                    <span class="glyphicon {{value.glyphicon}}"/>
-                  </div>
-                  <div class="media-body">
-                    <h5 class="media-heading">{{value.prettyName}}</h5>
-                  </div>
-                </div>
-              </li>
-            {{/each-in}}
-          </ul>
-        </div>
-      </div>
-    {{/video-list}}
-  {{/if}}
+      <ul class="dropdown-menu">
+        <li class="glyphicon glyphicon-filter" class="dropdown-header menu-bar--list--element--border">FilterVideos</li>
+        {{#each-in modelData.attributes as |key value|}}
+          <li data-container="body" data-toggle="popover" data-placement="auto right" data-title={{value.prettyName}} data-content={{value.description}} {{action 'setMenuVideos' key}} class="menu-bar--list--element menu-bar--list--element--border">
+            <div class="media">
+              <div class="media-left">
+                <span class="glyphicon {{value.glyphicon}}"/>
+              </div>
+              <div class="media-body">
+                <h5 class="media-heading">{{value.prettyName}}</h5>
+              </div>
+            </div>
+          </li>
+        {{/each-in}}
+      </ul>
+    </div>
+  </div>
+  {{video-list
+    onSelectedCallback=(action 'videoClicked')
+    onInputCallback=(action 'doNothing')
+    onHoverCallback=(action 'doNothing')
+    class="items"
+    listItemClass="item"
+    listItemHighlight="blue-border"
+    muted=true
+    videos=displayVideos
+  }}
 </div>
+
 {{yield}}

@@ -25,40 +25,135 @@
   color: white;
 }
 
-.menu-bar {
+.menu-overlay {
+  // variables
+  $menu-max-height: 25vh;
+  $menu-max-width: 25vw;
+  // mixins
+  @mixin menu-bar() {
+    background-color: #c0c1c4;
+
+    // max-height: $menu-max-height;
+
+    display: flex;
+    overflow: hidden;
+
+    & > .items {
+      display: flex;
+      overflow: auto;
+      justify-content: flex-start;
+
+      & > .item {
+        flex: 0 0 auto;
+        margin: 1em;
+
+        width: 5vw;
+
+        cursor: pointer;
+      }
+    }
+  }
+
+  @mixin animate($name) {
+    animation-name: $name;
+    animation-duration: 0.5s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+  }
+  // Keyframes
+  @keyframes collapse-horizontal {
+    0% { max-height: $menu-max-height; }
+    100% { max-height: 0vh; }
+  }
+
+  @keyframes expand-horizontal {
+    0% { max-height: 0vh; }
+    100% { max-height: $menu-max-height; }
+  }
+
+  @keyframes collapse-vertical {
+    0% { max-width: $menu-max-width; }
+    100% { max-width: 0vw; }
+  }
+
+  @keyframes expand-vertical {
+    0% { max-width: 0vw; }
+    100% { max-width: $menu-max-width; }
+  }
+  // class rules
   position: absolute;
 
-  z-index: 100;
-}
+  top: 0px;
+  left: 0px;
 
-.menu-bar__top {
-  top: 4px;
-  right: 4px;
-  left: 4px;
+  height: 100vh;
+  width: 100vw;
 
-  height: 20%;
-}
+  display: grid;
 
-.menu-bar__right {
-  top: 4px;
-  right: 4px;
-  bottom: 4px;
+  grid-template-columns: [left] fit-content($menu-max-width) [center] 1fr [right] fit-content($menu-max-width);
+  grid-template-rows: [top] fit-content($menu-max-height) [center] 1fr [bottom] fit-content($menu-max-height);
 
-  width: 20%;
-}
+  // Nested classes
+  .collapse-horizontal {
+    @include animate(collapse-horizontal);
+  }
 
-.menu-bar__bottom {
-  right: 4px;
-  bottom: 4px;
-  left: 4px;
+  .expand-horizontal {
+    @include animate(expand-horizontal);
+  }
 
-  height: 20%;
-}
+  .collapse-vertical {
+    @include animate(collapse-vertical);
+  }
 
-.menu-bar__left {
-  bottom: 4px;
-  left: 4px;
-  top: 4px;
+  .expand-vertical {
+    @include animate(expand-vertical);
+  }
 
-  width: 20%;
+  .menu-top {
+    @include menu-bar();
+
+    // necessary because firefox is dumb
+    width: inherit;
+
+    grid-column: left / span 3;
+    grid-row-start: top;
+  }
+
+  .menu-right {
+    @include menu-bar();
+
+    flex-direction: column;
+
+    grid-column-start: right;
+    grid-row: top / span 3;
+
+    & > .items {
+      flex-direction: column;
+    }
+  }
+
+  .menu-bottom {
+    @include menu-bar();
+
+    // necessary because firefox is dumb
+    width: inherit;
+
+    grid-column: left / span 3;
+    grid-row-start: bottom;
+  }
+
+  .menu-left {
+    @include menu-bar();
+
+    flex-direction: column;
+
+    grid-column-start: left;
+    grid-row: top / span 3;
+
+    & > .items {
+      flex-direction: column;
+    }
+  }
 }
