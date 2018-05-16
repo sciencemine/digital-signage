@@ -1,4 +1,4 @@
-<div class="{{menuBarStyle}} {{if renderMenu 'expand-horizontal' 'collapse-horizontal'}}">
+<div class="{{menuBarStyle}} {{if renderMenu (concat 'expand-' menuBarDirection) (concat 'collapse-' menuBarDirection)}}">
   <div class="controls">
     <span class="filter-label">
       {{filterType}}
@@ -38,6 +38,9 @@
     muted=true
     videos=displayVideos
   }}
+</div>
+<div class={{concat menuBarStyle "-tag"}} onmouseenter={{action 'toggleMenu'}}>
+  <div></div>
 </div>
 
 {{yield}}

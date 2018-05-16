@@ -4,17 +4,17 @@ export default Ember.Component.extend({
   modelData: Ember.inject.service(),
 
   displayVideos: [ ],
-  menuListStyle: "",
   menuBarStyle: "",
+  menuBarDirection: "",
   filterType: "All",
   useDropUp: false,
-  renderMenu: false,
+  renderMenu: true,
   menuTimeout: null,
   popoverTimeout: null,
   popoverShowDelay: 0.25,
   classNames: [ 'menu-overlay' ],
 
-  hidePopovers: function() {
+  hidePopovers() {
     this.$('[data-toggle="popover"]').popover('hide');
   },
   init() {
@@ -30,21 +30,33 @@ export default Ember.Component.extend({
 
     switch (modelData.get('ui.menuLocale')) {
       case "right":
-        this.set('menuBarStyle', 'menu-right');
+        this.setProperties({
+          menuBarStyle: 'menu-right',
+          menuBarDirection: 'vertical'
+        });
         break;
       case "bottom":
         this.setProperties({
-          menuBarStyle: "menu-bottom",
+          menuBarStyle: 'menu-bottom',
+          menuBarDirection: 'horizontal',
           useDropUp: true
         });
         break;
       case "left":
-        this.set('menuBarStyle', 'menu-left');
+        this.setProperties({
+          menuBarStyle: 'menu-left',
+          menuBarDirection: 'vertical'
+        });
         break;
       default:
-        this.set('menuBarStyle', 'menu-top');
+        this.setProperties({
+          menuBarStyle: 'menu-top',
+          menuBarDirection: 'horizontal'
+        });
         break;
     }
+
+    this.mouseLeave();
   },
   didRender() {
     if (this.$('[data-toggle="popover"]').length !== 0) {
@@ -77,13 +89,11 @@ export default Ember.Component.extend({
   mouseLeave() {
     clearTimeout(this.get('menuTimeout'));
 
-    let timeout = (function(component) {
-      return setTimeout(() => {
-        component.hidePopovers();
+    let timeout = setTimeout((component) => {
+      component.hidePopovers();
 
-        component.set('renderMenu', false);
-      }, component.get('modelData.ui.menuDwell') * 1000);
-    }) (this);
+      component.set('renderMenu', false);
+    }, this.get('modelData.ui.menuDwell') * 1000, this);
 
     this.set('menuTimeout', timeout);
   },
@@ -110,6 +120,9 @@ export default Ember.Component.extend({
     },
     videoClicked(videoId) {
       this.get('onClickCallback') (videoId);
+    },
+    toggleMenu() {
+      this.mouseEnter();
     },
     doNothing() {}
   }

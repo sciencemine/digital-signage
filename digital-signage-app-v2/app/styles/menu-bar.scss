@@ -29,14 +29,18 @@
   // variables
   $menu-max-height: 25vh;
   $menu-max-width: 25vw;
+  $menu-collapse-height: 2vh;
+  $menu-collapse-width: 1vw;
   // mixins
   @mixin menu-bar() {
+    pointer-events: auto;
     background-color: #c0c1c4;
 
-    // max-height: $menu-max-height;
-
     display: flex;
-    overflow: hidden;
+
+    & > .controls {
+      padding: 1em;
+    }
 
     & > .items {
       display: flex;
@@ -54,6 +58,37 @@
     }
   }
 
+  @mixin tag() {
+    display: flex;
+    justify-content: space-around;
+    pointer-events: auto;
+
+    & > * {
+      opacity: 0.85;
+      background-color: #666;
+    }
+  }
+
+  @mixin horizontal-tag($tag-width) {
+    @include tag();
+
+    & > * {
+      height: $menu-collapse-height;
+      width: $tag-width;
+    }
+  }
+
+  @mixin vertical-tag($tag-height) {
+    @include tag();
+
+    flex-direction: column;
+
+    & > * {
+      height: $tag-height;
+      width: $menu-collapse-width;
+    }
+  }
+
   @mixin animate($name) {
     animation-name: $name;
     animation-duration: 0.5s;
@@ -63,21 +98,25 @@
   // Keyframes
   @keyframes collapse-horizontal {
     0% { max-height: $menu-max-height; }
-    100% { max-height: 0vh; }
+    85% { opacity: 1; }
+    100% { max-height: 0vh; opacity: 0; }
   }
 
   @keyframes expand-horizontal {
-    0% { max-height: 0vh; }
+    0% { max-height: 0vh; opacity: 0; }
+    85% { opacity: 1; }
     100% { max-height: $menu-max-height; }
   }
 
   @keyframes collapse-vertical {
     0% { max-width: $menu-max-width; }
-    100% { max-width: 0vw; }
+    85% { opacity: 1; }
+    100% { max-width: 0vh; opacity: 0; }
   }
 
   @keyframes expand-vertical {
-    0% { max-width: 0vw; }
+    0% { max-width: 0vh; opacity: 0; }
+    85% { opacity: 1; }
     100% { max-width: $menu-max-width; }
   }
   // class rules
@@ -91,8 +130,10 @@
 
   display: grid;
 
-  grid-template-columns: [left] fit-content($menu-max-width) [center] 1fr [right] fit-content($menu-max-width);
-  grid-template-rows: [top] fit-content($menu-max-height) [center] 1fr [bottom] fit-content($menu-max-height);
+  grid-template-columns: [left] fit-content($menu-max-width) [left-menu] auto [center] 1fr [right-menu] auto [right] fit-content($menu-max-width);
+  grid-template-rows: [top] fit-content($menu-max-height) [top-menu] auto [center] 1fr [bottom-menu] auto [bottom] fit-content($menu-max-height);
+
+  pointer-events: none;
 
   // Nested classes
   .collapse-horizontal {
@@ -117,8 +158,11 @@
     // necessary because firefox is dumb
     width: inherit;
 
-    grid-column: left / span 3;
+    grid-column: left / -1;
     grid-row-start: top;
+
+    border-bottom-right-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
   }
 
   .menu-right {
@@ -127,7 +171,10 @@
     flex-direction: column;
 
     grid-column-start: right;
-    grid-row: top / span 3;
+    grid-row: top / -1;
+
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
 
     & > .items {
       flex-direction: column;
@@ -140,8 +187,11 @@
     // necessary because firefox is dumb
     width: inherit;
 
-    grid-column: left / span 3;
+    grid-column: left / -1;
     grid-row-start: bottom;
+
+    border-top-right-radius: 0.5em;
+    border-top-left-radius: 0.5em;
   }
 
   .menu-left {
@@ -150,10 +200,74 @@
     flex-direction: column;
 
     grid-column-start: left;
-    grid-row: top / span 3;
+    grid-row: top / -1;
+
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
 
     & > .items {
       flex-direction: column;
+    }
+  }
+
+  .menu-top-tag {
+    $tag-width: 5vw;
+
+    @include horizontal-tag($tag-width);
+
+    grid-row-start: top-menu;
+    grid-column: left / -1;
+
+    & > * {
+      $double-tag-width: 2 * $tag-width;
+
+      border-bottom-right-radius: $double-tag-width;
+      border-bottom-left-radius: $double-tag-width;
+    }
+  }
+
+  .menu-right-tag {
+    $tag-height: 10vh;
+
+    @include vertical-tag($tag-height);
+
+    grid-column-start: right-menu;
+    grid-row: top / -1;
+
+    & > * {
+      $double-tag-height: 2 * $tag-height;
+
+      border-top-left-radius: $double-tag-height;
+      border-bottom-left-radius: $double-tag-height;
+    }
+  }
+
+  .menu-bottom-tag {
+    $tag-width: 5vw;
+
+    @include horizontal-tag($tag-width);
+
+    grid-row-start: bottom-menu;
+    grid-column: left / -1;
+
+    & > * {
+      $double-tag-width: 2 * $tag-width;
+
+      border-top-right-radius: $double-tag-width;
+      border-top-left-radius: $double-tag-width;
+    }
+  }
+
+  .menu-left-tag {
+    $tag-height: 10vh;
+
+    @include vertical-tag($tag-height);
+
+    & > * {
+      $double-tag-height: 2 * $tag-height;
+
+      border-top-right-radius: $double-tag-height;
+      border-bottom-right-radius: $double-tag-height;
     }
   }
 }
